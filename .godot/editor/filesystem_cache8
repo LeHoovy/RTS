@@ -1,0 +1,7 @@
+2a60927148abd1d33b818b535e306557
+::res://::1678593011
+default_env.tres::Environment::3496648197930920804::1678590695::0::1::::<><>::
+Game.gd::GDScript::-1::1678592954::0::1::::<>Node3D<>::
+Game.tscn::PackedScene::1497748723383701652::1678590695::0::1::::<><>::res://UnitMove.gd<>res://Game.gd
+icon.png::CompressedTexture2D::1036173404524170573::1678410373::1678588255::1::::<><>::
+UnitMove.gd::GDScript::-1::1678590582::0::1::::<>CharacterBody3D<>::
