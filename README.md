@@ -8,4 +8,3 @@ Any more requires extensions for all of us.
 
 Game:
 Right click: aim unit toward mouse
-
