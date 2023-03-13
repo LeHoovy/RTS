@@ -12,10 +12,12 @@ func _process(delta):
 	var rayOrigin = get_parent().get_node("Camera3D").project_ray_origin(mousePos)
 #	print("rayOrigin: ", rayOrigin)
 	rayTarget = rayOrigin + get_parent().get_node("Camera3D").project_ray_normal(mousePos) * 2000
+	#Locate mouse position and set position for a ray to the world
 	
 	var spaceState = get_world_3d().direct_space_state
 	var parameters = PhysicsRayQueryParameters3D.create(rayOrigin, rayTarget)
 	var intersect = spaceState.intersect_ray(parameters)
+	#Locate x,z position for intercept with terrain
 	
 	if Input.is_action_just_pressed("MB2"):
 		if not intersect.is_empty():
@@ -23,3 +25,4 @@ func _process(delta):
 			var pos = intersect.position
 			var lookAtTarget = Vector3(pos.x, position.y, pos.z)
 			look_at(lookAtTarget, Vector3.UP )
+			#Point at location when mouse button 2 pressed
