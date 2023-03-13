@@ -1,5 +1,3 @@
 res://default_env.tres
 res://Game.tscn
-res://UnitMove.gd
-res://Main.gd
-res://Game.gd
+res://Units/UnitMove.gd
