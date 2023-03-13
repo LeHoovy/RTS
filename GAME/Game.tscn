@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dl8opt3qxgbdn"]
+[gd_scene load_steps=7 format=3 uid="uid://dow5ht7wyx062"]
 
 [ext_resource type="Script" path="res://Units/UnitMove.gd" id="1_pla0c"]
 
@@ -14,11 +14,11 @@ albedo_color = Color(0, 0.662745, 1, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oc60a"]
 albedo_color = Color(1, 0.372549, 0, 1)
 
-[node name="Map" type="Node3D"]
-script = ExtResource("1_pla0c")
+[node name="Game" type="Node3D"]
 
 [node name="Unit" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.108059, 2.04218, -5.18581)
+script = ExtResource("1_pla0c")
 metadata/_edit_group_ = true
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Unit"]
@@ -43,9 +43,7 @@ shadow_enabled = true
 transform = Transform3D(-1, 8.74228e-08, -1.96331e-15, 3.19539e-08, 0.36551, 0.930807, 8.13737e-08, 0.930807, -0.36551, 0, 62.7081, -18.3169)
 fov = 27.8
 
-[node name="Map" type="StaticBody3D" parent="."]
-
-[node name="Terrain01" type="CSGBox3D" parent="Map"]
+[node name="Floor" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.913052, 0)
 use_collision = true
 size = Vector3(124, 3.2321, 54)
