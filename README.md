@@ -1,4 +1,9 @@
 # RTS
+Download link: https://godotengine.org/download/windows/
+
+Make sure to download the
+
+Godot Engine - .NET version
 
 Possible languages:
 Gdscript
