@@ -5,6 +5,8 @@ Make sure to download the
 
 Godot Engine - .NET version
 
+along with Visual Studio and the .NET SDK through it.
+
 Possible languages:
 Gdscript
 C++ 17
