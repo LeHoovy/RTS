@@ -1,4 +1,5 @@
 StaticBody3D
+NavigationLink3D
 CharacterBody3D
 MeshInstance3D
 Camera3D

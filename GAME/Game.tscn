@@ -43,7 +43,17 @@ shadow_enabled = true
 transform = Transform3D(-1, 8.74228e-08, -1.96331e-15, 3.19539e-08, 0.36551, 0.930807, 8.13737e-08, 0.930807, -0.36551, 0, 62.7081, -18.3169)
 fov = 27.8
 
-[node name="Floor" type="CSGBox3D" parent="."]
+[node name="NavigationLink3D" type="NavigationLink3D" parent="."]
+
+[node name="Terrain02" type="StaticBody3D" parent="NavigationLink3D"]
+
+[node name="Floor" type="CSGBox3D" parent="NavigationLink3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.913052, 0)
 use_collision = true
 size = Vector3(124, 3.2321, 54)
+
+[node name="Terrain01" type="StaticBody3D" parent="NavigationLink3D"]
+
+[node name="Terrain03" type="StaticBody3D" parent="NavigationLink3D"]
+
+[node name="Terrain04" type="StaticBody3D" parent="NavigationLink3D"]

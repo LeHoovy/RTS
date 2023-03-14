@@ -26,3 +26,5 @@ func _process(delta):
 			var lookAtTarget = Vector3(pos.x, position.y, pos.z)
 			look_at(lookAtTarget, Vector3.UP )
 			#Point at location when mouse button 2 pressed
+	
+	
