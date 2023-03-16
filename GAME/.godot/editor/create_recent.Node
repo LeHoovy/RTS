@@ -1,3 +1,5 @@
+CSGMesh3D
+MultiMeshInstance3D
 StaticBody3D
 NavigationLink3D
 CharacterBody3D

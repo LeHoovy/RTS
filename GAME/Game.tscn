@@ -1,6 +1,7 @@
-[gd_scene load_steps=7 format=3 uid="uid://dow5ht7wyx062"]
+[gd_scene load_steps=10 format=3 uid="uid://dow5ht7wyx062"]
 
 [ext_resource type="Script" path="res://Units/UnitMove.gd" id="1_pla0c"]
+[ext_resource type="ArrayMesh" uid="uid://vsydkk5akx6h" path="res://Editor/Terrain/StockTerrainSet.obj" id="2_0k88m"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nbl0s"]
 
@@ -13,6 +14,16 @@ albedo_color = Color(0, 0.662745, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oc60a"]
 albedo_color = Color(1, 0.372549, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbvy6"]
+albedo_color = Color(0.215686, 0.121569, 0.109804, 1)
+
+[sub_resource type="MultiMesh" id="MultiMesh_3nimy"]
+transform_format = 1
+use_colors = true
+instance_count = 5
+mesh = ExtResource("2_0k88m")
+buffer = PackedFloat32Array(0, 2.8026e-45, 1.4013e-45, 1.4013e-45, 4.2039e-45, 2.8026e-45, 2.8026e-45, 5.60519e-45, 4.2039e-45, 4.2039e-45, 7.00649e-45, 5.60519e-45, 5.60519e-45, 8.40779e-45, 7.00649e-45, 7.00649e-45, 9.80909e-45, 8.40779e-45, 8.40779e-45, 1.12104e-44, 9.80909e-45, 9.80909e-45, 1.26117e-44, 1.12104e-44, 1.12104e-44, 1.4013e-44, 1.26117e-44, 1.26117e-44, 1.54143e-44, 1.4013e-44, 1.4013e-44, 1.68156e-44, 1.54143e-44, 1.54143e-44, 1.82169e-44, 1.68156e-44, 1.68156e-44, 1.96182e-44, 1.82169e-44, 1.82169e-44, 2.10195e-44, 1.96182e-44, 1.96182e-44, 0, 2.10195e-44, 2.10195e-44, 1.4013e-45, 0, 0, 1.68156e-44, 2.8026e-45, 0, 1.96182e-44, 1.68156e-44, 2.8026e-45, 1.4013e-44, 5.60519e-45, 2.8026e-45, 1.68156e-44, 1.4013e-44, 5.60519e-45, 1.12104e-44, 8.40779e-45, 5.60519e-45, 1.4013e-44, 1.12104e-44, 8.40779e-45, 8.40779e-45, 1.12104e-44, 8.40779e-45, 1.12104e-44, 8.40779e-45, 3.36312e-44, 3.64338e-44, 3.50325e-44, 3.50325e-44, 3.78351e-44, 3.64338e-44, 3.64338e-44, 3.92364e-44)
 
 [node name="Game" type="Node3D"]
 
@@ -53,6 +64,10 @@ use_collision = true
 size = Vector3(124, 3.2321, 54)
 
 [node name="Terrain01" type="StaticBody3D" parent="NavigationLink3D"]
+
+[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="NavigationLink3D/Terrain01"]
+material_override = SubResource("StandardMaterial3D_kbvy6")
+multimesh = SubResource("MultiMesh_3nimy")
 
 [node name="Terrain03" type="StaticBody3D" parent="NavigationLink3D"]
 

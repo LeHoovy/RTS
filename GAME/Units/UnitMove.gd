@@ -9,7 +9,7 @@ func _process(delta):
 	var mousePos = get_viewport().get_mouse_position()
 #	print("Mouse Position: ", mousePos)
 	
-	var rayOrigin = get_parent().get_node("Camera3D").project_ray_origin(mousePos)
+	rayOrigin = get_parent().get_node("Camera3D").project_ray_origin(mousePos)
 #	print("rayOrigin: ", rayOrigin)
 	rayTarget = rayOrigin + get_parent().get_node("Camera3D").project_ray_normal(mousePos) * 2000
 	#Locate mouse position and set position for a ray to the world
