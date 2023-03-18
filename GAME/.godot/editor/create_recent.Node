@@ -1,8 +1,9 @@
+GridMap
+CollisionShape3D
+StaticBody3D
+MeshInstance3D
 CSGMesh3D
 MultiMeshInstance3D
-StaticBody3D
 NavigationLink3D
 CharacterBody3D
-MeshInstance3D
 Camera3D
-CollisionShape3D

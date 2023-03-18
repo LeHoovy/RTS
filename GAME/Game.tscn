@@ -1,7 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://dow5ht7wyx062"]
+[gd_scene load_steps=8 format=3 uid="uid://dow5ht7wyx062"]
 
 [ext_resource type="Script" path="res://Units/UnitMove.gd" id="1_pla0c"]
-[ext_resource type="ArrayMesh" uid="uid://vsydkk5akx6h" path="res://Editor/Terrain/StockTerrainSet.obj" id="2_0k88m"]
+[ext_resource type="MeshLibrary" uid="uid://btg7gq2nwj1ag" path="res://ProtoTileMeshLib.tres" id="2_xl1os"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nbl0s"]
 
@@ -14,16 +14,6 @@ albedo_color = Color(0, 0.662745, 1, 1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oc60a"]
 albedo_color = Color(1, 0.372549, 0, 1)
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbvy6"]
-albedo_color = Color(0.215686, 0.121569, 0.109804, 1)
-
-[sub_resource type="MultiMesh" id="MultiMesh_3nimy"]
-transform_format = 1
-use_colors = true
-instance_count = 5
-mesh = ExtResource("2_0k88m")
-buffer = PackedFloat32Array(0, 2.8026e-45, 1.4013e-45, 1.4013e-45, 4.2039e-45, 2.8026e-45, 2.8026e-45, 5.60519e-45, 4.2039e-45, 4.2039e-45, 7.00649e-45, 5.60519e-45, 5.60519e-45, 8.40779e-45, 7.00649e-45, 7.00649e-45, 9.80909e-45, 8.40779e-45, 8.40779e-45, 1.12104e-44, 9.80909e-45, 9.80909e-45, 1.26117e-44, 1.12104e-44, 1.12104e-44, 1.4013e-44, 1.26117e-44, 1.26117e-44, 1.54143e-44, 1.4013e-44, 1.4013e-44, 1.68156e-44, 1.54143e-44, 1.54143e-44, 1.82169e-44, 1.68156e-44, 1.68156e-44, 1.96182e-44, 1.82169e-44, 1.82169e-44, 2.10195e-44, 1.96182e-44, 1.96182e-44, 0, 2.10195e-44, 2.10195e-44, 1.4013e-45, 0, 0, 1.68156e-44, 2.8026e-45, 0, 1.96182e-44, 1.68156e-44, 2.8026e-45, 1.4013e-44, 5.60519e-45, 2.8026e-45, 1.68156e-44, 1.4013e-44, 5.60519e-45, 1.12104e-44, 8.40779e-45, 5.60519e-45, 1.4013e-44, 1.12104e-44, 8.40779e-45, 8.40779e-45, 1.12104e-44, 8.40779e-45, 1.12104e-44, 8.40779e-45, 3.36312e-44, 3.64338e-44, 3.50325e-44, 3.50325e-44, 3.78351e-44, 3.64338e-44, 3.64338e-44, 3.92364e-44)
 
 [node name="Game" type="Node3D"]
 
@@ -56,19 +46,11 @@ fov = 27.8
 
 [node name="NavigationLink3D" type="NavigationLink3D" parent="."]
 
-[node name="Terrain02" type="StaticBody3D" parent="NavigationLink3D"]
-
-[node name="Floor" type="CSGBox3D" parent="NavigationLink3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.913052, 0)
-use_collision = true
-size = Vector3(124, 3.2321, 54)
-
-[node name="Terrain01" type="StaticBody3D" parent="NavigationLink3D"]
-
-[node name="MultiMeshInstance3D" type="MultiMeshInstance3D" parent="NavigationLink3D/Terrain01"]
-material_override = SubResource("StandardMaterial3D_kbvy6")
-multimesh = SubResource("MultiMesh_3nimy")
-
-[node name="Terrain03" type="StaticBody3D" parent="NavigationLink3D"]
-
-[node name="Terrain04" type="StaticBody3D" parent="NavigationLink3D"]
+[node name="GridMap" type="GridMap" parent="NavigationLink3D"]
+mesh_library = ExtResource("2_xl1os")
+cell_size = Vector3(4, 4, 4)
+cell_scale = 2.0
+data = {
+"cells": PackedInt32Array(2, 1, 4, 1, 2, 655363, 2, 3, 3, 4, 3, 3, 4, 65535, 1441796, 65542, 4, 1441795, 3, 65534, 1441796, 5, 65534, 1441796, 5, 0, 1441796, 3, 0, 1441796, 4, 1, 1441795, 2, 65535, 655363)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)

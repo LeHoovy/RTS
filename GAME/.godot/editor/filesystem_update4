@@ -1,2 +1,4 @@
 res://default_env.tres
+res://meshlib.tscn
+res://ProtoTileMeshLib.tres
 res://Game.tscn

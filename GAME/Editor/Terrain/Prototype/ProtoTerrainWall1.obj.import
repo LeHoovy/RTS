@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dml6kmqq71rq0"
+path="res://.godot/imported/ProtoTerrainWall1.obj-5e4058bc4bd46d89695828798f317817.mesh"
+
+[deps]
+
+files=["res://.godot/imported/ProtoTerrainWall1.obj-5e4058bc4bd46d89695828798f317817.mesh"]
+
+source_file="res://Editor/Terrain/Prototype/ProtoTerrainWall1.obj"
+dest_files=["res://.godot/imported/ProtoTerrainWall1.obj-5e4058bc4bd46d89695828798f317817.mesh", "res://.godot/imported/ProtoTerrainWall1.obj-5e4058bc4bd46d89695828798f317817.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
