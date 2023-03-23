@@ -1,9 +1,11 @@
-GridMap
+NavigationAgent3D
+CharacterBody3D
 CollisionShape3D
+NavigationRegion3D
 StaticBody3D
+GridMap
 MeshInstance3D
 CSGMesh3D
 MultiMeshInstance3D
 NavigationLink3D
-CharacterBody3D
 Camera3D
