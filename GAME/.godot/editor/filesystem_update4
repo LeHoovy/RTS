@@ -1,5 +1,7 @@
 res://default_env.tres
 res://Game.tscn
 res://ProtoTileMeshLib.tres
-res://Units/UnitMove.gd
+res://Camera.gd
 res://unit.tscn
+res://Cam.gd
+res://Units/UnitMove.gd

@@ -1,10 +1,13 @@
 2a60927148abd1d33b818b535e306557
-::res://::1679529827
-default_env.tres::Environment::378918640071933981::1679529802::0::1::::<><>::
-Game.tscn::PackedScene::8189157231351379221::1679529802::0::1::::<><>::res://Units/UnitMove.gd<>uid://btg7gq2nwj1ag
+::res://::1679775408
+Camera.gd::GDScript::-1::1679713092::0::1::::<>Camera3D<>::
+default_env.tres::Environment::378918640071933981::1679771454::0::1::::<><>::
+Game.tscn::PackedScene::8189157231351379221::1679771454::0::1::::<><>::res://world.gd<>uid://wkiumw07sp0l<>uid://btg7gq2nwj1ag<>res://Camera.gd
 icon.png::CompressedTexture2D::1036173404524170573::1678413973::1678591855::1::::<><>::
 meshlib.tscn::PackedScene::7427183392584584125::1679182401::0::1::::<><>::uid://0oeablpisfrt<>uid://dajlkjt8lwasj<>uid://ccwmh342mcffb<>uid://nn4ck3rbqdhs<>uid://dml6kmqq71rq0
-ProtoTileMeshLib.tres::MeshLibrary::3734349520575796470::1679529802::0::1::::<><>::
+ProtoTileMeshLib.tres::MeshLibrary::3734349520575796470::1679771454::0::1::::<><>::
+unit.tscn::PackedScene::1565320454842812745::1679713029::0::1::::<><>::res://Units/UnitMove.gd
+world.gd::GDScript::-1::1679531524::0::1::::<>Node3D<>::
 ::res://Editor/::1679170909
 ::res://Editor/Terrain/::1679004311
 StockTerrainSet.obj::Mesh::1512587623224894865::1678924284::1678924323::1::::<><>::
@@ -14,6 +17,6 @@ ProtoTerrainCorner1.obj::Mesh::7178527699301690413::1679172735::1679172747::1:::
 ProtoTerrainRamp.obj::Mesh::4959377986418122927::1679171216::1679172672::1::::<><>::
 ProtoTerrainWall0.obj::Mesh::941056811737631548::1679169174::1679172672::1::::<><>::
 ProtoTerrainWall1.obj::Mesh::8026137070513002701::1679172597::1679172672::1::::<><>::
-::res://Units/::1679529802
-UnitMove.gd::GDScript::-1::1679529802::0::1::::<>CharacterBody3D<>::
+::res://Units/::1679621150
+UnitMove.gd::GDScript::-1::1679621150::0::1::::<>CharacterBody3D<>::
 ::res://Units/Falashali/::1678744019

@@ -1,6 +1,6 @@
-NavigationAgent3D
-CharacterBody3D
 CollisionShape3D
+CharacterBody3D
+NavigationAgent3D
 NavigationRegion3D
 StaticBody3D
 GridMap
