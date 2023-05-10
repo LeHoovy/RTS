@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dog84mfw2oc3i"
+path="res://.godot/imported/Obtuse.obj-496ce4531d7e01a4b674893060816c37.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Obtuse.obj-496ce4531d7e01a4b674893060816c37.mesh"]
+
+source_file="res://Editor/Terrain/Prototype/Obtuse.obj"
+dest_files=["res://.godot/imported/Obtuse.obj-496ce4531d7e01a4b674893060816c37.mesh", "res://.godot/imported/Obtuse.obj-496ce4531d7e01a4b674893060816c37.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true

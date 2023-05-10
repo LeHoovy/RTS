@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://c7xjnjrbmulug"
+path="res://.godot/imported/Edge.obj-cd31fbcb298a9f82b745ae862457e5bf.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Edge.obj-cd31fbcb298a9f82b745ae862457e5bf.mesh"]
+
+source_file="res://Editor/Terrain/Prototype/Edge.obj"
+dest_files=["res://.godot/imported/Edge.obj-cd31fbcb298a9f82b745ae862457e5bf.mesh", "res://.godot/imported/Edge.obj-cd31fbcb298a9f82b745ae862457e5bf.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
