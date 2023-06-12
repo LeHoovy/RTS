@@ -1,10 +1,10 @@
+GridMap
 StaticBody3D
+MeshInstance3D
 CollisionShape3D
 CharacterBody3D
 NavigationAgent3D
 NavigationRegion3D
-GridMap
-MeshInstance3D
 CSGMesh3D
 MultiMeshInstance3D
 NavigationLink3D

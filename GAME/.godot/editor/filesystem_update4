@@ -1,4 +1,6 @@
 res://default_env.tres
+res://Units/unit.tscn
+res://Editor/Terrain/Prototype/Prototype.tres
 res://Editor/Terrain/meshlib.tscn
 res://Game.tscn
-res://Editor/Terrain/Prototype/meshlib.tres
+res://Units/UnitMove.gd
