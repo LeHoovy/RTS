@@ -1,5 +1,6 @@
-GridMap
 StaticBody3D
+LightmapGI
+GridMap
 MeshInstance3D
 CollisionShape3D
 CharacterBody3D

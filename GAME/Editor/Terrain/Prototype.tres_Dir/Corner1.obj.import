@@ -1,0 +1,21 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://bxfcqweprrhw8"
+path="res://.godot/imported/Corner1.obj-311e2ad07510190112dea45edff63ede.mesh"
+
+[deps]
+
+files=["res://.godot/imported/Corner1.obj-311e2ad07510190112dea45edff63ede.mesh"]
+
+source_file="res://Editor/Terrain/Prototype.tres_Dir/Corner1.obj"
+dest_files=["res://.godot/imported/Corner1.obj-311e2ad07510190112dea45edff63ede.mesh", "res://.godot/imported/Corner1.obj-311e2ad07510190112dea45edff63ede.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
