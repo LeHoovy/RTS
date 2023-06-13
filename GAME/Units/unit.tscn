@@ -3,7 +3,8 @@
 [ext_resource type="Script" path="res://Units/UnitMove.gd" id="1_0a6ws"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ujc7y"]
-height = 1.23605
+height = 0.235782
+radius = 0.338863
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_uybvm"]
 
@@ -21,7 +22,7 @@ script = ExtResource("1_0a6ws")
 metadata/_edit_group_ = true
 
 [node name="UnitHitBox" type="CollisionShape3D" parent="."]
-transform = Transform3D(1.39965, 0, 0, 0, 1.39965, 0, 0, 0, 1.39965, 0, -0.141812, 0)
+transform = Transform3D(1.39965, 0, 0, 0, 1.39965, 0, 0, 0, 1.39965, 0, -0.841812, 0)
 shape = SubResource("CylinderShape3D_ujc7y")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
