@@ -1,4 +1,6 @@
 StaticBody3D
+Label
+Timer
 LightmapGI
 GridMap
 MeshInstance3D

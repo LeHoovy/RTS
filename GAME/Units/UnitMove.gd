@@ -3,7 +3,7 @@ extends CharacterBody3D
 var rayOrigin = Vector3()
 var rayTarget = Vector3()
 
-var speed = 100.0
+var speed = 2
 
 @onready var navAgent = $NavigationAgent3D
 
@@ -13,13 +13,16 @@ var path = []
 func _physics_process(delta):
 	if navAgent.is_navigation_finished():
 		return
-
-	var current_location = global_transform.origin
-	var next_location = navAgent.get_next_path_position()
-	var newVelocity: Vector3 = (next_location - current_location).normalized() * speed * delta
-
+	
+	var currentLocation = global_transform.origin
+	var nextLocation = navAgent.get_next_path_position()
+	var newVelocity: Vector3 = (nextLocation - currentLocation).normalized() * speed * delta * 125
+	#Takes the current location, and sets a speed.
+	
 	set_velocity(newVelocity)
 	move_and_slide()
+	var lookAtTarget = Vector3(position.x + velocity.x, position.y, position.z + velocity.z)
+	look_at(lookAtTarget, Vector3.UP )
 
 
 func updateTargetLocation(targetLocation):
@@ -45,7 +48,7 @@ func _process(delta):
 		if not intersect.is_empty():
 			#print("NOT EMPTY!")
 			var pos = intersect.position
-			var lookAtTarget = Vector3(pos.x, position.y, pos.z)
+			var lookAtTarget = Vector3(position.x + velocity.x, position.y, position.z + velocity.z)
 			look_at(lookAtTarget, Vector3.UP )
 
 			navAgent.set_target_position(pos)
