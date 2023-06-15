@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://blqgkl2pa424i"]
+
+[ext_resource type="Script" path="res://main.gd" id="1_pt2jv"]
+[ext_resource type="Script" path="res://Grid.gd" id="2_xkena"]
+[ext_resource type="Script" path="res://Cam.gd" id="3_wf35k"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_pt2jv")
+
+[node name="Grid" type="Node2D" parent="."]
+script = ExtResource("2_xkena")
+show_debug = true
+
+[node name="Cam" type="Camera2D" parent="."]
+script = ExtResource("3_wf35k")
