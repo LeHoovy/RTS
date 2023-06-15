@@ -1,8 +1,0 @@
-res://default_env.tres
-res://Editor/Terrain/meshlib.tscn
-res://Editor/Terrain/Prototype.tres
-res://Units/unit.tscn
-res://Game.tscn
-res://world.gd
-res://TimerShower.gd
-res://TimerShower.tscn
