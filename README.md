@@ -15,6 +15,8 @@ Any more requires extensions for all of us.
 
 You might have to download the github app so you can push the to the repository.
 
+(Discord server)[https://discord.gg/egXPKJv2ju]
+
 Game:
 
 Right click: aim unit toward mouse
