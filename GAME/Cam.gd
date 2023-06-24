@@ -1,7 +1,7 @@
 extends Camera2D
 
 var zoomSpeed: float = 0.05
-var zoomMin: float = 0.001
+var zoomMin: float = 0.3
 var zoomMax: float = 5.0
 #Sets the minimum and maximum zoom, as well as the speed of zooming.
 @export var dragSens: float = 1.0
