@@ -1,5 +1,12 @@
 extends Sprite2D
 
+var heat = 0
+var heat2 = 0
+
+var relPos = Vector2i()
+
+func locate():
+	print(relPos)
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
