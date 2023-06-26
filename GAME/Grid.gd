@@ -7,6 +7,8 @@ var width = size.x
 var height = size.y
 #Finds the overall size of the map.
 
+#var target = Vector2i()
+
 @onready var vectorLocation = get_node(^"ArrowSpawner").vectorLocate
 #Prepares vectorLocation as the vectorLocate dictionary found in the ArrowSpawner node
 
@@ -41,65 +43,136 @@ func _ready():
 #	var x = get_node("ArrowSpawner").vectorLocate.find_key(Vector2(315, 175))
 #	print (x)
 
-func getTileAt(position):
+
+func getTileAt(pos):
 #	var tile : Vector2 = to_global(map_to_local(local_to_map(get_global_mouse_position() / scale)))
-	var tile : Vector2i = local_to_map(position / scale)
+	var tile : Vector2i = local_to_map(pos / scale)
 	#Takes the mouse's position, divides it by the scale of the map
 	#Then it snaps the coordinates to the coordinates of the cell, then it brings it back to global
 #	print(tile)
 	return tile
 
-func findVector(position):
-	return vectorLocation.has(vectorLocation.find_key(position))
+
+func findVector(pos):
+	return vectorLocation.has(vectorLocation.find_key(pos))
+
+
+func clearHeatMap(vector):
+	vector.heat = 0
+
+
+func findBestNeighbor(cell):
+	var best = 0
+	var heat = vectorLocation.find_key(cell)
+	heat = get_node(heat)
+	heat = heat.heat
+	var min1 = heat - 1
+	var min2 = heat - 2
+	var angle = 0
+#	var R = 
+#	var BR = 
+#	var B = 
+#	var BL = 
+#	var L = 
+#	var TL = 
+#	var T = 
+#	var TR = 
+	var neighborArray = [
+		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_RIGHT_SIDE), #0
+		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER), #45
+		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE), #90
+		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_BOTTOM_LEFT_CORNER), #135
+		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_LEFT_SIDE), #180
+		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_TOP_LEFT_CORNER), #225
+		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_TOP_SIDE), #270
+		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_TOP_RIGHT_CORNER)]#315
+	#Finds each neighboring node and stores them in an array.
+	
+#	get_node(array[0]).locate()
+	for i in neighborArray.size():
+		if findVector(neighborArray[i]) == true and get_node(vectorLocation.find_key(cell)).heat != 0:
+			if get_node(vectorLocation.find_key(neighborArray[i])).heat == min2:
+				best = neighborArray[i]
+				angle = i
+				print(angle)
+				break
+			elif get_node(vectorLocation.find_key(neighborArray[i])).heat == min1:
+				best = neighborArray[i]
+				angle = i
+				print(angle)
+
+#Checks each neighboring node in the array if they have a vector, and if they do, checks their heat.
+#It then stores whichever has the least heat in "best."
+#	print(min2)
+	return {"bestFit":best, "targetDir":angle}
+
+
+func readyPathfind(target):
+	var current = Vector2i()
+	var locate = vectorLocation.keys()
+#	print(locate)
+	for i in locate:
+		current = i
+		current = get_node(current)
+		current.heat = abs(target.x - current.relPos.x) + abs(target.y - current.relPos.y)
+#		print(current.heat)
+	#generates the heatmap, each tile has a heat of 1 for every tile to either side and up or down
+	
+		if current.relPos == target:
+			current.heat = 0
+	#Makes sure that the target has a heat of 0 as to make sure the game doesn't break.
+	
+	for i in locate:
+		current = i
+		current = get_node(current)
+#		findBestNeighbor(current)
+		var bestNeighbor = findBestNeighbor(current.relPos)
+		var targetDir = bestNeighbor.targetDir * 45
+		bestNeighbor = bestNeighbor.bestFit
+#		#finds the neighboring tile with the lowest heat.
+		
+		if current.frame == 1:
+			current.toggleVisibility()
+		
+		current.rotation = deg_to_rad(targetDir)
+		#converts the pending vector rotation to degrees, then actually rotates it
+		
+		get_node(vectorLocation.find_key(target)).frame = 1
+		
+#	vector.heat = abs(target.x - vector.position.x) + abs(target.y - vector.position.y)
+	
+
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var tile1 = Vector2i()
-	var tile2 = Vector2i()
+#	var tile1 = Vector2i()
+#	var tile2 = Vector2i()
+	var best = []
 	
-	if Input.is_action_just_pressed("MB1"):
+	if Input.is_action_just_pressed("MB2"):
 		
 		var tile = getTileAt(get_global_mouse_position())
+
+		
 		if  findVector(tile) == true:
 #			print(tile)
 			#If left clicked, check for the cell type. If its pathable, continue.
 			
-			var rotate = randi_range(-3, 4) * 45
+#			get_node(vectorLocation.find_key(tile)).toggleVisibility()
+			
+#			var temp = get_node(vectorLocation.find_key(tile)).toggleVisibility()
+#			temp.toggleVisibility()
+			
+			var rotateDist = randi_range(-3, 4) * 45
 #			print("Rotated ", rotate, " degrees")
 			#Generates the number to rotate the vector by
 			
-			var vector = vectorLocation.find_key(Vector2i(tile.x, tile.y))
-			vector = get_node(vector)
-			var vectorDir = vector.rotation_degrees
-			vectorDir += rotate
+#			var vector = vectorLocation.find_key(Vector2i(tile.x, tile.y))
+#			vector = get_node(vector)
 			#Finds the vector, then rotates it
 			
-			if vectorDir >= 360:
-				vectorDir -= 360
-			elif vectorDir <= -360:
-				vectorDir += 360
-			round(vectorDir)
-#			print(vectorDir)
-			#Makes sure it doesn't rotate too far
+			readyPathfind(tile)
 			
-			vector.rotation = deg_to_rad(vectorDir)
 			
-#			vector.locate()
-#
-#			var neighbor = get_neighbor_cell(tile, TileSet.CELL_NEIGHBOR_RIGHT_SIDE)
-#			if findVector(neighbor) == true:
-#				if get_cell_atlas_coords(0, Vector2i(neighbor)) == Vector2i(1, 0):
-#					erase_cell(0, neighbor)
-#				else:
-#					set_cell(0, neighbor, 0, Vector2i(1, 0))
-#				print(neighbor)
-			#If the cell exists and is pathable, go ahead and toggle it
 			
-			var neighbors = get_surrounding_cells(tile)
-			#get surrounding cells creates an Vector2i array, in the cell order, east, south, west, north
-			for i in neighbors:
-				if findVector(i) == true:
-					print(i)
-					
-			print("| BREAK |")
-			print("")
+

@@ -1,9 +1,10 @@
 [gd_scene load_steps=3 format=3 uid="uid://bbdp61db7u02t"]
 
-[ext_resource type="Texture2D" uid="uid://5vm8ymsv8cg4" path="res://Debug/vector2.png" id="1_uj7dg"]
+[ext_resource type="Texture2D" uid="uid://00dwsfgatalq" path="res://Debug/vector3.png" id="1_dinab"]
 [ext_resource type="Script" path="res://Debug/Vector.gd" id="2_uq5ce"]
 
 [node name="Vector" type="Sprite2D"]
 texture_filter = 1
-texture = ExtResource("1_uj7dg")
+texture = ExtResource("1_dinab")
+hframes = 2
 script = ExtResource("2_uq5ce")

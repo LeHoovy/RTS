@@ -1,9 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://blqgkl2pa424i"]
+[gd_scene load_steps=7 format=3 uid="uid://blqgkl2pa424i"]
 
 [ext_resource type="Texture2D" uid="uid://4mcyjqwysmpd" path="res://tiles2d3.png" id="3_n0e75"]
 [ext_resource type="Script" path="res://Cam.gd" id="3_wf35k"]
 [ext_resource type="Script" path="res://Grid.gd" id="4_c5yor"]
-[ext_resource type="PackedScene" uid="uid://bv1y5iyse6p53" path="res://Guy.tscn" id="5_jke48"]
 [ext_resource type="Script" path="res://VectorSpawn.gd" id="5_yl2jc"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_pcr6u"]
@@ -17,20 +16,6 @@ texture_region_size = Vector2i(2, 2)
 [sub_resource type="TileSet" id="TileSet_hulw7"]
 tile_size = Vector2i(2, 2)
 sources/0 = SubResource("TileSetAtlasSource_pcr6u")
-
-[sub_resource type="GDScript" id="GDScript_4ko5h"]
-script/source = "extends CharacterBody2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-"
 
 [node name="Main" type="Node2D"]
 
@@ -47,7 +32,3 @@ script = ExtResource("4_c5yor")
 
 [node name="ArrowSpawner" type="Node2D" parent="Grid"]
 script = ExtResource("5_yl2jc")
-
-[node name="Guy" parent="." instance=ExtResource("5_jke48")]
-position = Vector2(-263, 155)
-script = SubResource("GDScript_4ko5h")
