@@ -10,8 +10,9 @@ var zoomMax: float = 5.0
 func _input(event):
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
 		position -= event.relative * dragSens / zoom
-		#repositions the camera as long as the middle mouse button (mouse 3) is pressed, relative to the sensitivity and movement of the mouse.
-		#Also adjusts based on the zoom amount.
+#Repositions the camera as long as the middle mouse button (mouse 3) is pressed
+#Relative to the sensitivity and movement of the mouse.
+#Also adjusts based on the zoom amount.
 	
 	if event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_WHEEL_UP:

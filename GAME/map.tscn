@@ -18,12 +18,14 @@ tile_size = Vector2i(2, 2)
 sources/0 = SubResource("TileSetAtlasSource_pcr6u")
 
 [node name="Main" type="Node2D"]
+metadata/_edit_horizontal_guides_ = []
+metadata/_edit_vertical_guides_ = []
 
 [node name="Cam" type="Camera2D" parent="."]
 script = ExtResource("3_wf35k")
 
 [node name="Grid" type="TileMap" parent="."]
-scale = Vector2(5, 5)
+scale = Vector2(10, 10)
 tile_set = SubResource("TileSet_hulw7")
 cell_quadrant_size = 4
 format = 2
