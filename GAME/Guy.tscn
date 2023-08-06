@@ -4,8 +4,8 @@
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mxs7w"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_1udyw"]
-radius = 0.5
+[sub_resource type="CircleShape2D" id="CircleShape2D_6x45d"]
+radius = 1.0
 
 [node name="Guy" type="CharacterBody2D"]
 motion_mode = 1
@@ -13,11 +13,24 @@ slide_on_ceiling = false
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_cfjag")
+acceleration = 1.0
+metadata/_edit_vertical_guides_ = [1.0, -1.0]
+metadata/_edit_horizontal_guides_ = [1.0, -1.0]
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(10, 10)
+scale = Vector2(2, 2)
 texture = SubResource("PlaceholderTexture2D_mxs7w")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(10, 10)
-shape = SubResource("CircleShape2D_1udyw")
+shape = SubResource("CircleShape2D_6x45d")
+
+[node name="DirDetect" type="Area2D" parent="."]
+scale = Vector2(0.99, 0.99)
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DirDetect"]
+shape = SubResource("CircleShape2D_6x45d")
+
+[connection signal="area_entered" from="DirDetect" to="." method="updateDir"]
+[connection signal="area_exited" from="DirDetect" to="." method="updateDir"]

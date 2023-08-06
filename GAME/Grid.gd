@@ -1,20 +1,21 @@
 extends TileMap
 
-var size = get_used_rect().size
-var startY = get_used_rect().position.y
-var startX = get_used_rect().position.x
-var width = size.x
-var height = size.y
+var size : Vector2i = get_used_rect().size
+var startY : int = get_used_rect().position.y
+var startX : int = get_used_rect().position.x
+var width : float = size.x
+var height : float = size.y
 #Finds the overall size of the map.
 
 #var target = Vector2i()
 
-@onready var vectorLocation = {}
+@onready var vectorLocation : Dictionary
+@onready var guysHandle : Node = get_node("GuyHandler")
 #Prepares vectorLocation as the vectorLocate dictionary found in the ArrowSpawner node
 
-var open = [] #or {}
-#var queue = []
-#var allNeighbors = []
+var prevTarget : Vector2i = Vector2i(-1, -1)
+var target : Vector2
+var open : Array
 #Prepares arrays to store stuff for pathfinding
 
 signal pathfind
@@ -22,9 +23,11 @@ signal pathfind
 
 
 
+
+
 func neighboringVectors(tile):
-	var neighboringTiles = getAllSurroundingCells(tile)
-	var neighboringVectors = 0
+	var neighboringTiles : Array = getAllSurroundingCells(tile)
+	var neighboringVectors : int = 0
 	for i in neighboringTiles:
 		if findVector(i):
 			neighboringVectors += 1
@@ -46,7 +49,7 @@ func _ready():
 #			print("Exact location: ", pos, " Tilemap Coordinates: (", x, ",", y, ")")
 			#Finds the position in the world of each tile.
 
-			var cell = get_cell_atlas_coords(0, Vector2(x + startX, y + startY))
+			var cell : Vector2i = get_cell_atlas_coords(0, Vector2(x + startX, y + startY))
 #			if cell == Vector2i(0, 0) or cell == Vector2i(1, 0):
 			if cell == Vector2i(1, 0):
 			#Makes sure the cell can be pathed on, then activates the rest of the script.
@@ -54,7 +57,7 @@ func _ready():
 #				print(pos, ", (", x, ",", y, ")")
 #				print(cell)
 
-				var pos = to_global(map_to_local(Vector2(x + startX, y + startY)))
+				var pos : Vector2 = to_global(map_to_local(Vector2(x + startX, y + startY)))
 				#Finds the position in the world of each tile.
 	
 				get_node("ArrowSpawner").spawnVector(pos.x, pos.y, x + startX, y + startY)
@@ -64,14 +67,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	var tile = int()
+	var tile : Vector2i
 #	var tile1 = Vector2i()
 #	var tile2 = Vector2i()
-	var best = []
+	var best : Array
 	
 	if Input.is_action_just_pressed("MB2"):
 		tile = getTileAt(get_global_mouse_position())
-		
+		target = get_global_mouse_position()
 		if findVector(tile) == true:
 #			print(tile)
 			#If left clicked, check for the cell type. If its pathable, continue.
@@ -80,10 +83,12 @@ func _process(delta):
 			
 	if Input.is_action_just_pressed("MB1"):
 		tile = getTileAt(get_global_mouse_position())
-		tile = getVector(tile)
-		tile.findHeat()
-#		pathfind.emit()
+		getVector(tile).findHeat()
 		#Prints the heat of any left-clicked vector
+		
+	if Input.is_action_just_pressed("Space") and findVector(getTileAt(get_global_mouse_position())):
+		tile = map_to_local(getTileAt(get_global_mouse_position()))
+		guysHandle.spawnGuy(1, tile)
 
 
 
@@ -104,15 +109,15 @@ func findVector(pos):
 
 
 func getVector(pos):
-	var arrow = vectorLocation.find_key(pos)
+	var arrow : Node = vectorLocation.find_key(pos)
 	return arrow
 
 
 
 
 func readyVectorNeighbors(pos):
-	var array = getAllSurroundingCells(pos)
-	var list = []
+	var array : Array = getAllSurroundingCells(pos)
+	var list : Array
 	for i in array:
 		list.append(getVector(i).heat)
 	return list
@@ -121,7 +126,7 @@ func readyVectorNeighbors(pos):
 
 
 func neighborTarget(node):
-	var list = getAllSurroundingCells(node)
+	var list : Array = getAllSurroundingCells(node)
 	for i in list:
 		if getVector(i).heat == 0:
 			return true
@@ -132,7 +137,7 @@ func neighborTarget(node):
 
 
 func getAllSurroundingCells(cell):
-	var allNeighbors = [
+	var allNeighbors : Array = [
 		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_RIGHT_SIDE), #0
 		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_BOTTOM_RIGHT_CORNER), #45
 		get_neighbor_cell(cell, TileSet.CELL_NEIGHBOR_BOTTOM_SIDE), #90
@@ -149,6 +154,7 @@ func getAllSurroundingCells(cell):
 func clearHeatMap():
 	for i in vectorLocation:
 		i.visited = false
+		i.activeTog()
 
 
 
@@ -159,12 +165,12 @@ func genHeatMap(target):
 	
 	while open.size() > 0:
 #		print(a)
-		var current = getVector(open[0])
-		var neighbors = get_surrounding_cells(open[0])
+		var current : Node = getVector(open[0])
+		var neighbors : Array = getAllSurroundingCells(open[0])
 #		var neighbors = get_surrounding_cells(open[0])
 		for b in neighbors:
 			if findVector(b) == true:
-				var selected = getVector(b)
+				var selected : Node = getVector(b)
 				if selected.visited == true:
 					if selected.heat > current.heat + 1: 
 					#dist.n(b(a?)) > dist.c(a(b?)) + abs(dist.c.position - dist.n.position, or just 2, maybe 1)
@@ -183,7 +189,12 @@ func genHeatMap(target):
 
 
 func readyPathfind(target):
-	var current = Vector2i()
+	if prevTarget != Vector2i(-1, -1):
+		set_cell(0, prevTarget, 0, Vector2i(1, 0))
+	set_cell(0, target, 0, Vector2i(1, 1))
+	prevTarget = target
+	
+	var current : Vector2i
 
 	clearHeatMap()
 
@@ -197,39 +208,20 @@ func readyPathfind(target):
 #	print("finished")
 	
 	pathfind.emit()
-#	for i in vectorLocation:
-#		current = i
-##		current = get_node(current)
-##		print(current.visited)
-##		findBestNeighbor(current)
-#		var bestNeighbor = findBestNeighbor(current.relPos)
-#		var targetDir = bestNeighbor.targetDir * 45
-#		bestNeighbor = bestNeighbor.bestFit
-##		#finds the neighboring tile with the lowest heat.
-#
-#		if current.frame == 1:
-#			current.target()
-#
-#		current.rotation = deg_to_rad(targetDir)
-#		#converts the pending vector rotation to degrees, then actually rotates it
-#
-#		getVector(target).frame = 1
-		
-#	vector.heat = abs(target.x - vector.position.x) + abs(target.y - vector.position.y)
 
 
 
 
 func findBestNeighbor(cell):
-	var current = Vector2()
-	var best = 0
-	var heat = getVector(cell).heat
+	var current : Node
+	var best : Vector2i
+	var heat : int = getVector(cell).heat
 #	heat = get_node(heat)
 #	heat = heat.heat
-	var min1 = heat - 1
-	var min2 = heat - 2
-	var angle = 0
-	var neighborArray = getAllSurroundingCells(cell)
+	var min1 : int = heat - 1
+	var min2 : int = heat - 2
+	var angle : int = 0
+	var neighborArray : Array = getAllSurroundingCells(cell)
 
 	if getVector(cell).heat != 0:
 		for i in neighborArray.size():
@@ -250,41 +242,3 @@ func findBestNeighbor(cell):
 #It then stores whichever has the least heat in "best."
 #	print(min2)
 	return {"bestFit":best, "targetDir":angle}
-
-
-
-
-#func genHeatMap(tile, counter):
-##	tile = findVector(tile)
-##	if tile == true:
-#	tile = getVector(tile)
-##	counter += 1
-#	var surroundCells = get_surrounding_cells(Vector2i(tile.relPos.x, tile.relPos.y))
-#	for i in surroundCells:
-#		var selected = findVector(i)
-#		if selected == true:
-##			genHeatMap(i, counter)
-#			selected = getVector(i)
-#			if selected.visited == false:
-#				selected.visited = true
-#				selected.heat = counter
-#				if queue.has(selected) == false:
-#					queue.append(Vector2i(selected.relPos.x, selected.relPos.y))
-#			else:
-#				if selected.heat > counter:
-#					selected.heat = counter
-##				selected.visited = true
-##				selected.heat = abs(tile.relPos.x - goal.x) + abs(tile.relPos.y - goal.y)
-##				open.append(Vector2i(selected.relPos.x, selected.relPos.y))
-##	if open.size() == 0:
-##		genHeatMap(open[0], counter, goal)
-#	open.pop_front()
-#	if open.size() == 0:
-#		if queue.size() > 0:
-#			print("continue")
-#		open = queue
-#		queue.clear()
-#		counter += 1
-#	elif open.size() > 0:
-#		genHeatMap(open[0], counter)
-#	#do manhattan, each corner = 2, x+y
