@@ -19,4 +19,6 @@ You might have to download the github app so you can push the to the repository.
 
 Game:
 
-Right click: aim unit toward mouse
+Right click: make a target location
+Space: spawn a unit at the mouse's position
+If a unit is spawned after creating a target, the unit will not move.
