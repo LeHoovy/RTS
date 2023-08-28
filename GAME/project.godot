@@ -12,17 +12,28 @@ config_version=5
 
 config/name="RTSBetter"
 run/main_scene="res://map.tscn"
+<<<<<<< HEAD
 config/features=PackedStringArray("4.0", "Forward Plus")
+=======
+config/features=PackedStringArray("4.1", "Forward Plus")
+>>>>>>> GameBetter
 config/icon="res://icon.svg"
+
+[autoload]
+
+DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
 
 [dotnet]
 
 project/assembly_name="RTSBetter"
 
+<<<<<<< HEAD
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/SimpleTODO/plugin.cfg", "res://addons/godot-idea-board/plugin.cfg", "res://addons/discord-sdk-gd/plugin.cfg")
 
+=======
+>>>>>>> GameBetter
 [godot_idea_board]
 
 directory_path="res://addons/godot-idea-board/savedata/"
@@ -31,12 +42,35 @@ directory_path="res://addons/godot-idea-board/savedata/"
 
 MB1={
 "deadzone": 0.5,
+<<<<<<< HEAD
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"pressed":false,"double_click":false,"script":null)
+=======
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":1,"canceled":false,"pressed":false,"double_click":false,"script":null)
+>>>>>>> GameBetter
 ]
 }
 MB2={
 "deadzone": 0.5,
+<<<<<<< HEAD
 "events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"pressed":false,"double_click":false,"script":null)
+=======
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(0, 0),"global_position":Vector2(0, 0),"factor":1.0,"button_index":2,"canceled":false,"pressed":false,"double_click":false,"script":null)
+]
+}
+Complete={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194309,"key_label":0,"unicode":0,"echo":false,"script":null)
+]
+}
+C1R1={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":81,"key_label":0,"unicode":113,"echo":false,"script":null)
+]
+}
+Space={
+"deadzone": 0.5,
+"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":32,"key_label":0,"unicode":32,"echo":false,"script":null)
+>>>>>>> GameBetter
 ]
 }
 

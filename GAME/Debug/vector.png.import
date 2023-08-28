@@ -2,7 +2,11 @@
 
 importer="texture"
 type="CompressedTexture2D"
+<<<<<<< HEAD
 uid="uid://lx8g4uhdh5xj"
+=======
+uid="uid://bnt7kjs6cndgn"
+>>>>>>> GameBetter
 path="res://.godot/imported/vector.png-21f80a616011981378976451927c0b09.ctex"
 metadata={
 "vram_texture": false
