@@ -160,20 +160,23 @@ func _process(delta):
 				get_node("ArrowSpawner").spawnVector(pos.x, pos.y, x + startX, y + startY)
 
 
-var tile : Vector2i
-var best : Array
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-#	if Input.is_action_just_pressed("MB2"):
-#		tile = getTileAt(get_global_mouse_position())
-#		target = get_global_mouse_position()
-#		if findVector(tile) == true:
-##			print(tile)
-#			#If left clicked, check for the cell type. If its pathable, continue.
-#
-#			readyPathfind(tile)
+	var tile : Vector2i
+#	var tile1 = Vector2i()
+#	var tile2 = Vector2i()
+	var best : Array
+	
+	if Input.is_action_just_pressed("MB2"):
+		tile = getTileAt(get_global_mouse_position())
+		target = get_global_mouse_position()
+		if findVector(tile) == true:
+#			print(tile)
+			#If left clicked, check for the cell type. If its pathable, continue.
+			
+			readyPathfind(tile)
 			
 	if Input.is_action_just_pressed("MB1"):
 		tile = getTileAt(get_global_mouse_position())
@@ -184,17 +187,6 @@ func _process(delta):
 		tile = map_to_local(getTileAt(get_global_mouse_position()))
 		guysHandle.spawnGuy(1, tile)
 
-
-
-func _physics_process(delta):
-	if Input.is_action_just_pressed("MB2"):
-		tile = getTileAt(get_global_mouse_position())
-		target = get_global_mouse_position()
-		if findVector(tile) == true:
-#			print(tile)
-			#If left clicked, check for the cell type. If its pathable, continue.
-			
-			readyPathfind(tile)
 
 
 
