@@ -45,7 +45,7 @@ func startStop(toggle : bool):
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(delta):
+func _process(delta):
 	if moving:
 		velocityCalc()
 		move_and_slide()
@@ -54,10 +54,6 @@ func _physics_process(delta):
 		target = get_local_mouse_position()
 		print(target, get_global_mouse_position())
 	
-
-
-func _process(delta):
-	pass
 
 
 func updateDir(area):
