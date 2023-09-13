@@ -37,11 +37,11 @@ func velocityCalc():
 		speed = 0
 
 
-func startStop(toggle : bool):
-	if toggle:
-		moving = true
+func startStop(toggle = null):
+	if toggle is bool:
+		moving = toggle
 	else:
-		moving = false
+		moving != moving
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -61,16 +61,19 @@ func updateDir(area):
 		vecRot.clear()
 		dir = 0
 		touchedVectors = area2d.get_overlapping_areas()
-		for i in touchedVectors:
-			if i.get_parent() is Sprite2D and !vecRot.has(i.get_parent() and i.get_parent().heat > 0):
-				vecRot.append(i.get_parent().rotation)
-			elif i.get_parent().heat < 1:
-				startStop(false)
-		for i in vecRot:
-	#		i.activeTog()
-			dir += i
-		if vecRot.max() - vecRot.min() > 5:
-			dir += 8 * (PI / 4)
-		dir = dir / vecRot.size()
-		rotation = dir
+		if touchedVectors.size() < 1:
+			startStop()
+		else:
+			for i in touchedVectors:
+				if i.get_parent() is Sprite2D and !vecRot.has(i.get_parent() and i.get_parent().heat > 0):
+					vecRot.append(i.get_parent().rotation)
+				elif i.get_parent().heat < 1:
+					startStop()
+			for i in vecRot:
+		#		i.activeTog()
+				dir += i
+			if vecRot.max() - vecRot.min() > 6 * (PI / 4):
+				dir += 8 * (PI / 4)
+			dir = dir / vecRot.size()
+			rotation = dir
 #	print(vecRot)

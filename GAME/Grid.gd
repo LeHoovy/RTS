@@ -1,3 +1,4 @@
+class_name PathingHandler
 extends TileMap
 
 <<<<<<< HEAD
@@ -37,7 +38,9 @@ signal pathfind
 
 
 
-
+func get_shortest_path(start : Array, end = Vector2()):
+	pass
+	
 
 
 func neighboringVectors(tile):
@@ -52,12 +55,13 @@ func neighboringVectors(tile):
 		return false
 
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
+<<<<<<< Updated upstream
 	get_node("ArrowSpawner").begun()
 >>>>>>> GameBetter
+=======
+>>>>>>> Stashed changes
 	for x in width:
 		for y in height:
 
@@ -157,9 +161,29 @@ func _process(delta):
 				var pos : Vector2 = to_global(map_to_local(Vector2(x + startX, y + startY)))
 				#Finds the position in the world of each tile.
 	
-				get_node("ArrowSpawner").spawnVector(pos.x, pos.y, x + startX, y + startY)
+				spawnVector(pos.x, pos.y, x + startX, y + startY)
 
 
+var vectorArrow = preload("res://Debug/Vector.tscn")
+var arrowCount = 0
+func spawnVector(x, y, posx, posy):
+	#Spawns the vector arrow
+#	var root = get_parent()
+	var arrow = vectorArrow.instantiate()
+	arrow.position = Vector2(x / scale.x, y / scale.y)
+	#Prepares the vector arrow to spawn
+	add_child(arrow)
+	arrowCount += 1
+	#Spawns the arrow and counts how many have been spawned.
+	
+	arrow.relPos = Vector2i(posx, posy)
+	arrow.name = str("vector", arrowCount)
+	arrow.root = self
+	
+	pathfind.connect(arrow.pathfind)
+	
+	vectorLocation[arrow] = Vector2i(posx, posy)
+	#Stores the arrow in the dictionary "vectorLocate" to be used later
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

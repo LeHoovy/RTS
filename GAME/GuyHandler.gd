@@ -1,8 +1,11 @@
+class_name GuyHandler
 extends Node2D
 
 
-var basicUnit = load("res://Guy.tscn")
-var units = []
+var basicUnit = preload("res://GameObjects/Control/Guy.tscn")
+var units : Array
+
+var selected : Array
 
 
 # Called when the node enters the scene tree for the first time.
@@ -11,10 +14,24 @@ func _ready():
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
+func _physics_process(delta):
+	if Input.is_action_just_pressed("MB2"):
+		for unit in units:
+			unit.startStop(true)
+			unit.target = get_local_mouse_position()
+			print(unit.target, get_global_mouse_position())
+	
+
+	#detects if you click a unit
+
+
 func _process(delta):
-	pass
-
-
+	if Input.is_action_just_pressed("MB1") and get_global_mouse_position():
+		if Input.is_action_pressed("Shift"):
+			if selected.size() != 200:
+				selected.append()
+		else:
+			pass
 
 
 func spawnGuy(team, pos):

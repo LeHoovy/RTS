@@ -1,6 +1,6 @@
 extends Node2D
 
-var vectorArrow = load("res://Debug/Vector.tscn")
+var vectorArrow = preload("res://Debug/Vector.tscn")
 var arrowCount = 0
 <<<<<<< HEAD
 =======

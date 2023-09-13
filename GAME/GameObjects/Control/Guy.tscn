@@ -11,7 +11,7 @@ scale = Vector2(5, 5)
 =======
 [gd_scene load_steps=4 format=3 uid="uid://bv1y5iyse6p53"]
 
-[ext_resource type="Script" path="res://UnitMovement.gd" id="1_cfjag"]
+[ext_resource type="Script" path="res://GameObjects/Control/UnitMovement.gd" id="1_cfjag"]
 
 [sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mxs7w"]
 
