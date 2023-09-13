@@ -10,17 +10,18 @@ config_version=5
 
 [application]
 
+<<<<<<< Updated upstream
 config/name="RTSBetter"
 run/main_scene="res://map.tscn"
+=======
+config/name="Game"
+>>>>>>> Stashed changes
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-DiscordSDKLoader="*res://addons/discord-sdk-gd/nodes/core_updater.gd"
-
 [dotnet]
 
+<<<<<<< Updated upstream
 project/assembly_name="RTSBetter"
 
 [godot_idea_board]
@@ -63,3 +64,6 @@ Shift={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+=======
+project/assembly_name="Game"
+>>>>>>> Stashed changes
