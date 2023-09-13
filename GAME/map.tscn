@@ -24,6 +24,9 @@ metadata/_edit_vertical_guides_ = []
 [node name="Cam" type="Camera2D" parent="."]
 script = ExtResource("3_wf35k")
 
+[node name="RayCast2D" type="RayCast2D" parent="Cam"]
+collision_mask = 1073741824
+
 [node name="PathingHandler" type="TileMap" parent="."]
 scale = Vector2(10, 10)
 tile_set = SubResource("TileSet_hulw7")

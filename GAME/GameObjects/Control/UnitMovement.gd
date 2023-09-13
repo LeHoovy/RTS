@@ -9,6 +9,8 @@ var dir : float = 0
 var speed : float = 0
 var moving : bool = false
 
+var handler = get_parent()
+
 @export_category("Primary Unit Stats")
 @export_range(1, 100, 0.1, "or_greater") var moveSpeed : float = 50
 
@@ -25,6 +27,10 @@ func _ready():
 #
 #	scale.x = size / 100
 #	scale.y = size / 100
+
+
+func select():
+	pass
 
 
 func velocityCalc():

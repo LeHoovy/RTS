@@ -1,17 +1,6 @@
-<<<<<<< HEAD
-[gd_scene load_steps=3 format=3 uid="uid://bbdp61db7u02t"]
-
-[ext_resource type="Texture2D" uid="uid://5vm8ymsv8cg4" path="res://Debug/vector2.png" id="1_uj7dg"]
-[ext_resource type="Script" path="res://Debug/Vector.gd" id="2_uq5ce"]
-
-[node name="Vector" type="Sprite2D"]
-texture_filter = 1
-texture = ExtResource("1_uj7dg")
-script = ExtResource("2_uq5ce")
-=======
 [gd_scene load_steps=4 format=3 uid="uid://bbdp61db7u02t"]
 
-[ext_resource type="Texture2D" uid="uid://bnt7kjs6cndgn" path="res://Debug/vector.png" id="1_ufq3m"]
+[ext_resource type="Texture2D" uid="uid://xdwji3s4jxoq" path="res://Debug/vector.png" id="1_ufq3m"]
 [ext_resource type="Script" path="res://Debug/Vector.gd" id="2_uq5ce"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_26ddb"]
@@ -25,10 +14,9 @@ hframes = 3
 script = ExtResource("2_uq5ce")
 
 [node name="Area2D" type="Area2D" parent="."]
-collision_layer = 8
+collision_layer = 2147483648
 collision_mask = 0
 monitoring = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_26ddb")
->>>>>>> GameBetter

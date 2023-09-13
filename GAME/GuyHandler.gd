@@ -29,7 +29,8 @@ func _process(delta):
 	if Input.is_action_just_pressed("MB1") and get_global_mouse_position():
 		if Input.is_action_pressed("Shift"):
 			if selected.size() != 200:
-				selected.append()
+#				selected.append()
+				pass
 		else:
 			pass
 

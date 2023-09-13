@@ -1,23 +1,5 @@
 extends Sprite2D
 
-<<<<<<< HEAD
-var heat = 0
-var heat2 = 0
-
-var relPos = Vector2i()
-
-func locate():
-	print(relPos)
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
-	pass
-=======
 
 @export var debug : bool = true
 
@@ -25,7 +7,7 @@ var visited : bool = false
 var active : bool = false
 var heat = 0
 var root
-var relPos = Vector2i()
+var relPos : Vector2i
 #Make sure its not visited on spawn, nor active, the heat is 0, and ready root and relPos
 
 var detail : String = "not checked"
@@ -135,4 +117,3 @@ func _ready():
 #func _process(delta):
 #	changeFrame()
 #	pass
->>>>>>> GameBetter
