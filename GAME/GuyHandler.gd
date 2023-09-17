@@ -16,10 +16,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
 	if Input.is_action_just_pressed("MB2"):
-		for unit in units:
-			unit.startStop(true)
-			unit.target = get_local_mouse_position()
-			print(unit.target, get_global_mouse_position())
+		for unit in selected:
+			$unit.startStop(true)
+			$unit.target = get_local_mouse_position()
+			print($unit.target, get_global_mouse_position())
 	
 
 	#detects if you click a unit

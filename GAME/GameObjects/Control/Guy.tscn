@@ -33,7 +33,6 @@ collision_layer = 1073741824
 collision_mask = 2147483648
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirDetect"]
-scale = Vector2(1, 1)
 shape = SubResource("RectangleShape2D_q7rtq")
 
 [connection signal="area_entered" from="DirDetect" to="." method="updateDir"]

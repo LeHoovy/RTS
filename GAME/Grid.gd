@@ -49,9 +49,9 @@ func _ready():
 #			print("Exact location: ", pos, " Tilemap Coordinates: (", x, ",", y, ")")
 			#Finds the position in the world of each tile.
 
-			var cell : Vector2i = get_cell_atlas_coords(0, Vector2(x + startX, y + startY))
+#			var cell : Vector2i = get_cell_atlas_coords(0, Vector2(x + startX, y + startY))
 #			if cell == Vector2i(0, 0) or cell == Vector2i(1, 0):
-			if cell == Vector2i(1, 0):
+			if get_cell_atlas_coords(0, Vector2(x + startX, y + startY)) == Vector2i(1, 0):
 			#Makes sure the cell can be pathed on, then activates the rest of the script.
 
 #				print(pos, ", (", x, ",", y, ")")
@@ -61,6 +61,7 @@ func _ready():
 				#Finds the position in the world of each tile.
 	
 				spawnVector(pos.x, pos.y, x + startX, y + startY)
+
 
 
 var vectorArrow = preload("res://Debug/Vector.tscn")
