@@ -64,7 +64,7 @@ func _ready():
 
 
 
-var vectorArrow = preload("res://Debug/Vector.tscn")
+var vectorArrow = preload("res://Debug/Scenes/Vector.tscn")
 var arrowCount = 0
 func spawnVector(x, y, posx, posy):
 	#Spawns the vector arrow
@@ -102,16 +102,8 @@ func _process(delta):
 			
 			readyPathfind(tile)
 			
-	if Input.is_action_just_pressed("MB1"):
-		tile = getTileAt(get_global_mouse_position())
-		getVector(tile).findHeat()
-		#Prints the heat of any left-clicked vector
 		
-	if Input.is_action_just_pressed("Space") and findVector(getTileAt(get_global_mouse_position())):
-		tile = map_to_local(getTileAt(get_global_mouse_position()))
-		guysHandle.spawnGuy(1, tile)
-
-
+	
 
 
 func getTileAt(pos):
@@ -121,19 +113,13 @@ func getTileAt(pos):
 	return tile
 
 
-
-
 func findVector(pos):
 	return vectorLocation.has(vectorLocation.find_key(pos))
-
-
 
 
 func getVector(pos):
 	var arrow : Node = vectorLocation.find_key(pos)
 	return arrow
-
-
 
 
 func readyVectorNeighbors(pos):
@@ -144,8 +130,6 @@ func readyVectorNeighbors(pos):
 	return list
 
 
-
-
 func neighborTarget(node):
 	var list : Array = getAllSurroundingCells(node)
 	for i in list:
@@ -153,8 +137,6 @@ func neighborTarget(node):
 			return true
 			break
 	return false
-
-
 
 
 func getAllSurroundingCells(cell):
@@ -170,14 +152,10 @@ func getAllSurroundingCells(cell):
 	return allNeighbors
 
 
-
-
 func clearHeatMap():
 	for i in vectorLocation:
 		i.visited = false
 		i.activeTog()
-
-
 
 
 #VERY IMPORTANT
@@ -207,8 +185,6 @@ func genHeatMap(target):
 
 
 
-
-
 func readyPathfind(target):
 	if prevTarget != Vector2i(-1, -1):
 		set_cell(0, prevTarget, 0, Vector2i(1, 0))
@@ -229,8 +205,6 @@ func readyPathfind(target):
 #	print("finished")
 	
 	pathfind.emit()
-
-
 
 
 func findBestNeighbor(cell):

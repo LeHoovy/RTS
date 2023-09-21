@@ -1,14 +1,17 @@
-[gd_scene load_steps=5 format=3 uid="uid://bv1y5iyse6p53"]
+[gd_scene load_steps=7 format=3 uid="uid://bv1y5iyse6p53"]
 
 [ext_resource type="Script" path="res://GameObjects/Control/UnitMovement.gd" id="1_cfjag"]
+[ext_resource type="Texture2D" uid="uid://qxn41jvoowc5" path="res://GameObjects/Textures/Guy/15.png" id="2_2nmke"]
+[ext_resource type="Texture2D" uid="uid://bivl5j7iqfnyj" path="res://GameObjects/Textures/SelectorV1.png" id="2_eu444"]
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_mxs7w"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_6x45d"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_161fp"]
 radius = 1.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_q7rtq"]
-size = Vector2(2.0202, 2.0202)
+[sub_resource type="CircleShape2D" id="CircleShape2D_3dyy7"]
+radius = 1.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3ls70"]
+radius = 1.5
 
 [node name="Guy" type="CharacterBody2D"]
 motion_mode = 1
@@ -20,20 +23,35 @@ acceleration = 1.0
 metadata/_edit_vertical_guides_ = [1.0, -1.0]
 metadata/_edit_horizontal_guides_ = [1.0, -1.0]
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(2, 2)
-texture = SubResource("PlaceholderTexture2D_mxs7w")
+[node name="Collider" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_161fp")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_6x45d")
+[node name="Color" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_2nmke")
+
+[node name="Selector" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(0.02, 0.02)
+texture = ExtResource("2_eu444")
 
 [node name="DirDetect" type="Area2D" parent="."]
-scale = Vector2(0.99, 0.99)
 collision_layer = 1073741824
 collision_mask = 2147483648
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DirDetect"]
-shape = SubResource("RectangleShape2D_q7rtq")
+shape = SubResource("CircleShape2D_3dyy7")
+
+[node name="Range" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 1073741824
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Range"]
+shape = SubResource("CircleShape2D_3ls70")
 
 [connection signal="area_entered" from="DirDetect" to="." method="updateDir"]
 [connection signal="area_exited" from="DirDetect" to="." method="updateDir"]
+[connection signal="mouse_entered" from="DirDetect" to="." method="mouse_entered"]
+[connection signal="mouse_exited" from="DirDetect" to="." method="mouse_exited"]
+[connection signal="area_entered" from="Range" to="." method="range_entered"]
+[connection signal="area_exited" from="Range" to="." method="range_exited"]
