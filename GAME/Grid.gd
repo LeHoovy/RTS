@@ -8,14 +8,15 @@ var width : float = size.x
 var height : float = size.y
 #Finds the overall size of the map.
 
-#var target = Vector2i()
+var vector_count : int = 0
+var vectors : Dictionary
 
 @onready var vectorLocation : Dictionary
 @onready var guysHandle : Node = get_node("GuyHandler")
 #Prepares vectorLocation as the vectorLocate dictionary found in the ArrowSpawner node
 
 var prevTarget : Vector2i = Vector2i(-1, -1)
-var target : Vector2
+#var target : Vector2
 var open : Array
 #Prepares arrays to store stuff for pathfinding
 
@@ -26,6 +27,17 @@ signal pathfind
 func get_shortest_path(start : Array, end = Vector2()):
 	pass
 	
+
+
+func generate_vectors(layer):
+	for x in width:
+		for y in height:
+			if get_cell_atlas_coords(0, Vector2(x + startX, y + startY)) == Vector2i(1, 0):
+			#Makes sure the cell can be pathed on, then activates the rest of the script.
+				var pos : Vector2 = to_global(map_to_local(Vector2(x + startX, y + startY)))
+				#Finds the position in the world of each tile.
+	
+				spawnVector(pos.x, pos.y, x + startX, y + startY, layer)
 
 
 func neighboringVectors(tile):
@@ -44,29 +56,14 @@ func neighboringVectors(tile):
 func _ready():
 	for x in width:
 		for y in height:
-
-#			var pos = to_global(map_to_local(Vector2(x + startX, y + startY)))
-#			print("Exact location: ", pos, " Tilemap Coordinates: (", x, ",", y, ")")
-			#Finds the position in the world of each tile.
-
-#			var cell : Vector2i = get_cell_atlas_coords(0, Vector2(x + startX, y + startY))
-#			if cell == Vector2i(0, 0) or cell == Vector2i(1, 0):
 			if get_cell_atlas_coords(0, Vector2(x + startX, y + startY)) == Vector2i(1, 0):
-			#Makes sure the cell can be pathed on, then activates the rest of the script.
-
-#				print(pos, ", (", x, ",", y, ")")
-#				print(cell)
-
-				var pos : Vector2 = to_global(map_to_local(Vector2(x + startX, y + startY)))
-				#Finds the position in the world of each tile.
-	
-				spawnVector(pos.x, pos.y, x + startX, y + startY)
+				vector_count += 1
 
 
 
-var vectorArrow = preload("res://Debug/Scenes/Vector.tscn")
-var arrowCount = 0
-func spawnVector(x, y, posx, posy):
+var vectorArrow : PackedScene = preload("res://Debug/Scenes/Vector.tscn")
+var arrowCount : int = 0
+func spawnVector(x, y, posx, posy, layer):
 	#Spawns the vector arrow
 #	var root = get_parent()
 	var arrow = vectorArrow.instantiate()
@@ -74,6 +71,7 @@ func spawnVector(x, y, posx, posy):
 	#Prepares the vector arrow to spawn
 	add_child(arrow)
 	arrowCount += 1
+	arrow.layer = layer
 	#Spawns the arrow and counts how many have been spawned.
 	
 	arrow.relPos = Vector2i(posx, posy)
@@ -83,6 +81,7 @@ func spawnVector(x, y, posx, posy):
 	pathfind.connect(arrow.pathfind)
 	
 	vectorLocation[arrow] = Vector2i(posx, posy)
+	vectors[arrow] = layer
 	#Stores the arrow in the dictionary "vectorLocate" to be used later
 
 
@@ -93,14 +92,14 @@ func _process(delta):
 #	var tile2 = Vector2i()
 	var best : Array
 	
-	if Input.is_action_just_pressed("MB2"):
-		tile = getTileAt(get_global_mouse_position())
-		target = get_global_mouse_position()
-		if findVector(tile) == true:
+#	if Input.is_action_just_pressed("MB2"):
+#		tile = getTileAt(get_global_mouse_position())
+#		target = get_global_mouse_position()
+#		if findVector(tile) == true:
 #			print(tile)
 			#If left clicked, check for the cell type. If its pathable, continue.
 			
-			readyPathfind(tile)
+#			readyPathfind(tile)
 			
 		
 	
@@ -126,7 +125,7 @@ func readyVectorNeighbors(pos):
 	var array : Array = getAllSurroundingCells(pos)
 	var list : Array
 	for i in array:
-		list.append(getVector(i).heat)
+		list.append(getVector(i))
 	return list
 
 
@@ -154,12 +153,13 @@ func getAllSurroundingCells(cell):
 
 func clearHeatMap():
 	for i in vectorLocation:
+		
 		i.visited = false
 		i.activeTog()
 
 
 #VERY IMPORTANT
-func genHeatMap(target):
+func genHeatMap(target, layer):
 	open.append(target)
 	
 	while open.size() > 0:
@@ -168,7 +168,7 @@ func genHeatMap(target):
 		var neighbors : Array = getAllSurroundingCells(open[0])
 #		var neighbors = get_surrounding_cells(open[0])
 		for b in neighbors:
-			if findVector(b) == true:
+			if findVector(b) == true and getVector(b).layer == layer:
 				var selected : Node = getVector(b)
 				if selected.visited == true:
 					if selected.heat > current.heat + 1: 
@@ -185,7 +185,8 @@ func genHeatMap(target):
 
 
 
-func readyPathfind(target):
+func readyPathfind(target, layer):
+#	print('e')
 	if prevTarget != Vector2i(-1, -1):
 		set_cell(0, prevTarget, 0, Vector2i(1, 0))
 	set_cell(0, target, 0, Vector2i(1, 1))
@@ -193,12 +194,12 @@ func readyPathfind(target):
 	
 	var current : Vector2i
 
-	clearHeatMap()
+#	clearHeatMap()
 
 	getVector(target).visited = true
 	getVector(target).heat = 0
 	open = []
-	genHeatMap(target)
+	genHeatMap(target, layer)
 	
 #	await finished
 	

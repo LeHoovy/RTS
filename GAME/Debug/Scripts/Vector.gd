@@ -9,6 +9,7 @@ var heat = 0
 var root
 var relPos : Vector2i
 #Make sure its not visited on spawn, nor active, the heat is 0, and ready root and relPos
+var layer : int
 
 var detail : String = "not checked"
 
@@ -35,6 +36,12 @@ func pathfind():
 func findBestDir():
 	var smallestNodes = {}
 	neighborVectors = root.readyVectorNeighbors(relPos)
+	for neighbor in neighborVectors:
+		if neighbor.layer != layer:
+			neighborVectors.pop_at(neighborVectors.find(neighbor))
+	for neighbor in neighborVectors:
+		neighborVectors.append(neighborVectors[0].heat)
+		neighborVectors.pop_front()
 	#prepares smallest nodes dict, and gets the neighboring vectors magnitude (heat)
 
 	for i in neighborVectors.size():
@@ -69,7 +76,7 @@ func changeFrame():
 	if debug == true and (active == true or visited == true):
 		if heat == 0:
 			frame = 0
-			look_at(root.target)
+			look_at(get_global_mouse_position())
 		else:
 			frame = 0
 	else:

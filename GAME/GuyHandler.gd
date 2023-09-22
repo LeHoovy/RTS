@@ -63,6 +63,10 @@ func _physics_process(delta):
 		print(current_team_id)
 	if Input.is_action_just_pressed("MB2"):
 		for unit in selected:
+			unit.path_layer = get_parent().vectors.size() / get_parent().vector_count
+			get_parent().generate_vectors(get_parent().vectors.size() / get_parent().vector_count)
+			if get_parent().findVector(get_parent().getTileAt(get_global_mouse_position())) == true:
+				get_parent().readyPathfind(get_parent().getTileAt(get_global_mouse_position()), get_parent().vectors.size() / get_parent().vector_count)
 			unit.startStop(true)
 			unit.target = get_local_mouse_position()
 			print(unit.target, get_global_mouse_position())

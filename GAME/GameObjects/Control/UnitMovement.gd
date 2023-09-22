@@ -8,6 +8,7 @@ var vec_rot : Array = []
 var dir : float = 0
 var speed : float = 0
 var moving : bool = false
+var path_layer : int
 
 var possible_atk_targets : Dictionary
 
@@ -20,6 +21,7 @@ var state : int
 #0 is stopped, 1 is moving, 2 is patrolling, 3 is holding position, and 4 is attacking
 
 @onready var handler = get_parent().get_parent()
+@onready var pathing_handler = handler.get_parent()
 
 @export_category("Primary Unit Stats")
 @export_range(1, 1000, 1, "or_greater") var max_health : int = 50
@@ -112,6 +114,11 @@ func updateDir(area):
 		vec_rot.clear()
 		dir = 0
 		touchedVectors = area2d.get_overlapping_areas()
+#		for vector in touchedVectors:
+#			if not vector.get_parent() is Sprite2D or vector.get_parent().layer != path_layer:
+#
+##			else:
+#				touchedVectors.pop_at(touchedVectors.find(vector))
 		if touchedVectors.size() < 1:
 			startStop()
 		else:
