@@ -1,0 +1,41 @@
+[gd_scene load_steps=8 format=3 uid="uid://dox7v54c2yhj2"]
+
+[ext_resource type="ArrayMesh" uid="uid://btoikukxfgims" path="res://Terrain/Prototype/Artificial/Models/Floor.tres" id="1_dolxa"]
+[ext_resource type="Material" uid="uid://b8s2x0rsmxcb1" path="res://Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres" id="2_kk6q7"]
+[ext_resource type="ArrayMesh" uid="uid://7qoemnh4v4aa" path="res://Terrain/Prototype/Artificial/Models/Ramp1.tres" id="3_c0owr"]
+[ext_resource type="ArrayMesh" uid="uid://bgyu5k6j4xm5p" path="res://Terrain/Prototype/Artificial/Models/Ramp2.tres" id="4_ddd4p"]
+[ext_resource type="ArrayMesh" uid="uid://bdton8wydvk4w" path="res://Terrain/Prototype/Artificial/Models/Corner1.tres" id="5_k05xt"]
+[ext_resource type="ArrayMesh" uid="uid://dvqxkx02f8f1i" path="res://Terrain/Prototype/Artificial/Models/Corner2.tres" id="6_7cdyc"]
+[ext_resource type="ArrayMesh" uid="uid://bbev2dugqd0og" path="res://Terrain/Prototype/Artificial/Models/Corner3.tres" id="7_v02hj"]
+
+[node name="Tiles" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+mesh = ExtResource("1_dolxa")
+surface_material_override/0 = ExtResource("2_kk6q7")
+
+[node name="Ramp1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+mesh = ExtResource("3_c0owr")
+surface_material_override/0 = ExtResource("2_kk6q7")
+
+[node name="Ramp2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+mesh = ExtResource("4_ddd4p")
+surface_material_override/0 = ExtResource("2_kk6q7")
+
+[node name="Corner1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+mesh = ExtResource("5_k05xt")
+surface_material_override/0 = ExtResource("2_kk6q7")
+
+[node name="Corner2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+mesh = ExtResource("6_7cdyc")
+surface_material_override/0 = ExtResource("2_kk6q7")
+
+[node name="Corner3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
+mesh = ExtResource("7_v02hj")
+surface_material_override/0 = ExtResource("2_kk6q7")
