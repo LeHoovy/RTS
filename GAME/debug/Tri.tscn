@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://bsgkoehq0fgk"]
+
+[ext_resource type="ArrayMesh" uid="uid://dunrcp5e1nymn" path="res://debug/tri.obj" id="1_o6qar"]
+[ext_resource type="Material" uid="uid://lavbmcieawdb" path="res://debug/tri.tres" id="2_syspk"]
+
+[node name="MeshInstance3D" type="MeshInstance3D"]
+mesh = ExtResource("1_o6qar")
+surface_material_override/0 = ExtResource("2_syspk")

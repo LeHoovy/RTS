@@ -34,18 +34,10 @@ func process_move(delta) -> void:
 	mouse_pos = get_viewport().get_mouse_position()
 	screen_size = get_viewport().get_visible_rect().size
 	
-	move = is_mouse_on_edge(1)
-	cam_move_speed += Vector2(move) * delta #* (0.9 * edge_scroll_sens)
+	#move = is_mouse_on_edge(1)
+	#cam_move_speed += Vector2(move) * (0.3 * (edge_scroll_sens / 3)) * delta
 	#cam_move_speed *= friction
-	if cam_move_speed.x > edge_scroll_sens / 5:
-		cam_move_speed.x = edge_scroll_sens / 5
-	elif cam_move_speed.x < -(edge_scroll_sens / 5):
-		cam_move_speed.x = -edge_scroll_sens / 5
-	
-	if cam_move_speed.y > edge_scroll_sens:
-		cam_move_speed.y = edge_scroll_sens
-	elif cam_move_speed.y < -edge_scroll_sens:
-		cam_move_speed.y = edge_scroll_sens
+	cam_move_speed = clamp(cam_move_speed, Vector2(-edge_scroll_sens / 3, -edge_scroll_sens / 3), Vector2(edge_scroll_sens / 3, edge_scroll_sens / 3))
 	
 	if move.x == 0:
 		cam_move_speed.x = 0
@@ -63,3 +55,28 @@ var screen_size: Vector2
 var cam_move_speed: Vector2
 func _process(delta):
 	process_move(delta)
+
+
+var zoomSpeed: float = 0.05
+var zoomMin: float = 0.3
+var zoomMax: float = 5.0
+var zoom: float = 1
+#Sets the minimum and maximum zoom, as well as the speed of zooming.
+@export var dragSens: float = 4
+#Changes the sensitivity of the ability to drag around the camera.
+
+func _input(event):
+	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
+		position.x -= event.relative.x / 49.5
+		position.z -= event.relative.y / 50
+#Repositions the camera as long as the middle mouse button (mouse 3) is pressed
+#Relative to the sensitivity and movement of the mouse.
+#Also adjusts based on the zoom amount.
+	
+	if event is InputEventMouseButton:
+		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+			zoom += zoomSpeed
+		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+			zoom -= zoomSpeed
+		#Changes zoom as long, and only if, the mouse wheel is being scrolled
+		zoom = clamp(zoom, zoomMin, zoomMax)

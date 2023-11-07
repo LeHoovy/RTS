@@ -1,0 +1,7 @@
+[gd_resource type="StandardMaterial3D" format=3 uid="uid://lavbmcieawdb"]
+
+[resource]
+transparency = 1
+blend_mode = 1
+no_depth_test = true
+albedo_color = Color(0, 0.694118, 0.901961, 0.596078)

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dunrcp5e1nymn"
+path="res://.godot/imported/tri.obj-0aaa22b0661e8c02d71858e67e3f4655.mesh"
+
+[deps]
+
+files=["res://.godot/imported/tri.obj-0aaa22b0661e8c02d71858e67e3f4655.mesh"]
+
+source_file="res://debug/tri.obj"
+dest_files=["res://.godot/imported/tri.obj-0aaa22b0661e8c02d71858e67e3f4655.mesh", "res://.godot/imported/tri.obj-0aaa22b0661e8c02d71858e67e3f4655.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false
