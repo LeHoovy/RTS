@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dox7v54c2yhj2"]
+[gd_scene load_steps=14 format=3 uid="uid://dox7v54c2yhj2"]
 
 [ext_resource type="ArrayMesh" uid="uid://btoikukxfgims" path="res://Terrain/Prototype/Artificial/Models/Floor.tres" id="1_dolxa"]
 [ext_resource type="Material" uid="uid://b8s2x0rsmxcb1" path="res://Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres" id="2_kk6q7"]
@@ -8,77 +8,23 @@
 [ext_resource type="ArrayMesh" uid="uid://dvqxkx02f8f1i" path="res://Terrain/Prototype/Artificial/Models/Corner2.tres" id="6_7cdyc"]
 [ext_resource type="ArrayMesh" uid="uid://bbev2dugqd0og" path="res://Terrain/Prototype/Artificial/Models/Corner3.tres" id="7_v02hj"]
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_erj8b"]
-points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0, 0.499995, -0.5, 1.1, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.499995, -0.5, 1.1, 0.499995, 0.5, 1.1, -0.5, 0.5, 1.1, 0.499995)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_h1vah"]
+data = PackedVector3Array(-0.5, 0, 0.5, -0.5, 1.1, -0.5, -0.5, 1.1, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 1.1, -0.5, -0.5, 0, -0.5, 0.5, 1.1, -0.5, -0.5, 1.1, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 1.1, -0.5, 0.5, 0, -0.5, 0.5, 1.1, 0.5, 0.5, 1.1, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 1.1, 0.5, 0.5, 0, 0.5, -0.5, 1.1, 0.5, 0.5, 1.1, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 1.1, 0.5, 0.5, 1.1, -0.5, -0.5, 1.1, 0.5, -0.5, 1.1, -0.5, 0.5, 1.1, -0.5, 0.5, 1.1, 0.5, -0.5, 1.1, 0.5)
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_ey7lp"]
-vertices = PackedVector3Array(-0.5, 1.3, -0.5, -0.5, 1.3, 0.5, 0.5, 1.3, 0.5, 0.5, 1.3, -0.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-cell_size = 0.01
-cell_height = 0.1
-agent_radius = 0.0
-agent_max_climb = 1.0
-agent_max_slope = 60.0
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_n46vg"]
+data = PackedVector3Array(-0.5, 0.55, -0.5, 0.5, 1.1, 0.5, -0.5, 1.1, 0.5, -0.5, 0.55, -0.5, 0.5, 0.55, -0.5, 0.5, 1.1, 0.5, 0.5, 0.55, -0.5, 0.5, 0.55, 0.5, 0.5, 1.1, 0.5, -0.5, 1.1, 0.5, -0.5, 0.55, 0.5, -0.5, 0.55, -0.5, 0.5, 0.55, 0.5, -0.5, 1.1, 0.5, 0.5, 1.1, 0.5, 0.5, 0.55, 0.5, -0.5, 0.55, 0.5, -0.5, 1.1, 0.5, 0.5, 0, 0.5, -0.5, 0.55, 0.5, 0.5, 0.55, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.55, 0.5, 0.5, 0, -0.5, 0.5, 0.55, 0.5, 0.5, 0.55, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0.55, 0.5, -0.5, 0, -0.5, 0.5, 0.55, -0.5, -0.5, 0.55, -0.5, -0.5, 0, -0.5, 0.5, 0, -0.5, 0.5, 0.55, -0.5, -0.5, 0, 0.5, -0.5, 0.55, -0.5, -0.5, 0.55, 0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0.55, -0.5)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_odaui"]
-points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0, 0.499995, -0.5, 0.549892, -0.5, 0.5, 0, -0.5, 0.5, 0, 0.499995, -0.5, 1.1, 0.499995, 0.5, 0.549892, -0.5, 0.5, 1.1, 0.499995)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_nxsi5"]
+data = PackedVector3Array(-0.5, 0, 0.5, -0.5, 0, -0.5, -0.5, 0.55, 0.5, 0.5, 0, 0.5, -0.5, 0.55, 0.5, 0.5, 0.55, 0.5, 0.5, 0, 0.5, -0.5, 0, 0.5, -0.5, 0.55, 0.5, 0.5, 0, 0.5, 0.5, 0.55, 0.5, 0.5, 0, -0.5, -0.5, 0.55, 0.5, 0.5, 0, -0.5, 0.5, 0.55, 0.5, -0.5, 0.55, 0.5, 0, 0.275, 0, 0.5, 0, -0.5, 0, 0.275, 0, -0.5, 0, -0.5, 0.5, 0, -0.5, 0, 0.275, 0, -0.5, 0.55, 0.5, -0.5, 0, -0.5)
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_ghhu7"]
-vertices = PackedVector3Array(-0.5, 0.7, -0.5, -0.5, 1.2, 0.5, 0.5, 1.2, 0.5, 0.5, 0.7, -0.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-cell_size = 0.01
-cell_height = 0.1
-agent_radius = 0.0
-agent_max_climb = 1.0
-agent_max_slope = 60.0
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_rak26"]
+data = PackedVector3Array(0.5, 1.1, 0.5, 0, 1.1, 0.5, 0.5, 1.1, 0, 0.5, 0, 0, 0, 1.1, 0.5, 0, 0, 0.5, 0.5, 0, 0, 0.5, 1.1, 0, 0, 1.1, 0.5)
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vxgq8"]
-points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0, 0.499995, -0.5, 0.55, 0.499995, 0.5, 0, -0.5, 0.5, 0, 0.499995, 0.5, 0.55, 0.499995)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_616r7"]
+data = PackedVector3Array(0.5, 0, 0, 0.5, 1.1, 0.5, 0.5, 1.1, 0, 0.5, 0, 0, 0.5, 0, 0.5, 0.5, 1.1, 0.5, 0, 0, 0.5, -0.5, 1.1, 0.5, 0, 1.1, 0.5, 0, 0, 0.5, -0.5, 0, 0.5, -0.5, 1.1, 0.5, 0.5, 1.1, 0, 0, 1.1, 0.5, 0, 1.1, 0, 0.5, 1.1, 0, 0.5, 1.1, 0.5, 0, 1.1, 0.5, 0.5, 0, 0.5, 0, 1.1, 0.5, 0.5, 1.1, 0.5, 0.5, 0, 0.5, 0, 0, 0.5, 0, 1.1, 0.5, 0.5, 1.1, 0, 0, 1.1, 0, 0.5, 1.1, -0.5, -0.5, 0, 0.5, 0.5, 1.1, -0.5, -0.5, 1.1, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 1.1, -0.5, 0.5, 0, -0.5, 0.5, 1.1, 0, 0.5, 1.1, -0.5, 0.5, 0, -0.5, 0.5, 0, 0, 0.5, 1.1, 0, 0, 1.1, 0.5, -0.5, 1.1, 0.5, 0, 1.1, 0)
 
-[sub_resource type="NavigationMesh" id="NavigationMesh_ee5ox"]
-vertices = PackedVector3Array(-0.5, 0.2, -0.5, -0.5, 0.7, 0.5, 0.5, 0.7, 0.5, 0.5, 0.2, -0.5)
-polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
-cell_size = 0.01
-cell_height = 0.1
-agent_radius = 0.0
-agent_max_climb = 1.0
-agent_max_slope = 60.0
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_wm2kb"]
-points = PackedVector3Array(0, 0, 0.499995, 0, 1.09999, 0.499995, 0.499995, 0, 0, 0.499995, 1.09999, 0.499995, 0.499995, 1.09999, 0)
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_xocwm"]
-vertices = PackedVector3Array(0.48, 1.2, 0, 0, 1.2, 0.48, 0, 1.2, 0.5, 0.5, 1.2, 0.5, 0.5, 1.2, 0)
-polygons = [PackedInt32Array(4, 3, 0), PackedInt32Array(0, 3, 1), PackedInt32Array(1, 3, 2)]
-cell_size = 0.01
-cell_height = 0.1
-agent_radius = 0.0
-agent_max_climb = 1.0
-agent_max_slope = 60.0
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_670fl"]
-points = PackedVector3Array(-0.5, 0, 0.499995, 0.5, 0, -0.5, 0.5, 0, 0.499995, -0.5, 1.1, 0.499995, -9.78708e-05, 1.1, -2.65241e-06, 0.5, 1.1, -0.5, 0.5, 1.1, 0.499995)
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_6ljlw"]
-vertices = PackedVector3Array(0.48, 1.3, -0.5, -0.5, 1.3, 0.48, -0.5, 1.3, 0.5, 0.5, 1.3, 0.5, 0.5, 1.3, -0.5)
-polygons = [PackedInt32Array(4, 3, 0), PackedInt32Array(0, 3, 1), PackedInt32Array(1, 3, 2)]
-cell_size = 0.01
-cell_height = 0.1
-agent_radius = 0.0
-agent_max_climb = 1.0
-agent_max_slope = 60.0
-
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_2udfg"]
-points = PackedVector3Array(-0.5, 0, -2.65241e-06, -0.5, 0, 0.499995, -0.5, 1.1, -2.65241e-06, -9.78708e-05, 0, -0.5, 0.5, 0, 0.499995, -0.5, 1.1, 0.499995, -9.78708e-05, 1.1, -0.5, 0.5, 0, -0.5, 0.5, 1.1, 0.499995, 0.5, 1.1, -0.5)
-
-[sub_resource type="NavigationMesh" id="NavigationMesh_svgt0"]
-vertices = PackedVector3Array(0.5, 1.3, -0.5, -0.02, 1.3, -0.5, -0.5, 1.3, -0.02, -0.5, 1.3, 0.5, 0.5, 1.3, 0.5)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(3, 0, 4)]
-cell_size = 0.01
-cell_height = 0.1
-agent_radius = 0.0
-agent_max_climb = 1.0
-agent_max_slope = 60.0
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_5p8ml"]
+data = PackedVector3Array(-0.5, 1.1, 0, 0, 1.1, -0.5, 0, 1.1, 0, 0, 0, -0.5, 0.5, 1.1, -0.5, 0, 1.1, -0.5, 0, 0, -0.5, 0.5, 0, -0.5, 0.5, 1.1, -0.5, 0.5, 0, 0, 0.5, 1.1, 0.5, 0.5, 1.1, 0, 0.5, 0, 0, 0.5, 0, 0.5, 0.5, 1.1, 0.5, 0, 0, 0.5, -0.5, 1.1, 0.5, 0, 1.1, 0.5, 0, 0, 0.5, -0.5, 0, 0.5, -0.5, 1.1, 0.5, 0, 1.1, 0, -0.5, 1.1, 0.5, -0.5, 1.1, 0, 0, 1.1, 0, 0, 1.1, 0.5, -0.5, 1.1, 0.5, 0.5, 1.1, 0, 0, 1.1, 0.5, 0, 1.1, 0, 0.5, 1.1, 0, 0.5, 1.1, 0.5, 0, 1.1, 0.5, 0.5, 0, 0.5, 0, 1.1, 0.5, 0.5, 1.1, 0.5, 0.5, 0, 0.5, 0, 0, 0.5, 0, 1.1, 0.5, 0.5, 1.1, -0.5, 0, 1.1, 0, 0, 1.1, -0.5, 0.5, 1.1, -0.5, 0.5, 1.1, 0, 0, 1.1, 0, -0.5, 1.1, 0, 0, 0, -0.5, 0, 1.1, -0.5, -0.5, 1.1, 0, -0.5, 0, 0, 0, 0, -0.5, 0.5, 0, -0.5, 0.5, 1.1, 0, 0.5, 1.1, -0.5, 0.5, 0, -0.5, 0.5, 0, 0, 0.5, 1.1, 0, -0.5, 0, 0.5, -0.5, 1.1, 0, -0.5, 1.1, 0.5, -0.5, 0, 0.5, -0.5, 0, 0, -0.5, 1.1, 0)
 
 [node name="Tiles" type="Node3D"]
 
@@ -87,19 +33,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.5)
 mesh = ExtResource("1_dolxa")
 surface_material_override/0 = ExtResource("2_kk6q7")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
-collision_layer = 2048
-collision_mask = 0
+[node name="StaticBody3D2" type="StaticBody3D" parent="Floor"]
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_erj8b")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Floor"]
-navigation_mesh = SubResource("NavigationMesh_ey7lp")
-
-[node name="Floor" type="MeshInstance3D" parent="Floor/NavigationRegion3D"]
-mesh = ExtResource("1_dolxa")
-surface_material_override/0 = ExtResource("2_kk6q7")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D2"]
+shape = SubResource("ConcavePolygonShape3D_h1vah")
 
 [node name="Ramp1" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -0.5)
@@ -107,19 +44,9 @@ mesh = ExtResource("3_c0owr")
 surface_material_override/0 = ExtResource("2_kk6q7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ramp1"]
-collision_layer = 2048
-collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp1/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_odaui")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Ramp1"]
-navigation_mesh = SubResource("NavigationMesh_ghhu7")
-
-[node name="Ramp1" type="MeshInstance3D" parent="Ramp1/NavigationRegion3D"]
-mesh = ExtResource("3_c0owr")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_kk6q7")
+shape = SubResource("ConcavePolygonShape3D_n46vg")
 
 [node name="Ramp2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0, -0.5)
@@ -127,19 +54,9 @@ mesh = ExtResource("4_ddd4p")
 surface_material_override/0 = ExtResource("2_kk6q7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Ramp2"]
-collision_layer = 2048
-collision_mask = 0
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Ramp2/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_vxgq8")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Ramp2"]
-navigation_mesh = SubResource("NavigationMesh_ee5ox")
-
-[node name="Ramp2" type="MeshInstance3D" parent="Ramp2/NavigationRegion3D"]
-mesh = ExtResource("4_ddd4p")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_kk6q7")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ramp2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_nxsi5")
 
 [node name="Corner1" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -0.5)
@@ -147,18 +64,9 @@ mesh = ExtResource("5_k05xt")
 surface_material_override/0 = ExtResource("2_kk6q7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Corner1"]
-collision_layer = 2048
-collision_mask = 0
 
-[node name="CollisionShape3D3" type="CollisionShape3D" parent="Corner1/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_wm2kb")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Corner1"]
-navigation_mesh = SubResource("NavigationMesh_xocwm")
-
-[node name="Corner1" type="MeshInstance3D" parent="Corner1/NavigationRegion3D"]
-mesh = ExtResource("5_k05xt")
-surface_material_override/0 = ExtResource("2_kk6q7")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Corner1/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_rak26")
 
 [node name="Corner2" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -0.5)
@@ -166,19 +74,9 @@ mesh = ExtResource("6_7cdyc")
 surface_material_override/0 = ExtResource("2_kk6q7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Corner2"]
-collision_layer = 2048
-collision_mask = 0
 
-[node name="CollisionShape3D4" type="CollisionShape3D" parent="Corner2/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_670fl")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Corner2"]
-navigation_mesh = SubResource("NavigationMesh_6ljlw")
-
-[node name="Corner2" type="MeshInstance3D" parent="Corner2/NavigationRegion3D"]
-mesh = ExtResource("6_7cdyc")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_kk6q7")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Corner2/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_616r7")
 
 [node name="Corner3" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.5, 0, -0.5)
@@ -186,16 +84,6 @@ mesh = ExtResource("7_v02hj")
 surface_material_override/0 = ExtResource("2_kk6q7")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Corner3"]
-collision_layer = 2048
-collision_mask = 0
 
-[node name="CollisionShape3D5" type="CollisionShape3D" parent="Corner3/StaticBody3D"]
-shape = SubResource("ConvexPolygonShape3D_2udfg")
-
-[node name="NavigationRegion3D" type="NavigationRegion3D" parent="Corner3"]
-navigation_mesh = SubResource("NavigationMesh_svgt0")
-
-[node name="Corner3" type="MeshInstance3D" parent="Corner3/NavigationRegion3D"]
-mesh = ExtResource("7_v02hj")
-skeleton = NodePath("../..")
-surface_material_override/0 = ExtResource("2_kk6q7")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Corner3/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_5p8ml")
