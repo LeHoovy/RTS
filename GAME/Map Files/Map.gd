@@ -1,13 +1,18 @@
 extends GridMap
 class_name Map
 
+
+@export var plausible_walls: Array[int] = [-1]
+@export var plausible_meshes: Array[int] = [0]
+
+
 var thread: Thread
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	thread = Thread.new()
 	bake_navmesh([])
 	
-	
+	get_edges()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -15,8 +20,17 @@ func _process(delta):
 	pass
 
 
+var triangle_preload: PackedScene = preload("res://debug/Tri.tscn")
 func get_edges() -> void:
-	pass
+	for cell in get_used_cells():
+		#print(cell)
+		if plausible_walls.has(get_cell_item(Vector3i(cell.x, cell.y - 1, cell.z))) and plausible_meshes.has(get_cell_item(cell)):
+			var triangle: Node = triangle_preload.instantiate()
+			add_child(triangle)
+			triangle.position = Vector3(cell.x, cell.y + 1.15, cell.z)
+			
+			print(cell, " is plausible for pathfinding.")
+			
 
 
 func bake():
@@ -26,11 +40,11 @@ func bake():
 func bake_navmesh(affected: Array[Node]) -> void:
 	for cell in get_used_cells():
 		pass
-	print(get_cell_neighbors(Vector3i(0, 1, 0)))
-	print(get_cell_neighbors(Vector3i(0, 0, 0)).size())
-	print()
-	print(get_vertical_neighbors(Vector3i(0, 0, 0,)))
-	print(get_vertical_neighbors(Vector3i(0,0,0)).size())
+	#print(get_cell_neighbors(Vector3i(0, 1, 0)))
+	#print(get_cell_neighbors(Vector3i(0, 0, 0)).size())
+	#print()
+	#print(get_vertical_neighbors(Vector3i(0, 0, 0,)))
+	#print(get_vertical_neighbors(Vector3i(0,0,0)).size())
 	
 
 
