@@ -34,8 +34,8 @@ func process_move(delta) -> void:
 	mouse_pos = get_viewport().get_mouse_position()
 	screen_size = get_viewport().get_visible_rect().size
 	
-	#move = is_mouse_on_edge(1)
-	#cam_move_speed += Vector2(move) * (0.3 * (edge_scroll_sens / 3)) * delta
+	move = is_mouse_on_edge(1)
+	cam_move_speed += move * (0.3 * (edge_scroll_sens / 3)) 
 	#cam_move_speed *= friction
 	cam_move_speed = clamp(cam_move_speed, Vector2(-edge_scroll_sens / 3, -edge_scroll_sens / 3), Vector2(edge_scroll_sens / 3, edge_scroll_sens / 3))
 	
@@ -45,8 +45,8 @@ func process_move(delta) -> void:
 		cam_move_speed.y = 0
 	
 	#print(cam_move_speed)
-	position.x += cam_move_speed.x
-	position.z += cam_move_speed.y
+	position.x += cam_move_speed.x * delta
+	position.z += cam_move_speed.y * delta
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

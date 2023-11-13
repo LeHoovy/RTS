@@ -4,5 +4,6 @@
 [ext_resource type="Material" uid="uid://lavbmcieawdb" path="res://debug/tri.tres" id="2_syspk"]
 
 [node name="MeshInstance3D" type="MeshInstance3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = ExtResource("1_o6qar")
 surface_material_override/0 = ExtResource("2_syspk")
