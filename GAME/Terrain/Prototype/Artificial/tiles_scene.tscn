@@ -1,10 +1,8 @@
-[gd_scene load_steps=20 format=3 uid="uid://b4yaceb32qmf1"]
+[gd_scene load_steps=37 format=3 uid="uid://b4yaceb32qmf1"]
 
-[ext_resource type="PackedScene" uid="uid://cuwsrhvgc1jdb" path="res://Terrain/Prototype/Artificial/Models/Terrain.glb" id="1_ygfru"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kdrjw"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5oshk"]
-
-[sub_resource type="ArrayMesh" id="ArrayMesh_033iq"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_d60lw"]
 _surfaces = [{
 "aabb": AABB(0, 0, 0, 0, 0, 0),
 "format": 34896613377,
@@ -17,7 +15,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_bi73j"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_cc7db"]
 resource_name = "Terrain_Cube_001"
 _surfaces = [{
 "aabb": AABB(-0.5, 0, -0.5, 1, 1.1, 1.00001),
@@ -25,18 +23,212 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 30,
 "index_data": PackedByteArray(0, 0, 7, 0, 2, 0, 0, 0, 5, 0, 7, 0, 6, 0, 17, 0, 8, 0, 6, 0, 15, 0, 17, 0, 16, 0, 14, 0, 19, 0, 16, 0, 11, 0, 14, 0, 10, 0, 3, 0, 12, 0, 10, 0, 1, 0, 3, 0, 18, 0, 4, 0, 9, 0, 18, 0, 13, 0, 4, 0),
-"material": SubResource("StandardMaterial3D_5oshk"),
+"material": SubResource("StandardMaterial3D_kdrjw"),
 "primitive": 3,
 "uv_scale": Vector4(1, 2, 0, 0),
 "vertex_count": 20,
 "vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 84, 213, 0, 0, 0, 0, 254, 255, 255, 191, 0, 0, 255, 255, 254, 255, 84, 213, 0, 0, 255, 255, 254, 255, 255, 191, 0, 0, 255, 255, 254, 255, 255, 255, 0, 0, 0, 0, 0, 0, 84, 213, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 84, 213, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 255, 255, 255, 255, 0, 0, 254, 255, 255, 191, 255, 255, 0, 0, 254, 255, 84, 213, 255, 255, 255, 255, 254, 255, 255, 191, 255, 255, 255, 255, 254, 255, 255, 255, 255, 255, 255, 255, 254, 255, 84, 213, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 84, 213, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 84, 213, 84, 213, 84, 213, 255, 255, 255, 255, 84, 213, 84, 213, 255, 255, 255, 255, 255, 127, 255, 191, 84, 213, 84, 213, 255, 191, 255, 191, 84, 213, 84, 213, 255, 191, 255, 191, 255, 127, 255, 191, 255, 255, 255, 255, 170, 42, 170, 42, 255, 255, 255, 255, 255, 127, 255, 191, 170, 42, 170, 42, 255, 191, 255, 191, 170, 42, 170, 42, 255, 191, 255, 191, 255, 127, 255, 191, 170, 42, 170, 42)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_033iq")
+shadow_mesh = SubResource("ArrayMesh_d60lw")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5awrx"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_icvbq"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_dh3qo"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_k4kk5"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 0, 0, 0),
+"format": 34896613377,
+"index_count": 18,
+"index_data": PackedByteArray(3, 0, 4, 0, 5, 0, 3, 0, 1, 0, 4, 0, 6, 0, 2, 0, 0, 0, 4, 0, 0, 0, 5, 0, 5, 0, 0, 0, 2, 0, 3, 0, 5, 0, 2, 0),
+"lods": [1e-10, PackedByteArray(3, 0, 1, 0, 4, 0, 4, 0, 0, 0, 3, 0, 3, 0, 0, 0, 2, 0, 6, 0, 2, 0, 0, 0)],
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 7,
+"vertex_data": PackedByteArray(0, 0, 253, 255, 254, 255, 0, 0, 255, 255, 253, 255, 254, 255, 0, 0, 255, 255, 253, 255, 0, 0, 0, 0, 255, 255, 253, 255, 255, 127, 0, 0, 255, 127, 253, 255, 254, 255, 0, 0, 255, 127, 253, 255, 255, 127, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_p70fb"]
+resource_name = "Terrain_Cube_005"
+_surfaces = [{
+"aabb": AABB(-0.5, 0.711091, -0.5, 1, 0.388919, 1.00001),
+"attribute_data": PackedByteArray(255, 127, 255, 255, 255, 127, 255, 255, 255, 255, 255, 255, 255, 255, 255, 191, 255, 255, 255, 191, 255, 255, 255, 223, 255, 191, 255, 255, 255, 191, 255, 223, 255, 127, 255, 191),
+"format": 34896613399,
+"index_count": 18,
+"index_data": PackedByteArray(5, 0, 6, 0, 7, 0, 5, 0, 2, 0, 6, 0, 8, 0, 3, 0, 0, 0, 6, 0, 1, 0, 7, 0, 7, 0, 1, 0, 4, 0, 5, 0, 7, 0, 4, 0),
+"lods": [1e-10, PackedByteArray(5, 0, 2, 0, 6, 0, 6, 0, 0, 0, 5, 0, 5, 0, 0, 0, 3, 0, 8, 0, 3, 0, 0, 0)],
+"material": SubResource("StandardMaterial3D_icvbq"),
+"primitive": 3,
+"uv_scale": Vector4(1, 2, 0, 0),
+"vertex_count": 9,
+"vertex_data": PackedByteArray(0, 0, 253, 255, 254, 255, 36, 207, 0, 0, 253, 255, 254, 255, 252, 197, 255, 255, 253, 255, 254, 255, 255, 191, 255, 255, 253, 255, 0, 0, 36, 207, 255, 255, 253, 255, 0, 0, 255, 191, 255, 255, 253, 255, 255, 127, 255, 191, 255, 127, 253, 255, 254, 255, 255, 191, 255, 127, 253, 255, 255, 127, 255, 191, 0, 0, 0, 0, 0, 0, 36, 207, 202, 237, 247, 158, 255, 226, 1, 70, 255, 255, 255, 127, 202, 237, 247, 158, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 202, 237, 247, 158)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_k4kk5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6oawa"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_6l70u"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 0, 0, 0),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(2, 0, 0, 0, 1, 0, 1, 0, 0, 0, 3, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(255, 127, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 254, 255, 0, 0, 0, 0, 0, 0, 255, 255, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hu3bk"]
+resource_name = "Terrain_Cube_006"
+_surfaces = [{
+"aabb": AABB(-0.328427, 0, 0.0857863, 0.828427, 0.322182, 0.414214),
+"attribute_data": PackedByteArray(255, 191, 255, 223, 255, 191, 255, 255, 255, 255, 255, 255, 255, 127, 255, 239, 255, 127, 255, 255, 255, 127, 255, 255),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(4, 0, 0, 0, 2, 0, 3, 0, 1, 0, 5, 0),
+"material": SubResource("StandardMaterial3D_6oawa"),
+"primitive": 3,
+"uv_scale": Vector4(1, 2, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray(255, 127, 0, 0, 0, 0, 36, 207, 255, 127, 0, 0, 0, 0, 255, 223, 255, 255, 255, 255, 254, 255, 36, 207, 255, 255, 255, 255, 254, 255, 255, 223, 0, 0, 0, 0, 255, 255, 36, 207, 255, 255, 0, 0, 254, 255, 255, 223, 202, 237, 247, 158, 255, 127, 0, 0, 202, 237, 247, 158, 255, 127, 0, 0, 202, 237, 247, 158, 255, 127, 0, 0)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_6l70u")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o861c"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d48tt"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 0, 0, 0),
+"format": 34896613377,
+"index_count": 6,
+"index_data": PackedByteArray(2, 0, 1, 0, 0, 0, 3, 0, 0, 0, 1, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 127, 0, 0, 254, 255, 255, 255, 255, 255, 0, 0, 255, 255, 0, 0, 0, 0, 0, 0, 254, 255, 0, 0, 254, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_oqovg"]
+resource_name = "Terrain_Cube_009"
+_surfaces = [{
+"aabb": AABB(0.0857863, 0, -0.328871, 0.414657, 0.322527, 0.829314),
+"attribute_data": PackedByteArray(255, 127, 255, 255, 255, 199, 255, 193, 255, 255, 255, 223, 255, 223, 255, 207, 255, 223, 255, 181, 255, 255, 255, 255),
+"format": 34896613399,
+"index_count": 6,
+"index_data": PackedByteArray(4, 0, 3, 0, 1, 0, 5, 0, 0, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_o861c"),
+"primitive": 3,
+"uv_scale": Vector4(1, 2, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray(0, 0, 0, 0, 255, 127, 255, 159, 0, 0, 0, 0, 255, 127, 149, 207, 254, 255, 255, 255, 255, 255, 255, 159, 254, 255, 255, 255, 255, 255, 149, 207, 255, 255, 0, 0, 0, 0, 149, 207, 254, 255, 0, 0, 254, 255, 255, 159, 255, 127, 255, 255, 121, 241, 243, 157, 255, 127, 255, 255, 121, 241, 243, 157, 121, 241, 243, 157, 255, 127, 255, 255)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_d48tt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wpee4"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gn4c5"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 0, 0, 0),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(3, 0, 4, 0, 0, 0, 4, 0, 2, 0, 1, 0, 4, 0, 3, 0, 2, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(0, 0, 28, 116, 254, 255, 0, 0, 254, 255, 252, 115, 0, 0, 0, 0, 211, 43, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 201, 43, 0, 0, 255, 255, 255, 255, 225, 255, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_8ig1n"]
+resource_name = "Terrain_Cube_010"
+_surfaces = [{
+"aabb": AABB(-0.499557, 0, -0.500001, 0.999557, 0.711091, 1.00045),
+"attribute_data": PackedByteArray(255, 127, 255, 255, 254, 255, 255, 191, 233, 149, 255, 191, 255, 127, 241, 202, 255, 255, 247, 255),
+"format": 34896613399,
+"index_count": 9,
+"index_data": PackedByteArray(3, 0, 4, 0, 0, 0, 4, 0, 2, 0, 1, 0, 4, 0, 3, 0, 2, 0),
+"material": SubResource("StandardMaterial3D_wpee4"),
+"primitive": 3,
+"uv_scale": Vector4(1, 2, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(0, 0, 28, 116, 254, 255, 36, 207, 254, 255, 252, 115, 0, 0, 36, 207, 211, 43, 0, 0, 0, 0, 36, 207, 0, 0, 0, 0, 201, 43, 36, 207, 255, 255, 255, 255, 225, 255, 36, 207, 202, 237, 247, 158, 202, 237, 247, 158, 202, 237, 247, 158, 202, 237, 247, 158, 202, 237, 247, 158)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_gn4c5")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_g83ye"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_i0ab3"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 0, 0, 0),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(1, 0, 2, 0, 3, 0, 0, 0, 2, 0, 1, 0, 0, 0, 4, 0, 2, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(254, 255, 0, 0, 254, 255, 0, 0, 254, 255, 255, 255, 254, 255, 0, 0, 0, 0, 15, 75, 29, 0, 0, 0, 254, 255, 124, 165, 0, 0, 0, 0, 0, 0, 0, 0, 29, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_abyre"]
+resource_name = "Terrain_Cube_011"
+_surfaces = [{
+"aabb": AABB(-0.499557, 0, -0.5, 0.999567, 1.1, 1.00001),
+"attribute_data": PackedByteArray(255, 255, 255, 255, 255, 255, 255, 191, 255, 255, 255, 255, 255, 127, 255, 233, 255, 127, 6, 192, 254, 255, 255, 191, 255, 127, 255, 255),
+"format": 34896613399,
+"index_count": 9,
+"index_data": PackedByteArray(2, 0, 4, 0, 5, 0, 0, 0, 3, 0, 1, 0, 0, 0, 6, 0, 3, 0),
+"material": SubResource("StandardMaterial3D_g83ye"),
+"primitive": 3,
+"uv_scale": Vector4(1, 2, 0, 0),
+"vertex_count": 7,
+"vertex_data": PackedByteArray(254, 255, 0, 0, 254, 255, 6, 160, 254, 255, 255, 255, 254, 255, 9, 160, 254, 255, 255, 255, 254, 255, 36, 207, 0, 0, 15, 75, 29, 0, 0, 160, 0, 0, 15, 75, 29, 0, 36, 207, 254, 255, 124, 165, 0, 0, 36, 207, 0, 0, 0, 0, 29, 0, 255, 159, 246, 134, 244, 253, 12, 136, 163, 253, 202, 237, 247, 158, 240, 130, 34, 255, 202, 237, 247, 158, 202, 237, 247, 158, 255, 127, 255, 255)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_i0ab3")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r0h0b"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o8der"]
+_surfaces = [{
+"aabb": AABB(0, 0, 0, 0, 0, 0),
+"format": 34896613377,
+"index_count": 9,
+"index_data": PackedByteArray(1, 0, 3, 0, 2, 0, 0, 0, 2, 0, 4, 0, 0, 0, 1, 0, 2, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 5,
+"vertex_data": PackedByteArray(254, 255, 0, 0, 254, 255, 0, 0, 254, 255, 255, 255, 254, 255, 0, 0, 0, 0, 250, 74, 0, 0, 0, 0, 0, 0, 124, 165, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_dos21"]
+resource_name = "Terrain_Cube_012"
+_surfaces = [{
+"aabb": AABB(-0.500001, 0, -0.500001, 1.00001, 1.1, 1.00001),
+"attribute_data": PackedByteArray(255, 127, 255, 255, 255, 255, 255, 255, 255, 127, 255, 191, 255, 127, 255, 191, 255, 255, 255, 231, 255, 127, 255, 255, 255, 255, 255, 255),
+"format": 34896613399,
+"index_count": 9,
+"index_data": PackedByteArray(1, 0, 5, 0, 3, 0, 0, 0, 4, 0, 6, 0, 0, 0, 2, 0, 4, 0),
+"material": SubResource("StandardMaterial3D_r0h0b"),
+"primitive": 3,
+"uv_scale": Vector4(1, 2, 0, 0),
+"vertex_count": 7,
+"vertex_data": PackedByteArray(254, 255, 0, 0, 254, 255, 2, 224, 254, 255, 255, 255, 254, 255, 36, 207, 254, 255, 255, 255, 254, 255, 3, 224, 0, 0, 250, 74, 0, 0, 36, 207, 0, 0, 250, 74, 0, 0, 255, 223, 0, 0, 124, 165, 254, 255, 36, 207, 0, 0, 0, 0, 0, 0, 255, 223, 94, 131, 196, 4, 202, 237, 247, 158, 231, 131, 134, 5, 202, 237, 247, 158, 104, 129, 253, 1, 202, 237, 247, 158, 255, 127, 0, 0)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_o8der")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6j8w7"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_oqrrw"]
 _surfaces = [{
 "aabb": AABB(0, 0, 0, 0, 0, 0),
 "format": 34896613377,
@@ -49,7 +241,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ga2wa"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_7er4u"]
 resource_name = "Terrain_Cube_007"
 _surfaces = [{
 "aabb": AABB(-0.5, 0, -0.5, 1, 1.1, 1.00001),
@@ -57,18 +249,18 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 42,
 "index_data": PackedByteArray(18, 0, 10, 0, 4, 0, 18, 0, 20, 0, 10, 0, 21, 0, 23, 0, 11, 0, 2, 0, 14, 0, 16, 0, 22, 0, 3, 0, 9, 0, 22, 0, 15, 0, 3, 0, 7, 0, 15, 0, 22, 0, 7, 0, 1, 0, 15, 0, 13, 0, 23, 0, 21, 0, 13, 0, 8, 0, 23, 0, 6, 0, 19, 0, 17, 0, 6, 0, 12, 0, 19, 0, 0, 0, 16, 0, 14, 0, 0, 0, 5, 0, 16, 0),
-"material": SubResource("StandardMaterial3D_5awrx"),
+"material": SubResource("StandardMaterial3D_6j8w7"),
 "primitive": 3,
 "uv_scale": Vector4(1, 2, 0, 0),
 "vertex_count": 24,
 "vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 255, 255, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 254, 255, 255, 191, 255, 255, 255, 255, 254, 255, 0, 0, 255, 255, 255, 255, 254, 255, 255, 255, 255, 255, 255, 255, 254, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 191, 0, 0, 255, 127, 254, 255, 0, 0, 0, 0, 255, 127, 254, 255, 0, 0, 0, 0, 255, 127, 0, 0, 0, 0, 0, 0, 255, 127, 0, 0, 255, 255, 0, 0, 255, 127, 0, 0, 255, 255, 255, 255, 255, 127, 0, 0, 255, 255, 255, 255, 255, 127, 0, 0, 255, 255, 255, 255, 255, 127, 0, 0, 255, 191, 255, 255, 255, 127, 254, 255, 0, 0, 255, 255, 255, 127, 254, 255, 255, 191, 255, 63, 255, 127, 255, 127, 255, 127, 255, 63, 255, 127, 255, 127, 255, 127, 255, 127, 111, 208, 255, 63, 255, 127, 255, 127, 255, 255, 255, 127, 255, 127, 255, 127, 0, 0, 255, 127, 255, 127, 255, 127, 111, 208, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 0, 0, 255, 63, 255, 127, 255, 127, 255, 127, 255, 63, 255, 127, 255, 127, 255, 255, 255, 127, 111, 208, 255, 127, 255, 255, 255, 127, 111, 208, 255, 127, 0, 0, 255, 127, 255, 127, 255, 127, 0, 0)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_dh3qo")
+shadow_mesh = SubResource("ArrayMesh_oqrrw")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oh7p7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mirj4"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_abmkr"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_raj5s"]
 _surfaces = [{
 "aabb": AABB(0, 0, 0, 0, 0, 0),
 "format": 34896613377,
@@ -81,7 +273,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_4bxoc"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_slxm7"]
 resource_name = "Terrain_Cube_008"
 _surfaces = [{
 "aabb": AABB(-0.5, 0, -0.5, 1, 0.55, 1.00001),
@@ -89,18 +281,18 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 24,
 "index_data": PackedByteArray(0, 0, 2, 0, 8, 0, 4, 0, 9, 0, 11, 0, 4, 0, 1, 0, 9, 0, 5, 0, 13, 0, 7, 0, 10, 0, 6, 0, 12, 0, 10, 0, 14, 0, 6, 0, 14, 0, 3, 0, 6, 0, 14, 0, 10, 0, 3, 0),
-"material": SubResource("StandardMaterial3D_oh7p7"),
+"material": SubResource("StandardMaterial3D_mirj4"),
 "primitive": 3,
 "uv_scale": Vector4(1, 2, 0, 0),
 "vertex_count": 15,
 "vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 191, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 0, 0, 255, 191, 0, 0, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 254, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 191, 0, 0, 255, 255, 254, 255, 255, 191, 0, 0, 255, 255, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 255, 255, 255, 255, 255, 255, 254, 255, 0, 0, 255, 255, 255, 255, 254, 255, 255, 255, 255, 255, 255, 255, 254, 255, 255, 191, 255, 127, 255, 127, 255, 127, 255, 255, 255, 127, 255, 255, 255, 127, 255, 127, 255, 127, 255, 255, 255, 127, 111, 208, 255, 127, 255, 127, 255, 127, 0, 0, 255, 127, 111, 208, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 127, 255, 127, 111, 208, 255, 127, 255, 127, 255, 127, 111, 208, 255, 127, 0, 0, 255, 127, 111, 208)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_abmkr")
+shadow_mesh = SubResource("ArrayMesh_raj5s")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uthjj"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_n7ws6"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_kq7t8"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_dcwbx"]
 _surfaces = [{
 "aabb": AABB(0, 0, 0, 0, 0, 0),
 "format": 34896613377,
@@ -113,7 +305,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_kc38o"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ysp7d"]
 resource_name = "Terrain_Cube_002"
 _surfaces = [{
 "aabb": AABB(-0.5, 0, -0.5, 1, 1.1, 1.00001),
@@ -121,18 +313,18 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 63,
 "index_data": PackedByteArray(29, 0, 19, 0, 33, 0, 16, 0, 12, 0, 18, 0, 16, 0, 10, 0, 12, 0, 30, 0, 9, 0, 32, 0, 30, 0, 6, 0, 9, 0, 20, 0, 3, 0, 22, 0, 20, 0, 1, 0, 3, 0, 33, 0, 4, 0, 29, 0, 33, 0, 24, 0, 4, 0, 31, 0, 24, 0, 33, 0, 31, 0, 8, 0, 24, 0, 5, 0, 23, 0, 7, 0, 5, 0, 21, 0, 23, 0, 13, 0, 33, 0, 19, 0, 13, 0, 31, 0, 33, 0, 28, 0, 15, 0, 17, 0, 28, 0, 26, 0, 15, 0, 11, 0, 32, 0, 14, 0, 11, 0, 30, 0, 32, 0, 0, 0, 27, 0, 2, 0, 0, 0, 25, 0, 27, 0),
-"material": SubResource("StandardMaterial3D_uthjj"),
+"material": SubResource("StandardMaterial3D_n7ws6"),
 "primitive": 3,
 "uv_scale": Vector4(1, 2, 0, 0),
 "vertex_count": 34,
 "vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 255, 255, 255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 254, 255, 255, 191, 255, 255, 255, 255, 254, 255, 0, 0, 255, 255, 255, 255, 254, 255, 255, 255, 255, 255, 255, 255, 254, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 255, 255, 255, 255, 255, 255, 0, 0, 255, 191, 255, 127, 0, 0, 0, 0, 255, 255, 255, 127, 0, 0, 0, 0, 255, 255, 255, 127, 255, 255, 0, 0, 255, 255, 255, 127, 255, 255, 0, 0, 255, 255, 255, 127, 255, 255, 0, 0, 255, 255, 255, 127, 0, 0, 254, 255, 0, 0, 255, 127, 0, 0, 254, 255, 0, 0, 255, 127, 255, 255, 254, 255, 0, 0, 255, 127, 255, 255, 254, 255, 0, 0, 255, 127, 255, 255, 254, 255, 255, 255, 0, 0, 0, 0, 255, 127, 0, 0, 0, 0, 0, 0, 255, 127, 255, 255, 0, 0, 255, 255, 255, 127, 0, 0, 0, 0, 255, 255, 255, 127, 255, 255, 0, 0, 255, 255, 255, 127, 255, 255, 255, 255, 0, 0, 255, 127, 255, 191, 255, 255, 255, 255, 255, 127, 255, 255, 255, 255, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 255, 255, 63, 255, 127, 255, 127, 255, 127, 255, 63, 255, 127, 255, 127, 255, 127, 255, 127, 255, 191, 255, 127, 255, 127, 255, 127, 0, 0, 255, 127, 255, 127, 255, 127, 255, 191, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 0, 0, 255, 255, 124, 165, 255, 127, 255, 255, 255, 255, 124, 165, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 127, 255, 127, 255, 127, 255, 127, 255, 127, 255, 127, 255, 127, 255, 127, 255, 191, 255, 63, 255, 127, 255, 255, 124, 165, 255, 63, 255, 127, 255, 255, 124, 165, 255, 127, 255, 191, 255, 127, 0, 0, 255, 127, 255, 191, 255, 127, 0, 0, 255, 127, 255, 191)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_kq7t8")
+shadow_mesh = SubResource("ArrayMesh_dcwbx")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_73fh7"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xcyoe"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ykm8m"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_0lw7d"]
 _surfaces = [{
 "aabb": AABB(0, 0, 0, 0, 0, 0),
 "format": 34896613377,
@@ -145,7 +337,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_do5ai"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_eodyw"]
 resource_name = "Terrain_Cube_003"
 _surfaces = [{
 "aabb": AABB(0, 0, 0, 0.50001, 1.10001, 0.50001),
@@ -153,18 +345,18 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 9,
 "index_data": PackedByteArray(0, 0, 6, 0, 3, 0, 1, 0, 5, 0, 4, 0, 1, 0, 2, 0, 5, 0),
-"material": SubResource("StandardMaterial3D_73fh7"),
+"material": SubResource("StandardMaterial3D_xcyoe"),
 "primitive": 3,
 "uv_scale": Vector4(0.5, 2, 0, 0),
 "vertex_count": 7,
 "vertex_data": PackedByteArray(253, 255, 254, 255, 253, 255, 255, 191, 253, 255, 0, 0, 0, 0, 255, 223, 253, 255, 254, 255, 0, 0, 255, 223, 253, 255, 254, 255, 0, 0, 255, 191, 0, 0, 0, 0, 253, 255, 255, 223, 0, 0, 254, 255, 253, 255, 255, 223, 0, 0, 254, 255, 253, 255, 255, 191, 255, 255, 255, 127, 255, 127, 255, 255, 255, 127, 255, 255, 255, 255, 255, 127, 255, 127, 255, 255, 255, 127, 255, 255, 255, 255, 255, 127)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_ykm8m")
+shadow_mesh = SubResource("ArrayMesh_0lw7d")
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6ow4e"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1fqnk"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_b5vl2"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_b7trx"]
 _surfaces = [{
 "aabb": AABB(0, 0, 0, 0, 0, 0),
 "format": 34896613377,
@@ -177,7 +369,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_17f22"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_0rtd0"]
 resource_name = "Terrain_Cube_004"
 _surfaces = [{
 "aabb": AABB(-0.5, 0, -0.5, 1, 1.1, 1.00001),
@@ -185,31 +377,61 @@ _surfaces = [{
 "format": 34896613399,
 "index_count": 42,
 "index_data": PackedByteArray(19, 0, 9, 0, 22, 0, 19, 0, 6, 0, 9, 0, 15, 0, 3, 0, 16, 0, 15, 0, 1, 0, 3, 0, 20, 0, 17, 0, 23, 0, 20, 0, 8, 0, 17, 0, 5, 0, 16, 0, 7, 0, 5, 0, 15, 0, 16, 0, 21, 0, 25, 0, 13, 0, 0, 0, 12, 0, 2, 0, 0, 0, 10, 0, 12, 0, 11, 0, 22, 0, 14, 0, 11, 0, 19, 0, 22, 0, 18, 0, 4, 0, 24, 0),
-"material": SubResource("StandardMaterial3D_6ow4e"),
+"material": SubResource("StandardMaterial3D_1fqnk"),
 "primitive": 3,
 "uv_scale": Vector4(1, 2, 0, 0),
 "vertex_count": 26,
 "vertex_data": PackedByteArray(0, 0, 0, 0, 254, 255, 255, 223, 0, 0, 0, 0, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 255, 223, 0, 0, 255, 255, 254, 255, 0, 0, 0, 0, 255, 255, 254, 255, 0, 0, 255, 255, 0, 0, 254, 255, 0, 0, 255, 255, 0, 0, 254, 255, 255, 191, 255, 255, 255, 255, 254, 255, 0, 0, 255, 255, 255, 255, 254, 255, 255, 191, 255, 255, 255, 255, 254, 255, 255, 191, 255, 255, 0, 0, 0, 0, 255, 223, 255, 255, 0, 0, 0, 0, 255, 191, 255, 255, 255, 255, 0, 0, 255, 223, 255, 255, 255, 255, 0, 0, 0, 0, 255, 255, 255, 255, 0, 0, 255, 191, 255, 127, 0, 0, 254, 255, 0, 0, 255, 127, 255, 255, 254, 255, 0, 0, 255, 127, 255, 255, 254, 255, 255, 191, 255, 127, 255, 255, 254, 255, 0, 0, 255, 255, 0, 0, 255, 127, 255, 191, 255, 255, 255, 255, 255, 127, 255, 191, 255, 255, 255, 255, 255, 127, 0, 0, 255, 255, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 255, 255, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 127, 255, 127, 255, 255, 255, 127, 255, 127, 255, 127, 255, 191, 255, 127, 255, 127, 255, 127, 0, 0, 255, 127, 255, 127, 255, 255, 255, 127, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 0, 0, 255, 127, 255, 255, 255, 127, 255, 191, 255, 127, 0, 0, 255, 127, 255, 127, 255, 127, 255, 127, 255, 255, 255, 127, 255, 127, 255, 191, 255, 127, 0, 0, 255, 255, 255, 127, 255, 127, 255, 191, 255, 127, 0, 0, 255, 255, 255, 127, 255, 127, 255, 191, 255, 127, 255, 191)
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_b5vl2")
+shadow_mesh = SubResource("ArrayMesh_b7trx")
 
-[node name="Terrain" instance=ExtResource("1_ygfru")]
+[node name="Tiles" type="Node3D"]
 
-[node name="Floor" parent="." index="0"]
-mesh = SubResource("ArrayMesh_bi73j")
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_cc7db")
+skeleton = NodePath("")
 
-[node name="Ramp1" parent="." index="1"]
-mesh = SubResource("ArrayMesh_ga2wa")
+[node name="DRampE" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_p70fb")
+skeleton = NodePath("")
 
-[node name="Ramp2" parent="." index="2"]
-mesh = SubResource("ArrayMesh_4bxoc")
+[node name="DRampRC" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_hu3bk")
+skeleton = NodePath("")
 
-[node name="Corner3" parent="." index="3"]
-mesh = SubResource("ArrayMesh_kc38o")
+[node name="DRampLC" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_oqovg")
+skeleton = NodePath("")
 
-[node name="Corner1" parent="." index="4"]
-mesh = SubResource("ArrayMesh_do5ai")
+[node name="DRamp" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_8ig1n")
+skeleton = NodePath("")
 
-[node name="Corner2" parent="." index="5"]
-mesh = SubResource("ArrayMesh_17f22")
+[node name="DRampLS" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_abyre")
+skeleton = NodePath("")
+
+[node name="DRampRS" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_dos21")
+skeleton = NodePath("")
+
+[node name="Ramp1" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_7er4u")
+skeleton = NodePath("")
+
+[node name="Ramp2" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_slxm7")
+skeleton = NodePath("")
+
+[node name="Corner3" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_ysp7d")
+skeleton = NodePath("")
+
+[node name="Corner1" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_eodyw")
+skeleton = NodePath("")
+
+[node name="Corner2" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_0rtd0")
+skeleton = NodePath("")
