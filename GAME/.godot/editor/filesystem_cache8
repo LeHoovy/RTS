@@ -1,5 +1,5 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1701132470
+::res://::1701401135
 Camera.gd::GDScript::-1::1699915555::0::1::::Camera<>Node3D<>::
 export_presets.cfg::TextFile::-1::1699231910::0::1::::<><>::
 GUI.tscn::PackedScene::789380440230785768::1699657863::0::1::::<><>::
@@ -14,29 +14,23 @@ e.tres::NavigationMesh::2870622057280532842::1699317950::0::1::::<><>::
 tri.obj::Mesh::8590912429518977805::1699312420::1699312458::1::::<><>::
 tri.tres::StandardMaterial3D::773354756399021695::1699312758::0::1::::<><>::
 Tri.tscn::PackedScene::107730544953293714::1699915555::0::1::::<><>::uid://dunrcp5e1nymn::::res://debug/tri.obj<>uid://lavbmcieawdb::::res://debug/tri.tres
-::res://Map Files/::1699915555
+::res://Map Files/::1701132769
 Map.gd::GDScript::-1::1699915555::0::1::::Map<>GridMap<>::
-map.tscn::PackedScene::936490859718910636::1699915555::0::1::::<><>::uid://dvlju1n3a8tti::::res://Terrain/Prototype/Artificial.tres<>res://Map Files/Map.gd<>res://Camera.gd
+map.tscn::PackedScene::936490859718910636::1701132769::0::1::::<><>::uid://cgkmstsunkimm::::res://Terrain/Prototype/Artificial.tres<>res://Map Files/Map.gd<>res://Camera.gd
 ::res://Terrain/::1699140415
-::res://Terrain/Prototype/::1699916067
-Artificial.tres::MeshLibrary::5215379981635095652::1699916067::0::1::::<><>::uid://bxxqr4yfq0jm2::::res://Terrain/Prototype/Artificial/texture_09.png
+::res://Terrain/Prototype/::1701132769
+Artificial.tres::MeshLibrary::5215379981635095652::1701132769::0::1::::<><>::uid://bxxqr4yfq0jm2::::res://Terrain/Prototype/Artificial/texture_09.png
 ::res://Terrain/Prototype/Artificial/::1699916053
 texture_09.png::CompressedTexture2D::4049248166593879487::1699138980::1699305664::1::::<><>::
 tiles.tscn::PackedScene::8191368616423397081::1699916053::0::1::::<><>::uid://bxxqr4yfq0jm2::::res://Terrain/Prototype/Artificial/texture_09.png
 tiles_scene.tscn::PackedScene::4471445999828405476::1699915566::0::1::::<><>::
-::res://Terrain/Prototype/Artificial/Models/::1699915566
-CEmpt.glb::PackedScene::7561461359738130669::1699230502::1699915555::1::::<><>::
-CFull.glb::PackedScene::2613556181827534502::1699230352::1699915555::1::::<><>::
-CHalf.glb::PackedScene::7500540462271647435::1699229649::1699915555::1::::<><>::
+::res://Terrain/Prototype/Artificial/Models/::1701399229
 Corner1.tres::ArrayMesh::2637085413505377136::1699914965::0::1::::<><>::
 Corner2.tres::ArrayMesh::8667673408207522824::1699914965::0::1::::<><>::
 Corner3.tres::ArrayMesh::2466190500391180446::1699914965::0::1::::<><>::
-Floor.glb::PackedScene::5586021260955769776::1699231000::1699915555::1::::<><>::
 Floor.tres::ArrayMesh::3749414662220722858::1699914965::0::1::::<><>::
 prototype_artificial_texture.tres::StandardMaterial3D::4741493095565961532::1699914965::0::1::::<><>::uid://bxxqr4yfq0jm2::::res://Terrain/Prototype/Artificial/texture_09.png
 Ramp1.tres::ArrayMesh::2279930872276662540::1699914965::0::1::::<><>::
 Ramp2.tres::ArrayMesh::2858367298862235939::1699914965::0::1::::<><>::
-RampA.glb::PackedScene::6865514480416396782::1699229102::1699915555::1::::<><>::
-RampB.glb::PackedScene::486897462964829201::1699228782::1699915555::1::::<><>::
-Terrain.glb::PackedScene::6223158215483005819::1699915566::1699915555::1::::<><>::
+Terrain.glb::PackedScene::6223158215483005819::1701399488::1701401137::1::::<><>::
 ::res://Terrain/Prototype/Natural/::1699140423
