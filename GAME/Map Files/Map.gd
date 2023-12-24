@@ -2,8 +2,8 @@ extends GridMap
 class_name Map
 
 
-@export var plausible_walls: Array[int] = [-1]
-@export var plausible_meshes: Array[int] = [0]
+@export var open_cielings: Array[int] = [-1]
+@export var pathable_tiles: Array[int] = [0]
 
 
 var thread: Thread
@@ -24,7 +24,7 @@ var triangle_preload: PackedScene = preload("res://debug/Tri.tscn")
 func get_edges() -> void:
 	for cell in get_used_cells():
 		#print(cell)
-		if plausible_walls.has(get_cell_item(Vector3i(cell.x, cell.y - 1, cell.z))) and plausible_meshes.has(get_cell_item(cell)):
+		if open_cielings.has(get_cell_item(Vector3i(cell.x, cell.y + 1, cell.z))) and pathable_tiles.has(get_cell_item(cell)):
 			var triangle: Node = triangle_preload.instantiate()
 			add_child(triangle)
 			triangle.position = Vector3(cell.x, cell.y + 1.15, cell.z)
