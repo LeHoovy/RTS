@@ -2,11 +2,11 @@ extends Node3D
 class_name Camera
 
 @export_category("Sensitivity")
-@export_range(1, 100) var edge_scroll_sens: int = 10
-@export var smooth_cam_move: bool = false
-@export_range(0.01, 3) var smooth_cam_time: float = 0.5
-@export var drag_sens: float = 4
-@export_range(0.1, 10, 0.1) var move_margin: float = 1
+@export_range(1, 100) var edge_scroll_sens : int = 10
+@export var smooth_cam_move : bool = false
+@export_range(0.01, 3) var smooth_cam_time : float = 0.5
+@export var drag_sens : float = 4
+@export_range(0.1, 10, 0.1) var move_margin : float = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,8 +14,8 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 
-func is_mouse_on_edge(percentage: float) -> Vector2i:
-	var output: Vector2i = Vector2i(0, 0)
+func is_mouse_on_edge(percentage : float) -> Vector2i:
+	var output : Vector2i = Vector2i(0, 0)
 	if mouse_pos.x <= (percentage / 100) * screen_size.x:
 		output.x = -1
 	elif mouse_pos.x >= (screen_size.x * (percentage / 100) + screen_size.x - (((percentage / 100) * screen_size.x) * 2) - 1):
@@ -30,10 +30,10 @@ func is_mouse_on_edge(percentage: float) -> Vector2i:
 	#print(mouse_pos.y <= (percentage / 100) * screen_size.y)
 	return output
 
-var not_delta: Vector2
-var friction: float = 0.9
-var move: Vector2i
-func process_move(delta: float) -> void:
+var not_delta : Vector2
+var friction : float = 0.9
+var move : Vector2i
+func process_move(delta : float) -> void:
 	mouse_pos = get_viewport().get_mouse_position()
 	screen_size = get_viewport().get_visible_rect().size
 	move = is_mouse_on_edge(move_margin)
@@ -44,7 +44,7 @@ func process_move(delta: float) -> void:
 	position.x += cam_move_speed.x * delta
 	position.z += cam_move_speed.y * delta
 
-func calc_move(delta: float) -> void:
+func calc_move(delta : float) -> void:
 	#mouse_pos = get_viewport().get_mouse_position()
 	#screen_size = get_viewport().get_visible_rect().size
 	#move = is_mouse_on_edge(1)
@@ -63,22 +63,22 @@ func calc_move(delta: float) -> void:
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-var mouse_pos: Vector2
-var screen_size: Vector2
-var cam_move_speed: Vector2
-func _process(delta: float) -> void:
+var mouse_pos : Vector2
+var screen_size : Vector2
+var cam_move_speed : Vector2
+func _process(delta : float) -> void:
 	process_move(delta)
 
 
-var zoomSpeed: float = 0.05
-var zoomMin: float = 0.3
-var zoomMax: float = 5.0
-var zoom: float = 1
+var zoomSpeed : float = 0.05
+var zoomMin : float = 0.3
+var zoomMax : float = 5.0
+var zoom : float = 1
 #Sets the minimum and maximum zoom, as well as the speed of zooming.
 
 #Changes the sensitivity of the ability to drag around the camera.
 
-func _input(event: Variant) -> void:
+func _input(event : Variant) -> void:
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
 		position.x -= event.relative.x / 49.5
 		position.z -= event.relative.y / 50
