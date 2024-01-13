@@ -1,36 +1,32 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1703387410
-Camera.gd::GDScript::-1::1699915555::0::1::::Camera<>Node3D<>::
+::res://::1705121703
+Camera.gd::GDScript::-1::1705113861::0::1::::Camera<>Node3D<>::
 export_presets.cfg::TextFile::-1::1699231910::0::1::::<><>::
-GUI.tscn::PackedScene::789380440230785768::1701490224::0::1::::<><>::
+GUI.tscn::PackedScene::789380440230785768::1705117124::0::1::::<><>::
 icon.svg::CompressedTexture2D::4416804812191622736::1699052503::1699052511::1::::<><>::
-test.gd::GDScript::-1::1699140888::0::1::::<>GridMap<>::
+test.gd::GDScript::-1::1705113861::0::1::::<>GridMap<>::
 unit.gd::GDScript::-1::1699318196::0::1::::<>CharacterBody3D<>::
-unit.tscn::PackedScene::1992454978002742142::1701490224::0::1::::<><>::res://unit.gd
+unit.tscn::PackedScene::1992454978002742142::1705117124::0::1::::<><>::res://unit.gd
 ::res://addons/::1699305671
 Clean and Modern.tres::Theme::3884849446934463986::1696539501::0::1::::<><>::
-::res://debug/::1701490224
+::res://debug/::1705117124
 e.tres::NavigationMesh::2870622057280532842::1699317950::0::1::::<><>::
+Tri.gd::GDScript::-1::1705115219::0::1::::Triangle<>MeshInstance3D<>::
 tri.obj::Mesh::8590912429518977805::1699312420::1699312458::1::::<><>::
 tri.tres::StandardMaterial3D::773354756399021695::1699312758::0::1::::<><>::
-Tri.tscn::PackedScene::107730544953293714::1701490224::0::1::::<><>::uid://dunrcp5e1nymn::::res://debug/tri.obj<>uid://lavbmcieawdb::::res://debug/tri.tres
-::res://Map Files/::1701491247
-Map.gd::GDScript::-1::1701490000::0::1::::Map<>GridMap<>::
-map.tscn::PackedScene::936490859718910636::1701491247::0::1::::<><>::uid://cgkmstsunkimm::::res://Terrain/Prototype/Artificial.tres<>res://Map Files/Map.gd<>res://Camera.gd
+Tri.tscn::PackedScene::107730544953293714::1705117124::0::1::::<><>::res://debug/Tri.gd
+::res://Map Files/::1705121703
+Map.gd::GDScript::-1::1705116411::0::1::::Map<>GridMap<>::
+map.tscn::PackedScene::936490859718910636::1705121707::0::1::::<><>::uid://dyxo8623sgiyp::::res://Terrain/Prototype/Artificial_Version2.tres<>res://Map Files/Map.gd<>res://Camera.gd
 ::res://Terrain/::1699140415
-::res://Terrain/Prototype/::1701489766
-Artificial.tres::MeshLibrary::5215379981635095652::1701489766::0::1::::<><>::uid://bxxqr4yfq0jm2::::res://Terrain/Prototype/Artificial/texture_09.png<>uid://b8s2x0rsmxcb1::::res://Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres
-::res://Terrain/Prototype/Artificial/::1701490224
+::res://Terrain/Prototype/::1705121703
+Artificial_Old.tres::MeshLibrary::5215379981635095652::1705120447::0::1::::<><>::uid://bxxqr4yfq0jm2::::res://Terrain/Prototype/Artificial/texture_09.png<>uid://b8s2x0rsmxcb1::::res://Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres
+Artificial_Version2.tres::MeshLibrary::8892185627063112815::1705121707::0::1::::<><>::uid://b8s2x0rsmxcb1::::res://Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres
+::res://Terrain/Prototype/Artificial/::1705121391
 texture_09.png::CompressedTexture2D::4049248166593879487::1699138980::1699305664::1::::<><>::
-tiles.tscn::PackedScene::8191368616423397081::1701490224::0::1::::<><>::uid://bxxqr4yfq0jm2::::res://Terrain/Prototype/Artificial/texture_09.png<>uid://b8s2x0rsmxcb1::::res://Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres
-tiles_scene.tscn::PackedScene::4471445999828405476::1701490224::0::1::::<><>::
-::res://Terrain/Prototype/Artificial/Models/::1701489766
-Corner1.tres::ArrayMesh::2637085413505377136::1699914965::0::1::::<><>::
-Corner2.tres::ArrayMesh::8667673408207522824::1699914965::0::1::::<><>::
-Corner3.tres::ArrayMesh::2466190500391180446::1699914965::0::1::::<><>::
-Floor.tres::ArrayMesh::3749414662220722858::1699914965::0::1::::<><>::
-prototype_artificial_texture.tres::StandardMaterial3D::4741493095565961532::1701489766::0::1::::<><>::uid://bxxqr4yfq0jm2::::res://Terrain/Prototype/Artificial/texture_09.png
-Ramp1.tres::ArrayMesh::2279930872276662540::1699914965::0::1::::<><>::
-Ramp2.tres::ArrayMesh::2858367298862235939::1699914965::0::1::::<><>::
-Terrain.glb::PackedScene::6223158215483005819::1701399488::1701401137::1::::<><>::
+tiles.tscn::PackedScene::8191368616423397081::1705121391::0::1::::<><>::uid://b8s2x0rsmxcb1::::res://Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres
+tiles_scene.tscn::PackedScene::4471445999828405476::1705120447::0::1::::<><>::
+::res://Terrain/Prototype/Artificial/Models/::1705120447
+prototype_artificial_texture.tres::StandardMaterial3D::4741493095565961532::1705120447::0::1::::<><>::uid://bxxqr4yfq0jm2::::res://Terrain/Prototype/Artificial/texture_09.png
+Terrain.glb::PackedScene::6223158215483005819::1705119934::1705119936::1::::<><>::
 ::res://Terrain/Prototype/Natural/::1699140423
