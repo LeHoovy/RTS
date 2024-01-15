@@ -11,13 +11,9 @@ config_version=5
 [application]
 
 config/name="RTS"
-run/main_scene="res://Map Files/map.tscn"
+run/main_scene="res://General game files/Map Files/map.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 config/icon="res://icon.svg"
-
-[autoload]
-
-Gui="*res://GUI.tscn"
 
 [debug]
 
