@@ -3,5 +3,4 @@
 [ext_resource type="Script" path="res://debug/Tri.gd" id="3_l1xa5"]
 
 [node name="MeshInstance3D" type="MeshInstance3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 script = ExtResource("3_l1xa5")
