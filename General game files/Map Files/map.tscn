@@ -18,7 +18,7 @@ open_ceilings = Array[int]([-1, 1, 2, 3, 8, 9, 10, 11])
 metadata/_editor_floor_ = Vector3(0, -1, 0)
 
 [node name="Camera" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 67, 39)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 50, 39)
 script = ExtResource("2_mvfqk")
 
 [node name="Camera3D" type="Camera3D" parent="Camera"]
