@@ -63,9 +63,9 @@ func get_cell_type_dir(tile: Vector2i) -> Vector2i:
 	var up_down_ramp: int = 1
 	if get_cell_atlas_coords(0, ramp_neighbor).x > self_type.x:
 		up_down_ramp += 1
-	if up_down_ramp == 2 and vert_dir.has(direction):
-		direction = 4 - direction
-	elif up_down_ramp == 2:
-		direction = 2 - direction
+	#if up_down_ramp == 2 and vert_dir.has(direction):
+		#direction = 4 - direction
+	#elif up_down_ramp == 2:
+		#direction = 2 - direction
 	
 	return Vector2i(up_down_ramp, direction)
