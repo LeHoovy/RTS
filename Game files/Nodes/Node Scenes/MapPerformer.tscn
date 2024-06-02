@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://dep80x6xtyt65"]
+
+[ext_resource type="Script" path="res://Game files/Nodes/Node Scripts/CSMapPerformer.cs" id="1_m80gn"]
+
+[node name="MapPerformer" type="Node"]
+script = ExtResource("1_m80gn")

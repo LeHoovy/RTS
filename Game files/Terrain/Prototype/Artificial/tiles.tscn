@@ -1,6 +1,6 @@
 [gd_scene load_steps=26 format=3 uid="uid://dox7v54c2yhj2"]
 
-[ext_resource type="Material" uid="uid://b8s2x0rsmxcb1" path="res://General game files/Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres" id="2_k51pv"]
+[ext_resource type="Material" uid="uid://b8s2x0rsmxcb1" path="res://Game files/Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres" id="2_k51pv"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7islt"]
 

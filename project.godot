@@ -11,9 +11,9 @@ config_version=5
 [application]
 
 config/name="RTS"
-run/main_scene="res://General game files/Map Files/map.tscn"
-config/features=PackedStringArray("4.2", "Forward Plus")
-config/icon="res://icon.svg"
+run/main_scene="res://2D3D_Test/Client3D/map client.tscn"
+config/features=PackedStringArray("4.2", "C#", "Forward Plus")
+config/icon="res://2D3D_Test/Art/icon.svg"
 
 [autoload]
 
@@ -41,6 +41,12 @@ project/assembly_name="Pathfinding test"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
+
+[file_customization]
+
+folder_colors={
+"res://2D3D_Test/": "green"
+}
 
 [internationalization]
 

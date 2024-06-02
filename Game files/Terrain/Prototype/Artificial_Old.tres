@@ -1,7 +1,7 @@
 [gd_resource type="MeshLibrary" load_steps=91 format=3 uid="uid://cgkmstsunkimm"]
 
-[ext_resource type="Texture2D" uid="uid://bxxqr4yfq0jm2" path="res://General game files/Terrain/Prototype/Artificial/texture_09.png" id="1_22omr"]
-[ext_resource type="Material" uid="uid://b8s2x0rsmxcb1" path="res://General game files/Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres" id="2_iwluj"]
+[ext_resource type="Texture2D" uid="uid://bxxqr4yfq0jm2" path="res://Game files/Terrain/Prototype/Artificial/texture_09.png" id="1_22omr"]
+[ext_resource type="Material" uid="uid://b8s2x0rsmxcb1" path="res://Game files/Terrain/Prototype/Artificial/Models/prototype_artificial_texture.tres" id="2_iwluj"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bxxt6"]
 albedo_texture = ExtResource("1_22omr")
