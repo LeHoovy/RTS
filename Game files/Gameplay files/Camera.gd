@@ -94,6 +94,10 @@ func _input(event : Variant) -> void:
 		#Changes zoom as long, and only if, the mouse wheel is being scrolled
 		zoom = clamp(zoom, zoomMin, zoomMax)
 
+	if event is InputEvent and (event as InputEvent).is_action_pressed("rotate camera left"):
+		rotate_y(1.57079633)
+	if event is InputEvent and (event as InputEvent).is_action_pressed("rotate camera right"):
+		rotate_y(-1.57079633)
 #const ray_length: int = 2000
 #func _physics_process(delta):
 	#var physic_proc_mouse_pos = get_viewport().get_mouse_position()

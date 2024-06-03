@@ -30,6 +30,11 @@ func used_tiles() -> Array[Vector2i]:
 
 
 
+func used_area() -> Vector4i:
+	return Vector4i(get_used_rect().size.x, get_used_rect().size.y, get_used_rect().position.x, get_used_rect().position.y)
+
+
+
 func get_cell_height(tile: Vector2i) -> Vector3i:
 	var height: int = get_cell_atlas_coords(0, tile).x
 	var type: int = get_cell_atlas_coords(0, tile).y
@@ -37,7 +42,7 @@ func get_cell_height(tile: Vector2i) -> Vector3i:
 	if type == 1:
 		#print(get_surrounding_cells(tile))
 		for neighbor in get_surrounding_cells(tile):
-			if get_cell_atlas_coords(0, neighbor).x > height:
+			if get_cell_atlas_coords(0, neighbor).y == 1 and get_cell_atlas_coords(0, neighbor).x > height:
 				height += 1
 	
 	return Vector3i(tile.x, height, tile.y)
@@ -63,9 +68,5 @@ func get_cell_type_dir(tile: Vector2i) -> Vector2i:
 	var up_down_ramp: int = 1
 	if get_cell_atlas_coords(0, ramp_neighbor).x > self_type.x:
 		up_down_ramp += 1
-	#if up_down_ramp == 2 and vert_dir.has(direction):
-		#direction = 4 - direction
-	#elif up_down_ramp == 2:
-		#direction = 2 - direction
 	
 	return Vector2i(up_down_ramp, direction)
