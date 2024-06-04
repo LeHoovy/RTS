@@ -1,5 +1,5 @@
-extends Node3D
-class_name Camera
+extends Node2D
+class_name Camera2DServer
 
 @export_category("Sensitivity")
 @export_range(1, 100) var edge_scroll_sens : int = 10
@@ -8,12 +8,20 @@ class_name Camera
 @export var drag_sens : float = 4
 @export_range(0.1, 10, 0.1) var move_margin : float = 1
 
+var parent: MapServer
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	parent = get_parent()
+	camera_client = (parent.get_parent() as MapClient).camera_client
 
 
+#region General Functions
+var camera_client: Node3D
+var mouse_pos : Vector2
+var screen_size : Vector2
+var cam_move_speed : Vector2
 func is_mouse_on_edge(percentage : float) -> Vector2i:
 	var output : Vector2i = Vector2i(0, 0)
 	if mouse_pos.x <= (percentage / 100) * screen_size.x:
@@ -42,8 +50,7 @@ func process_move(delta : float) -> void:
 	else:
 		cam_move_speed = move * edge_scroll_sens
 	
-	position.x += cam_move_speed.x * delta
-	position.z += cam_move_speed.y * delta
+	position += cam_move_speed * delta
 
 func calc_move(delta : float) -> void:
 	#mouse_pos = get_viewport().get_mouse_position()
@@ -59,17 +66,17 @@ func calc_move(delta : float) -> void:
 		cam_move_speed.y = 0
 	
 	#print(cam_move_speed)
-	position.x += cam_move_speed.x * delta
-	position.z += cam_move_speed.y * delta
+	position += cam_move_speed * delta
+#endregion
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-var mouse_pos : Vector2
-var screen_size : Vector2
-var cam_move_speed : Vector2
 func _process(delta : float) -> void:
-	pass
-	#process_move(delta)
+	process_move(delta)
+	camera_client.position.x = position.x
+	camera_client.position.z = position.y
+	camera_client.position.y = parent.get_cell_height(Vector2i(roundi(position.x), roundi(position.y))).y + 1
+	calc_height()
+
+#region General Functions 2
 
 
 var zoomSpeed : float = 0.05
@@ -83,7 +90,7 @@ var zoom : float = 1
 func _input(event : Variant) -> void:
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
 		position.x -= event.relative.x / 49.5
-		position.z -= event.relative.y / 50
+		position.y -= event.relative.y / 50
 #Repositions the camera as long as the middle mouse button (mouse 3) is pressed
 #Relative to the sensitivity and movement of the mouse.
 #Also adjusts based on the zoom amount.
@@ -96,10 +103,7 @@ func _input(event : Variant) -> void:
 		#Changes zoom as long, and only if, the mouse wheel is being scrolled
 		zoom = clamp(zoom, zoomMin, zoomMax)
 
-	if event is InputEvent and (event as InputEvent).is_action_pressed("rotate camera left"):
-		rotate_y(1.57079633)
-	if event is InputEvent and (event as InputEvent).is_action_pressed("rotate camera right"):
-		rotate_y(-1.57079633)
+
 #const ray_length: int = 2000
 #func _physics_process(delta):
 	#var physic_proc_mouse_pos = get_viewport().get_mouse_position()
@@ -117,3 +121,33 @@ func _input(event : Variant) -> void:
 		#var pos: Vector3 = raycast_result.position
 		#var look_at_me: Vector3 = Vector3(pos.x, $Player.position.y, pos.z)
 		#$Player.look_at(look_at_me, Vector3.UP)
+#endregion
+
+const max_tile_dist: int = 100
+func calc_height() -> float:
+	var closest_tiles: Array[float] = []
+	print(closest_tiles) #may need to change back from normalized to non-normalized, but normalized should be good for now
+	#print(tile_true_positions)
+	get_overlapping_tiles()
+	return 0.0
+
+# TODO: get what percent each tile is covered by, when positions are equal (i.e 50,50), should be 100%, when in a perfect corner (i.e 0,0), it should be 25%
+const tile_size_px: int = 100
+func get_overlapping_tiles(radius: float = 50) -> Array[float]:
+	var tiles_arr: Array[Vector2]
+	for x in range(0 - radius, radius + 1, tile_size_px):
+		for y in range(0 - radius, radius + 1, tile_size_px):
+			if not tiles_arr.has(parent.map_to_local(parent.local_to_map(
+				Vector2(x + position.x, y + position.y)
+			))):
+					tiles_arr.append(parent.map_to_local(parent.local_to_map(Vector2(
+						x + position.x, y + position.y
+					))))
+	print(tiles_arr)
+	var tiles_dist: Array[Vector2]
+	for tile in tiles_arr:
+		tiles_dist.append(
+			Vector2(position - tile).abs()
+		)
+	print(tiles_dist)
+	return []

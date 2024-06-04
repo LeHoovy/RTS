@@ -1,6 +1,8 @@
 extends GridMap
 class_name MapClient
 
+var camera_client: Node3D
+
 var performance: CSMapPerformer
 @export var load_map: String
 var map: MapServer
@@ -19,6 +21,7 @@ func _ready() -> void:
 		print('Already empty!')
 	map = (load(load_map) as PackedScene).instantiate()
 	map.visible = false
+	camera_client = get_parent().get_node("Camera")
 	add_child(map)
 	
 	#map.used_tiles()
@@ -40,10 +43,7 @@ func _ready() -> void:
 	for cell in range(all_cells.size(), 0, -1):
 		fix_floating(map.get_cell_height(all_cells[cell - 1]))
 	
-	var area: Vector4i = map.used_area()
-	for x in range(area.x):
-		for y in range(area.y):
-			set_cell_item(Vector3i(x + area.z, 0, y + area.w), 0)
+	camera_client = get_parent().get_node("Camera")
 
 
 

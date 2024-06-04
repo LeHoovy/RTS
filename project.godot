@@ -15,10 +15,6 @@ run/main_scene="res://2D3D_Test/Client3D/map client.tscn"
 config/features=PackedStringArray("4.2", "C#", "Forward Plus")
 config/icon="res://2D3D_Test/Art/icon.svg"
 
-[autoload]
-
-DialogueManager="*res://addons/dialogue_manager/dialogue_manager.gd"
-
 [debug]
 
 gdscript/warnings/untyped_declaration=2
@@ -37,10 +33,6 @@ window/size/borderless=true
 [dotnet]
 
 project/assembly_name="Pathfinding test"
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/dialogue_manager/plugin.cfg")
 
 [file_customization]
 

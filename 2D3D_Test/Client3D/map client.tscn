@@ -1,13 +1,12 @@
-[gd_scene load_steps=7 format=3 uid="uid://b651bxr22nbbl"]
+[gd_scene load_steps=6 format=3 uid="uid://b651bxr22nbbl"]
 
 [ext_resource type="MeshLibrary" uid="uid://bsdxlipbmkmjy" path="res://Game files/Terrain/Prototype/ArtificialUpdate2.tres" id="1_uebiu"]
 [ext_resource type="MeshLibrary" uid="uid://dyxo8623sgiyp" path="res://Game files/Terrain/Prototype/Artificial.tres" id="1_yiqme"]
 [ext_resource type="Script" path="res://2D3D_Test/Client3D/Map client.gd" id="2_fiins"]
 [ext_resource type="PackedScene" uid="uid://dep80x6xtyt65" path="res://Game files/Nodes/Node Scenes/MapPerformer.tscn" id="3_mrhqh"]
-[ext_resource type="Script" path="res://Game files/Gameplay files/Camera.gd" id="4_kkf3j"]
 [ext_resource type="Script" path="res://2D3D_Test/test.gd" id="5_baxbl"]
 
-[node name="Node3D" type="Node3D"]
+[node name="Main" type="Node3D"]
 
 [node name="Map" type="GridMap" parent="."]
 mesh_library = ExtResource("1_uebiu")
@@ -23,12 +22,10 @@ metadata/_editor_floor_ = Vector3(0, 2, 0)
 [node name="MapPerformer" parent="Map" instance=ExtResource("3_mrhqh")]
 
 [node name="Camera" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 50, 39)
-script = ExtResource("4_kkf3j")
-smooth_cam_move = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2)
 
 [node name="Camera3D" type="Camera3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 0.866025, -0.5, 0, 0.5, 0.866025, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 50, 25)
 fov = 20.0
 size = 10.255
 

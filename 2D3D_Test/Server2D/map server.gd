@@ -4,7 +4,13 @@ class_name MapServer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	var prepare_size: Vector2i = get_used_rect().size
+	var prepare_pos: Vector2i = get_used_rect().position
+	
+	for x: int in range(prepare_size.x):
+		for y: int in range(prepare_size.y):
+			if get_cell_atlas_coords(0, Vector2i(x + prepare_pos.x, y + prepare_pos.y)) == Vector2i(-1, -1):
+				set_cell(0, Vector2i(x + prepare_pos.x, y + prepare_pos.y), 0, Vector2i(0, 0))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -70,3 +76,5 @@ func get_cell_type_dir(tile: Vector2i) -> Vector2i:
 		up_down_ramp += 1
 	
 	return Vector2i(up_down_ramp, direction)
+
+
