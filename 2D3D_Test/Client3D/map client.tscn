@@ -17,7 +17,7 @@ data = {
 }
 script = ExtResource("2_fiins")
 load_map = "res://2D3D_Test/Server2D/map server.tscn"
-metadata/_editor_floor_ = Vector3(0, 2, 0)
+metadata/_editor_floor_ = Vector3(0, 7, 0)
 
 [node name="MapPerformer" parent="Map" instance=ExtResource("3_mrhqh")]
 
@@ -25,7 +25,7 @@ metadata/_editor_floor_ = Vector3(0, 2, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2)
 
 [node name="Camera3D" type="Camera3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 50, 25)
+transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 50, 30)
 fov = 20.0
 size = 10.255
 

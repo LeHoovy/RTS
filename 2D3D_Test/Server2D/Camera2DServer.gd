@@ -50,7 +50,7 @@ func process_move(delta : float) -> void:
 	else:
 		cam_move_speed = move * edge_scroll_sens
 	
-	position += cam_move_speed * delta
+	position += cam_move_speed * delta * 100
 
 func calc_move(delta : float) -> void:
 	#mouse_pos = get_viewport().get_mouse_position()
@@ -66,15 +66,16 @@ func calc_move(delta : float) -> void:
 		cam_move_speed.y = 0
 	
 	#print(cam_move_speed)
-	position += cam_move_speed * delta
+	position += cam_move_speed * delta * 100
 #endregion
 
 func _process(delta : float) -> void:
 	process_move(delta)
-	camera_client.position.x = position.x
-	camera_client.position.z = position.y
-	camera_client.position.y = parent.get_cell_height(Vector2i(roundi(position.x), roundi(position.y))).y + 1
-	calc_height()
+	camera_client.position.x = position.x / 100
+	camera_client.position.z = position.y / 100
+	#camera_client.position.y = parent.get_cell_height(Vector2i(roundi(position.x), roundi(position.y))).y + 1
+	camera_client.position.y = calc_height() + 1.5
+	#calc_height()
 
 #region General Functions 2
 
@@ -89,8 +90,8 @@ var zoom : float = 1
 
 func _input(event : Variant) -> void:
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
-		position.x -= event.relative.x / 49.5
-		position.y -= event.relative.y / 50
+		position.x -= event.relative.x / 49.5 * 100
+		position.y -= event.relative.y / 50 * 100
 #Repositions the camera as long as the middle mouse button (mouse 3) is pressed
 #Relative to the sensitivity and movement of the mouse.
 #Also adjusts based on the zoom amount.
@@ -123,31 +124,49 @@ func _input(event : Variant) -> void:
 		#$Player.look_at(look_at_me, Vector3.UP)
 #endregion
 
-const max_tile_dist: int = 100
-func calc_height() -> float:
-	var closest_tiles: Array[float] = []
-	print(closest_tiles) #may need to change back from normalized to non-normalized, but normalized should be good for now
-	#print(tile_true_positions)
-	get_overlapping_tiles()
-	return 0.0
-
-# TODO: get what percent each tile is covered by, when positions are equal (i.e 50,50), should be 100%, when in a perfect corner (i.e 0,0), it should be 25%
+# TODO: Figure out this stuff (primarily radius stuff/whether to do radius + 1 or .append(radius)
 const tile_size_px: int = 100
-func get_overlapping_tiles(radius: float = 50) -> Array[float]:
+func calc_height(radius: float = 50) -> float:
+	var x_arr: Array[float]
+	for item in range(-radius, radius + 1, tile_size_px):
+		x_arr.append(item)
+	#x_arr.append(radius)
+	
+	var y_arr: Array[float]
+	for item in range(-radius, radius + 1, tile_size_px):
+		y_arr.append(item)
+	#y_arr.append(radius)
+	
 	var tiles_arr: Array[Vector2]
-	for x in range(0 - radius, radius + 1, tile_size_px):
-		for y in range(0 - radius, radius + 1, tile_size_px):
+	for x in x_arr:
+		for y in y_arr:
 			if not tiles_arr.has(parent.map_to_local(parent.local_to_map(
 				Vector2(x + position.x, y + position.y)
 			))):
 					tiles_arr.append(parent.map_to_local(parent.local_to_map(Vector2(
 						x + position.x, y + position.y
 					))))
-	print(tiles_arr)
-	var tiles_dist: Array[Vector2]
+	#print(tiles_arr)
+	var coverage_arr: Array[float]
 	for tile in tiles_arr:
-		tiles_dist.append(
-			Vector2(position - tile).abs()
-		)
-	print(tiles_dist)
-	return []
+		var x_rel: float = tile.x - position.x
+		var y_rel: float = tile.y - position.y
+		x_rel = tile_size_px - absf(x_rel)
+		y_rel = tile_size_px - absf(y_rel)
+		x_rel /= 100
+		y_rel /= 100
+		
+		coverage_arr.append(x_rel * y_rel)
+	
+	var output: float = 0
+	var iteration: int = 0
+	for tile in tiles_arr:
+		var change: float = (parent.get_cell_atlas_coords(0, parent.local_to_map(tile)).x + 1) * coverage_arr[iteration]
+		output += change
+		iteration += 1
+	
+	return output
+
+
+
+#func get_overlapping_tiles(radius: float = 50) -> Array[float]:
