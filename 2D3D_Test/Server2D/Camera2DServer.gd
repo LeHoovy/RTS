@@ -8,13 +8,16 @@ class_name Camera2DServer
 @export var drag_sens : float = 4
 @export_range(0.1, 10, 0.1) var move_margin : float = 1
 
-var parent: MapServer
+var map_server: MapServer
+
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	parent = get_parent()
-	camera_client = (parent.get_parent() as MapClient).camera_client
+	map_server = get_parent()
+	#var client: Node3D = get_node('/root').get_node('Client')
+	camera_client = get_node('/root').get_node('Client').get_node('CameraNode')
+	print(camera_client)
 
 
 #region General Functions
@@ -73,7 +76,7 @@ func _process(delta : float) -> void:
 	process_move(delta)
 	camera_client.position.x = position.x / 100
 	camera_client.position.z = position.y / 100
-	#camera_client.position.y = parent.get_cell_height(Vector2i(roundi(position.x), roundi(position.y))).y + 1
+	#camera_client.position.y = map_server.get_cell_height(Vector2i(roundi(position.x), roundi(position.y))).y + 1
 	camera_client.position.y = calc_height() + 1.5
 	#calc_height()
 
@@ -140,10 +143,10 @@ func calc_height(radius: float = 50) -> float:
 	var tiles_arr: Array[Vector2]
 	for x in x_arr:
 		for y in y_arr:
-			if not tiles_arr.has(parent.map_to_local(parent.local_to_map(
+			if not tiles_arr.has(map_server.map_to_local(map_server.local_to_map(
 				Vector2(x + position.x, y + position.y)
 			))):
-					tiles_arr.append(parent.map_to_local(parent.local_to_map(Vector2(
+					tiles_arr.append(map_server.map_to_local(map_server.local_to_map(Vector2(
 						x + position.x, y + position.y
 					))))
 	#print(tiles_arr)
@@ -161,7 +164,7 @@ func calc_height(radius: float = 50) -> float:
 	var output: float = 0
 	var iteration: int = 0
 	for tile in tiles_arr:
-		var change: float = (parent.get_cell_atlas_coords(0, parent.local_to_map(tile)).x + 1) * coverage_arr[iteration]
+		var change: float = (map_server.get_cell_atlas_coords(0, map_server.local_to_map(tile)).x + 1) * coverage_arr[iteration]
 		output += change
 		iteration += 1
 	

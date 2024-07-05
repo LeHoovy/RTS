@@ -1,9 +1,11 @@
 extends TileMap
 class_name MapServer
 
-
+signal finished_loading
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	(get_parent() as Node2D).visible = false
+	
 	var prepare_size: Vector2i = get_used_rect().size
 	var prepare_pos: Vector2i = get_used_rect().position
 	
@@ -11,6 +13,8 @@ func _ready() -> void:
 		for y: int in range(prepare_size.y):
 			if get_cell_atlas_coords(0, Vector2i(x + prepare_pos.x, y + prepare_pos.y)) == Vector2i(-1, -1):
 				set_cell(0, Vector2i(x + prepare_pos.x, y + prepare_pos.y), 0, Vector2i(0, 0))
+	
+	finished_loading.emit()
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

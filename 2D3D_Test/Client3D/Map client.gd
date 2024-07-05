@@ -3,9 +3,10 @@ class_name MapClient
 
 var camera_client: Node3D
 
-var performance: CSMapPerformer
+
 @export var load_map: String
-var map: MapServer
+
+var map_server: MapServer
 
 const directions: Array[int] = [
 	22, # east
@@ -15,35 +16,29 @@ const directions: Array[int] = [
 ]
 
 func _ready() -> void:
+	var root: Window = get_node('/root')
+	var server: Node2D
+	camera_client = get_parent().get_node("CameraNode")
+	server = (load(load_map) as PackedScene).instantiate()
+	
+	root.call_deferred('add_child', server)
+	map_server = server.get_node('Map')
+	
 	if get_used_cells():
 		clear()
 	else:
 		print('Already empty!')
-	map = (load(load_map) as PackedScene).instantiate()
-	map.visible = false
-	camera_client = get_parent().get_node("Camera")
-	add_child(map)
 	
-	#map.used_tiles()
+	await map_server.finished_loading
 	
-	for child in get_children():
-		if child is CSMapPerformer:
-			performance = child
-			print('Performance node found')
-			break
-	if performance == null:
-		printerr('No performance node found')
-	
-	var all_cells: Array[Vector2i] = map.used_tiles() #May need to also have a Vector3i version
+	var all_cells: Array[Vector2i] = map_server.used_tiles() #May need to also have a Vector3i version
 	
 	for cell in all_cells:
-		var cell_type: Vector2i = map.get_cell_type_dir(cell) 
-		set_cell_item(map.get_cell_height(cell), cell_type.x, directions[cell_type.y % 4])
+		var cell_type: Vector2i = map_server.get_cell_type_dir(cell) 
+		set_cell_item(map_server.get_cell_height(cell), cell_type.x, directions[cell_type.y % 4])
 	
 	for cell in range(all_cells.size(), 0, -1):
-		fix_floating(map.get_cell_height(all_cells[cell - 1]))
-	
-	camera_client = get_parent().get_node("Camera")
+		fix_floating(map_server.get_cell_height(all_cells[cell - 1]))
 
 
 
@@ -64,3 +59,21 @@ func cell_is_visibly_floating(cell: Vector3i) -> bool:
 	if get_cell_item(Vector3i(cell.x - 1, cell.y, cell.z)) == -1:
 		return true
 	return false
+
+
+
+#func debug_toggle_cam() -> void:
+	#if Input.is_action_just_pressed("debug_change_cam"):
+		#if visible:
+			#visible = false
+			#debug_camera.visible = true
+		#else:
+			#visible = true
+			#debug_camera.visible = false
+
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action("debug_change_cam") and Input.is_action_just_pressed("debug_change_cam"):
+		visible = !visible
+		(map_server.get_parent() as Node2D).visible = !(map_server.get_parent() as Node2D).visible

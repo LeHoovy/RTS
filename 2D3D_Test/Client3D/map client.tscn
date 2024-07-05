@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b651bxr22nbbl"]
+[gd_scene load_steps=3 format=3 uid="uid://b651bxr22nbbl"]
 
 [ext_resource type="MeshLibrary" uid="uid://bsdxlipbmkmjy" path="res://Game files/Terrain/Prototype/ArtificialUpdate2.tres" id="1_uebiu"]
-[ext_resource type="MeshLibrary" uid="uid://dyxo8623sgiyp" path="res://Game files/Terrain/Prototype/Artificial.tres" id="1_yiqme"]
 [ext_resource type="Script" path="res://2D3D_Test/Client3D/Map client.gd" id="2_fiins"]
-[ext_resource type="PackedScene" uid="uid://dep80x6xtyt65" path="res://Game files/Nodes/Node Scenes/MapPerformer.tscn" id="3_mrhqh"]
-[ext_resource type="Script" path="res://2D3D_Test/test.gd" id="5_baxbl"]
 
-[node name="Main" type="Node3D"]
+[node name="Client" type="Node3D"]
 
 [node name="Map" type="GridMap" parent="."]
 mesh_library = ExtResource("1_uebiu")
@@ -19,31 +16,19 @@ script = ExtResource("2_fiins")
 load_map = "res://2D3D_Test/Server2D/map server.tscn"
 metadata/_editor_floor_ = Vector3(0, 7, 0)
 
-[node name="MapPerformer" parent="Map" instance=ExtResource("3_mrhqh")]
-
-[node name="Camera" type="Node3D" parent="."]
+[node name="CameraNode" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 2)
 
-[node name="Camera3D" type="Camera3D" parent="Camera"]
+[node name="Camera3D" type="Camera3D" parent="CameraNode"]
 transform = Transform3D(1, 0, 0, 0, 0.5, 0.866025, 0, -0.866025, 0.5, 0, 50, 30)
 fov = 20.0
 size = 10.255
 
-[node name="RayCast3D" type="RayCast3D" parent="Camera/Camera3D"]
+[node name="RayCast3D" type="RayCast3D" parent="CameraNode/Camera3D"]
 transform = Transform3D(1, 0, 0, 0, 0.052336, -0.99863, 0, 0.99863, 0.052336, 0, 0, 0)
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+[node name="Sun" type="DirectionalLight3D" parent="."]
 transform = Transform3D(0.793375, 0.527179, -0.304367, 1.57889e-08, 0.5, 0.866025, 0.608734, -0.687083, 0.396687, 0, 114, 24)
 light_energy = 0.919
 shadow_enabled = true
 sky_mode = 1
-
-[node name="GridMap" type="GridMap" parent="."]
-visible = false
-mesh_library = ExtResource("1_yiqme")
-cell_size = Vector3(1, 1, 1)
-cell_center_y = false
-data = {
-"cells": PackedInt32Array(3, 4, 1048578, 4, 4, 1048577)
-}
-script = ExtResource("5_baxbl")
