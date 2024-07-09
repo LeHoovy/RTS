@@ -14,7 +14,7 @@ var map_server: MapServer
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	map_server = get_parent()
+	map_server = get_parent().get_node("Map")
 	#var client: Node3D = get_node('/root').get_node('Client')
 	camera_client = get_node('/root').get_node('Client').get_node('CameraNode')
 	print(camera_client)
@@ -130,17 +130,17 @@ func _input(event : Variant) -> void:
 # TODO: Figure out this stuff (primarily radius stuff/whether to do radius + 1 or .append(radius)
 const tile_size_px: int = 100
 func calc_height(radius: float = 50) -> float:
-	var x_arr: Array[float]
+	var x_arr: Array[float] = []
 	for item in range(-radius, radius + 1, tile_size_px):
 		x_arr.append(item)
 	#x_arr.append(radius)
 	
-	var y_arr: Array[float]
+	var y_arr: Array[float] = []
 	for item in range(-radius, radius + 1, tile_size_px):
 		y_arr.append(item)
 	#y_arr.append(radius)
 	
-	var tiles_arr: Array[Vector2]
+	var tiles_arr: Array[Vector2] = []
 	for x in x_arr:
 		for y in y_arr:
 			if not tiles_arr.has(map_server.map_to_local(map_server.local_to_map(
@@ -150,7 +150,7 @@ func calc_height(radius: float = 50) -> float:
 						x + position.x, y + position.y
 					))))
 	#print(tiles_arr)
-	var coverage_arr: Array[float]
+	var coverage_arr: Array[float] = []
 	for tile in tiles_arr:
 		var x_rel: float = tile.x - position.x
 		var y_rel: float = tile.y - position.y

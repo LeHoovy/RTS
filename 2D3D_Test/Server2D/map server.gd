@@ -1,6 +1,8 @@
 extends TileMap
 class_name MapServer
+#used_tiles(): returns an array containing the position of every tile on the map.
 
+#region Setup
 signal finished_loading
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -15,12 +17,8 @@ func _ready() -> void:
 				set_cell(0, Vector2i(x + prepare_pos.x, y + prepare_pos.y), 0, Vector2i(0, 0))
 	
 	finished_loading.emit()
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
-
+	
+	generate_navigation_map()
 
 
 
@@ -58,6 +56,7 @@ func get_cell_height(tile: Vector2i) -> Vector3i:
 	return Vector3i(tile.x, height, tile.y)
 
 
+
 const vert_dir: Array[int] = [
 	1, 3
 ]
@@ -80,5 +79,34 @@ func get_cell_type_dir(tile: Vector2i) -> Vector2i:
 		up_down_ramp += 1
 	
 	return Vector2i(up_down_ramp, direction)
+#endregion
+
+
+#make a "get next point" function eventually
+var triangle_count: int = 0
+func generate_navigation_map() -> void:
+	var vertices: Dictionary
+	var starting_point: Vector2i = used_tiles()[0] * 100
+	starting_point.x += 50
+	starting_point.y += 50
+	print(starting_point)
+	
+	var check_direction: Vector2i = Vector2i(1, 0)
+	
+	var tri: Tri = Tri.new()
+	add_child(tri)
+	await tri.ready
+	print('tri has loaded')
+	tri.reposition_vertex(0, starting_point)
+
+
+#part of setup but unfinished so not in the region yet
+func generate_triangles(affected_triangles: Array[Polygon2D]) -> void:
+	pass
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
 
 

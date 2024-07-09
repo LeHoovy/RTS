@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://teut8uthojch"]
+
+[ext_resource type="Script" path="res://2D3D_Test/Server2D/triangle.gd" id="1_ty1kd"]
+
+[node name="Triangle_Area" type="Area2D"]
+script = ExtResource("1_ty1kd")
+
+[node name="Triangle" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(0, 0, 0, 0, 0, 0)
