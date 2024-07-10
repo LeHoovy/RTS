@@ -85,24 +85,39 @@ func get_cell_type_dir(tile: Vector2i) -> Vector2i:
 #make a "get next point" function eventually
 var triangle_count: int = 0
 func generate_navigation_map() -> void:
-	var vertices: Dictionary
+	#var vertices: Dictionary
 	var starting_point: Vector2i = used_tiles()[0] * 100
 	starting_point.x += 50
 	starting_point.y += 50
-	print(starting_point)
+	#print(starting_point)
 	
-	var check_direction: Vector2i = Vector2i(1, 0)
+	var direction: Vector2i = Vector2i(1, 0)
 	
 	var tri: Tri = Tri.new()
 	add_child(tri)
-	await tri.ready
-	print('tri has loaded')
 	tri.reposition_vertex(0, starting_point)
+	
+	var second_point: Vector2i = starting_point + (100 * direction)
+	print(second_point)
+	while true:
+		if !compare_tile_height(local_to_map(second_point), local_to_map(second_point + (100 * direction))):
+			break
+		second_point += 100 * direction
+	print(second_point)
+	
+	tri.reposition_vertex(1, second_point)
 
 
+
+func compare_tile_height(tile_a: Vector2i, tile_b: Vector2i) -> bool:
+	var height_a: int = get_cell_atlas_coords(0, tile_a).x
+	var height_b: int = get_cell_atlas_coords(0, tile_b).x
+	if height_a == height_b:
+		return true
+	return false
 #part of setup but unfinished so not in the region yet
-func generate_triangles(affected_triangles: Array[Polygon2D]) -> void:
-	pass
+#func generate_triangles(affected_triangles: Array[Polygon2D]) -> void:
+	#pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

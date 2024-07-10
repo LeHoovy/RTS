@@ -1,10 +1,9 @@
-[gd_scene load_steps=9 format=3 uid="uid://bxackhqf0778f"]
+[gd_scene load_steps=8 format=3 uid="uid://bxackhqf0778f"]
 
 [ext_resource type="Texture2D" uid="uid://c8vim0gdlf7hr" path="res://2D3D_Test/Art/map tiles.png" id="1_o5c4q"]
 [ext_resource type="Script" path="res://2D3D_Test/Server2D/map server.gd" id="1_snqjc"]
 [ext_resource type="Texture2D" uid="uid://qwn3vrsev0nr" path="res://2D3D_Test/Art/map tiles contrast.png" id="2_q1sb7"]
 [ext_resource type="Script" path="res://2D3D_Test/Server2D/Camera2DServer.gd" id="4_mjvcv"]
-[ext_resource type="PackedScene" uid="uid://teut8uthojch" path="res://2D3D_Test/Server2D/triangle.tscn" id="5_03uuv"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_joy2a"]
 texture = ExtResource("2_q1sb7")
@@ -68,5 +67,3 @@ script = ExtResource("4_mjvcv")
 [node name="Camera2D" type="Camera2D" parent="Camera"]
 visible = false
 zoom = Vector2(0.62, 0.62)
-
-[node name="Triangle_Area" parent="." instance=ExtResource("5_03uuv")]

@@ -17,7 +17,7 @@ func _ready() -> void:
 	map_server = get_parent().get_node("Map")
 	#var client: Node3D = get_node('/root').get_node('Client')
 	camera_client = get_node('/root').get_node('Client').get_node('CameraNode')
-	print(camera_client)
+	#print(camera_client)
 
 
 #region General Functions

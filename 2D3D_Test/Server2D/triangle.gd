@@ -2,14 +2,27 @@ extends Area2D
 class_name Tri
 
 
+var pathable: bool = true
 
+var triangle_visualizer: Polygon2D
 var triangle: CollisionPolygon2D
-var ready_passed: bool = false
+var triangle_array: Array[Vector2]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	await child_entered_tree
-	triangle = get_node("Triangle")
-	ready_passed = true
+	triangle_array.append(Vector2(0, 0))
+	triangle_array.append(Vector2(20, 20))
+	triangle_array.append(Vector2(0, 0))
+	
+	triangle = CollisionPolygon2D.new()
+	add_child(triangle)
+	
+	triangle_visualizer = Polygon2D.new()
+	add_child(triangle_visualizer)
+	
+	triangle.set_polygon(triangle_array)
+	triangle_visualizer.set_polygon(triangle_array)
+	triangle_visualizer.set_color(Color(0.341, 0.153, 0.729, 0.4))
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,6 +32,6 @@ func _process(delta: float) -> void:
 
 
 func reposition_vertex(vertex: int, new_position: Vector2i) -> void:
-	print(triangle, ' ', ready_passed)
 	var vertex_new_pos: Vector2 = Vector2(new_position)
 	triangle.polygon[vertex] = vertex_new_pos
+	triangle_visualizer.polygon[vertex] = vertex_new_pos
