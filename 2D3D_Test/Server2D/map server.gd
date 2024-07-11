@@ -85,6 +85,7 @@ func get_cell_type_dir(tile: Vector2i) -> Vector2i:
 #make a "get next point" function eventually
 var triangle_count: int = 0
 func generate_navigation_map() -> void:
+	var not_yet_triangulated_tiles: Array[Vector2i] = []
 	#var vertices: Dictionary
 	var starting_point: Vector2i = used_tiles()[0] * 100
 	starting_point.x += 50
@@ -97,15 +98,40 @@ func generate_navigation_map() -> void:
 	add_child(tri)
 	tri.reposition_vertex(0, starting_point)
 	
-	var second_point: Vector2i = starting_point + (100 * direction)
-	print(second_point)
+	var next_point: Vector2i = starting_point + (100 * direction)
+	print(next_point)
 	while true:
-		if !compare_tile_height(local_to_map(second_point), local_to_map(second_point + (100 * direction))):
+		if !compare_tile_height(local_to_map(next_point), local_to_map(next_point + (100 * direction))):
 			break
-		second_point += 100 * direction
-	print(second_point)
+		next_point += 100 * direction
+	tri.reposition_vertex(1, next_point)
 	
-	tri.reposition_vertex(1, second_point)
+	if get_cell_atlas_coords(0, local_to_map(next_point + (100 * direction))) != Vector2i(-1, -1):
+		not_yet_triangulated_tiles.append(local_to_map(next_point + (100 * direction)))
+	direction = change_dir(direction)
+	if !compare_tile_height(local_to_map(next_point), local_to_map(next_point + (100 * direction))):
+		direction *= -1
+		if get_cell_atlas_coords(0, local_to_map(next_point + (100 * direction))) != Vector2i(-1, -1):
+			not_yet_triangulated_tiles.append(local_to_map(next_point + (100 * direction)))
+	
+	while true:
+		if !compare_tile_height(local_to_map(next_point), local_to_map(next_point + (100 * direction))):
+			break
+		next_point += 100 * direction
+	tri.reposition_vertex(2, next_point)
+
+
+
+
+func change_dir(direction: Vector2i, clockwise: bool = true) -> Vector2i:
+	var output_dir: Vector2i = Vector2i(0, 0)
+	if clockwise:
+		output_dir.x = direction.y
+		output_dir.y = 0 - direction.x
+	else:
+		output_dir.x = 0 - direction.y
+		output_dir.y = direction.x
+	return output_dir
 
 
 

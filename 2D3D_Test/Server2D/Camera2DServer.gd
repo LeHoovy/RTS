@@ -10,14 +10,23 @@ class_name Camera2DServer
 
 var map_server: MapServer
 
+var clamp_min: Vector2
+var clamp_max: Vector2
 
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	map_server = get_parent().get_node("Map")
 	#var client: Node3D = get_node('/root').get_node('Client')
-	camera_client = get_node('/root').get_node('Client').get_node('CameraNode')
-	#print(camera_client)
+	camera_client = get_node('/root/Client/CameraNode')
+	
+	clamp_min = map_server.used_tiles()[0] * map_server.tile_set.tile_size
+	clamp_min.x += 50 + (Vector2((get_node('/root') as Window).size) / 2 * ($Camera2D as Camera2D).zoom).x
+	clamp_min.y += 50 + (Vector2(get_window().size) / 2 * ($Camera2D as Camera2D).zoom).y
+	clamp_max = map_server.used_tiles()[-1] * map_server.tile_set.tile_size
+	clamp_max.x += 50
+	clamp_max.y += 50
+
 
 
 #region General Functions
@@ -54,6 +63,9 @@ func process_move(delta : float) -> void:
 		cam_move_speed = move * edge_scroll_sens
 	
 	position += cam_move_speed * delta * 100
+	position = position.clamp(clamp_min, clamp_max)
+
+
 
 func calc_move(delta : float) -> void:
 	#mouse_pos = get_viewport().get_mouse_position()
@@ -70,7 +82,9 @@ func calc_move(delta : float) -> void:
 	
 	#print(cam_move_speed)
 	position += cam_move_speed * delta * 100
+	position = position.clamp(clamp_min, clamp_max)
 #endregion
+
 
 func _process(delta : float) -> void:
 	process_move(delta)
@@ -95,6 +109,7 @@ func _input(event : Variant) -> void:
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
 		position.x -= event.relative.x / 49.5 * 100
 		position.y -= event.relative.y / 50 * 100
+		position = position.clamp(clamp_min, clamp_max)
 #Repositions the camera as long as the middle mouse button (mouse 3) is pressed
 #Relative to the sensitivity and movement of the mouse.
 #Also adjusts based on the zoom amount.
