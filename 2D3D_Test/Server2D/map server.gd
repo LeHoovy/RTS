@@ -93,6 +93,11 @@ func generate_navigation_map() -> void:
 	#print(starting_point)
 	
 	var direction: Vector2i = Vector2i(1, 0)
+	var wall_direction: Vector2i
+	if !compare_tile_height(starting_point, starting_point + (100 * change_dir(direction))):
+		wall_direction = change_dir(direction)
+	else:
+		wall_direction = change_dir(direction, false)
 	
 	var tri: Tri = Tri.new()
 	add_child(tri)
@@ -100,9 +105,7 @@ func generate_navigation_map() -> void:
 	
 	var next_point: Vector2i = starting_point + (100 * direction)
 	print(next_point)
-	while true:
-		if !compare_tile_height(local_to_map(next_point), local_to_map(next_point + (100 * direction))):
-			break
+	while compare_tile_height(local_to_map(next_point), local_to_map(next_point + (100 * direction))):
 		next_point += 100 * direction
 	tri.reposition_vertex(1, next_point)
 	
@@ -114,12 +117,25 @@ func generate_navigation_map() -> void:
 		if get_cell_atlas_coords(0, local_to_map(next_point + (100 * direction))) != Vector2i(-1, -1):
 			not_yet_triangulated_tiles.append(local_to_map(next_point + (100 * direction)))
 	
-	while true:
-		if !compare_tile_height(local_to_map(next_point), local_to_map(next_point + (100 * direction))):
-			break
+	while compare_tile_height(local_to_map(next_point), local_to_map(next_point + (100 * direction))):
 		next_point += 100 * direction
 	tri.reposition_vertex(2, next_point)
 
+
+
+func check_next_tile_availability(
+	current_tile: Vector2i,
+	dir: Vector2i,
+	wall_dir: Vector2i
+	) -> bool:
+	
+	var output: bool = false
+	var next_tile: Vector2i = current_tile + (100 * dir)
+	
+	if compare_tile_height(local_to_map(current_tile), local_to_map(next_tile)):
+		pass
+	
+	return output
 
 
 
