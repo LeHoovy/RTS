@@ -18,7 +18,80 @@ func _ready() -> void:
 	
 	finished_loading.emit()
 	
-	generate_navigation_map()
+	#generate_navigation_map()
+#endregion
+
+#region old triangulation code
+#make a "get next point" function eventually
+#var triangle_count: int = 0
+#func generate_navigation_map() -> void:
+	#var untriangulated_tiles: Array[Vector2i] = []
+	#var starting_point: Vector2i = used_tiles()[0] * 100
+	#starting_point.x += 50
+	#starting_point.y += 50
+	#
+	#var direction: Vector2i = Vector2i(1, 0)
+	#var wall_clockwise: bool = false
+	#if !compare_tile_height(starting_point, starting_point + (100 * change_dir(direction))):
+		#wall_clockwise = true
+	#
+	#var tri: Tri = Tri.new()
+	#add_child(tri)
+	#tri.reposition_vertex(0, starting_point)
+	#
+	#var next_point: Vector2i = starting_point + (100 * direction)
+	#for point in range(1, 3):
+		#while next_tile_nav_gen(next_point, direction, change_dir(direction, wall_clockwise)):
+			#next_point += 100 * direction
+		#tri.reposition_vertex(point, next_point)
+		#if get_cell_atlas_coords(0, local_to_map(next_point + (100 * direction))) != Vector2i(-1, -1):
+			#untriangulated_tiles.append(local_to_map(next_point + (100 * direction)))
+		#direction = change_dir(direction)
+		#if !compare_tile_height(local_to_map(next_point), local_to_map(next_point + (100 * direction))):
+			#direction *= -1
+			#if get_cell_atlas_coords(0, local_to_map(next_point + (100 * direction))) != Vector2i(-1, -1):
+				#untriangulated_tiles.append(local_to_map(next_point + (100 * direction)))
+	#
+	#while next_tile_nav_gen(next_point, direction, change_dir(direction, wall_clockwise)):
+		#next_point += 100 * direction
+	#tri.reposition_vertex(2, next_point)
+
+
+
+#func next_tile_nav_gen(
+	#current_tile: Vector2i,
+	#dir: Vector2i,
+	#wall_dir: Vector2i
+	#) -> bool:
+	#
+	#var output: bool = false
+	#var next_tile: Vector2i = current_tile + (100 * dir)
+	#
+	#if compare_tile_height(local_to_map(current_tile), local_to_map(next_tile)):
+		#if compare_tile_height(local_to_map(next_tile), local_to_map(next_tile + (100 * wall_dir))):
+			#output = true
+	#return output
+
+
+
+#func change_dir(direction: Vector2i, clockwise: bool = true) -> Vector2i:
+	#var output_dir: Vector2i = Vector2i(0, 0)
+	#if clockwise:
+		#output_dir.x = direction.y
+		#output_dir.y = 0 - direction.x
+	#else:
+		#output_dir.x = 0 - direction.y
+		#output_dir.y = direction.x
+	#return output_dir
+#endregion
+
+#region misc functions
+func compare_tile_height(tile_a: Vector2i, tile_b: Vector2i) -> bool:
+	var height_a: int = get_cell_atlas_coords(0, tile_a).x
+	var height_b: int = get_cell_atlas_coords(0, tile_b).x
+	if height_a == height_b:
+		return true
+	return false
 
 
 
@@ -35,25 +108,6 @@ func used_tiles() -> Array[Vector2i]:
 				used_tiles_arr.append(Vector2i(x + tiles_start.x, y + tiles_start.y))
 	
 	return used_tiles_arr
-
-
-
-func used_area() -> Vector4i:
-	return Vector4i(get_used_rect().size.x, get_used_rect().size.y, get_used_rect().position.x, get_used_rect().position.y)
-
-
-
-func get_cell_height(tile: Vector2i) -> Vector3i:
-	var height: int = get_cell_atlas_coords(0, tile).x
-	var type: int = get_cell_atlas_coords(0, tile).y
-	
-	if type == 1:
-		#print(get_surrounding_cells(tile))
-		for neighbor in get_surrounding_cells(tile):
-			if get_cell_atlas_coords(0, neighbor).y == 1 and get_cell_atlas_coords(0, neighbor).x > height:
-				height += 1
-	
-	return Vector3i(tile.x, height, tile.y)
 
 
 
@@ -79,85 +133,26 @@ func get_cell_type_dir(tile: Vector2i) -> Vector2i:
 		up_down_ramp += 1
 	
 	return Vector2i(up_down_ramp, direction)
+
+
+
+func used_area() -> Vector4i:
+	return Vector4i(get_used_rect().size.x, get_used_rect().size.y, get_used_rect().position.x, get_used_rect().position.y)
+
+
+
+func get_cell_height(tile: Vector2i) -> Vector3i:
+	var height: int = get_cell_atlas_coords(0, tile).x
+	var type: int = get_cell_atlas_coords(0, tile).y
+	
+	if type == 1:
+		#print(get_surrounding_cells(tile))
+		for neighbor in get_surrounding_cells(tile):
+			if get_cell_atlas_coords(0, neighbor).y == 1 and get_cell_atlas_coords(0, neighbor).x > height:
+				height += 1
+	
+	return Vector3i(tile.x, height, tile.y)
 #endregion
-
-
-#make a "get next point" function eventually
-var triangle_count: int = 0
-func generate_navigation_map() -> void:
-	var untriangulated_tiles: Array[Vector2i] = []
-	#var vertices: Dictionary
-	var starting_point: Vector2i = used_tiles()[0] * 100
-	starting_point.x += 50
-	starting_point.y += 50
-	#print(starting_point)
-	
-	var direction: Vector2i = Vector2i(1, 0)
-	var wall_clockwise: bool = false
-	if !compare_tile_height(starting_point, starting_point + (100 * change_dir(direction))):
-		wall_clockwise = true
-	
-	var tri: Tri = Tri.new()
-	add_child(tri)
-	tri.reposition_vertex(0, starting_point)
-	
-	var next_point: Vector2i = starting_point + (100 * direction)
-	for point in range(1, 3):
-		while next_tile_nav_gen(next_point, direction, change_dir(direction, wall_clockwise)):
-			next_point += 100 * direction
-		tri.reposition_vertex(point, next_point)
-		#check if the next tile is a pathable tile or not
-		if get_cell_atlas_coords(0, local_to_map(next_point + (100 * direction))) != Vector2i(-1, -1):
-			untriangulated_tiles.append(local_to_map(next_point + (100 * direction)))
-		direction = change_dir(direction)
-		if !compare_tile_height(local_to_map(next_point), local_to_map(next_point + (100 * direction))):
-			direction *= -1
-			if get_cell_atlas_coords(0, local_to_map(next_point + (100 * direction))) != Vector2i(-1, -1):
-				untriangulated_tiles.append(local_to_map(next_point + (100 * direction)))
-	
-	#while next_tile_nav_gen(next_point, direction, change_dir(direction, wall_clockwise)):
-		#next_point += 100 * direction
-	#tri.reposition_vertex(2, next_point)
-
-
-
-func next_tile_nav_gen(
-	current_tile: Vector2i,
-	dir: Vector2i,
-	wall_dir: Vector2i
-	) -> bool:
-	
-	var output: bool = false
-	var next_tile: Vector2i = current_tile + (100 * dir)
-	
-	if compare_tile_height(local_to_map(current_tile), local_to_map(next_tile)):
-		if compare_tile_height(local_to_map(next_tile), local_to_map(next_tile + (100 * wall_dir))):
-			output = true
-	return output
-
-
-
-func change_dir(direction: Vector2i, clockwise: bool = true) -> Vector2i:
-	var output_dir: Vector2i = Vector2i(0, 0)
-	if clockwise:
-		output_dir.x = direction.y
-		output_dir.y = 0 - direction.x
-	else:
-		output_dir.x = 0 - direction.y
-		output_dir.y = direction.x
-	return output_dir
-
-
-
-func compare_tile_height(tile_a: Vector2i, tile_b: Vector2i) -> bool:
-	var height_a: int = get_cell_atlas_coords(0, tile_a).x
-	var height_b: int = get_cell_atlas_coords(0, tile_b).x
-	if height_a == height_b:
-		return true
-	return false
-#part of setup but unfinished so not in the region yet
-#func generate_triangles(affected_triangles: Array[Polygon2D]) -> void:
-	#pass
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
