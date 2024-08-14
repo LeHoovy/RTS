@@ -15,7 +15,7 @@ Any more requires extensions for all of us.
 
 You might have to download the github app so you can push the to the repository.
 
-(Discord server)[https://discord.gg/egXPKJv2ju]
+[Discord server](https://discord.gg/egXPKJv2ju)
 
 Game:
 
@@ -27,3 +27,5 @@ If a unit is spawned after creating a target, the unit will not move.
 
 Aight so I've decided flow field can work, but we gotta work on map creation so that we can implement any pathfinding
 Also Constrained Delaunay Triangulation may work for pathfinding instead of flowfield (just has to be baked when loading, I think its godot's default pathfinding system but idk)
+
+https://cdn.aaai.org/AAAI/2006/AAAI06-148.pdf is the link for pathfinding I want to do
