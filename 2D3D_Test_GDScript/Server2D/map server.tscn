@@ -1,0 +1,67 @@
+[gd_scene load_steps=8 format=3 uid="uid://bxackhqf0778f"]
+
+[ext_resource type="Texture2D" uid="uid://c8vim0gdlf7hr" path="res://2D3D_Test_GDScript/Art/map tiles.png" id="1_o5c4q"]
+[ext_resource type="Script" path="res://2D3D_Test_GDScript/Server2D/Scripts/map server.gd" id="1_snqjc"]
+[ext_resource type="Texture2D" uid="uid://qwn3vrsev0nr" path="res://2D3D_Test_GDScript/Art/map tiles contrast.png" id="2_q1sb7"]
+[ext_resource type="Script" path="res://2D3D_Test_GDScript/Server2D/Scripts/Camera2DServer.gd" id="4_mjvcv"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_joy2a"]
+texture = ExtResource("2_q1sb7")
+texture_region_size = Vector2i(100, 100)
+0:0/next_alternative_id = 3
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_n5gea"]
+texture = ExtResource("1_o5c4q")
+texture_region_size = Vector2i(100, 100)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/0 = 0
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+7:1/0 = 0
+6:1/0 = 0
+5:1/0 = 0
+4:1/0 = 0
+3:1/0 = 0
+2:1/0 = 0
+1:1/0 = 0
+0:1/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_v6ikx"]
+tile_size = Vector2i(100, 100)
+sources/1 = SubResource("TileSetAtlasSource_n5gea")
+sources/0 = SubResource("TileSetAtlasSource_joy2a")
+
+[node name="Server" type="Node2D"]
+
+[node name="Map" type="TileMapLayer" parent="."]
+texture_filter = 1
+tile_set = SubResource("TileSet_v6ikx")
+script = ExtResource("1_snqjc")
+
+[node name="Camera" type="Node2D" parent="."]
+position = Vector2(100, 0)
+script = ExtResource("4_mjvcv")
+
+[node name="Camera2D" type="Camera2D" parent="Camera"]
+visible = false
+zoom = Vector2(0.62, 0.62)

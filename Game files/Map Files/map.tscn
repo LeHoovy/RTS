@@ -2,7 +2,7 @@
 
 [ext_resource type="MeshLibrary" uid="uid://dyxo8623sgiyp" path="res://Game files/Terrain/Prototype/Artificial.tres" id="1_2h7kt"]
 [ext_resource type="Script" path="res://Game files/Gameplay files/Camera.gd" id="2_mvfqk"]
-[ext_resource type="Script" path="res://2D3D_Test/Client3D/Map client.gd" id="2_s36xw"]
+[ext_resource type="Script" path="res://2D3D_Test_GDScript/Client3D/Map client.gd" id="2_s36xw"]
 
 [node name="Node3D" type="Node3D"]
 

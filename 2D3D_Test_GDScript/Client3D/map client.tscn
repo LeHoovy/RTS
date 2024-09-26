@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://b651bxr22nbbl"]
 
 [ext_resource type="MeshLibrary" uid="uid://bsdxlipbmkmjy" path="res://Game files/Terrain/Prototype/ArtificialUpdate2.tres" id="1_uebiu"]
-[ext_resource type="Script" path="res://2D3D_Test/Client3D/Map client.gd" id="2_fiins"]
+[ext_resource type="Script" path="res://2D3D_Test_GDScript/Client3D/Map client.gd" id="2_fiins"]
 
 [node name="Client" type="Node3D"]
 
