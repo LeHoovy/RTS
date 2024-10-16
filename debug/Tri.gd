@@ -24,8 +24,8 @@ func _ready() -> void:
 #endregion
 
 
-func set_surface(surface : int, rgb_color : Color, opaque : int = 1) -> void:
-	main.transparency = opaque
+func set_surface(surface : int, rgb_color : Color, _opaque : int = 1) -> void:
+	#main.transparency = _opaque
 	main.albedo_color = rgb_color
 	set_surface_override_material(surface, main)
 
@@ -54,4 +54,5 @@ func gen_main() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	var _intyint: float = 0 * delta
 	pass

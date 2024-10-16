@@ -68,6 +68,7 @@ var mouse_pos : Vector2
 var screen_size : Vector2
 var cam_move_speed : Vector2
 func _process(delta : float) -> void:
+	var _flo: float = 0 * delta
 	pass
 	#process_move(delta)
 
@@ -80,25 +81,25 @@ var zoom : float = 1
 
 #Changes the sensitivity of the ability to drag around the camera.
 
-func _input(event : Variant) -> void:
+func _input(event : InputEvent) -> void:
 	if event is InputEventMouseMotion and Input.is_mouse_button_pressed(MOUSE_BUTTON_MIDDLE):
-		position.x -= event.relative.x / 49.5
-		position.z -= event.relative.y / 50
+		position.x -= (event as InputEventMouseMotion).relative.x / 49.5
+		position.z -= (event as InputEventMouseMotion).relative.y / 50
 #Repositions the camera as long as the middle mouse button (mouse 3) is pressed
 #Relative to the sensitivity and movement of the mouse.
 #Also adjusts based on the zoom amount.
 	
 	if event is InputEventMouseButton:
-		if event.button_index == MOUSE_BUTTON_WHEEL_UP:
+		if (event as InputEventMouseButton).button_index == MOUSE_BUTTON_WHEEL_UP:
 			zoom += zoomSpeed
-		elif event.button_index == MOUSE_BUTTON_WHEEL_DOWN:
+		elif (event as InputEventMouseButton).button_index == MOUSE_BUTTON_WHEEL_DOWN:
 			zoom -= zoomSpeed
 		#Changes zoom as long, and only if, the mouse wheel is being scrolled
 		zoom = clamp(zoom, zoomMin, zoomMax)
 
-	if event is InputEvent and (event as InputEvent).is_action_pressed("rotate camera left"):
+	if event is InputEvent and event.is_action_pressed("rotate camera left"):
 		rotate_y(1.57079633)
-	if event is InputEvent and (event as InputEvent).is_action_pressed("rotate camera right"):
+	if event is InputEvent and event.is_action_pressed("rotate camera right"):
 		rotate_y(-1.57079633)
 #const ray_length: int = 2000
 #func _physics_process(delta):

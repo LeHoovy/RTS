@@ -179,7 +179,7 @@ func calc_height(radius: float = 50) -> float:
 	var output: float = 0
 	var iteration: int = 0
 	for tile in tiles_arr:
-		var change: float = (map_server.get_cell_atlas_coords(0, map_server.local_to_map(tile)).x + 1) * coverage_arr[iteration]
+		var change: float = (map_server.get_cell_atlas_coords(map_server.local_to_map(tile)).x + 1) * coverage_arr[iteration]
 		output += change
 		iteration += 1
 	

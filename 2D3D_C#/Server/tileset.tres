@@ -1,9 +1,9 @@
 [gd_resource type="TileSet" load_steps=3 format=3 uid="uid://btqk7gtvaw07a"]
 
-[ext_resource type="Texture2D" uid="uid://ctyvjjqcee86l" path="res://2D3D_C#/Tiles.png" id="1_885n4"]
+[ext_resource type="Texture2D" uid="uid://ctyvjjqcee86l" path="res://2D3D_C#/Server/Tiles.png" id="1_5w4wf"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_twwx0"]
-texture = ExtResource("1_885n4")
+texture = ExtResource("1_5w4wf")
 texture_region_size = Vector2i(64, 64)
 0:0/0 = 0
 1:0/0 = 0

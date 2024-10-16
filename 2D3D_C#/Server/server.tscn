@@ -1,33 +1,44 @@
-[gd_scene load_steps=2 format=4 uid="uid://bw1kx58c2d04r"]
+[gd_scene load_steps=4 format=4 uid="uid://bw1kx58c2d04r"]
 
-[ext_resource type="TileSet" uid="uid://btqk7gtvaw07a" path="res://2D3D_C#/tileset.tres" id="1_5oeg0"]
+[ext_resource type="Script" path="res://2D3D_C#/Server/MapHandler.cs" id="1_2a8wm"]
+[ext_resource type="TileSet" uid="uid://btqk7gtvaw07a" path="res://2D3D_C#/Server/tileset.tres" id="1_5oeg0"]
+[ext_resource type="Script" path="res://2D3D_C#/Server/MapLayer.cs" id="3_s5iqm"]
 
 [node name="Server" type="Node2D"]
 
-[node name="Map" type="Node2D" parent="."]
+[node name="MapHandler" type="Node2D" parent="."]
+script = ExtResource("1_2a8wm")
 
-[node name="LayerEight" type="TileMapLayer" parent="Map"]
+[node name="LayerEight" type="TileMapLayer" parent="MapHandler"]
 tile_set = ExtResource("1_5oeg0")
+script = ExtResource("3_s5iqm")
 
-[node name="LayerSeven" type="TileMapLayer" parent="Map"]
+[node name="LayerSeven" type="TileMapLayer" parent="MapHandler"]
 tile_set = ExtResource("1_5oeg0")
+script = ExtResource("3_s5iqm")
 
-[node name="LayerSix" type="TileMapLayer" parent="Map"]
+[node name="LayerSix" type="TileMapLayer" parent="MapHandler"]
 tile_set = ExtResource("1_5oeg0")
+script = ExtResource("3_s5iqm")
 
-[node name="LayerFive" type="TileMapLayer" parent="Map"]
+[node name="LayerFive" type="TileMapLayer" parent="MapHandler"]
 tile_set = ExtResource("1_5oeg0")
+script = ExtResource("3_s5iqm")
 
-[node name="LayerFour" type="TileMapLayer" parent="Map"]
+[node name="LayerFour" type="TileMapLayer" parent="MapHandler"]
 tile_set = ExtResource("1_5oeg0")
+script = ExtResource("3_s5iqm")
 
-[node name="LayerThree" type="TileMapLayer" parent="Map"]
+[node name="LayerThree" type="TileMapLayer" parent="MapHandler"]
 tile_set = ExtResource("1_5oeg0")
+script = ExtResource("3_s5iqm")
 
-[node name="LayerTwo" type="TileMapLayer" parent="Map"]
+[node name="LayerTwo" type="TileMapLayer" parent="MapHandler"]
 tile_map_data = PackedByteArray("AAALAAIAAAABAAAAAAALAAEAAAAAAAAAAAAMAAEAAAAAAAAAAAAMAAIAAAAAAAAAAAANAAIAAAAAAAAAAAAOAAIAAAAAAAAAAAANAAEAAAAAAAAAAAANAAAAAAAAAAAAAAAOAAAAAAAAAAAAAAAOAAEAAAAAAAAAAAAOAP//AAAAAAAAAAAOAP7/AAAAAAAAAAANAP7/AAAAAAAAAAAMAP7/AAAAAAAAAAAMAP//AAAAAAAAAAALAP//AAAAAAAAAAAMAAAAAAAAAAAAAAANAP//AAAAAAAAAAALAAAAAAAAAAAAAAALAP7/AAAAAAAAAAAKAAEAAAACAAAAAAAKAAAAAAACAAAAAAAJAAAAAAACAAAAAAAJAAEAAAACAAAAAAAIAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAA=")
 tile_set = ExtResource("1_5oeg0")
+script = ExtResource("3_s5iqm")
 
-[node name="LayerOne" type="TileMapLayer" parent="Map"]
+[node name="LayerOne" type="TileMapLayer" parent="MapHandler"]
 tile_map_data = PackedByteArray("AAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAABAAEAAAAAAAAAAAABAAIAAAAAAAAAAAACAAIAAAAAAAAAAAADAAIAAAAAAAAAAAAEAAEAAAAAAAAAAAAEAAAAAAAAAAAAAAADAAAAAAAAAAAAAAACAAAAAAAAAAAAAAACAAEAAAAAAAAAAAABAAMAAAAAAAAAAAACAAMAAAAAAAAAAAACAAQAAAAAAAAAAAADAAQAAAAAAAAAAAADAAMAAAAAAAAAAAAEAAMAAAAAAAAAAAAEAAIAAAAAAAAAAAABAAAAAAAAAAAAAAABAAQAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAMAAAAAAAAAAAAAAAQAAAAAAAAAAAAEAAQAAAAAAAAAAAAFAAMAAAAAAAAAAAAFAAQAAAAAAAAAAAAFAAIAAAAAAAAAAAAFAAEAAAAAAAAAAAAFAAAAAAAAAAAAAAADAAEAAAAAAAAAAAAGAAAAAAAAAAAAAAAGAAEAAAAAAAAAAAAGAAIAAAAAAAAAAAAGAAMAAAAAAAAAAAAHAAMAAAAAAAAAAAAIAAMAAAAAAAAAAAAJAAMAAAAAAAAAAAAJAAIAAAAAAAAAAAAIAAEAAAAAAAAAAAAHAAEAAAAAAAAAAAAHAAIAAAAAAAAAAAAGAAQAAAAAAAAAAAAHAAQAAAAAAAAAAAAIAAQAAAAAAAAAAAAJAAQAAAAAAAAAAAAKAAQAAAAAAAAAAAAKAAIAAAAAAAAAAAAKAAMAAAAAAAAAAAAJAAEAAAAAAAAAAAAIAAIAAAAAAAAAAAAKAAEAAAAAAAAAAAAKAAAAAAAAAAAAAAAJAAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAHAAAAAAAAAAAAAAAJAP//AAAAAAAAAAAKAP//AAAAAAAAAAAKAP7/AAAAAAAAAAAJAP7/AAAAAAAAAAAIAP7/AAAAAAAAAAAHAP7/AAAAAAAAAAAGAP7/AAAAAAAAAAAFAP7/AAAAAAAAAAAEAP7/AAAAAAAAAAAEAP//AAAAAAAAAAADAP//AAAAAAAAAAAFAP//AAAAAAAAAAAGAP//AAAAAAAAAAAHAP//AAAAAAAAAAAIAP//AAAAAAAAAAACAP//AAAAAAAAAAADAP7/AAAAAAAAAAACAP7/AAAAAAAAAAABAP7/AAAAAAAAAAAAAP//AAAAAAAAAAABAP//AAAAAAAAAAAAAP7/AAAAAAAAAAALAAMAAAABAAAAAAA=")
 tile_set = ExtResource("1_5oeg0")
+script = ExtResource("3_s5iqm")
