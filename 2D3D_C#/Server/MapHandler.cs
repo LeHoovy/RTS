@@ -32,11 +32,13 @@ public partial class MapHandler : Node2D
 				}
 				childrenReadyCount += 1;
 			}
+			GD.Print(childrenReadyCount);
 			if (childrenReadyCount >= mapLayers.Count)
 			{
 				break;
 			}
 			GD.Print("Not all children ready");
+			
 		}
 		GD.Print("All children ready");
 	}
