@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 
 [GlobalClass]
 public partial class MapHandler : Node2D
@@ -41,6 +42,24 @@ public partial class MapHandler : Node2D
 			
 		}
 		GD.Print("All children ready");
+
+		LoadMap();
+
+		Vector2I[] tempVar = new Vector2I[0];
+		foreach (MapLayer layer in mapLayers)
+		{
+			foreach (Vector2I cell in layer.GetUsedCells())
+			{
+				tempVar = tempVar.Append(cell).ToArray();
+			}
+			GD.Print(tempVar);
+			GD.Print(layer.GetUsedRect().Size);
+		}
+	}
+
+	public void LoadMap()
+	{
+		return;
 	}
 
 	// Called every frame. 'delta' is the elapsed time since the previous frame.
