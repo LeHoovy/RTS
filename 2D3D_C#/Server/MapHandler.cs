@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 [GlobalClass]
@@ -44,17 +45,43 @@ public partial class MapHandler : Node2D
 		GD.Print("All children ready");
 
 		LoadMap();
+		eraseMissingCells();
+	}
 
-		Vector2I[] tempVar = new Vector2I[0];
+	public void eraseMissingCells()
+	{
+		Godot.Collections.Array<Vector2I> cellsUsed = new Godot.Collections.Array<Vector2I>();
 		foreach (MapLayer layer in mapLayers)
 		{
-			foreach (Vector2I cell in layer.GetUsedCells())
+			GD.Print("Checking Layer: ", layer.Name);
+			foreach (Godot.Vector2I cell in layer.GetUsedCells())
 			{
-				tempVar = tempVar.Append(cell).ToArray();
+				if (cellsUsed.Contains(cell) || isBehindPosition(cell))
+				{
+					GD.Print("Cell ", cell, " already exists: ", cellsUsed.Contains(cell), ". Cell is behind (0, 0): ", isBehindPosition(cell));
+					layer.EraseCell(cell);
+					continue;
+				}
+				if (layer.GetCellAtlasCoords(cell) == new Vector2I(2, 0))
+				{
+					GD.Print("Cell ", cell, " was a bridge");
+					continue;
+				}
+				cellsUsed.Add(cell);
 			}
-			GD.Print(tempVar);
-			GD.Print(layer.GetUsedRect().Size);
+			GD.Print(cellsUsed);
+			GD.Print();
+
 		}
+	}
+
+	public bool isBehindPosition(Vector2I currentPosition, Vector2I targetPosition = default)
+	{
+		if (currentPosition.X < targetPosition.X || currentPosition.Y < targetPosition.Y)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	public void LoadMap()
