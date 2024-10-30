@@ -45,10 +45,10 @@ public partial class MapHandler : Node2D
 		GD.Print("All children ready");
 
 		LoadMap();
-		eraseMissingCells();
+		EraseMissingCells();
 	}
 
-	public void eraseMissingCells()
+	public void EraseMissingCells()
 	{
 		Godot.Collections.Array<Vector2I> cellsUsed = new Godot.Collections.Array<Vector2I>();
 		foreach (MapLayer layer in mapLayers)
