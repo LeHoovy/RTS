@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 
 [GlobalClass]
@@ -46,6 +47,30 @@ public partial class MapHandler : Node2D
 
 		LoadMap();
 		EraseMissingCells();
+
+		for (int layerLevel = 1; layerLevel <= mapLayers.Count; layerLevel++)
+		{
+			MapLayer layer = GetNode<MapLayer>("Layer" + layerLevel.ToString());
+			if (mapSize.X < layer.GetUsedRect().Size.X + layer.GetUsedRect().Position.X)
+			{
+				mapSize.X = layer.GetUsedRect().Size.X + layer.GetUsedRect().Position.X;
+			}
+			if (mapSize.Y < layer.GetUsedRect().Size.Y + layer.GetUsedRect().Position.Y)
+			{
+				mapSize.Y = layer.GetUsedRect().Size.Y + layer.GetUsedRect().Position.Y;
+			}
+			GD.Print(mapSize);
+
+			/* TODO */
+			/*
+			make a region out of tiles, send the region to layers above and below
+			for bottom layer, check for entirely missing tiles and make a region there too, send that to bottom layer
+			send each region to the highest layer
+			for each layer's new regions, combine all of them where possible to prevent overlap
+			
+			yeah this'll be easy I definitely know how to make regions in the first place
+			*/
+		}
 	}
 
 	public void EraseMissingCells()
