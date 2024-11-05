@@ -1,4 +1,5 @@
 using Godot;
+using Godot.NativeInterop;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -60,6 +61,7 @@ public partial class MapHandler : Node2D
 				mapSize.Y = layer.GetUsedRect().Size.Y + layer.GetUsedRect().Position.Y;
 			}
 			GD.Print(mapSize);
+			
 
 			/* TODO */
 			/*
@@ -71,6 +73,23 @@ public partial class MapHandler : Node2D
 			yeah this'll be easy I definitely know how to make regions in the first place
 			*/
 		}
+
+		Godot.Collections.Array<Vector2I> uncheckedTiles = new Godot.Collections.Array<Vector2I>();
+		Godot.Collections.Array<Vector2I> toCheckTiles = new Godot.Collections.Array<Vector2I>();
+		Godot.Collections.Array<Vector2I> checkedTiles= new Godot.Collections.Array<Vector2I>();
+
+		for (int x = 0; x < mapSize.X; x++)
+		{
+			for (int y = 0; y < mapSize.X; y++)
+			{
+				
+			}
+		}
+
+
+		GD.Print();
+		GD.Print("LOADING DONE");
+		GD.Print();
 	}
 
 	public void EraseMissingCells()

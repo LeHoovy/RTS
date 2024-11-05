@@ -1,5 +1,5 @@
 extends Polygon2D
-class_name Region
+class_name RegionGDScript
 
 var lines: Dictionary = {}
 var tiles: Array[Vector2i]
