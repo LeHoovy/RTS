@@ -74,17 +74,14 @@ public partial class MapHandler : Node2D
 			*/
 		}
 
-		Godot.Collections.Array<Vector2I> uncheckedTiles = new Godot.Collections.Array<Vector2I>();
-		Godot.Collections.Array<Vector2I> toCheckTiles = new Godot.Collections.Array<Vector2I>();
-		Godot.Collections.Array<Vector2I> checkedTiles= new Godot.Collections.Array<Vector2I>();
-
-		for (int x = 0; x < mapSize.X; x++)
+		// REMINDER //
+		// MapLayer.GetSurroundingCells(Vector2I Cell) gets the four neighboring cells on the sides
+		// NOT the corners
+		foreach (MapLayer currentLayer in mapLayers)
 		{
-			for (int y = 0; y < mapSize.X; y++)
-			{
-				
-			}
+			GenerateLayerRegions(currentLayer);
 		}
+		
 
 
 		GD.Print();
@@ -92,6 +89,7 @@ public partial class MapHandler : Node2D
 		GD.Print();
 	}
 
+#region Cell Management
 	public void EraseMissingCells()
 	{
 		Godot.Collections.Array<Vector2I> cellsUsed = new Godot.Collections.Array<Vector2I>();
@@ -118,7 +116,13 @@ public partial class MapHandler : Node2D
 
 		}
 	}
+	#endregion
 
+//empty region space
+
+//so it's readable in vscode on the right
+
+#region Cell Related Checking
 	public bool isBehindPosition(Vector2I currentPosition, Vector2I targetPosition = default)
 	{
 		if (currentPosition.X < targetPosition.X || currentPosition.Y < targetPosition.Y)
@@ -127,14 +131,59 @@ public partial class MapHandler : Node2D
 		}
 		return false;
 	}
+#endregion
 
+//empty region space
+
+//so it's readable in vscode on the right
+
+#region Loading Only
 	public void LoadMap()
 	{
 		return;
 	}
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
+	public void GenerateLayerRegions(MapLayer layer)
 	{
+		// Set up the tiles to check
+		Godot.Collections.Array<Vector2I> uncheckedTiles = new Godot.Collections.Array<Vector2I>(VectorRange(mapSize));
+		Godot.Collections.Array<Vector2I> tilesToCheck = new Godot.Collections.Array<Vector2I>();
+		//Godot.Collections.Array<Vector2I> checkedTiles= new Godot.Collections.Array<Vector2I>();
+
+		tilesToCheck.Add(uncheckedTiles[0]);
+
+		while (uncheckedTiles.Count > 0 || tilesToCheck.Count > 0)
+		{
+			
+		}
 	}
+#endregion
+
+//empty region space
+
+//so it's readable in vscode on the right
+
+#region Generate Navmesh
+
+#endregion
+
+//empty region space
+
+//so it's readable in vscode on the right
+
+#region Global-ish stuff
+	// Returns an array of Vector2Is, going left to right, then down a row
+	public Godot.Collections.Array<Vector2I> VectorRange(Vector2I size)
+	{
+		Godot.Collections.Array<Vector2I> outputArr = new Godot.Collections.Array<Vector2I>();	
+		for (int x = 0; x < size.X; x++)
+		{
+			for (int y = 0; y < size.X; y++)
+			{
+				outputArr.Add(new Vector2I(x, y));
+			}
+		}
+		return outputArr;
+	}
+#endregion
 }
