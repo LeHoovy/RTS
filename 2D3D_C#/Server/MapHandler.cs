@@ -113,7 +113,7 @@ public partial class MapHandler : Node2D
 			}
 			GD.Print(cellsUsed);
 			GD.Print();
-
+			GD.Print("Test");
 		}
 	}
 	#endregion
@@ -154,7 +154,7 @@ public partial class MapHandler : Node2D
 
 		while (uncheckedTiles.Count > 0 || tilesToCheck.Count > 0)
 		{
-			
+			break;
 		}
 	}
 #endregion
