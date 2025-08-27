@@ -1,7 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://6ti3ox3ku0i6"]
-
-[sub_resource type="Resource" id="Resource_oydjo"]
-metadata/__load_path__ = "res://2D3D_Test_GDScript/Client3D/Test.gd"
-
-[node name="Test Node" type="Node"]
-script = SubResource("Resource_oydjo")

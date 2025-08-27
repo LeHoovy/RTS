@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsgkoehq0fgk"]
-
-[ext_resource type="Script" uid="uid://dvau8bvwaxmue" path="res://debug/Tri.gd" id="3_l1xa5"]
-
-[node name="MeshInstance3D" type="MeshInstance3D"]
-script = ExtResource("3_l1xa5")
