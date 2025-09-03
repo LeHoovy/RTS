@@ -1,80 +1,11 @@
-; Engine configuration file.
-; It's best edited using the editor UI and not directly,
-; since the parameters that go here are not all obvious.
-;
-; Format:
-;   [section] ; section goes between []
-;   param=value ; assign values to parameters
-
 config_version=5
 
 [application]
 
 config/name="RTS"
-config/tags=PackedStringArray("private", "prototype", "real_time_strategy")
-run/main_scene="uid://nlv4q8t7h5vs"
-config/features=PackedStringArray("4.4", "C#", "Forward Plus")
-config/icon="res://2D3D_Test_GDScript/Art/icon.svg"
-
-[debug]
-
-gdscript/warnings/untyped_declaration=2
-gdscript/warnings/unsafe_property_access=2
-gdscript/warnings/unsafe_method_access=2
-gdscript/warnings/unsafe_cast=2
-gdscript/warnings/unsafe_call_argument=2
-gdscript/warnings/unsafe_void_return=2
-
-[display]
-
-window/size/viewport_width=1920
-window/size/viewport_height=1080
-window/size/mode=4
-window/size/resizable=false
-window/size/borderless=true
+config/features=PackedStringArray("4.4", "Forward Plus")
+config/icon="res://icon.svg"
 
 [dotnet]
 
-project/assembly_name="Pathfinding test"
-
-[editor_plugins]
-
-enabled=PackedStringArray()
-
-[file_customization]
-
-folder_colors={
-"res://_2D3D_Triangulation/": "red",
-"res://old but useful stuff/Old Scripts/": "gray"
-}
-
-[input]
-
-"rotate camera left"={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194311,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
-]
-}
-"rotate camera right"={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194312,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
-]
-}
-debug_change_cam={
-"deadzone": 0.5,
-"events": [Object(InputEventKey,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"pressed":false,"keycode":0,"physical_keycode":4194342,"key_label":0,"unicode":0,"location":0,"echo":false,"script":null)
-]
-}
-moveCamera={
-"deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":4,"position":Vector2(494, 4),"global_position":Vector2(503, 50),"factor":1.0,"button_index":3,"canceled":false,"pressed":true,"double_click":false,"script":null)
-]
-}
-
-[internationalization]
-
-locale/translations_pot_files=PackedStringArray("res://test.dialogue")
-
-[physics]
-
-common/physics_ticks_per_second=48
+project/assembly_name="2D-RTS"
