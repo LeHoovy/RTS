@@ -12,9 +12,8 @@ config_version=5
 
 config/name="RTS"
 config/tags=PackedStringArray("private", "prototype", "real_time_strategy")
-run/main_scene="uid://nlv4q8t7h5vs"
+run/main_scene="uid://bke475j3jqbrm"
 config/features=PackedStringArray("4.5", "Forward Plus")
-config/icon="res://2D3D_Test_GDScript/Art/icon.svg"
 
 [debug]
 
@@ -29,9 +28,10 @@ gdscript/warnings/unsafe_void_return=2
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=4
+window/size/mode=3
 window/size/resizable=false
 window/size/borderless=true
+window/per_pixel_transparency/allowed=true
 
 [dotnet]
 

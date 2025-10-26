@@ -1,3 +1,55 @@
-[gd_scene format=3 uid="uid://bke475j3jqbrm"]
+[gd_scene load_steps=7 format=3 uid="uid://bke475j3jqbrm"]
+
+[ext_resource type="Script" uid="uid://b4e41ujql4v2e" path="res://Game/Editor/Classes/map_editor.gd" id="1_60gar"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_60gar"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u4uyf"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_pqa7c"]
+
+[sub_resource type="Sky" id="Sky_60gar"]
+sky_material = SubResource("ProceduralSkyMaterial_pqa7c")
+
+[sub_resource type="Environment" id="Environment_u4uyf"]
+background_mode = 2
+sky = SubResource("Sky_60gar")
+ambient_light_source = 3
+ambient_light_color = Color(1, 1, 1, 1)
+reflected_light_source = 2
 
 [node name="Node3D" type="Node3D"]
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.8551291, 0.5184151, 0, -0.5184151, 0.8551291, 0, 2.7765496, 4.1805277)
+
+[node name="CSGMesh3D" type="CSGMesh3D" parent="."]
+mesh = SubResource("BoxMesh_60gar")
+material = SubResource("StandardMaterial3D_u4uyf")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_u4uyf")
+
+[node name="MapEditor" type="Node3D" parent="."]
+script = ExtResource("1_60gar")
+metadata/_custom_type_script = "uid://b4e41ujql4v2e"
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchor_right = 0.1038125
+anchor_bottom = 0.088851854
+offset_right = -0.3200035
+offset_bottom = 0.040000916
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_font_sizes/font_size = 24
+text = "New Map"
+
+[connection signal="pressed" from="Control/Button" to="MapEditor" method="_debug_gen_new_map_window"]
