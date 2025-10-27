@@ -26,6 +26,11 @@ var _map: Map
 
 func _debug_gen_new_map_window() -> void:
 	var new_map_window := Window.new()
+	#var position_finder := Window.new()
+	#position_finder.initial_position = WINDOW_INITIAL_POSITION_CENTER_OTHER_SCREEN
+	#add_child(position_finder)
+	# Replace Rect2i(Vector2(100, 100),) with Rect2i(position_finder.position)
+	#position_finder.queue_free()
 	EditorInterface.popup_dialog(new_map_window, Rect2i(Vector2(100, 100), Vector2(500, 720)))
 	
 	new_map_window.close_requested.connect(func() -> void:
