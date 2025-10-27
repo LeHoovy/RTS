@@ -12,7 +12,7 @@ config_version=5
 
 config/name="RTS"
 config/tags=PackedStringArray("private", "prototype", "real_time_strategy")
-run/main_scene="uid://bke475j3jqbrm"
+run/main_scene="uid://blif5g8ckxnwo"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
 [debug]

@@ -1,5 +1,5 @@
 extends GridMap
-class_name Map
+class_name MapOld
 
 
 

@@ -1,4 +1,4 @@
-#@tool
+@tool
 class_name MapEditor
 extends Node3D
 # TODO:
@@ -10,7 +10,7 @@ extends Node3D
 # Chunks should probably have their own classes
 # If chunks are their own classes, instances, or even scenes, might not need this to extend Node3D
 
-#@export_tool_button("Generate debug map", "Callable") var gen_map : Callable = debug_gen_map
+@export_tool_button("Generate debug map", "Callable") var gen_map : Callable = _debug_gen_new_map_window
 
 const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
 
@@ -23,20 +23,13 @@ const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
 var _map_corners: Dictionary[Vector3, Array]
 var chunks: Array[Node3D]
 var _map: Map
-var _new_map_window: Window
 
 func _debug_gen_new_map_window() -> void:
-	if _new_map_window != null:
-		print("Window exists!")
-		_new_map_window.queue_free()
-		await get_tree().process_frame
-	else:
-		print("Window does not exist!")
+	var new_map_window := Window.new()
+	EditorInterface.popup_dialog(new_map_window, Rect2i(Vector2(100, 100), Vector2(500, 720)))
 	
-	_new_map_window = CREATE_MAP_DIALOGUE.instantiate()
-	add_child(_new_map_window)
-	_new_map_window.owner = get_tree().edited_scene_root
-	await get_tree().process_frame
+	new_map_window.close_requested.connect(func() -> void:
+		new_map_window.queue_free()
+	)
 	
-	print(_new_map_window)
-	print("test")
+	new_map_window.add_child(CREATE_MAP_DIALOGUE.instantiate())

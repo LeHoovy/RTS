@@ -1,4 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://blif5g8ckxnwo"]
+[gd_scene load_steps=4 format=3 uid="uid://blif5g8ckxnwo"]
+
+[ext_resource type="Script" uid="uid://b4e41ujql4v2e" path="res://Game/Editor/Classes/map_editor.gd" id="1_dprn3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_a5mxl"]
 
@@ -16,3 +18,7 @@ transform = Transform3D(0.8420572, 0.264558, -0.4700518, 0, 0.8714536, 0.4904779
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(0.79373574, -0.33243132, 0.509385, 0.36564606, 0.93001115, 0.03717914, -0.48609325, 0.15674421, 0.8597352, 2.3681464, 0.99894667, 3.9580123)
 fov = 22.500002
+
+[node name="MapEditor" type="Node3D" parent="."]
+script = ExtResource("1_dprn3")
+metadata/_custom_type_script = "uid://b4e41ujql4v2e"
