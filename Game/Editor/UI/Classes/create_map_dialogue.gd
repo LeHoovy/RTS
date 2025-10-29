@@ -4,11 +4,10 @@ extends Panel
 
 
 var _parent_window: Window
-
 var _new_map_x_input: OptionButton
 var _new_map_y_input: OptionButton
-var _cancel_button: Button
 var _create_button: Button
+var _cancel_button: Button
 
 
 func _ready() -> void:
