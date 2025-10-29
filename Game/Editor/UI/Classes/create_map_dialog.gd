@@ -1,5 +1,5 @@
 @tool
-class_name NewMapDialogue
+class_name NewMapDialog
 extends Panel
 
 
