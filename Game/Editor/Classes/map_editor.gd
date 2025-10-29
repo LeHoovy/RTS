@@ -25,8 +25,18 @@ var chunks: Array[Node3D]
 var _map: Map
 
 func _debug_gen_new_map_window() -> void:
+	# position_finder is generated at the same size as the new editor window at the center
+	# its position is then taken for the new editor window and used
+	var position_finder := Window.new()
+	position_finder.initial_position = Window.WINDOW_INITIAL_POSITION_CENTER_OTHER_SCREEN
+	position_finder.size = Vector2(500, 720)
+	add_child(position_finder)
+	
+	# Generate the new map window prompt and create it in the editor
+	# Free the position finder's memory afterwards
 	var new_map_window := Window.new()
-	EditorInterface.popup_dialog(new_map_window, Rect2i(Vector2(100, 100), Vector2(500, 720)))
+	EditorInterface.popup_dialog(new_map_window, Rect2i(position_finder.position, Vector2(500, 720)))
+	position_finder.queue_free()
 	
 	new_map_window.close_requested.connect(func() -> void:
 		new_map_window.queue_free()
