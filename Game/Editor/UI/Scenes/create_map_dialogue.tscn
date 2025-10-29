@@ -248,5 +248,3 @@ size_flags_horizontal = 3
 [node name="Bottom Spacing" type="Control" parent="VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 10
-
-[connection signal="pressed" from="VBoxContainer/Confirmation/Cancel" to="." method="_on_cancel_pressed"]
