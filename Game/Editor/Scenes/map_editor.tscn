@@ -1,6 +1,39 @@
-[gd_scene load_steps=2 format=3 uid="uid://blif5g8ckxnwo"]
+[gd_scene load_steps=11 format=3 uid="uid://blif5g8ckxnwo"]
 
 [ext_resource type="Script" uid="uid://b4e41ujql4v2e" path="res://Game/Editor/Classes/map_editor.gd" id="1_dprn3"]
+[ext_resource type="Shader" uid="uid://bxawnauoxlh1b" path="res://triplanar temp material/basic_triplanar.gdshader" id="2_kso8g"]
+[ext_resource type="Texture2D" uid="uid://dlpdurg6uv4dv" path="res://triplanar temp material/grid_1024x1024/grid_blue_1024x1024.png" id="3_2yuak"]
+[ext_resource type="Texture2D" uid="uid://de702ti4t1kl3" path="res://triplanar temp material/grid_1024x1024/grid_black_1024x1024.png" id="4_uxtu0"]
+[ext_resource type="Texture2D" uid="uid://cg4athvxivqg" path="res://triplanar temp material/grid_1024x1024/grid_lime_1024x1024.png" id="5_k83o3"]
+[ext_resource type="Texture2D" uid="uid://kr8yy6dhtdmk" path="res://triplanar temp material/grid_1024x1024/grid_orange_1024x1024.png" id="6_hmqts"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_k6nru"]
+_surfaces = [{
+"aabb": AABB(-64, 0, -64, 128, 1e-05, 128),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 1, 0, 2, 0, 0, 0, 2, 0, 3, 0),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray(0, 0, 128, 194, 0, 0, 0, 0, 0, 0, 128, 194, 0, 0, 128, 66, 0, 0, 0, 0, 0, 0, 128, 194, 0, 0, 128, 66, 0, 0, 0, 0, 0, 0, 128, 66, 0, 0, 128, 194, 0, 0, 0, 0, 0, 0, 128, 66)
+}]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iubhv"]
+render_priority = 0
+shader = ExtResource("2_kso8g")
+shader_parameter/texture_x = ExtResource("3_2yuak")
+shader_parameter/texture_y = ExtResource("4_uxtu0")
+shader_parameter/texture_z = ExtResource("5_k83o3")
+
+[sub_resource type="BoxMesh" id="BoxMesh_skw66"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_5y3c5"]
+render_priority = 0
+shader = ExtResource("2_kso8g")
+shader_parameter/texture_x = ExtResource("4_uxtu0")
+shader_parameter/texture_y = ExtResource("5_k83o3")
+shader_parameter/texture_z = ExtResource("6_hmqts")
 
 [node name="map_editor" type="Node3D"]
 
@@ -10,3 +43,12 @@ transform = Transform3D(0.8420572, 0.264558, -0.4700518, 0, 0.8714536, 0.4904779
 [node name="MapEditor" type="Node3D" parent="."]
 script = ExtResource("1_dprn3")
 metadata/_custom_type_script = "uid://b4e41ujql4v2e"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="MapEditor"]
+mesh = SubResource("ArrayMesh_k6nru")
+surface_material_override/0 = SubResource("ShaderMaterial_iubhv")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.85815513, 0.81742376, -1.0855532)
+mesh = SubResource("BoxMesh_skw66")
+surface_material_override/0 = SubResource("ShaderMaterial_5y3c5")
