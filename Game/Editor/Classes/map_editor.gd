@@ -48,38 +48,41 @@ func _new_map() -> void:
 	new_map_window.add_child(CREATE_MAP_DIALOGUE.instantiate())
 
 
-func generate_new_map(map_size: Vector2) -> void:
-	var corners: Array[Vector2] = [
-			Vector2(-map_size.x / 2, -map_size.y / 2),
-			Vector2(map_size.x / 2, -map_size.y / 2),
-			Vector2(map_size.x / 2, map_size.y / 2),
-			Vector2(-map_size.x / 2, map_size.y / 2),
-	]
-	
-	# VERY TEMPORARY CHANGE LATER
-	var temp_corners: Array[Vector3] = [
-			Vector3(corners[0].x, 0, corners[0].y),
-			Vector3(corners[1].x, 0, corners[1].y),
-			Vector3(corners[2].x, 0, corners[2].y),
-			Vector3(corners[3].x, 0, corners[3].y),
-	]
-	var temp_mesh_corners := PackedVector3Array(temp_corners)
-	var temp_mesh_indices := PackedInt32Array(
-		[
-			0, 1, 2,
-			0, 2, 3,
-		]
-	)
-	
-	# TEMPORARY CHANGE THIS LATER
-	var temp_nochunk_map_mesh := ArrayMesh.new()
-	var temp_map_mesh_instance := get_node("MeshInstance3D") as MeshInstance3D
-	temp_map_mesh_instance.mesh = temp_nochunk_map_mesh
-	
-	var temp_surface_array: Array[Variant] = []
-	temp_surface_array.resize(Mesh.ARRAY_MAX)
-	
-	temp_surface_array[Mesh.ARRAY_VERTEX] = temp_mesh_corners
-	temp_surface_array[Mesh.ARRAY_INDEX] = temp_mesh_indices
-	
-	temp_nochunk_map_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, temp_surface_array)
+func make_new_map(map_size: Vector2) -> void:
+	var map_gen := MapGenerator.new()
+	map_gen.editor = self
+	map_gen.generate_new_map(map_size, 4)
+	#var corners: Array[Vector2] = [
+			#Vector2(-map_size.x / 2, -map_size.y / 2),
+			#Vector2(map_size.x / 2, -map_size.y / 2),
+			#Vector2(map_size.x / 2, map_size.y / 2),
+			#Vector2(-map_size.x / 2, map_size.y / 2),
+	#]
+	#
+	## VERY TEMPORARY CHANGE LATER
+	#var temp_corners: Array[Vector3] = [
+			#Vector3(corners[0].x, 0, corners[0].y),
+			#Vector3(corners[1].x, 0, corners[1].y),
+			#Vector3(corners[2].x, 0, corners[2].y),
+			#Vector3(corners[3].x, 0, corners[3].y),
+	#]
+	#var temp_mesh_corners := PackedVector3Array(temp_corners)
+	#var temp_mesh_indices := PackedInt32Array(
+		#[
+			#0, 1, 2,
+			#0, 2, 3,
+		#]
+	#)
+	#
+	## TEMPORARY CHANGE THIS LATER
+	#var temp_nochunk_map_mesh := ArrayMesh.new()
+	#var temp_map_mesh_instance := get_node("MeshInstance3D") as MeshInstance3D
+	#temp_map_mesh_instance.mesh = temp_nochunk_map_mesh
+	#
+	#var temp_surface_array: Array[Variant] = []
+	#temp_surface_array.resize(Mesh.ARRAY_MAX)
+	#
+	#temp_surface_array[Mesh.ARRAY_VERTEX] = temp_mesh_corners
+	#temp_surface_array[Mesh.ARRAY_INDEX] = temp_mesh_indices
+	#
+	#temp_nochunk_map_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, temp_surface_array)
