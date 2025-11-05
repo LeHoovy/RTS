@@ -7,7 +7,7 @@ var _parent_window: Window
 var _map_editor: MapEditor
 
 var _new_map_x_input: OptionButton
-var _new_map_y_input: OptionButton
+var _new_map_z_input: OptionButton
 var _cancel_button: Button
 var _create_button: Button
 
@@ -32,8 +32,8 @@ func _ready() -> void:
 	_map_editor = get_tree().edited_scene_root.get_node("MapEditor") as MapEditor
 	
 	# Set up option input variables
-	_new_map_y_input = (
-			get_node("VBoxContainer/Y Axis/Options/HBoxContainer/Control3/Options")
+	_new_map_z_input = (
+			get_node("VBoxContainer/Z Axis/Options/HBoxContainer/Control3/Options")
 	) as OptionButton
 	_new_map_x_input = (
 			get_node("VBoxContainer/X Axis/Options/HBoxContainer/Control3/Options")
@@ -55,7 +55,7 @@ func _on_cancel_pressed() -> void:
 func _on_create_pressed() -> void:
 	var new_map_size := Vector2(
 			int(_new_map_x_input.get_item_text(_new_map_x_input.selected)),
-			int(_new_map_y_input.get_item_text(_new_map_y_input.selected)),
+			int(_new_map_z_input.get_item_text(_new_map_z_input.selected)),
 	)
 	
 	_map_editor.make_new_map(new_map_size)

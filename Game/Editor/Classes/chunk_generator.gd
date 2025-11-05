@@ -8,7 +8,7 @@ var editor: MapEditor
 
 
 # generates the new map mesh
-func generate_new_map(map_size: Vector2, requested_sides: int) -> void:
+func generate_new_map(map_size: Vector2, position: Vector2, requested_sides: int = 4) -> void:
 	# Mesh setup preperation
 	var corners: Array[Vector2] = [
 			Vector2(-map_size.x / 2, -map_size.y / 2),

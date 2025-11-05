@@ -113,21 +113,21 @@ size_flags_horizontal = 3
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Y Axis" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Z Axis" type="HBoxContainer" parent="VBoxContainer"]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 4
 
-[node name="Left Separator" type="Control" parent="VBoxContainer/Y Axis"]
+[node name="Left Separator" type="Control" parent="VBoxContainer/Z Axis"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Options" type="Panel" parent="VBoxContainer/Y Axis"]
+[node name="Options" type="Panel" parent="VBoxContainer/Z Axis"]
 custom_minimum_size = Vector2(150, 0)
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Y Axis/Options"]
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/Z Axis/Options"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -136,28 +136,28 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Control2" type="Control" parent="VBoxContainer/Y Axis/Options/HBoxContainer"]
+[node name="Control2" type="Control" parent="VBoxContainer/Z Axis/Options/HBoxContainer"]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Y Axis/Options/HBoxContainer"]
+[node name="Label" type="Label" parent="VBoxContainer/Z Axis/Options/HBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
-text = "Y-Axis"
+text = "Z-Axis"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="VBoxContainer/Y Axis/Options/HBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/Z Axis/Options/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control3" type="Control" parent="VBoxContainer/Y Axis/Options/HBoxContainer"]
+[node name="Control3" type="Control" parent="VBoxContainer/Z Axis/Options/HBoxContainer"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Options" type="OptionButton" parent="VBoxContainer/Y Axis/Options/HBoxContainer/Control3"]
+[node name="Options" type="OptionButton" parent="VBoxContainer/Z Axis/Options/HBoxContainer/Control3"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -196,7 +196,7 @@ popup/item_11/id = 11
 popup/item_12/text = "512"
 popup/item_12/id = 12
 
-[node name="Right Separator" type="Control" parent="VBoxContainer/Y Axis"]
+[node name="Right Separator" type="Control" parent="VBoxContainer/Z Axis"]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
