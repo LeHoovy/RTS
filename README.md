@@ -1,11 +1,7 @@
 # RTS
-Download link: https://godotengine.org/download/windows/
+Godot download link: https://godotengine.org/download/windows/
 
-Make sure to download the
-
-Godot Engine - .NET version
-
-along with Visual Studio and the .NET SDK through it.
+Godot can also be found on steam, although I am using 4.5 and the most recent version is 4.5.1 so you'd have to switch in the betas tab
 
 Possible languages:
 Gdscript
@@ -28,4 +24,8 @@ If a unit is spawned after creating a target, the unit will not move.
 Aight so I've decided flow field can work, but we gotta work on map creation so that we can implement any pathfinding
 Also Constrained Delaunay Triangulation may work for pathfinding instead of flowfield (just has to be baked when loading, I think its godot's default pathfinding system but idk)
 
-https://cdn.aaai.org/AAAI/2006/AAAI06-148.pdf is the link for pathfinding I want to do
+https://cdn.aaai.org/AAAI/2006/AAAI06-148.pdf
+
+https://www.jdxdev.com/blog/2021/07/06/rts-pathfinding-2-dynamic-navmesh-with-constrained-delaunay-triangles/
+
+Links and sources for the type of pathfinding I want to do
