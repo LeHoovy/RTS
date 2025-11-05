@@ -15,7 +15,7 @@ Any more requires extensions for all of us.
 
 You might have to download the github app so you can push the to the repository.
 
-[Discord server](https://discord.gg/egXPKJv2ju)
+[Discord server (Disabled)](discord.gg/egXPKJv2j)u
 
 Game:
 
