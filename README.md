@@ -25,7 +25,8 @@ Aight so I've decided flow field can work, but we gotta work on map creation so 
 Also Constrained Delaunay Triangulation may work for pathfinding instead of flowfield (just has to be baked when loading, I think its godot's default pathfinding system but idk)
 
 https://cdn.aaai.org/AAAI/2006/AAAI06-148.pdf
-
 https://www.jdxdev.com/blog/2021/07/06/rts-pathfinding-2-dynamic-navmesh-with-constrained-delaunay-triangles/
-
 Links and sources for the type of pathfinding I want to do
+
+https://www.gdcvault.com/play/1014514/AI-Navigation-It-s-Not
+Another link, though I haven't checked it yet
