@@ -1,10 +1,10 @@
 @tool
-class_name MapGenerator
+class_name TerrainGenerator
 extends Node
 
 
-const MAT: Material = preload("uid://bgd2s5biaripg")
-var editor: MapEditor
+const MATERIAL: Material = preload("uid://bgd2s5biaripg")
+var map_mesh: MeshInstance3D
 
 
 # generates the new map mesh
@@ -17,8 +17,7 @@ func generate_new_map(map_size: Vector2, position: Vector2, requested_sides: int
 			Vector2(-map_size.x / 2, map_size.y / 2),
 	]
 	var normal := Vector3(0, 1, 0)
-	var mesh := editor.get_node("MeshInstance3D") as MeshInstance3D
-	mesh.mesh = ArrayMesh.new()
+	map_mesh.mesh = ArrayMesh.new()
 	
 	var surface_tool := SurfaceTool.new()
 	surface_tool.begin(Mesh.PRIMITIVE_TRIANGLES)
@@ -33,7 +32,7 @@ func generate_new_map(map_size: Vector2, position: Vector2, requested_sides: int
 		
 		corners.pop_at(1)
 	
-	surface_tool.commit(mesh.mesh as ArrayMesh)
-	mesh.set_surface_override_material(0, MAT)
+	surface_tool.commit(map_mesh.mesh as ArrayMesh)
+	map_mesh.set_surface_override_material(0, MATERIAL)
 	
 	queue_free()

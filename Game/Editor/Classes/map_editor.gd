@@ -49,6 +49,6 @@ func _new_map() -> void:
 
 
 func make_new_map(map_size: Vector2) -> void:
-	var map_gen := MapGenerator.new()
-	map_gen.editor = self
+	var map_gen := TerrainGenerator.new()
+	map_gen.map_mesh = get_parent().get_node("map")
 	map_gen.generate_new_map(map_size, Vector2(0, 0))

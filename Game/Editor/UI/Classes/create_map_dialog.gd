@@ -6,8 +6,8 @@ extends Panel
 var _parent_window: Window
 var _map_editor: MapEditor
 
-var _new_map_x_input: OptionButton
-var _new_map_z_input: OptionButton
+var _new_map_width: OptionButton
+var _new_map_height: OptionButton
 var _cancel_button: Button
 var _create_button: Button
 
@@ -32,11 +32,11 @@ func _ready() -> void:
 	_map_editor = get_tree().edited_scene_root.get_node("MapEditor") as MapEditor
 	
 	# Set up option input variables
-	_new_map_z_input = (
-			get_node("VBoxContainer/Z Axis/Options/HBoxContainer/Control3/Options")
+	_new_map_width = (
+			get_node("VBoxContainer/HBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer/Width/Control3/Width Option")
 	) as OptionButton
-	_new_map_x_input = (
-			get_node("VBoxContainer/X Axis/Options/HBoxContainer/Control3/Options")
+	_new_map_height = (
+			get_node("VBoxContainer/HBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer/Height/Control3/Height Option")
 	) as OptionButton
 	
 	# Set up and connect signals of confirmation buttons
@@ -54,8 +54,8 @@ func _on_cancel_pressed() -> void:
 # When operation is confirmed, send the output to the map editor node
 func _on_create_pressed() -> void:
 	var new_map_size := Vector2(
-			int(_new_map_x_input.get_item_text(_new_map_x_input.selected)),
-			int(_new_map_z_input.get_item_text(_new_map_z_input.selected)),
+			int(_new_map_width.get_item_text(_new_map_width.selected)),
+			int(_new_map_height.get_item_text(_new_map_height.selected)),
 	)
 	
 	_map_editor.make_new_map(new_map_size)

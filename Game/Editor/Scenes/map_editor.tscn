@@ -24,11 +24,11 @@ transform = Transform3D(0.8420572, 0.264558, -0.4700518, 0, 0.8714536, 0.4904779
 script = ExtResource("1_dprn3")
 metadata/_custom_type_script = "uid://b4e41ujql4v2e"
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="MapEditor"]
+[node name="map" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.49940217, 0.0791927, 0.51344657)
 mesh = SubResource("ArrayMesh_mp3df")
 surface_material_override/0 = ExtResource("2_mp3df")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7842294, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5082637, 1.1920929e-07, 0.5040481)
 mesh = SubResource("BoxMesh_0shqo")
-surface_material_override/0 = ExtResource("2_mp3df")
