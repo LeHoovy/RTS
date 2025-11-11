@@ -22,8 +22,14 @@ const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
 # Should be useful for generating meshes and navmeshes
 # Should contain ramps, or at least points where ramps might connect
 var _map_corners: Dictionary[Vector3, Array]
-var chunks: Array[Node3D]
 var _map: Map
+var chunks: Array[Node3D]
+var terrain_brush_active := false:
+	get:
+		return terrain_brush_active
+	set(new_val):
+		terrain_brush_active = new_val
+		print("brush status changed to ", terrain_brush_active)
 
 
 # Open the new map creation dialog when generate map is pressed
@@ -52,3 +58,9 @@ func make_new_map(map_size: Vector2) -> void:
 	var map_gen := TerrainGenerator.new()
 	map_gen.map_mesh = get_parent().get_node("map")
 	map_gen.generate_new_map(map_size, Vector2(0, 0))
+
+
+# Moves the brush to mouse position
+func _process(delta: float) -> void:
+	if terrain_brush_active:
+		print("")
