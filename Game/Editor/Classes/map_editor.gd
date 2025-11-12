@@ -22,14 +22,17 @@ const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
 # Should be useful for generating meshes and navmeshes
 # Should contain ramps, or at least points where ramps might connect
 var _map_corners: Dictionary[Vector3, Array]
-var _map: Map
+var _map: MeshInstance3D
+var _editor_cam: Camera3D
+var _editor_viewport: SubViewport
+var _brush: Node3D
 var chunks: Array[Node3D]
 var terrain_brush_active := false:
 	get:
 		return terrain_brush_active
 	set(new_val):
 		terrain_brush_active = new_val
-		print("brush status changed to ", terrain_brush_active)
+		print("Brush status changed to ", terrain_brush_active)
 
 
 # Open the new map creation dialog when generate map is pressed
@@ -53,14 +56,66 @@ func _new_map() -> void:
 	
 	new_map_window.add_child(CREATE_MAP_DIALOGUE.instantiate())
 
-
-func make_new_map(map_size: Vector2) -> void:
+# Generates new map mesh and collider
+func generate_new_map(map_size: Vector2) -> void:
+	# Makes sure that the new map doesn't already have a collider
+	for child in _map.get_children():
+		if child is StaticBody3D:
+			child.queue_free()
+	
+	# Generate's the new maps basic mesh
 	var map_gen := TerrainGenerator.new()
-	map_gen.map_mesh = get_parent().get_node("map")
+	map_gen.map_mesh = _map
 	map_gen.generate_new_map(map_size, Vector2(0, 0))
+	
+	# Double await to make sure the name of the new StaticBody3D is always the same
+	await get_tree().process_frame
+	await get_tree().process_frame
+	_map.create_trimesh_collision()
+	
+	var collider: StaticBody3D
+	for child in _map.get_children():
+		if child is StaticBody3D:
+			collider = child
+	
+	collider.set_collision_mask_value(1, false)
+	collider.set_collision_layer_value(1, false)
+	collider.set_collision_layer_value(32, true)
+	print(collider.collision_layer)
+	print(collider.collision_mask)
 
 
 # Moves the brush to mouse position
 func _process(delta: float) -> void:
+	# If the terrain modification brush is active, activate ray scanning for the mouse/brush position
+	var collision_pos: Vector3
+	var collided: bool = false
 	if terrain_brush_active:
-		print("")
+		# ALL of this is just setting up the raycast
+		# From and to are self explanatory, the query is just the ray settings
+		# Space state is used for collisions
+		var from: Vector3 = _editor_cam.project_ray_origin(_editor_viewport.get_mouse_position())
+		var to: Vector3 = from + _editor_cam.project_ray_normal(_editor_viewport.get_mouse_position()) * 1000
+		var query := PhysicsRayQueryParameters3D.create(from, to)
+		query.collision_mask = 2147483648
+		var space_state := get_world_3d().direct_space_state
+		
+		# Perform the raycast and store the results.
+		# If we sucessfully collided with the map, make that known
+		var result: Dictionary = space_state.intersect_ray(query)
+		if result.size() > 0:
+			collision_pos = result.get("position")
+			collision_pos.y += 0.5
+			if result.get("collider") == _map.get_node("Map_col"):
+				collided = true
+			
+		if collided:
+			_brush.position = collision_pos
+
+
+func _ready() -> void:
+	_map = get_parent().get_node("Map")
+	_editor_viewport = EditorInterface.get_editor_viewport_3d()
+	_editor_cam = _editor_viewport.get_camera_3d()
+	
+	_brush = get_node("Brush")
