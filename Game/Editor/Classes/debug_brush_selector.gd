@@ -3,11 +3,17 @@ extends Node
 
 
 @export var editor: MapEditor
-var selection: EditorSelection = EditorInterface.get_selection()
+var _selected := false
+var selection: EditorSelection
 
 
 func _ready() -> void:
-	selection.connect("selection_changed", _on_selection_changed)
+	if Engine.is_editor_hint():
+		selection = EditorInterface.get_selection()
+		selection.connect("selection_changed", _on_selection_changed)
+	else:
+		_selected = true
+		editor.terrain_brush_active = true
 
 
 func _on_selection_changed() -> void:
@@ -15,14 +21,16 @@ func _on_selection_changed() -> void:
 	if self not in selection.get_selected_nodes():
 		if editor.terrain_brush_active:
 			editor.terrain_brush_active = false
+			_selected = false
 		return
 	if selection.get_selected_nodes().size() != 1:
-		if editor.terrain_brush_active:
-			editor.terrain_brush_active = false
+		_selected = false
 		print()
 		print("Brush is not the only selected, cancelling process")
 		print("Please only select the brush tool")
+		editor.terrain_brush_active = false
 		return
 	
 	if not editor.terrain_brush_active:
+		_selected = true
 		editor.terrain_brush_active = true

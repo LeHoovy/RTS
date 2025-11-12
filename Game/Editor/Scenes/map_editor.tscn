@@ -29,7 +29,7 @@ script = ExtResource("1_dprn3")
 metadata/_custom_type_script = "uid://b4e41ujql4v2e"
 
 [node name="Brush" type="MeshInstance3D" parent="MapEditor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -57.85756, 0.5000038, 45.703453)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -24.466137, 0.5000001, 63.133396)
 mesh = SubResource("BoxMesh_0shqo")
 skeleton = NodePath("../..")
 metadata/_edit_lock_ = true
@@ -50,3 +50,6 @@ shape = SubResource("ConcavePolygonShape3D_8op8v")
 script = ExtResource("3_0shqo")
 editor = NodePath("../MapEditor")
 metadata/_edit_group_ = true
+
+[node name="Editor Camera" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.3711392e-08, 1.0000001, 0, -1.0000001, -4.3711392e-08, 0, 50, 0)
