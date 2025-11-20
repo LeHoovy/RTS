@@ -58,6 +58,7 @@ func _on_create_pressed() -> void:
 			int(_new_map_height.get_item_text(_new_map_height.selected)),
 	)
 	
+	(_map_editor.get_parent().get_node("MapData") as MapData).map_size = new_map_size
 	_map_editor.generate_new_map(new_map_size)
 	await get_tree().process_frame
 	_parent_window.queue_free()

@@ -8,6 +8,8 @@ var selection: EditorSelection
 
 
 func _ready() -> void:
+	editor = %MapEditor
+	
 	if Engine.is_editor_hint():
 		selection = EditorInterface.get_selection()
 		selection.connect("selection_changed", _on_selection_changed)

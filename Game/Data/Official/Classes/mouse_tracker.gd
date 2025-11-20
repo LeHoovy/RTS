@@ -8,7 +8,7 @@ var _map: MeshInstance3D
 
 
 func _ready() -> void:
-	_map = get_parent().get_node("Map") as MeshInstance3D
+	_map = %Map
 	_viewport = get_viewport()
 	_camera = _viewport.get_camera_3d()
 

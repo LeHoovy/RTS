@@ -87,7 +87,7 @@ func generate_new_map(map_size: Vector2) -> void:
 
 
 func _ready() -> void:
-	_map = get_parent().get_node("Map")
+	_map = %Map
 	if Engine.is_editor_hint():
 		_editor_viewport = EditorInterface.get_editor_viewport_3d()
 		_editor_cam = _editor_viewport.get_camera_3d()
@@ -95,4 +95,4 @@ func _ready() -> void:
 		_editor_viewport = get_viewport()
 		_editor_cam = _editor_viewport.get_camera_3d()
 	
-	mouse_tracker = get_parent().get_node("Mouse Tracker")
+	mouse_tracker = %MouseTracker
