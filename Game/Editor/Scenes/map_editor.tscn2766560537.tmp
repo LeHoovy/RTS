@@ -49,17 +49,14 @@ metadata/_edit_group_ = true
 
 [node name="Camera Origin" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-rotation_edit_mode = 2
 script = ExtResource("4_8op8v")
 
-[node name="Vertical Rotation" type="Node3D" parent="Camera Origin"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
-
-[node name="Camera" type="Camera3D" parent="Camera Origin/Vertical Rotation"]
-transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071068, 0, -0.7071068, 0.7071067, 0, 14.642136, 14.142136)
+[node name="Camera" type="Camera3D" parent="Camera Origin"]
+transform = Transform3D(1, 0, 0, 0, 0.7071067, 0.7071068, 0, -0.7071068, 0.7071067, 0, 14.142136, 14.142136)
 
 [node name="Mouse Tracker" type="Node3D" parent="."]
 script = ExtResource("2_3ditt")
+metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Mouse Tracker"]
 mesh = SubResource("BoxMesh_3ditt")
