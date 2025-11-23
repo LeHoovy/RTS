@@ -1,4 +1,3 @@
-@tool
 extends Panel
 
 
@@ -16,12 +15,13 @@ func _ready() -> void:
 	# First make sure this isn't opened in the editor
 	# If it isn't, and it can't find the MapEditor node, free its memory
 	# If it also isn't opened in a new window, free its memory
-	if self == get_tree().edited_scene_root:
-		print("Scene opened in editor, scene is not new window, ignoring")
-		return
-	if not get_tree().edited_scene_root.has_node("MapEditor"):
-		print("Not opened from map editor scene, freeing memory")
-		queue_free()
+	if Engine.is_editor_hint():
+		if self == get_tree().edited_scene_root:
+			print("Scene opened in editor, scene is not new window, ignoring")
+			return
+		if not get_tree().edited_scene_root.has_node("MapEditor"):
+			print("Not opened from map editor scene, freeing memory")
+			queue_free()
 	if get_parent() is not Window:
 		print("Parent isn't a window, scene is not open in editor, freeing memory")
 		queue_free()
@@ -29,7 +29,10 @@ func _ready() -> void:
 	# Finally, set your parent window variable to your parent window
 	# And map editor to map editor node
 	_parent_window = get_parent()
-	_map_editor = get_tree().edited_scene_root.get_node("MapEditor") as MapEditor
+	if Engine.is_editor_hint():
+		_map_editor = get_tree().edited_scene_root.get_node("MapEditor") as MapEditor
+	else:
+		_map_editor = get_parent().get_parent() as MapEditor
 	
 	# Set up option input variables
 	_new_map_width = (

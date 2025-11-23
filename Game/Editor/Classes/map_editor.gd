@@ -1,4 +1,3 @@
-@tool
 class_name MapEditor
 extends Node3D
 # TODO:
@@ -10,7 +9,7 @@ extends Node3D
 # Chunks should probably have their own classes
 # If chunks are their own classes, instances, or even scenes, might not need this to extend Node3D
 
-@export_tool_button("Create new map", "Callable") var gen_map : Callable = _new_map
+#@export_tool_button("Create new map", "Callable") var gen_map : Callable = _new_map
 @export var window_size := Vector2(500, 720)
 
 const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
@@ -48,7 +47,13 @@ func _new_map() -> void:
 	# Generate the new map window prompt and create it in the editor
 	# Free the position finder's memory afterwards
 	var new_map_window := Window.new()
-	EditorInterface.popup_dialog(new_map_window, Rect2i(position_finder.position, window_size))
+	new_map_window.visible = false
+	if Engine.is_editor_hint():
+		EditorInterface.popup_dialog(new_map_window, Rect2i(position_finder.position, window_size))
+	else:
+		add_child(new_map_window)
+		new_map_window.popup(Rect2i(position_finder.position, window_size))
+	
 	position_finder.queue_free()
 	
 	new_map_window.close_requested.connect(func() -> void:
@@ -88,11 +93,12 @@ func generate_new_map(map_size: Vector2) -> void:
 
 func _ready() -> void:
 	_map = %Map
-	if Engine.is_editor_hint():
-		_editor_viewport = EditorInterface.get_editor_viewport_3d()
-		_editor_cam = _editor_viewport.get_camera_3d()
-	else:
-		_editor_viewport = get_viewport()
-		_editor_cam = _editor_viewport.get_camera_3d()
+	#if Engine.is_editor_hint():
+		#_editor_viewport = EditorInterface.get_editor_viewport_3d()
+		#_editor_cam = _editor_viewport.get_camera_3d()
+	#else:
+	_editor_viewport = get_viewport()
+	_editor_cam = _editor_viewport.get_camera_3d()
 	
 	mouse_tracker = %MouseTracker
+	_new_map()
