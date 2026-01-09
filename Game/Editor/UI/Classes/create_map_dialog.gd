@@ -36,10 +36,10 @@ func _ready() -> void:
 	
 	# Set up option input variables
 	_new_map_width = (
-			get_node("VBoxContainer/HBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer/Width/Control3/Width Option")
+			get_node("%Width Option")
 	) as OptionButton
 	_new_map_height = (
-			get_node("VBoxContainer/HBoxContainer2/HBoxContainer/VBoxContainer/HBoxContainer/Height/Control3/Height Option")
+			get_node("%Height Option")
 	) as OptionButton
 	
 	# Set up and connect signals of confirmation buttons
@@ -56,12 +56,12 @@ func _on_cancel_pressed() -> void:
 
 # When operation is confirmed, send the output to the map editor node
 func _on_create_pressed() -> void:
-	var new_map_size := Vector2(
+	var new_map_size := Vector2i(
 			int(_new_map_width.get_item_text(_new_map_width.selected)),
 			int(_new_map_height.get_item_text(_new_map_height.selected)),
 	)
 	
 	(_map_editor.get_parent().get_node("MapData") as MapData).map_size = new_map_size
-	_map_editor.generate_new_map(new_map_size)
+	_map_editor.create_new_map(new_map_size)
 	await get_tree().process_frame
 	_parent_window.queue_free()

@@ -13,3 +13,6 @@ extends Node3D
 # 2B Load and place cliff assets as children
 # 3. Load and place doodad assets as children
 # 2A and 2B may come in either order depending on cliff asset used
+
+
+var mesh: ArrayMesh

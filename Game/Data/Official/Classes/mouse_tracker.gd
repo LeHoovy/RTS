@@ -4,11 +4,11 @@ extends Node3D
 
 var _camera: Camera3D
 var _viewport: Viewport
-var _map: MeshInstance3D
+var _map: Map
 
 
 func _ready() -> void:
-	_map = %Map
+	_map = %Map as Map
 	_viewport = get_viewport()
 	_camera = _viewport.get_camera_3d()
 

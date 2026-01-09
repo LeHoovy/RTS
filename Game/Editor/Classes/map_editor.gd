@@ -20,8 +20,9 @@ const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
 # Essentially just the corners found on the map
 # Should be useful for generating meshes and navmeshes
 # Should contain ramps, or at least points where ramps might connect
+var scene_root: Node
 var _map_corners: Dictionary[Vector3, Array]
-var _map: MeshInstance3D
+var _map: Map
 var _editor_cam: Camera3D
 var _editor_viewport: Viewport
 var mouse_tracker: Node3D
@@ -62,37 +63,19 @@ func _new_map() -> void:
 	
 	new_map_window.add_child(CREATE_MAP_DIALOGUE.instantiate())
 
+
 # Generates new map mesh and collider
-func generate_new_map(map_size: Vector2) -> void:
-	# Makes sure that the new map doesn't already have a collider
-	for child in _map.get_children():
-		if child is StaticBody3D:
-			child.queue_free()
+func create_new_map(map_size: Vector2i) -> void:
+	var generator := MapGenerator.new()
+	generator.map = _map
+	generator.scene_root = scene_root
 	
-	# Generate's the new maps basic mesh
-	var map_gen := TerrainGenerator.new()
-	map_gen.map_mesh = _map
-	map_gen.generate_new_map(map_size, Vector2(0, 0))
-	
-	# Double await to make sure the name of the new StaticBody3D is always the same
-	await get_tree().process_frame
-	await get_tree().process_frame
-	_map.create_trimesh_collision()
-	
-	var collider: StaticBody3D
-	for child in _map.get_children():
-		if child is StaticBody3D:
-			collider = child
-	
-	collider.set_collision_mask_value(1, false)
-	collider.set_collision_layer_value(1, false)
-	collider.set_collision_layer_value(32, true)
-	print(collider.collision_layer)
-	print(collider.collision_mask)
+	generator.new_map(map_size)
 
 
 func _ready() -> void:
 	_map = %Map
+	scene_root = get_node("/root").get_child(0)
 	#if Engine.is_editor_hint():
 		#_editor_viewport = EditorInterface.get_editor_viewport_3d()
 		#_editor_cam = _editor_viewport.get_camera_3d()
