@@ -5,8 +5,10 @@ extends Panel
 var _parent_window: Window
 var _map_editor: MapEditor
 
-var _new_map_width: OptionButton
-var _new_map_height: OptionButton
+var _map_width: OptionButton
+var _map_height: OptionButton
+var _map_depth: OptionButton
+var _map_name: TextEdit
 var _cancel_button: Button
 var _create_button: Button
 
@@ -34,13 +36,13 @@ func _ready() -> void:
 	else:
 		_map_editor = get_parent().get_parent() as MapEditor
 	
-	# Set up option input variables
-	_new_map_width = (
-			get_node("%Width Option")
-	) as OptionButton
-	_new_map_height = (
-			get_node("%Height Option")
-	) as OptionButton
+	## Set up option input variables
+	# Map Size
+	_map_width = get_node("%Width Option") as OptionButton
+	_map_height = get_node("%Height Option") as OptionButton
+	_map_depth = get_node("%Depth option") as OptionButton
+	# Map Data
+	_map_name = get_node("%Map Name") as TextEdit
 	
 	# Set up and connect signals of confirmation buttons
 	_create_button = get_node("VBoxContainer/Confirmation/Create") as Button
@@ -56,12 +58,23 @@ func _on_cancel_pressed() -> void:
 
 # When operation is confirmed, send the output to the map editor node
 func _on_create_pressed() -> void:
-	var new_map_size := Vector2i(
-			int(_new_map_width.get_item_text(_new_map_width.selected)),
-			int(_new_map_height.get_item_text(_new_map_height.selected)),
+	if _map_name.text == "":
+		_map_name.placeholder_text = "A map name is required. Please enter one here"
+		return
+	
+	var new_map_size := Vector3i(
+			int(_map_width.get_item_text(_map_width.selected)),
+			int(_map_height.get_item_text(_map_height.selected)),
+			int(_map_depth.get_item_text(_map_depth.selected)),
 	)
 	
-	(_map_editor.get_parent().get_node("MapData") as MapData).map_size = new_map_size
-	_map_editor.create_new_map(new_map_size)
+	var output: Dictionary[String, Variant] = {
+		"Name": _map_name.text,
+		"Size": new_map_size,
+	}
+	
+	#(_map_editor.get_parent().get_node("MapData") as MapData).map_size = new_map_size
+	_map_editor.map_creation_output = output
+	_map_editor.create_new_map()
 	await get_tree().process_frame
 	_parent_window.queue_free()

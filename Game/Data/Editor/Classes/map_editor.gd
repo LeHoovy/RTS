@@ -11,6 +11,7 @@ extends Node3D
 
 #@export_tool_button("Create new map", "Callable") var gen_map : Callable = _new_map
 @export var window_size := Vector2(500, 720)
+@export var map_storage_path := String("res://Game/Data/Maps/")
 
 const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
 
@@ -20,11 +21,13 @@ const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
 # Essentially just the corners found on the map
 # Should be useful for generating meshes and navmeshes
 # Should contain ramps, or at least points where ramps might connect
-var scene_root: Node
-var _map_corners: Dictionary[Vector3, Array]
-var _map: Map
-var _editor_cam: Camera3D
-var _editor_viewport: Viewport
+#var scene_root: Node
+#var _map_corners: Dictionary[Vector3, Array]
+#var _map: Map
+#var _editor_cam: Camera3D
+#var _editor_viewport: Viewport
+var map_creation_output: Dictionary[String, Variant]
+var map_name: String
 var mouse_tracker: Node3D
 var chunks: Array[Node3D]
 var terrain_brush_active := false:
@@ -65,23 +68,27 @@ func _new_map() -> void:
 
 
 # Generates new map mesh and collider
-func create_new_map(map_size: Vector2i) -> void:
-	var generator := MapGenerator.new()
-	generator.map = _map
-	generator.scene_root = scene_root
+func create_new_map() -> void:
+	var map_size: Vector3i = map_creation_output["Size"]
+	var heightmap := HeightmapHandler.new(Vector2i(map_size.x, map_size.y))
+	heightmap.new_heightmap(map_size.z)
 	
-	generator.new_map(map_size)
+	#var generator := MapGenerator.new()
+	#generator.map = _map
+	#generator.scene_root = scene_root
+	#
+	#generator.new_map(map_size)
 
 
 func _ready() -> void:
-	_map = %Map
-	scene_root = get_node("/root").get_child(0)
+	#_map = %Map
+	#scene_root = get_node("/root").get_child(0)
 	#if Engine.is_editor_hint():
 		#_editor_viewport = EditorInterface.get_editor_viewport_3d()
 		#_editor_cam = _editor_viewport.get_camera_3d()
 	#else:
-	_editor_viewport = get_viewport()
-	_editor_cam = _editor_viewport.get_camera_3d()
+	#_editor_viewport = get_viewport()
+	#_editor_cam = _editor_viewport.get_camera_3d()
 	
 	mouse_tracker = %MouseTracker
 	_new_map()

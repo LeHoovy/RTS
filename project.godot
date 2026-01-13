@@ -39,7 +39,7 @@ project/assembly_name="Pathfinding test"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/nklbdev.importality/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 

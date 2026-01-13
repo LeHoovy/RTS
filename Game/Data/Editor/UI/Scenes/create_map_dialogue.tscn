@@ -1,0 +1,448 @@
+[gd_scene load_steps=4 format=3 uid="uid://bko3lfheh3efu"]
+
+[ext_resource type="Script" uid="uid://b5xutbu2xkxaj" path="res://Game/Data/Editor/UI/Classes/create_map_dialog.gd" id="1_t6gal"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6gal"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1202006, 0.14579576, 0.18556312, 1)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tfgk6"]
+content_margin_left = 0.0
+content_margin_top = 0.0
+content_margin_right = 0.0
+content_margin_bottom = 0.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+corner_detail = 5
+
+[node name="Create Map Dialogue" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_t6gal")
+script = ExtResource("1_t6gal")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Upper Spacing" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Map Data" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Left" type="Control" parent="VBoxContainer/Map Data"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="Panel" parent="VBoxContainer/Map Data"]
+custom_minimum_size = Vector2(380, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tfgk6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Map Data/HBoxContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Label2" type="Label" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_font_sizes/font_size = 36
+text = "Map Data"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Width" type="VBoxContainer" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Label" type="Label" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer/Width"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Name"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control3" type="Control" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer/Width"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="Map Name" type="TextEdit" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer/Width/Control3"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -4.0
+offset_bottom = 27.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 18
+text = "PlaceholderTest"
+placeholder_text = "Enter map name here"
+wrap_mode = 1
+
+[node name="Right" type="Control" parent="VBoxContainer/Map Data"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Upper Spacing2" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+
+[node name="Map Size" type="HBoxContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Left" type="Control" parent="VBoxContainer/Map Size"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="Panel" parent="VBoxContainer/Map Size"]
+custom_minimum_size = Vector2(380, 150)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_tfgk6")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+theme_override_font_sizes/font_size = 32
+text = "Map Size"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="MapScale" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Width" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Width"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Width Option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width/Control3"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+flat = true
+selected = 6
+allow_reselect = true
+item_count = 15
+popup/item_0/text = "32"
+popup/item_0/id = 0
+popup/item_1/text = "48"
+popup/item_1/id = 1
+popup/item_2/text = "64"
+popup/item_2/id = 2
+popup/item_3/text = "80"
+popup/item_3/id = 3
+popup/item_4/text = "96"
+popup/item_4/id = 4
+popup/item_5/text = "112"
+popup/item_5/id = 5
+popup/item_6/text = "128"
+popup/item_6/id = 6
+popup/item_7/text = "144"
+popup/item_7/id = 7
+popup/item_8/text = "160"
+popup/item_8/id = 8
+popup/item_9/text = "176"
+popup/item_9/id = 9
+popup/item_10/text = "192"
+popup/item_10/id = 10
+popup/item_11/text = "208"
+popup/item_11/id = 11
+popup/item_12/text = "224"
+popup/item_12/id = 12
+popup/item_13/text = "240"
+popup/item_13/id = 13
+popup/item_14/text = "256"
+popup/item_14/id = 14
+
+[node name="Height" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_horizontal = 10
+metadata/_edit_use_anchors_ = true
+
+[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height"]
+custom_minimum_size = Vector2(5, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Height"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control3" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Height Option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height/Control3"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+flat = true
+selected = 6
+allow_reselect = true
+item_count = 15
+popup/item_0/text = "32"
+popup/item_0/id = 0
+popup/item_1/text = "48"
+popup/item_1/id = 1
+popup/item_2/text = "64"
+popup/item_2/id = 2
+popup/item_3/text = "80"
+popup/item_3/id = 3
+popup/item_4/text = "96"
+popup/item_4/id = 4
+popup/item_5/text = "112"
+popup/item_5/id = 5
+popup/item_6/text = "128"
+popup/item_6/id = 6
+popup/item_7/text = "144"
+popup/item_7/id = 7
+popup/item_8/text = "160"
+popup/item_8/id = 8
+popup/item_9/text = "176"
+popup/item_9/id = 9
+popup/item_10/text = "192"
+popup/item_10/id = 10
+popup/item_11/text = "208"
+popup/item_11/id = 11
+popup/item_12/text = "224"
+popup/item_12/id = 12
+popup/item_13/text = "240"
+popup/item_13/id = 13
+popup/item_14/text = "256"
+popup/item_14/id = 14
+
+[node name="Depth" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(180, 0)
+layout_mode = 2
+size_flags_vertical = 3
+metadata/_edit_use_anchors_ = true
+
+[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="Control4" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Depth"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control4" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="Control3" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+metadata/_edit_use_anchors_ = true
+
+[node name="Depth option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4/Control3"]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 8
+flat = true
+selected = 6
+allow_reselect = true
+item_count = 16
+popup/item_0/text = "0"
+popup/item_0/id = 0
+popup/item_1/text = "1"
+popup/item_1/id = 1
+popup/item_2/text = "2"
+popup/item_2/id = 2
+popup/item_3/text = "3"
+popup/item_3/id = 3
+popup/item_4/text = "4"
+popup/item_4/id = 4
+popup/item_5/text = "5"
+popup/item_5/id = 5
+popup/item_6/text = "6"
+popup/item_6/id = 6
+popup/item_7/text = "7"
+popup/item_7/id = 7
+popup/item_8/text = "8"
+popup/item_8/id = 8
+popup/item_9/text = "9"
+popup/item_9/id = 9
+popup/item_10/text = "10"
+popup/item_10/id = 10
+popup/item_11/text = "11"
+popup/item_11/id = 11
+popup/item_12/text = "12"
+popup/item_12/id = 12
+popup/item_13/text = "13"
+popup/item_13/id = 13
+popup/item_14/text = "14"
+popup/item_14/id = 14
+popup/item_15/text = "15"
+popup/item_15/id = 15
+
+[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth"]
+custom_minimum_size = Vector2(15, 0)
+layout_mode = 2
+
+[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 10)
+layout_mode = 2
+
+[node name="Right" type="Control" parent="VBoxContainer/Map Size"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Axis Spacing" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+
+[node name="Middle Spacing" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 6
+
+[node name="Confirmation" type="HBoxContainer" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+size_flags_vertical = 8
+size_flags_stretch_ratio = 3.0
+
+[node name="Left Separator" type="Control" parent="VBoxContainer/Confirmation"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Create" type="Button" parent="VBoxContainer/Confirmation"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme_override_font_sizes/font_size = 24
+text = "Create Map"
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Mid Separator" type="Control" parent="VBoxContainer/Confirmation"]
+custom_minimum_size = Vector2(20, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Cancel" type="Button" parent="VBoxContainer/Confirmation"]
+custom_minimum_size = Vector2(190, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 24
+text = "Cancel
+"
+clip_text = true
+metadata/_edit_use_anchors_ = true
+
+[node name="Right Separator" type="Control" parent="VBoxContainer/Confirmation"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Bottom Spacing" type="Control" parent="VBoxContainer"]
+custom_minimum_size = Vector2(0, 150)
+layout_mode = 2
+size_flags_vertical = 8

@@ -7,15 +7,15 @@ var map: Map
 var _chunk_size: int = 8 # Size of each chunk in tiles on one axis. Chunks are square.
 
 
-func _generate_chunk(chunk_pos: Vector2i) -> MapChunk:
+func _generate_chunk(chunk_pos: Vector2i, chunk_height: int) -> MapChunk:
 	#print(chunk_pos)
 	return
 
 
-func new_map(map_size: Vector2i) -> void:
+func new_map(map_size: Vector3i) -> void:
 	for x: int in map_size.x / _chunk_size:
 		for y: int in map_size.y / _chunk_size:
-			_generate_chunk(Vector2i(x, y))
+			_generate_chunk(Vector2i(x, y), map_size.z)
 	
 	# OLD STUFF
 	# Generate's the new maps basic mesh
