@@ -28,7 +28,7 @@ func _ready() -> void:
 	_map_editor = %MapEditor
 	_camera = $Lock/Camera
 	_zoom = _camera.position.y
-	_map_data = %MapData
+	#_map_data = %MapData
 	
 	_zoom = _camera.position.y * 5
 
@@ -66,22 +66,22 @@ func _move_cam(mouse_movement: InputEventMouseMotion) -> void:
 	
 	# Handles horizontal movement
 	global_translate(movement * camera_move_speed / (1 / (_zoom / 500)))
-	stay_over_map()
+	#stay_over_map()
 
 
 ## Make sure the camera doesn't move off of the map
-func stay_over_map() -> void:
+#func stay_over_map() -> void:
 	# Can't move too far horizontally
-	if position.x > _map_data.map_size.x / 2 + 4: # East
-		position.x = _map_data.map_size.x / 2 + 4
-	if position.x < -_map_data.map_size.x / 2 - 4: # West
-		position.x = -_map_data.map_size.x / 2 - 4
-	
+	#if position.x > _map_data.map_size.x / 2 + 4: # East
+		#position.x = _map_data.map_size.x / 2 + 4
+	#if position.x < -_map_data.map_size.x / 2 - 4: # West
+		#position.x = -_map_data.map_size.x / 2 - 4
+	#
 	# Can't move too far vertically
-	if position.z > _map_data.map_size.y / 2 + 4: # North
-		position.z = _map_data.map_size.y / 2 + 4
-	if position.z < -_map_data.map_size.y / 2 - 4: # South
-		position.z = -_map_data.map_size.y / 2 - 4
+	#if position.z > _map_data.map_size.y / 2 + 4: # North
+		#position.z = _map_data.map_size.y / 2 + 4
+	#if position.z < -_map_data.map_size.y / 2 - 4: # South
+		#position.z = -_map_data.map_size.y / 2 - 4
 
 
 func _change_zoom(zoom_change: int) -> void:

@@ -75,6 +75,5 @@ func _on_create_pressed() -> void:
 	
 	#(_map_editor.get_parent().get_node("MapData") as MapData).map_size = new_map_size
 	_map_editor.map_creation_output = output
-	_map_editor.create_new_map()
 	await get_tree().process_frame
 	_parent_window.queue_free()
