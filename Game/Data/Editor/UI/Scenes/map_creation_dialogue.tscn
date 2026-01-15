@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://bko3lfheh3efu"]
+[gd_scene format=3 uid="uid://bko3lfheh3efu"]
 
-[ext_resource type="Script" uid="uid://b5xutbu2xkxaj" path="res://Game/Data/Editor/UI/Classes/create_map_dialog.gd" id="1_t6gal"]
+[ext_resource type="Script" uid="uid://b5xutbu2xkxaj" path="res://Game/Data/Editor/UI/Classes/create_map_dialog.gd" id="1_e4th4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6gal"]
 content_margin_left = 0.0
@@ -26,16 +26,16 @@ corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
 corner_detail = 5
 
-[node name="Create Map Dialogue" type="Panel"]
+[node name="Create Map Dialogue" type="Panel" unique_id=1737301006]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_t6gal")
-script = ExtResource("1_t6gal")
+script = ExtResource("1_e4th4")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=19615962]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -43,23 +43,23 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="Upper Spacing" type="Control" parent="VBoxContainer"]
+[node name="Upper Spacing" type="Control" parent="VBoxContainer" unique_id=2107822001]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Map Data" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Map Data" type="HBoxContainer" parent="VBoxContainer" unique_id=934375721]
 layout_mode = 2
 
-[node name="Left" type="Control" parent="VBoxContainer/Map Data"]
+[node name="Left" type="Control" parent="VBoxContainer/Map Data" unique_id=1019186795]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="Panel" parent="VBoxContainer/Map Data"]
+[node name="HBoxContainer" type="Panel" parent="VBoxContainer/Map Data" unique_id=299416483]
 custom_minimum_size = Vector2(380, 150)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tfgk6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Map Data/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Map Data/HBoxContainer" unique_id=1169538312]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -68,7 +68,7 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Label2" type="Label" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer" unique_id=1546430904]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 0
@@ -77,26 +77,26 @@ text = "Map Data"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Width" type="VBoxContainer" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer"]
+[node name="Width" type="VBoxContainer" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer" unique_id=1170610538]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Label" type="Label" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer/Width"]
+[node name="Label" type="Label" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer/Width" unique_id=975819610]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Name"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control3" type="Control" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer/Width"]
+[node name="Control3" type="Control" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer/Width" unique_id=1277309397]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
 
-[node name="Map Name" type="TextEdit" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer/Width/Control3"]
+[node name="Map Name" type="TextEdit" parent="VBoxContainer/Map Data/HBoxContainer/VBoxContainer/Width/Control3" unique_id=86431898]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -112,27 +112,27 @@ text = "PlaceholderTest"
 placeholder_text = "Enter map name here"
 wrap_mode = 1
 
-[node name="Right" type="Control" parent="VBoxContainer/Map Data"]
+[node name="Right" type="Control" parent="VBoxContainer/Map Data" unique_id=2014784861]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Upper Spacing2" type="Control" parent="VBoxContainer"]
+[node name="Upper Spacing2" type="Control" parent="VBoxContainer" unique_id=292632605]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 
-[node name="Map Size" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Map Size" type="HBoxContainer" parent="VBoxContainer" unique_id=355819801]
 layout_mode = 2
 
-[node name="Left" type="Control" parent="VBoxContainer/Map Size"]
+[node name="Left" type="Control" parent="VBoxContainer/Map Size" unique_id=1012864957]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="HBoxContainer" type="Panel" parent="VBoxContainer/Map Size"]
+[node name="HBoxContainer" type="Panel" parent="VBoxContainer/Map Size" unique_id=1466722677]
 custom_minimum_size = Vector2(380, 150)
 layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_tfgk6")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer" unique_id=1326776139]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -141,10 +141,10 @@ grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer"]
+[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer" unique_id=1613656640]
 layout_mode = 2
 
-[node name="Label2" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer" unique_id=1701041245]
 layout_mode = 2
 size_flags_vertical = 2
 theme_override_font_sizes/font_size = 32
@@ -152,38 +152,38 @@ text = "Map Size"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MapScale" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer"]
+[node name="MapScale" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer" unique_id=377917820]
 layout_mode = 2
 size_flags_vertical = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Width" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale"]
+[node name="Width" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale" unique_id=796777999]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width"]
+[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width" unique_id=727143284]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width"]
+[node name="Label" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width" unique_id=643597839]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Width"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width"]
+[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width" unique_id=606007373]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control3" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width"]
+[node name="Control3" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width" unique_id=516866624]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Width Option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width/Control3"]
+[node name="Width Option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Width/Control3" unique_id=241483248]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -227,34 +227,34 @@ popup/item_13/id = 13
 popup/item_14/text = "256"
 popup/item_14/id = 14
 
-[node name="Height" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale"]
+[node name="Height" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale" unique_id=91377]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_horizontal = 10
 metadata/_edit_use_anchors_ = true
 
-[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height"]
+[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height" unique_id=871302343]
 custom_minimum_size = Vector2(5, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height"]
+[node name="Label" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height" unique_id=864899817]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Height"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height"]
+[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height" unique_id=156876275]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control3" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height"]
+[node name="Control3" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height" unique_id=2023134477]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Height Option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height/Control3"]
+[node name="Height Option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/MapScale/Height/Control3" unique_id=426277676]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -298,41 +298,41 @@ popup/item_13/id = 13
 popup/item_14/text = "256"
 popup/item_14/id = 14
 
-[node name="Depth" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer"]
+[node name="Depth" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer" unique_id=2063689991]
 custom_minimum_size = Vector2(180, 0)
 layout_mode = 2
 size_flags_vertical = 3
 metadata/_edit_use_anchors_ = true
 
-[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth"]
+[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth" unique_id=1606972391]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
-[node name="Control4" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth"]
+[node name="Control4" type="HBoxContainer" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth" unique_id=1386927613]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4"]
+[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4" unique_id=2020997412]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Label" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4"]
+[node name="Label" type="Label" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4" unique_id=1463893270]
 layout_mode = 2
 theme_override_font_sizes/font_size = 24
 text = "Depth"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="Control4" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4"]
+[node name="Control4" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4" unique_id=1087089806]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
-[node name="Control3" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4"]
+[node name="Control3" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4" unique_id=289773323]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Depth option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4/Control3"]
+[node name="Depth option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4/Control3" unique_id=551129421]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -378,42 +378,42 @@ popup/item_14/id = 14
 popup/item_15/text = "15"
 popup/item_15/id = 15
 
-[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4"]
+[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4" unique_id=1908502923]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth"]
+[node name="Control" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth" unique_id=1117907386]
 custom_minimum_size = Vector2(15, 0)
 layout_mode = 2
 
-[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer"]
+[node name="Control2" type="Control" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer" unique_id=851767469]
 custom_minimum_size = Vector2(0, 10)
 layout_mode = 2
 
-[node name="Right" type="Control" parent="VBoxContainer/Map Size"]
+[node name="Right" type="Control" parent="VBoxContainer/Map Size" unique_id=1369868104]
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Axis Spacing" type="Control" parent="VBoxContainer"]
+[node name="Axis Spacing" type="Control" parent="VBoxContainer" unique_id=2070898781]
 custom_minimum_size = Vector2(0, 100)
 layout_mode = 2
 
-[node name="Middle Spacing" type="Control" parent="VBoxContainer"]
+[node name="Middle Spacing" type="Control" parent="VBoxContainer" unique_id=968444310]
 layout_mode = 2
 size_flags_vertical = 6
 
-[node name="Confirmation" type="HBoxContainer" parent="VBoxContainer"]
+[node name="Confirmation" type="HBoxContainer" parent="VBoxContainer" unique_id=1980816614]
 custom_minimum_size = Vector2(0, 50)
 layout_mode = 2
 size_flags_vertical = 8
 size_flags_stretch_ratio = 3.0
 
-[node name="Left Separator" type="Control" parent="VBoxContainer/Confirmation"]
+[node name="Left Separator" type="Control" parent="VBoxContainer/Confirmation" unique_id=43989756]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Create" type="Button" parent="VBoxContainer/Confirmation"]
+[node name="Create" type="Button" parent="VBoxContainer/Confirmation" unique_id=248388547]
 custom_minimum_size = Vector2(190, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -422,12 +422,12 @@ text = "Create Map"
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Mid Separator" type="Control" parent="VBoxContainer/Confirmation"]
+[node name="Mid Separator" type="Control" parent="VBoxContainer/Confirmation" unique_id=1020850509]
 custom_minimum_size = Vector2(20, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Cancel" type="Button" parent="VBoxContainer/Confirmation"]
+[node name="Cancel" type="Button" parent="VBoxContainer/Confirmation" unique_id=1781081089]
 custom_minimum_size = Vector2(190, 0)
 layout_mode = 2
 size_flags_horizontal = 4
@@ -437,12 +437,12 @@ text = "Cancel
 clip_text = true
 metadata/_edit_use_anchors_ = true
 
-[node name="Right Separator" type="Control" parent="VBoxContainer/Confirmation"]
+[node name="Right Separator" type="Control" parent="VBoxContainer/Confirmation" unique_id=1926445535]
 custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Bottom Spacing" type="Control" parent="VBoxContainer"]
+[node name="Bottom Spacing" type="Control" parent="VBoxContainer" unique_id=3690459]
 custom_minimum_size = Vector2(0, 150)
 layout_mode = 2
 size_flags_vertical = 8

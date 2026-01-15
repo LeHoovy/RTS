@@ -64,14 +64,19 @@ func _new_map() -> void:
 		new_map_window.queue_free()
 	) # Close window on cancel code block
 	
-	new_map_window.add_child(CREATE_MAP_DIALOGUE.instantiate())
+	var creation_panel := CREATE_MAP_DIALOGUE.instantiate() as MapCreationDialogue
+	creation_panel.create_map.connect(create_new_map)
+	
+	new_map_window.add_child(creation_panel)
 
 
 # Generates new map mesh and collider
 func create_new_map() -> void:
 	var map_size: Vector3i = map_creation_output["Size"]
+	#var files := FileAccess.new()
+	
 	var heightmap := HeightmapHandler.new(Vector2i(map_size.x, map_size.y))
-	heightmap.new_heightmap(map_size.z)
+	heightmap.gen_new_heightmap(map_size.z)
 	
 	#var generator := MapGenerator.new()
 	#generator.map = _map
