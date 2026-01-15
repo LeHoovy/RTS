@@ -72,7 +72,13 @@ func _on_create_pressed() -> void:
 	
 	var output: Dictionary[String, Variant] = {
 		"Name": _map_name.text,
-		"Size": new_map_size,
+		"Size": {
+			"Width": new_map_size.x,
+			"Height": new_map_size.y,
+		},
+		"map_creation_details": {
+			"new_map_ground_level": new_map_size.z,
+		},
 	}
 	
 	#(_map_editor.get_parent().get_node("MapData") as MapData).map_size = new_map_size

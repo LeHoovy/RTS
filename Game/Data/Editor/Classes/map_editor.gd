@@ -11,7 +11,7 @@ extends Node3D
 
 #@export_tool_button("Create new map", "Callable") var gen_map : Callable = _new_map
 @export var window_size := Vector2(500, 720)
-@export var map_storage_path := String("res://Game/Data/Maps/")
+@export var map_storage_path := String("res://Game/Data/Editor/Maps/")
 
 const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
 
@@ -27,7 +27,6 @@ const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
 #var _editor_cam: Camera3D
 #var _editor_viewport: Viewport
 var map_creation_output: Dictionary[String, Variant]
-var map_name: String
 var mouse_tracker: Node3D
 var chunks: Array[Node3D]
 var terrain_brush_active := false:
@@ -71,12 +70,26 @@ func _new_map() -> void:
 
 
 # Generates new map mesh and collider
-func create_new_map() -> void:
-	var map_size: Vector3i = map_creation_output["Size"]
-	#var files := FileAccess.new()
+func create_new_map(map_details: Dictionary[String, Variant]) -> void:
+	#var map_size: Vector3i = map_creation_output["Size"]
 	
-	var heightmap := HeightmapHandler.new(Vector2i(map_size.x, map_size.y))
-	heightmap.gen_new_heightmap(map_size.z)
+	var map_name: String = str(map_details["Name"])
+	var map_path: String = map_storage_path.path_join(map_name)
+	var new_map: FileAccess
+	if not DirAccess.dir_exists_absolute(map_path):
+		var new_folder_test: Error = DirAccess.make_dir_recursive_absolute(map_path)
+		if new_folder_test != Error.OK:
+			printerr(error_string(new_folder_test) + "! Could not create map folder.")
+	
+	var new_map_data := JSON.stringify(map_details, "\t", false)
+	new_map = FileAccess.open(map_path.path_join("map.JSON"), FileAccess.WRITE)
+	new_map.store_string(new_map_data)
+	new_map.close()
+	
+	EditorData.current_map_path = map_path
+
+	#var heightmap := HeightmapHandler.new(Vector2i(map_size.x, map_size.y))
+	#HeightmapHandler.gen_new_heightmap(map_size.z)
 	
 	#var generator := MapGenerator.new()
 	#generator.map = _map

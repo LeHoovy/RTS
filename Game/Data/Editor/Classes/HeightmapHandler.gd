@@ -13,7 +13,7 @@ func _init(map_size: Vector2i) -> void:
 	size = map_size
 
 
-static func gen_new_heightmap(initial_depth: int) -> PackedByteArray:
+static func gen_new_heightmap() -> PackedByteArray:
 	
 	
 	return []
