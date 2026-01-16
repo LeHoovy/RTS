@@ -1,6 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://bke475j3jqbrm"]
+[gd_scene format=3 uid="uid://bke475j3jqbrm"]
 
-[ext_resource type="Script" uid="uid://b4e41ujql4v2e" path="res://Game/Data/Editor/Classes/map_editor.gd" id="1_60gar"]
+[ext_resource type="Script" uid="uid://b4e41ujql4v2e" path="res://Game/Data/Editor/Classes_gdscript/map_editor.gd" id="1_60gar"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_60gar"]
 
