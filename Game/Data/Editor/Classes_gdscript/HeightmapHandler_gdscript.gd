@@ -1,5 +1,5 @@
-class_name HeightmapHandler extends Resource
- 
+class_name HeightmapHandlerGDScript extends Resource
+
 
 #var h_map: Image # Image class for handling the heightmap
 static var cur_hmap: PackedByteArray

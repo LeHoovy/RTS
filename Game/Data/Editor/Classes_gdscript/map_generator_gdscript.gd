@@ -1,4 +1,4 @@
-class_name MapGenerator
+class_name MapGeneratorGDScript
 extends RefCounted
 
 
@@ -7,7 +7,7 @@ var map: Map
 var _chunk_size: int = 8 # Size of each chunk in tiles on one axis. Chunks are square.
 
 
-func _generate_chunk(chunk_pos: Vector2i, chunk_height: int) -> MapChunk:
+func _generate_chunk(chunk_pos: Vector2i, chunk_height: int) -> MapChunkGDScript:
 	#print(chunk_pos)
 	return
 

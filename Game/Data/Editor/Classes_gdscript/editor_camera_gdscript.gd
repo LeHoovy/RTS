@@ -1,4 +1,4 @@
-class_name EditorCamera
+class_name EditorCameraGDScript
 extends Node3D
 
 ## TODO:
@@ -13,9 +13,9 @@ const RADIAN: float = 2 * PI
 @export var max_zoom: float
 @export var zoom_speed: float
 
-var _map_editor: MapEditor
+var _map_editor: MapEditorGDScript
 var _camera: Camera3D
-var _map_data: MapData
+var _map_data: MapDataGDScript
 
 var _rotating_camera := false
 var _moving_camera := false

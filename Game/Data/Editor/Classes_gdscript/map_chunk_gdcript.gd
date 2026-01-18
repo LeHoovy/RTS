@@ -1,5 +1,4 @@
-class_name MapChunk
-extends Node3D
+class_name MapChunkGDScript extends Node3D
 # Use this later to show the map
 # Chunks can probably store their own data such as exploration and triggers
 # Doodads will be stored in chunks

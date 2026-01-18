@@ -1,4 +1,4 @@
-class_name Map
+class_name MapGDScriptGDScript
 extends Node
 # Stores map information
 # Imports and exports map information to jsons in order to save map data
@@ -7,7 +7,7 @@ extends Node
 
 const CHUNK_SIZE := Vector2i(32, 32)
 
-var chunks: Array[MapChunk]
+var chunks: Array[MapChunkGDScript]
 var chunk_container: Node
 
 

@@ -1,11 +1,11 @@
-class_name MapCreationDialogue extends Panel
+class_name MapCreationDialogueGDScript extends Panel
 
 
 signal create_map(map_data: Dictionary[String, Variant])
 
 # Parent window and map editor vars for storage
 var _parent_window: Window
-var _map_editor: MapEditor
+var _map_editor: MapEditorGDScript
 
 var _map_width: OptionButton
 var _map_height: OptionButton
@@ -34,9 +34,9 @@ func _ready() -> void:
 	# And map editor to map editor node
 	_parent_window = get_parent()
 	if Engine.is_editor_hint():
-		_map_editor = get_tree().edited_scene_root.get_node("MapEditor") as MapEditor
+		_map_editor = get_tree().edited_scene_root.get_node("MapEditor") as MapEditorGDScript
 	else:
-		_map_editor = get_parent().get_parent() as MapEditor
+		_map_editor = get_parent().get_parent() as MapEditorGDScript
 	
 	## Set up option input variables
 	# Map Size

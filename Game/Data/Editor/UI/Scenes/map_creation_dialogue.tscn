@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bko3lfheh3efu"]
 
-[ext_resource type="Script" uid="uid://b5xutbu2xkxaj" path="res://Game/Data/Editor/UI/Classes/create_map_dialog.gd" id="1_e4th4"]
+[ext_resource type="Script" uid="uid://b5xutbu2xkxaj" path="res://Game/Data/Editor/UI/Classes/create_map_dialog_gdscript.gd" id="1_e4th4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6gal"]
 content_margin_left = 0.0

@@ -2,7 +2,7 @@
 extends Node
 
 
-@export var editor: MapEditor
+@export var editor: MapEditorGDScript
 var _selected := false
 var selection: EditorSelection
 

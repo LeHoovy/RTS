@@ -1,4 +1,4 @@
-class_name MapData extends JSON
+class_name MapDataGDScript extends JSON
 
 
 const accepted_map_details: Array[String] = [

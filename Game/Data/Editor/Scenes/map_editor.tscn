@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://blif5g8ckxnwo"]
 
-[ext_resource type="Script" uid="uid://b4e41ujql4v2e" path="res://Game/Data/Editor/Classes_gdscript/map_editor.gd" id="1_dprn3"]
+[ext_resource type="Script" uid="uid://b4e41ujql4v2e" path="res://Game/Data/Editor/Classes_gdscript/map_editor_gdscript.gd" id="1_dprn3"]
+[ext_resource type="Script" uid="uid://cj83si6jfui02" path="res://Game/Data/Editor/Classes_gdscript/debug_brush_selector_gdscript.gd" id="2_2pls3"]
 [ext_resource type="Script" uid="uid://dwsegecab102j" path="res://Game/Data/Official/Classes/mouse_tracker.gd" id="2_3ditt"]
-[ext_resource type="Script" uid="uid://cj83si6jfui02" path="res://Game/Data/Editor/Classes_gdscript/debug_brush_selector.gd" id="3_0shqo"]
-[ext_resource type="Script" uid="uid://c5b4swippb8hv" path="res://Game/Data/Editor/Classes_gdscript/editor_camera.gd" id="4_8op8v"]
-[ext_resource type="Script" uid="uid://bivgddi4op53s" path="res://Game/Data/Editor/Classes_gdscript/map.gd" id="4_kso8g"]
+[ext_resource type="Script" uid="uid://c5b4swippb8hv" path="res://Game/Data/Editor/Classes_gdscript/editor_camera_gdscript.gd" id="4_8op8v"]
+[ext_resource type="Script" uid="uid://bivgddi4op53s" path="res://Game/Data/Editor/Classes_gdscript/map_gdscript.gd" id="4_kso8g"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3ditt"]
 
@@ -18,9 +18,8 @@ unique_name_in_owner = true
 script = ExtResource("1_dprn3")
 metadata/_custom_type_script = "uid://b4e41ujql4v2e"
 
-[node name="Debug Brush Selection" type="Node" parent="." unique_id=767216509 node_paths=PackedStringArray("editor")]
-script = ExtResource("3_0shqo")
-editor = NodePath("../MapEditor")
+[node name="Debug Brush Selection" type="Node" parent="." unique_id=767216509]
+script = ExtResource("2_2pls3")
 metadata/_edit_group_ = true
 
 [node name="Map" type="Node" parent="." unique_id=592671696]

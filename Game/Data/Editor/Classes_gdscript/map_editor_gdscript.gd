@@ -1,4 +1,4 @@
-class_name MapEditor
+class_name MapEditorGDScript
 extends Node3D
 # TODO:
 # Make a chunk system
@@ -13,7 +13,7 @@ extends Node3D
 @export var window_size := Vector2(500, 720)
 @export var map_storage_path := String("res://Game/Data/Editor/Maps/")
 
-const CREATE_MAP_DIALOGUE = preload("uid://bko3lfheh3efu")
+const CREATE_MAP_DIALOGUE: PackedScene = preload("uid://bko3lfheh3efu")
 
 
 # Contains points on the map and what other points they are connected to
@@ -63,7 +63,7 @@ func _new_map() -> void:
 		new_map_window.queue_free()
 	) # Close window on cancel code block
 	
-	var creation_panel := CREATE_MAP_DIALOGUE.instantiate() as MapCreationDialogue
+	var creation_panel := CREATE_MAP_DIALOGUE.instantiate() as MapCreationDialogueGDScript
 	creation_panel.create_map.connect(create_new_map)
 	
 	new_map_window.add_child(creation_panel)
@@ -86,7 +86,7 @@ func create_new_map(map_details: Dictionary[String, Variant]) -> void:
 	new_map.store_string(new_map_data)
 	new_map.close()
 	
-	EditorData.current_map_path = map_path
+	EditorDataGDScript.current_map_path = map_path
 
 	#var heightmap := HeightmapHandler.new(Vector2i(map_size.x, map_size.y))
 	#HeightmapHandler.gen_new_heightmap(map_size.z)

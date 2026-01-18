@@ -1,5 +1,5 @@
 #@tool 
-class_name TerrainGenerator
+class_name TerrainGeneratorGDScript
 extends RefCounted
 
 

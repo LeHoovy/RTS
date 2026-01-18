@@ -1,4 +1,4 @@
-class_name EditorData extends Resource
+class_name EditorDataGDScript extends Resource
 
 
 static var map_quick_access_details: Dictionary[String, Variant] = {}
