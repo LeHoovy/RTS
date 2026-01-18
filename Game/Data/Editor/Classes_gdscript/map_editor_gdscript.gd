@@ -38,6 +38,24 @@ var terrain_brush_active := false:
 		mouse_tracker.visible = new_val
 
 
+func _ready() -> void:
+	#_map = %Map
+	#scene_root = get_node("/root").get_child(0)
+	#if Engine.is_editor_hint():
+		#_editor_viewport = EditorInterface.get_editor_viewport_3d()
+		#_editor_cam = _editor_viewport.get_camera_3d()
+	#else:
+	#_editor_viewport = get_viewport()
+	#_editor_cam = _editor_viewport.get_camera_3d()
+	
+	#if not Engine.is_editor_hint():
+		#terrain_brush_active = true
+	#
+	#mouse_tracker = %MouseTracker
+	#_new_map()
+	pass
+
+
 # Open the new map creation dialog when generate map is pressed
 func _new_map() -> void:
 	# position_finder is generated at the same size as the new editor window at the center
@@ -96,17 +114,3 @@ func create_new_map(map_details: Dictionary[String, Variant]) -> void:
 	#generator.scene_root = scene_root
 	#
 	#generator.new_map(map_size)
-
-
-func _ready() -> void:
-	#_map = %Map
-	#scene_root = get_node("/root").get_child(0)
-	#if Engine.is_editor_hint():
-		#_editor_viewport = EditorInterface.get_editor_viewport_3d()
-		#_editor_cam = _editor_viewport.get_camera_3d()
-	#else:
-	#_editor_viewport = get_viewport()
-	#_editor_cam = _editor_viewport.get_camera_3d()
-	
-	mouse_tracker = %MouseTracker
-	_new_map()

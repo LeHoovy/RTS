@@ -39,7 +39,7 @@ window/per_pixel_transparency/allowed=true
 
 [dotnet]
 
-project/assembly_name="Pathfinding test"
+project/assembly_name="Realtime Strategy"
 
 [editor_plugins]
 

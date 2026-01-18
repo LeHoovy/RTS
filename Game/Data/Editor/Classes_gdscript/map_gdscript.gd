@@ -1,4 +1,4 @@
-class_name MapGDScriptGDScript
+class_name MapGDScript
 extends Node
 # Stores map information
 # Imports and exports map information to jsons in order to save map data

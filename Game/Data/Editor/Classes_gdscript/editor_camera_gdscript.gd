@@ -25,7 +25,7 @@ var _zoom: float
 
 
 func _ready() -> void:
-	_map_editor = %MapEditor
+	_map_editor = %MapEditorGDScript
 	_camera = $Lock/Camera
 	_zoom = _camera.position.y
 	#_map_data = %MapData
@@ -84,7 +84,7 @@ func _move_cam(mouse_movement: InputEventMouseMotion) -> void:
 		#position.z = -_map_data.map_size.y / 2 - 4
 
 
-func _change_zoom(zoom_change: int) -> void:
+func _change_zoom(zoom_change: float) -> void:
 	_zoom += zoom_change
 	if _zoom > max_zoom:
 		_zoom = max_zoom

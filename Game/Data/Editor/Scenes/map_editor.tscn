@@ -1,10 +1,10 @@
 [gd_scene format=3 uid="uid://blif5g8ckxnwo"]
 
 [ext_resource type="Script" uid="uid://b4e41ujql4v2e" path="res://Game/Data/Editor/Classes_gdscript/map_editor_gdscript.gd" id="1_dprn3"]
-[ext_resource type="Script" uid="uid://cj83si6jfui02" path="res://Game/Data/Editor/Classes_gdscript/debug_brush_selector_gdscript.gd" id="2_2pls3"]
-[ext_resource type="Script" uid="uid://dwsegecab102j" path="res://Game/Data/Official/Classes/mouse_tracker.gd" id="2_3ditt"]
+[ext_resource type="Script" uid="uid://dwsegecab102j" path="res://Game/Data/Official/Classes/mouse_tracker_gdscript.gd" id="2_3ditt"]
 [ext_resource type="Script" uid="uid://c5b4swippb8hv" path="res://Game/Data/Editor/Classes_gdscript/editor_camera_gdscript.gd" id="4_8op8v"]
 [ext_resource type="Script" uid="uid://bivgddi4op53s" path="res://Game/Data/Editor/Classes_gdscript/map_gdscript.gd" id="4_kso8g"]
+[ext_resource type="Script" uid="uid://ct2m2htg8meom" path="res://Game/Data/Editor/Classes/MapEditor.cs" id="5_2pls3"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3ditt"]
 
@@ -13,13 +13,13 @@
 [node name="Skylight" type="DirectionalLight3D" parent="." unique_id=578920974]
 transform = Transform3D(0.8420572, 0.264558, -0.4700518, 0, 0.8714536, 0.4904779, 0.5393881, -0.41301045, 0.73381376, 0, 0, 0)
 
-[node name="MapEditor" type="Node3D" parent="." unique_id=1614727247]
+[node name="MapEditorGDScript" type="Node3D" parent="." unique_id=1614727247]
 unique_name_in_owner = true
+visible = false
 script = ExtResource("1_dprn3")
 metadata/_custom_type_script = "uid://b4e41ujql4v2e"
 
 [node name="Debug Brush Selection" type="Node" parent="." unique_id=767216509]
-script = ExtResource("2_2pls3")
 metadata/_edit_group_ = true
 
 [node name="Map" type="Node" parent="." unique_id=592671696]
@@ -51,3 +51,7 @@ script = ExtResource("2_3ditt")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MouseTracker" unique_id=24065954]
 mesh = SubResource("BoxMesh_3ditt")
+
+[node name="MapEditor" type="Node3D" parent="." unique_id=2093193906]
+script = ExtResource("5_2pls3")
+metadata/_custom_type_script = "uid://ct2m2htg8meom"
