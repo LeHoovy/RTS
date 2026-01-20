@@ -57,5 +57,8 @@ mesh = SubResource("BoxMesh_3ditt")
 script = ExtResource("5_2pls3")
 metadata/_custom_type_script = "uid://ct2m2htg8meom"
 
+[node name="Test" type="Node" parent="MapEditor" unique_id=392114295]
+unique_name_in_owner = true
+
 [node name="EditorUI" parent="." unique_id=1455942969 instance=ExtResource("6_tu6x0")]
 offset_bottom = 0.0

@@ -10,10 +10,11 @@ public partial class WindowManager : Resource
 	/// This function generates a new popup window containing a dialogue to create a new map.
 	/// </summary>
 	/// <param name="newDialogue">The scene containing the dialogue to be loaded in the new window.</param>
-	/// <param name="rootNode">Must exist within the current scene. If it doesn't exist, the script will fail. Can be any node as long as it exists.</param>
 	/// <param name="winSize">The new window's size.</param>
-	public static void CreateNewDialogueWindow(PackedScene newDialogue, Node rootNode, Vector2I winSize)
+	public static void CreateNewDialogueWindow(PackedScene newDialogue, Vector2I winSize)
 	{
+		Node rootNode = (Engine.GetMainLoop() as SceneTree).Root;
+
 		// Used to find the position for the new map creation dialogue
 		Window windowPosFinder = new Window();
 		windowPosFinder.InitialPosition = Window.WindowInitialPosition.CenterOtherScreen;

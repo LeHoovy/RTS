@@ -49,7 +49,7 @@ public partial class EditorUI : Control
 		NewMapButton = GetNode<Button>("%New");
 		NewMapButton.Pressed += () =>
 		{
-			WindowManager.CreateNewDialogueWindow(GD.Load<PackedScene>("uid://bko3lfheh3efu"), this, new Vector2I(500, 720));
+			WindowManager.CreateNewDialogueWindow(GD.Load<PackedScene>("uid://bko3lfheh3efu"), new Vector2I(500, 720));
 		};
 	}
 }

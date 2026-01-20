@@ -18,7 +18,7 @@ public partial class NewMapDialogue : Panel
 		MapInitialDepthInput = GetNode<OptionButton>("%Depth Option");
 
 		// Close on cancel pressed
-		GetNode<Button>("%Cancel").Pressed += () => QueueFree();
+		GetNode<Button>("%Cancel").Pressed += () => GetParent().QueueFree();
 
 		// Create the map on creation pressed
 		GetNode<Button>("%Confirm").Pressed += () => CreateMap();
@@ -33,7 +33,13 @@ public partial class NewMapDialogue : Panel
 		int mapInitialDepth = MapInitialDepthInput.Selected;
 
 		// Output the map settings for debug purposes
-		GD.Print("name: ", mapName, ", width: ", mapWidth.ToString(), ", height: ", mapHeight.ToString(), ", depth: ", mapInitialDepth.ToString());
+		GD.Print
+		(
+			"name: ", mapName,
+			", width: ", mapWidth.ToString(),
+			", height: ", mapHeight.ToString(),
+			", depth: ", mapInitialDepth.ToString()
+		);
 
 		// Store the map data in a dictionary
 		Godot.Collections.Dictionary<string, Variant> mapData = new Godot.Collections.Dictionary<string, Variant>()
@@ -46,13 +52,31 @@ public partial class NewMapDialogue : Panel
 					{"Height", mapHeight}
 				}
 			},
-			{"Depth", mapInitialDepth}
 		};
 
 		// Store the map data as a json
 		string mapDataJson = Json.Stringify(mapData, "\t");
+		newHeightMap(new(mapWidth, mapHeight, mapInitialDepth));
 
 		// Finish and delete the window
-		QueueFree();
+		GetParent().QueueFree();
+	}
+
+	/// <summary>
+	/// Used for creating a new heightmap for use in loading the map.
+	/// </summary>
+	/// <param name="heightMapSize">X and Y are for the width and height, Z is for the depth.</param>
+	/// <returns>Outputs a heightmap in array form.</returns>
+	protected byte[] newHeightMap(Vector3I heightMapSize)
+	{
+		// Initializes an empty heightmap
+		byte[] heightMap = new byte[heightMapSize.X * heightMapSize.Y];
+
+		for (int pos = 0; pos < heightMap.Length; pos++)
+		{
+			heightMap[pos] = (byte)heightMapSize.Z;
+		}
+
+		return [];
 	}
 }
