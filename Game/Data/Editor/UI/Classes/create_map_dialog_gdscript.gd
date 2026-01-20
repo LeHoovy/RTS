@@ -42,13 +42,13 @@ func _ready() -> void:
 	# Map Size
 	_map_width = get_node("%Width Option") as OptionButton
 	_map_height = get_node("%Height Option") as OptionButton
-	_map_depth = get_node("%Depth option") as OptionButton
+	_map_depth = get_node("%Depth Option") as OptionButton
 	# Map Data
 	_map_name = get_node("%Map Name") as TextEdit
 	
 	# Set up and connect signals of confirmation buttons
-	_create_button = get_node("VBoxContainer/Confirmation/Create") as Button
-	_cancel_button = get_node("VBoxContainer/Confirmation/Cancel") as Button
+	_create_button = get_node("%Confirm") as Button
+	_cancel_button = get_node("%Cancel") as Button
 	_cancel_button.pressed.connect(_on_cancel_pressed)
 	_create_button.pressed.connect(_on_create_pressed)
 

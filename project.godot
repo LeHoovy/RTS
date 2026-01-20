@@ -17,7 +17,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 config/name="RTS"
 config/tags=PackedStringArray("private", "prototype", "real_time_strategy")
 run/main_scene="uid://blif5g8ckxnwo"
-config/features=PackedStringArray("4.6", "Forward Plus")
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 
 [debug]
 
@@ -32,7 +32,7 @@ gdscript/warnings/unsafe_void_return=2
 
 window/size/viewport_width=1920
 window/size/viewport_height=1080
-window/size/mode=3
+window/size/mode=4
 window/size/resizable=false
 window/size/borderless=true
 window/per_pixel_transparency/allowed=true

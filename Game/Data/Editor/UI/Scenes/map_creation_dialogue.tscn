@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://bko3lfheh3efu"]
 
-[ext_resource type="Script" uid="uid://b5xutbu2xkxaj" path="res://Game/Data/Editor/UI/Classes/create_map_dialog_gdscript.gd" id="1_e4th4"]
+[ext_resource type="Script" uid="uid://dpay2xm0h20ih" path="res://Game/Data/Editor/UI/Classes/NewMapDialogue.cs" id="1_e4th4"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_t6gal"]
 content_margin_left = 0.0
@@ -332,7 +332,7 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 metadata/_edit_use_anchors_ = true
 
-[node name="Depth option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4/Control3" unique_id=551129421]
+[node name="Depth Option" type="OptionButton" parent="VBoxContainer/Map Size/HBoxContainer/VBoxContainer/Depth/Control4/Control3" unique_id=551129421]
 unique_name_in_owner = true
 layout_mode = 1
 anchors_preset = 15
@@ -413,7 +413,8 @@ custom_minimum_size = Vector2(50, 0)
 layout_mode = 2
 size_flags_horizontal = 3
 
-[node name="Create" type="Button" parent="VBoxContainer/Confirmation" unique_id=248388547]
+[node name="Confirm" type="Button" parent="VBoxContainer/Confirmation" unique_id=248388547]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(190, 0)
 layout_mode = 2
 size_flags_horizontal = 0
@@ -428,6 +429,7 @@ layout_mode = 2
 size_flags_horizontal = 3
 
 [node name="Cancel" type="Button" parent="VBoxContainer/Confirmation" unique_id=1781081089]
+unique_name_in_owner = true
 custom_minimum_size = Vector2(190, 0)
 layout_mode = 2
 size_flags_horizontal = 4

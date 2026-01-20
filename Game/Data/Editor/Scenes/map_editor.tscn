@@ -5,6 +5,7 @@
 [ext_resource type="Script" uid="uid://c5b4swippb8hv" path="res://Game/Data/Editor/Classes_gdscript/editor_camera_gdscript.gd" id="4_8op8v"]
 [ext_resource type="Script" uid="uid://bivgddi4op53s" path="res://Game/Data/Editor/Classes_gdscript/map_gdscript.gd" id="4_kso8g"]
 [ext_resource type="Script" uid="uid://ct2m2htg8meom" path="res://Game/Data/Editor/Classes/MapEditor.cs" id="5_2pls3"]
+[ext_resource type="PackedScene" uid="uid://u4ut6lkirmov" path="res://Game/Data/Editor/UI/Scenes/editor_ui.tscn" id="6_tu6x0"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3ditt"]
 
@@ -55,3 +56,6 @@ mesh = SubResource("BoxMesh_3ditt")
 [node name="MapEditor" type="Node3D" parent="." unique_id=2093193906]
 script = ExtResource("5_2pls3")
 metadata/_custom_type_script = "uid://ct2m2htg8meom"
+
+[node name="EditorUI" parent="." unique_id=1455942969 instance=ExtResource("6_tu6x0")]
+offset_bottom = 0.0
