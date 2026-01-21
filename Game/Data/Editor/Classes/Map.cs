@@ -4,7 +4,7 @@ using System;
 public partial class Map : Node
 {
 	public const string FilePath = "user://editor/maps";
-	protected Vector2I MapSize;
+	public MapData Data;
 
 	/// <summary>
 	/// Returns the current "Map" node in the scene.
@@ -15,9 +15,17 @@ public partial class Map : Node
 		Node sceneRoot = (Engine.GetMainLoop() as SceneTree).Root.GetChildren()[0];
 		return sceneRoot.GetNode<Map>("%Map");
 	}
-	/* public static void Test()
+
+	public void Load(MapData newMap)
 	{
-		Node sceneRoot = (Engine.GetMainLoop() as SceneTree).Root.GetChildren()[0];
-		GD.Print(sceneRoot.GetNode("%Test").Name);
-	} */
+		// Overwrite and erase the previously loaded map
+		Data = newMap;
+		foreach (Node child in GetChildren())
+		{
+			child.QueueFree();
+		}
+
+		// Create chunk child, with each chunk being 16x16
+		// TODO: Create chunks and give them their data
+	}
 }

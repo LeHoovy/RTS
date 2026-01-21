@@ -1,4 +1,5 @@
 using Godot;
+using Godot.Collections;
 using System;
 
 public partial class NewMapDialogue : Panel
@@ -41,22 +42,29 @@ public partial class NewMapDialogue : Panel
 			", depth: ", mapInitialDepth.ToString()
 		);
 
-		// Store the map data in a dictionary
-		Godot.Collections.Dictionary<string, Variant> mapData = new Godot.Collections.Dictionary<string, Variant>()
+		/* // Store the map data in a dictionary
+		Dictionary<string, Variant> mapData = new Dictionary<string, Variant>()
 		{
 			{"Name", mapName},
 			{
-				"Size", new Godot.Collections.Dictionary<string, Variant>()
+				"Size", new Dictionary<string, Variant>()
 				{
 					{"Width", mapWidth},
 					{"Height", mapHeight}
 				}
 			},
-		};
+		}; */
 
-		// Store the map data as a json
-		string mapDataJson = Json.Stringify(mapData, "\t");
-		newHeightMap(new(mapWidth, mapHeight, mapInitialDepth));
+		// Create a new MapData resource, and put the map details into it
+		MapData mapData = new MapData();
+		mapData.Name = mapName;
+		mapData.Size = new Vector2I(mapWidth, mapHeight);
+
+		// Generate and store a heightmap in the MapData resource
+		mapData.HeightMap = newHeightMap(new(mapWidth, mapHeight, mapInitialDepth));
+
+		// Send the new map's data to the editor map and load it
+		Map.GetMap().Load(mapData);
 
 		// Finish and delete the window
 		GetParent().QueueFree();
