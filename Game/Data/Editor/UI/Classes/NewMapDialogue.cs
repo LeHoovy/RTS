@@ -73,19 +73,41 @@ public partial class NewMapDialogue : Panel
 	/// <summary>
 	/// Used for creating a new heightmap for use in loading the map.
 	/// </summary>
-	/// <param name="heightMapSize">X and Y are for the width and height, Z is for the depth.</param>
+	/// <param name="heightMapSize">X is width, Y is height, Z is initial depth.</param>
 	/// <returns>Outputs a heightmap in array form.</returns>
 	protected byte[] newHeightMap(Vector3I heightMapSize)
 	{
 		// Initializes an empty heightmap
 		byte[] heightMap = new byte[heightMapSize.X * heightMapSize.Y];
 
+		// Used for testing, unneeded otherwise
+		Vector2I mapSize = new Vector2I(heightMapSize.X, heightMapSize.Y);
+
 		// Sets each item to the initial height
 		for (int pos = 0; pos < heightMap.Length; pos++)
 		{
-			heightMap[pos] = (byte)heightMapSize.Z;
+			// Final process, disabled for testing
+			//heightMap[pos] = (byte)heightMapSize.Z;
+
+			// ======== Testing logic ========
+			//  ---- Diagonal diff height ----
+			Vector2I mapPos = new Vector2I // get map pos from pos in heightmap
+			(
+				pos % mapSize.X,
+				(int)Math.Floor(pos / (double)mapSize.X)
+			);
+
+			// Set the height of the current position
+			// Specifically, raise the size by one as you go down and right
+			byte curPosHeight = (byte)Math.Floor(Math.Max(mapPos.X, mapPos.Y) / 16.0);
+			if (mapPos.X % 16 >= mapPos.Y % 16) // Create diagonals
+			{
+				curPosHeight++; // Raise if on the top right of the chunk
+			}
+
+			heightMap[pos] = curPosHeight; // Finally set the current pos to the found height
 		}
 
-		return [];
+		return heightMap;
 	}
 }

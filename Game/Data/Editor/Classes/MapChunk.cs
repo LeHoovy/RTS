@@ -16,7 +16,7 @@ public partial class MapChunk : Node
 		Northeast
 	}
 	public MapChunk[] NeighboringChunks = new MapChunk[8];
-	protected Vector2I Position;
+	protected Vector2I Position = new Vector2I(-1, -1);
 	protected byte[] LocalHeightmap;
 	protected int[] LocalHeightmapPositions;
 
@@ -25,6 +25,31 @@ public partial class MapChunk : Node
 	// size and stuff
 	// local heighmap
 	// some math to figure out where a local heightmap piece is on global heightmap
+
+	public override void _Ready()
+	{
+		base._Ready();
+
+		// Cull if not initialized correctly (through CreateNewChunk())
+		if (
+			LocalHeightmap.Length <= 0 ||
+			LocalHeightmapPositions.Length <= 0 ||
+			Position == new Vector2I(-1, -1)
+		   )
+		{
+			GD.PrintErr("MapChunk not initialized correctly, freeing.");
+			QueueFree();
+		}
+
+		for (int x = 0; x <= 16; x++)
+		{
+			for (int y = 0; y <= 16; y++)
+			{
+				// create chunk mesh helpers at this position
+				// connect to any previous ones within |x-x|=1 and |y-y|=1
+			}
+		}
+	}
 
 	public static MapChunk CreateNewChunk(byte[] globalHeightmap, Vector2I newPos, Vector2I mapSize)
 	{
