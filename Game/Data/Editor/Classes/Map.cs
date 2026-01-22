@@ -20,12 +20,22 @@ public partial class Map : Node
 	{
 		// Overwrite and erase the previously loaded map
 		Data = newMap;
-		foreach (Node child in GetChildren())
+		foreach (Node chunk in GetTree().GetNodesInGroup("Map Chunks"))
 		{
-			child.QueueFree();
+			chunk.RemoveFromGroup("Map Chunks");
+			chunk.QueueFree();
 		}
 
 		// Create chunk child, with each chunk being 16x16
 		// TODO: Create chunks and give them their data
+		for (int x = 0; x < newMap.Size.X / 16; x++)
+		{
+			for (int y = 0; y < newMap.Size.Y / 16; y++)
+			{
+				MapChunk newChunk = MapChunk.CreateNewChunk(newMap.HeightMap, new Vector2I(x, y), newMap.Size);
+				AddChild(newChunk);
+				newChunk.AddToGroup("Map Chunks");
+			}
+		}
 	}
 }

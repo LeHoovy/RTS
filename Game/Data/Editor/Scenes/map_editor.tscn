@@ -9,7 +9,7 @@
 
 [sub_resource type="BoxMesh" id="BoxMesh_3ditt"]
 
-[node name="debug editor" type="Node3D" unique_id=286483857]
+[node name="debug editor" type="Node3D" unique_id=286483857 groups=["Map Chunks"]]
 
 [node name="Skylight" type="DirectionalLight3D" parent="." unique_id=578920974]
 transform = Transform3D(0.8420572, 0.264558, -0.4700518, 0, 0.8714536, 0.4904779, 0.5393881, -0.41301045, 0.73381376, 0, 0, 0)

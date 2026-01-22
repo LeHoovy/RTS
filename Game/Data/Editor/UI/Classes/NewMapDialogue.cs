@@ -80,6 +80,7 @@ public partial class NewMapDialogue : Panel
 		// Initializes an empty heightmap
 		byte[] heightMap = new byte[heightMapSize.X * heightMapSize.Y];
 
+		// Sets each item to the initial height
 		for (int pos = 0; pos < heightMap.Length; pos++)
 		{
 			heightMap[pos] = (byte)heightMapSize.Z;
