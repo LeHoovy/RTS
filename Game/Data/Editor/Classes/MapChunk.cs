@@ -47,6 +47,24 @@ public partial class MapChunk : Node
 			{
 				// create chunk mesh helpers at this position
 				// connect to any previous ones within |x-x|=1 and |y-y|=1
+				ChunkMeshHelper newHelper = new ChunkMeshHelper();
+				newHelper.Position = new Vector2I(x, y);
+				AddChild(newHelper);
+
+				foreach (ChunkMeshHelper child in GetChildren())
+				{
+					if
+					(
+						x - 1 <= child.Position.X &&
+						x + 1 >= child.Position.X &&
+						y + 1 >= child.Position.Y &&
+						y - 1 <= child.Position.Y
+					)
+					{
+
+						newHelper.ConnectHelper(child, );
+					}
+				}
 			}
 		}
 	}
@@ -86,6 +104,11 @@ public partial class MapChunk : Node
 
 		// Finish
 		return newChunk;
+	}
+
+	protected void CheckTriangle()
+	{
+		
 	}
 
 	/// <summary>

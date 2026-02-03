@@ -25,8 +25,10 @@ public partial class ChunkMeshHelper : Node
 		Northeast
 	}
 
+	public ChunkMeshHelper[] Neighbors = new ChunkMeshHelper[8];
 	public ChunkMeshHelper[] Connections = new ChunkMeshHelper[8];
 	public byte[] TileHeights = new byte[4];
+	public Vector2I Position;
 
 	/// <summary>
 	/// Connects the target helper to this helper.
@@ -34,7 +36,7 @@ public partial class ChunkMeshHelper : Node
 	/// </summary>
 	/// <param name="toConnect">The ChunkMeshHelper to connect to.</param>
 	/// <param name="connectDir">The direction to connect in.</param>
-	public void ConnectHelpers(ChunkMeshHelper toConnect, byte connectDir)
+	public void ConnectHelper(ChunkMeshHelper toConnect, byte connectDir)
 	{
 		Connections[connectDir] = toConnect;
 		toConnect.Connections[connectDir + 4 % 8] = this;
@@ -67,11 +69,12 @@ public partial class ChunkMeshHelper : Node
 		}
 
 		// Only run when this node is not a corner
+		// Re-connect each piece
 		for (byte connected = 0; connected < 8; connected++)
 		{
 			if (Connections[connected] != null && Connections[connected + 4 % 8] != null)
 			{
-				Connections[connected].ConnectHelpers
+				Connections[connected].ConnectHelper
 				(
 					Connections[connected + 4 % 8], (byte)(connected + 4 % 8)
 				);
@@ -82,6 +85,6 @@ public partial class ChunkMeshHelper : Node
 			}
 		}
 
-		QueueFree(); // Cull this node.
+		//QueueFree(); // Cull this node.
 	}
 }
