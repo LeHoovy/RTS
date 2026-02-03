@@ -1,34 +1,28 @@
 [gd_scene format=3 uid="uid://blif5g8ckxnwo"]
 
-[ext_resource type="Script" uid="uid://b4e41ujql4v2e" path="res://Game/Data/Editor/Classes_gdscript/map_editor_gdscript.gd" id="1_dprn3"]
 [ext_resource type="Script" uid="uid://dwsegecab102j" path="res://Game/Data/Official/Classes/mouse_tracker_gdscript.gd" id="2_3ditt"]
 [ext_resource type="Script" uid="uid://c5b4swippb8hv" path="res://Game/Data/Editor/Classes_gdscript/editor_camera_gdscript.gd" id="4_8op8v"]
 [ext_resource type="Script" uid="uid://bivgddi4op53s" path="res://Game/Data/Editor/Classes_gdscript/map_gdscript.gd" id="4_kso8g"]
 [ext_resource type="Script" uid="uid://ct2m2htg8meom" path="res://Game/Data/Editor/Classes/MapEditor.cs" id="5_2pls3"]
 [ext_resource type="PackedScene" uid="uid://u4ut6lkirmov" path="res://Game/Data/Editor/UI/Scenes/editor_ui.tscn" id="6_tu6x0"]
+[ext_resource type="Script" uid="uid://b3vr402ygu4g6" path="res://Game/Data/Editor/Classes/Map.cs" id="7_vcjhx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3ditt"]
 
-[node name="debug editor" type="Node3D" unique_id=286483857 groups=["Map Chunks"]]
+[node name="debug editor" type="Node3D" unique_id=286483857]
 
 [node name="Skylight" type="DirectionalLight3D" parent="." unique_id=578920974]
 transform = Transform3D(0.8420572, 0.264558, -0.4700518, 0, 0.8714536, 0.4904779, 0.5393881, -0.41301045, 0.73381376, 0, 0, 0)
 
-[node name="MapEditorGDScript" type="Node3D" parent="." unique_id=1614727247]
-unique_name_in_owner = true
-visible = false
-script = ExtResource("1_dprn3")
-metadata/_custom_type_script = "uid://b4e41ujql4v2e"
-
 [node name="Debug Brush Selection" type="Node" parent="." unique_id=767216509]
 metadata/_edit_group_ = true
 
-[node name="Map" type="Node" parent="." unique_id=592671696]
+[node name="MapGDScript" type="Node" parent="." unique_id=592671696]
 unique_name_in_owner = true
 script = ExtResource("4_kso8g")
 metadata/_custom_type_script = "uid://bivgddi4op53s"
 
-[node name="Chunks" type="Node" parent="Map" unique_id=1066998001]
+[node name="Chunks" type="Node" parent="MapGDScript" unique_id=1066998001]
 
 [node name="CameraOrigin" type="Node3D" parent="." unique_id=61754853]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
@@ -49,11 +43,13 @@ transform = Transform3D(1, 0, 0, 0, -8.940697e-08, 1, 0, -1, -8.940697e-08, 0, 2
 unique_name_in_owner = true
 visible = false
 script = ExtResource("2_3ditt")
+metadata/_edit_lock_ = true
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="MouseTracker" unique_id=24065954]
 mesh = SubResource("BoxMesh_3ditt")
 
 [node name="MapEditor" type="Node3D" parent="." unique_id=2093193906]
+unique_name_in_owner = true
 script = ExtResource("5_2pls3")
 metadata/_custom_type_script = "uid://ct2m2htg8meom"
 
@@ -62,3 +58,8 @@ unique_name_in_owner = true
 
 [node name="EditorUI" parent="." unique_id=1455942969 instance=ExtResource("6_tu6x0")]
 offset_bottom = 0.0
+
+[node name="Map" type="Node" parent="." unique_id=93719319]
+unique_name_in_owner = true
+script = ExtResource("7_vcjhx")
+metadata/_custom_type_script = "uid://b3vr402ygu4g6"

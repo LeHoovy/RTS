@@ -41,16 +41,20 @@ public partial class MapChunk : Node
 			QueueFree();
 		}
 
-		for (int x = 0; x <= 16; x++)
+		GD.Print("Chunk Pos: ");
+		GD.Print(Position.ToString());
+		GD.Print("Helpers Pos:");
+		for (int y = 0; y <= 16; y++)
 		{
-			for (int y = 0; y <= 16; y++)
+			for (int x = 0; x <= 16; x++)
 			{
+				GD.Print((new Vector2I(x, y)).ToString());
+
 				// create chunk mesh helpers at this position
 				// connect to any previous ones within |x-x|=1 and |y-y|=1
 				ChunkMeshHelper newHelper = new ChunkMeshHelper();
 				Vector2I newHelperPos = new Vector2I(x, y);
 				newHelper.Position = new Vector2I(newHelperPos.X, newHelperPos.Y);
-				AddChild(newHelper);
 
 				foreach (ChunkMeshHelper child in GetChildren())
 				{
@@ -62,12 +66,22 @@ public partial class MapChunk : Node
 						y - 1 <= child.Position.Y
 					)
 					{
+						Vector2I relPos = new Vector2I(0, 0);
+						relPos.X = newHelperPos.X - child.Position.X;
+						relPos.Y = newHelperPos.Y - child.Position.Y;
+
 						// Find the direction
-						newHelper.ConnectHelper(child, (byte)(Math.Atan(newHelperPos.Y / newHelperPos.X) / Math.PI * 4));
+						//GD.Print(relPos.ToString());
+						//GD.Print(((Vector2)relPos).Angle() / Math.PI * 4);
+						//GD.Print((((Vector2)newHelperPos).AngleTo((Vector2)child.Position) * 4).ToString());
+						newHelper.ConnectHelper(child, (byte)Math.Floor(((Vector2)relPos).Angle() / Math.PI * 4));
 					}
 				}
+
+				AddChild(newHelper);
 			}
 		}
+		GD.Print();
 	}
 
 	public static MapChunk CreateNewChunk(byte[] globalHeightmap, Vector2I newPos, Vector2I mapSize)

@@ -46,6 +46,18 @@ public partial class ChunkMeshHelper : Node
 	/// Check to see if this terrain corner finder should be kept or deleted.
 	/// Only keep this node if there is at least one corner.
 	/// Culls the node if it is not a corner.
+	/// 
+	/// TODO: If it is a corner, check if both connected neighbors are lines. If they are, keep this.
+	/// Forms 90 degree corners
+	/// TODO: If it is a line, check if either connected neighbor is a corner that stays.
+	/// Should form 45 degree corners
+	/// i.e something like this:
+	/// XX XX -> \X XX		XXXX    \XXX
+	/// #X XX -> #\ \X      #XXX -> #\XX
+	///       ->        OR  ####    ####
+	/// #X XX -> #\ \X
+	/// ## ## -> ## ##
+	/// (Dont forget that each node overlaps with its direct neighbors)
 	/// </summary>
 	public void KeepIfCorner()
 	{

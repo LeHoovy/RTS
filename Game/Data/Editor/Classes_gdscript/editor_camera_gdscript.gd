@@ -13,7 +13,7 @@ const RADIAN: float = 2 * PI
 @export var max_zoom: float
 @export var zoom_speed: float
 
-var _map_editor: MapEditorGDScript
+var _map_editor: MapEditor
 var _camera: Camera3D
 var _map_data: MapDataGDScript
 
@@ -25,7 +25,7 @@ var _zoom: float
 
 
 func _ready() -> void:
-	_map_editor = %MapEditorGDScript
+	_map_editor = %MapEditor
 	_camera = $Lock/Camera
 	_zoom = _camera.position.y
 	#_map_data = %MapData
@@ -100,11 +100,11 @@ func _input(event: InputEvent) -> void:
 		if (event as InputEventMouseButton).button_index == MOUSE_BUTTON_RIGHT:
 			if event.is_pressed():
 				_rotating_camera = true
-				_map_editor.terrain_brush_active = false
+				#_map_editor.terrain_brush_active = false
 				print("Allowing camera rotation")
 			else:
 				_rotating_camera = false
-				_map_editor.terrain_brush_active = true
+				#_map_editor.terrain_brush_active = true
 				print("Disallowing camera rotation")
 			
 		# Enable/disable camera movement if the correct button is held
@@ -114,11 +114,11 @@ func _input(event: InputEvent) -> void:
 			):
 			if event.is_pressed():
 				_moving_camera = true
-				_map_editor.terrain_brush_active = false
+				#_map_editor.terrain_brush_active = false
 				print("Allowing camera movement")
 			else:
 				_moving_camera = false
-				_map_editor.terrain_brush_active = true
+				#_map_editor.terrain_brush_active = true
 				print("Disallowing camera movement")
 			
 		# Zoom in and out
