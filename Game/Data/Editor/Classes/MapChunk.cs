@@ -48,7 +48,8 @@ public partial class MapChunk : Node
 				// create chunk mesh helpers at this position
 				// connect to any previous ones within |x-x|=1 and |y-y|=1
 				ChunkMeshHelper newHelper = new ChunkMeshHelper();
-				newHelper.Position = new Vector2I(x, y);
+				Vector2I newHelperPos = new Vector2I(x, y);
+				newHelper.Position = new Vector2I(newHelperPos.X, newHelperPos.Y);
 				AddChild(newHelper);
 
 				foreach (ChunkMeshHelper child in GetChildren())
@@ -61,8 +62,8 @@ public partial class MapChunk : Node
 						y - 1 <= child.Position.Y
 					)
 					{
-
-						newHelper.ConnectHelper(child, );
+						// Find the direction
+						newHelper.ConnectHelper(child, (byte)(Math.Atan(newHelperPos.Y / newHelperPos.X) / Math.PI * 4));
 					}
 				}
 			}
