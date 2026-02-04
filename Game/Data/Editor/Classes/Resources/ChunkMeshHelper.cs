@@ -28,6 +28,7 @@ public partial class ChunkMeshHelper : Node
 	public ChunkMeshHelper[] Neighbors = new ChunkMeshHelper[8];
 	public ChunkMeshHelper[] Connections = new ChunkMeshHelper[8];
 	public byte[] TileHeights = new byte[4];
+	public byte[] ExtendedHeightmap;
 	public Vector2I Position;
 
 	/// <summary>
@@ -52,16 +53,16 @@ public partial class ChunkMeshHelper : Node
 	/// TODO: If it is a line, check if either connected neighbor is a corner that stays.
 	/// Should form 45 degree corners
 	/// i.e something like this:
-	/// XX XX -> \X XX		XXXX    \XXX
-	/// #X XX -> #\ \X      #XXX -> #\XX
-	///       ->        OR  ####    ####
-	/// #X XX -> #\ \X
+	/// XX XX -> \X XX		XXXX      \XXX
+	/// #X XX -> #\  \X             #XXX -> #\XX
+	///       ->        OR               ####      ####
+	/// #X XX -> #\  \X
 	/// ## ## -> ## ##
 	/// (Dont forget that each node overlaps with its direct neighbors)
 	/// </summary>
-	public void KeepIfCorner()
+	public void CheckIfCorner(bool reconnectNeighbors = false)
 	{
-		bool isCorner = false; // If this node is true, keep it. Else, delete it.
+		bool isCorner = false; // Set to true if any edge case
 
 		for (int tile = 0; tile < 4; tile++)
 		{
@@ -98,5 +99,37 @@ public partial class ChunkMeshHelper : Node
 		}
 
 		//QueueFree(); // Cull this node.
+	}
+
+
+	/// <summary>
+	/// Check if this helper is an edge (not a corner) or if it is in a flat space and still does not need to be kept.
+	/// </summary>
+	/// <param name="level"></param>
+	/// <param name="recursive"></param>
+	/// <returns></returns>
+	public bool HelperIsRedundant(int level, bool recursive = false)
+	{
+
+		return false;
+	}
+
+
+	public bool IsCorner(bool recursive = false)
+	{
+		bool isCorner = false;
+
+		for (int tile = 0; tile < 4; tile++)
+		{
+			if ( // Check if any tile is on its own.
+				TileHeights[tile + 1 % 4] == TileHeights[tile] &&
+				TileHeights[tile + 3 % 4] == TileHeights[tile]
+			   )
+			{
+				isCorner = true;
+			}
+		}
+
+		return false;
 	}
 }
