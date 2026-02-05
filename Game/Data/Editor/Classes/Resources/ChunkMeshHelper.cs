@@ -24,6 +24,14 @@ public partial class ChunkMeshHelper : Node
 		Northwest,
 		Northeast
 	}
+	protected enum HelperType
+	{
+		Flat,
+		Corner,
+		Edge,
+		EdgeDiagonal,
+		Edgecorner // has one straight edge and a corner (three levels), might be redundant/just use corner
+	}
 
 	public ChunkMeshHelper[] Neighbors = new ChunkMeshHelper[8];
 	public ChunkMeshHelper[] Connections = new ChunkMeshHelper[8];
@@ -64,7 +72,7 @@ public partial class ChunkMeshHelper : Node
 	{
 		bool isCorner = false; // Set to true if any edge case
 
-		for (int tile = 0; tile < 4; tile++)
+		for (int tile = 0; tile < TileHeights.Length; tile++)
 		{
 			if ( // Only keep if the neighboring tiles of a tile are both not equal height
 				TileHeights[tile + 1] == TileHeights[tile] &&
@@ -83,7 +91,7 @@ public partial class ChunkMeshHelper : Node
 
 		// Only run when this node is not a corner
 		// Re-connect each piece
-		for (byte connected = 0; connected < 8; connected++)
+		for (byte connected = 0; connected < Connections.Length; connected++)
 		{
 			if (Connections[connected] != null && Connections[connected + 4 % 8] != null)
 			{
@@ -105,13 +113,47 @@ public partial class ChunkMeshHelper : Node
 	/// <summary>
 	/// Check if this helper is an edge (not a corner) or if it is in a flat space and still does not need to be kept.
 	/// </summary>
-	/// <param name="level"></param>
+	/// <param name="level">int level, (may not be used)</param>
 	/// <param name="recursive"></param>
-	/// <returns></returns>
-	public bool HelperIsRedundant(int level, bool recursive = false)
+	/// <returns>What type the helper is from the HelperType enum.</returns>
+	public int GetType(bool recursive = false)
 	{
+		// Runs if the tile is completely flat
+		if (TileHeights[0] == TileHeights[1] &&
+		TileHeights[1] == TileHeights[2] &&
+		TileHeights[2] == TileHeights[3] &&
+		TileHeights[3] == TileHeights[0])
+		{
+			return HelperType.Flat;
+		}
 
-		return false;
+		// First check if this contains any corners
+		for (int tile = 0; tile < TileHeights.Length; tile++)
+		{
+			// If the other three tiles are all equal and the first is not, then it is a corner
+			if (TileHeights[tile % 4] != TileHeights[tile + 1 % 4] &&
+			TileHeights[tile + 1 % 4] == TileHeights[tile + 2 % 4] &&
+			TileHeights[tile + 2 % 4] == TileHeights[tile + 3 % 4])
+			{
+				if (recursive)
+				{
+					for (int neighbor = 0; neighbor < 2; neighbor++)
+					{
+						// if either connection is just null, keep as a corner
+						Connections[(tile + 2) * 2].GetType(); // if either of these result in an edge
+						Connections[(tile + 3) * 2].GetType(); // then keep this as a corner
+					}
+				}
+				else
+				{
+					return HelperType.EdgeDiagonal;
+				}
+			}
+		}
+
+		// Check if we are an edge or need to be changed into a corner
+
+		return HelperType.Corner;
 	}
 
 
@@ -119,7 +161,7 @@ public partial class ChunkMeshHelper : Node
 	{
 		bool isCorner = false;
 
-		for (int tile = 0; tile < 4; tile++)
+		for (int tile = 0; tile < TileHeights.Length; tile++)
 		{
 			if ( // Check if any tile is on its own.
 				TileHeights[tile + 1 % 4] == TileHeights[tile] &&

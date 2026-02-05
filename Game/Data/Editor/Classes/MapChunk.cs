@@ -1,4 +1,5 @@
 using Godot;
+using static Godot.GD;
 using System;
 using System.Collections.Generic;
 
@@ -37,18 +38,18 @@ public partial class MapChunk : Node
 			Position == new Vector2I(-1, -1)
 		   )
 		{
-			GD.PrintErr("MapChunk not initialized correctly, freeing.");
+			PrintErr("MapChunk not initialized correctly, freeing.");
 			QueueFree();
 		}
 
-		GD.Print("Chunk Pos: ");
-		GD.Print(Position.ToString());
-		GD.Print("Helpers Pos:");
+		Print("Chunk Pos: ");
+		Print(Position.ToString());
+		Print("Helpers Pos:");
 		for (int y = 0; y <= 16; y++)
 		{
 			for (int x = 0; x <= 16; x++)
 			{
-				GD.Print((new Vector2I(x, y)).ToString());
+				Print((new Vector2I(x, y)).ToString());
 
 				// create chunk mesh helpers at this position
 				// connect to any previous ones within |x-x|=1 and |y-y|=1
@@ -71,9 +72,9 @@ public partial class MapChunk : Node
 						relPos.Y = newHelperPos.Y - child.Position.Y;
 
 						// Find the direction
-						//GD.Print(relPos.ToString());
-						//GD.Print(((Vector2)relPos).Angle() / Math.PI * 4);
-						//GD.Print((((Vector2)newHelperPos).AngleTo((Vector2)child.Position) * 4).ToString());
+						//Print(relPos.ToString());
+						//Print(((Vector2)relPos).Angle() / Math.PI * 4);
+						//Print((((Vector2)newHelperPos).AngleTo((Vector2)child.Position) * 4).ToString());
 						newHelper.ConnectHelper(child, (byte)Math.Floor(((Vector2)relPos).Angle() / Math.PI * 4));
 					}
 				}
@@ -81,7 +82,7 @@ public partial class MapChunk : Node
 				AddChild(newHelper);
 			}
 		}
-		GD.Print();
+		Print();
 	}
 
 	public static MapChunk CreateNewChunk(byte[] globalHeightmap, Vector2I newPos, Vector2I mapSize)
@@ -89,8 +90,8 @@ public partial class MapChunk : Node
 		// Create the new chunk
 		MapChunk newChunk = new MapChunk();
 		newChunk.Position = newPos;
-		List<byte> newLocalHeightmap = [];
-		List<int> newLocalHeightmapPositions = [];
+		List<byte> newLocalHeightmap = new();
+		List<int> newLocalHeightmapPositions = new();
 		
 
 		// ------ Calculate the local heightmap ------
