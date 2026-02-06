@@ -124,7 +124,7 @@ public partial class ChunkMeshHelper : Node
 		TileHeights[2] == TileHeights[3] &&
 		TileHeights[3] == TileHeights[0])
 		{
-			return HelperType.Flat;
+			return (int)HelperType.Flat;
 		}
 
 		// First check if this contains any corners
@@ -140,20 +140,27 @@ public partial class ChunkMeshHelper : Node
 					for (int neighbor = 0; neighbor < 2; neighbor++)
 					{
 						// if either connection is just null, keep as a corner
-						Connections[(tile + 2) * 2].GetType(); // if either of these result in an edge
-						Connections[(tile + 3) * 2].GetType(); // then keep this as a corner
+						if (Connections[(tile + 2) * 2].GetType() == (int)HelperType.Edge || // if either of these result in an edge
+						Connections[(tile + 3) * 2].GetType() == (int)HelperType.Edge) // then keep this as a corner
+						{
+							return (int)HelperType.Corner;
+						}
 					}
 				}
-				else
-				{
-					return HelperType.EdgeDiagonal;
-				}
+
+				return (int)HelperType.EdgeDiagonal;
+			}
+
+			if (TileHeights[tile % 4] == TileHeights[tile + 1 % 4] &&
+			TileHeights[tile + 2 % 4] == TileHeights[tile + 3 % 4])
+			{
+				return (int)HelperType.Edge;
 			}
 		}
 
 		// Check if we are an edge or need to be changed into a corner
 
-		return HelperType.Corner;
+		return (int)HelperType.Corner;
 	}
 
 
