@@ -20,6 +20,7 @@ public partial class MapChunk : Node
 	protected Vector2I Position = new Vector2I(-1, -1);
 	protected byte[] LocalHeightmap;
 	protected int[] LocalHeightmapPositions;
+	protected ChunkCorner[] ChunkCorners = new ChunkCorner[289];
 
 	// TODO: this whole class
 	// position vector2i
@@ -53,33 +54,34 @@ public partial class MapChunk : Node
 
 				// create chunk mesh helpers at this position
 				// connect to any previous ones within |x-x|=1 and |y-y|=1
-				ChunkMeshHelper newHelper = new ChunkMeshHelper();
-				Vector2I newHelperPos = new Vector2I(x, y);
-				newHelper.Position = new Vector2I(newHelperPos.X, newHelperPos.Y);
+				ChunkCorner newCorner = new ChunkCorner();
+				Vector2I newCornerPos = new Vector2I(x, y);
+				newCorner.Position = new Vector2I(newCornerPos.X, newCornerPos.Y);
 
-				foreach (ChunkMeshHelper child in GetChildren())
+				foreach (ChunkCorner corner in ChunkCorners)
 				{
 					if
 					(
-						x - 1 <= child.Position.X &&
-						x + 1 >= child.Position.X &&
-						y + 1 >= child.Position.Y &&
-						y - 1 <= child.Position.Y
+						x - 1 <= corner.Position.X &&
+						x + 1 >= corner.Position.X &&
+						y + 1 >= corner.Position.Y &&
+						y - 1 <= corner.Position.Y
 					)
 					{
 						Vector2I relPos = new Vector2I(0, 0);
-						relPos.X = newHelperPos.X - child.Position.X;
-						relPos.Y = newHelperPos.Y - child.Position.Y;
+						relPos.X = newCornerPos.X - corner.Position.X;
+						relPos.Y = newCornerPos.Y - corner.Position.Y;
 
 						// Find the direction
 						//Print(relPos.ToString());
 						//Print(((Vector2)relPos).Angle() / Math.PI * 4);
-						//Print((((Vector2)newHelperPos).AngleTo((Vector2)child.Position) * 4).ToString());
-						newHelper.ConnectHelper(child, (byte)Math.Floor(((Vector2)relPos).Angle() / Math.PI * 4));
+						//Print((((Vector2)newCornerPos).AngleTo((Vector2)child.Position) * 4).ToString());
+						newCorner.ConnectHelper(corner, (byte)Math.Floor(((Vector2)relPos).Angle() / Math.PI * 4));
 					}
 				}
 
-				AddChild(newHelper);
+				//AddChild(newCorner);
+				ChunkCorners[x + (y * 17)] = newCorner;
 			}
 		}
 		Print();

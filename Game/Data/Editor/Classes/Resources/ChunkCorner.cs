@@ -4,7 +4,7 @@ using System;
 /// <summary>
 /// Used to find terrain corners.
 /// </summary>
-public partial class ChunkMeshHelper : Node
+public partial class ChunkCorner : Resource
 {
 	public enum ConnectionDir
 	{
@@ -36,8 +36,9 @@ public partial class ChunkMeshHelper : Node
 	public ChunkMeshHelper[] Neighbors = new ChunkMeshHelper[8];
 	public ChunkMeshHelper[] Connections = new ChunkMeshHelper[8];
 	public byte[] TileHeights = new byte[4];
-	public byte[] ExtendedHeightmap;
-	public Vector2I Position;
+	//public byte[] ExtendedHeightmap;
+	//public Vector2I Position;
+	public HelperType Type;
 
 	/// <summary>
 	/// Connects the target helper to this helper.
@@ -45,12 +46,71 @@ public partial class ChunkMeshHelper : Node
 	/// </summary>
 	/// <param name="toConnect">The ChunkMeshHelper to connect to.</param>
 	/// <param name="connectDir">The direction to connect in.</param>
-	public void ConnectHelper(ChunkMeshHelper toConnect, byte connectDir)
+	public void ConnectHelper(ChunkMeshHelper toConnect, byte connectDir, bool setNeighbors = false)
 	{
 		Connections[connectDir] = toConnect;
-		toConnect.Connections[connectDir + 4 % 8] = this;
+		if (toConnect != null)
+		{
+			toConnect.Connections[connectDir + 4 % 8] = this;
+		}
+
+		// If set neighbors is set to true, allow overwriting the neighbors arr too. Used during setup.
+		if (setNeighbors)
+		{
+			Neighbors[connectDir] = toConnect;
+			if (toConnect != null) // Will occasionally be null on the edge of the map.
+			{
+				toConnect.Connections[connectDir + 4 % 8] = this;
+			}
+		}
 	}
 
+	// Disconnects this helper from its connections, and overwrites those connections with this neighbors previous connections
+	public void DisconnectHelper(bool fullDisconnect = false)
+	{
+		for (int connection = 0; connection < Connections.Length(); connection++)
+		{
+			// Get the connected node in each direction
+			// Then set what should be connected to this to what is connected to this in that same direction
+			ChunkMeshHelper connected = Connections[connection];
+			connected.Connections[connection + 4 % 8] = Connections[connection + 4 % 8];
+
+			/* Technically safer but this shouldn't ever be needed, keeping for future reference:
+			for (int findThis = 0; findThis < connection.Connections.Length(); findThis++)
+			{
+				if (connected.Connections[findThis] == this)
+				{
+					connected.Connections[findThis] = Connections[findThis];
+					break;
+				}
+			}
+			*/
+		}
+
+		if (fullDisconnect)
+		{
+			for (int connection = 0; connection < Connections.Length(); connection++)
+			{
+				// Get the connected node in each direction
+				// Then set what should be connected to this to what is connected to this in that same direction
+				ChunkMeshHelper connected = Neighbors[connection];
+				connected.Neighbors[connection + 4 % 8] = null;
+			}
+
+			QueueFree();
+		}
+	}
+
+	public void Setup()
+	{
+		Type = GetType(true);
+		if (Type != HelperType.Corner)
+		{
+			DisconnectHelper();
+		}
+	}
+
+	/*
 	/// <summary>
 	/// Check to see if this terrain corner finder should be kept or deleted.
 	/// Only keep this node if there is at least one corner.
@@ -107,7 +167,7 @@ public partial class ChunkMeshHelper : Node
 		}
 
 		//QueueFree(); // Cull this node.
-	}
+	}*/
 
 
 	/// <summary>
@@ -116,7 +176,7 @@ public partial class ChunkMeshHelper : Node
 	/// <param name="level">int level, (may not be used)</param>
 	/// <param name="recursive"></param>
 	/// <returns>What type the helper is from the HelperType enum.</returns>
-	public int GetType(bool recursive = false)
+	public HelperType GetType(bool recursive = false)
 	{
 		// Runs if the tile is completely flat
 		if (TileHeights[0] == TileHeights[1] &&
@@ -140,8 +200,13 @@ public partial class ChunkMeshHelper : Node
 					for (int neighbor = 0; neighbor < 2; neighbor++)
 					{
 						// if either connection is just null, keep as a corner
-						Connections[(tile + 2) * 2].GetType(); // if either of these result in an edge
-						Connections[(tile + 3) * 2].GetType(); // then keep this as a corner
+						//Connections[(tile + 2) * 2].GetType(); // if either of these result in an edge
+						//Connections[(tile + 3) * 2].GetType(); // then keep this as a corner
+						if (Connections[(tile + 2) * 2].GetType() == HelperType.Edge ||
+						Connections[(tile + 3) * 2].GetType() == HelperType.Edge)
+						{
+							return HelperType.Corner;
+						}
 					}
 				}
 				else
@@ -157,7 +222,7 @@ public partial class ChunkMeshHelper : Node
 	}
 
 
-	public bool IsCorner(bool recursive = false)
+	/*public bool IsCorner(bool recursive = false)
 	{
 		bool isCorner = false;
 
@@ -173,5 +238,5 @@ public partial class ChunkMeshHelper : Node
 		}
 
 		return false;
-	}
+	}*/
 }
