@@ -16,11 +16,14 @@ public partial class MapChunk : Node
 		North,
 		Northeast
 	}
+
+	[Export]
+	public TerrainChunkCorner[] ChunkCorners = new TerrainChunkCorner[289];
+
 	public MapChunk[] NeighboringChunks = new MapChunk[8];
 	protected Vector2I Position = new Vector2I(-1, -1);
 	protected byte[] LocalHeightmap;
 	protected int[] LocalHeightmapPositions;
-	protected ChunkCorner[] ChunkCorners = new ChunkCorner[289];
 
 	// TODO: this whole class
 	// position vector2i
@@ -54,23 +57,32 @@ public partial class MapChunk : Node
 
 				// create chunk mesh helpers at this position
 				// connect to any previous ones within |x-x|=1 and |y-y|=1
-				ChunkCorner newCorner = new ChunkCorner();
-				Vector2I newCornerPos = new Vector2I(x, y);
-				newCorner.Position = new Vector2I(newCornerPos.X, newCornerPos.Y);
+				TerrainChunkCorner newCorner = new TerrainChunkCorner();
+				//Vector2I newCornerPos = new Vector2I(x, y);
+				newCorner.Position = new Vector2I(x, y);
 
-				foreach (ChunkCorner corner in ChunkCorners)
+				// Pass the heightmap to the corner
+				for (byte tile = 0; tile < newCorner.TileHeights.Length(); tile++)
 				{
-					if
-					(
-						x - 1 <= corner.Position.X &&
+					// Check if it is on the edge of the chunk
+					Vector2 tileRelPos = new Vector2(x + (((tile % 2) - 0.5) * 2),
+						y + ((Math.Floor((double)tile / 2) - 0.5) * 2)
+					);
+					newCorner.TileHeights[tile] = GetHeightAtPos(tileRelPos);
+				}
+
+
+				// Connect the current corner to any already existing corners
+				foreach (TerrainChunkCorner corner in ChunkCorners)
+				{
+					if (x - 1 <= corner.Position.X &&
 						x + 1 >= corner.Position.X &&
 						y + 1 >= corner.Position.Y &&
-						y - 1 <= corner.Position.Y
-					)
+						y - 1 <= corner.Position.Y)
 					{
 						Vector2I relPos = new Vector2I(0, 0);
-						relPos.X = newCornerPos.X - corner.Position.X;
-						relPos.Y = newCornerPos.Y - corner.Position.Y;
+						relPos.X = x - corner.Position.X;
+						relPos.Y = y - corner.Position.Y;
 
 						// Find the direction
 						//Print(relPos.ToString());
@@ -86,6 +98,23 @@ public partial class MapChunk : Node
 		}
 		Print();
 	}
+
+
+	// Input a tile position, output the height that is at that position
+	public byte? GetHeightAtPos(Vector2I tilePos)
+	{
+		if (tilePos.X < 0 or tilePos.Y > 16)
+		{
+			return null;
+		}
+		if (tilePos.Y < 0 or tilePos.Y > 16)
+		{
+			return null;
+		}
+
+		return (byte)(tilePos.X + (TilePos.Y * 16));
+	}
+
 
 	public static MapChunk CreateNewChunk(byte[] globalHeightmap, Vector2I newPos, Vector2I mapSize)
 	{
@@ -124,10 +153,18 @@ public partial class MapChunk : Node
 		return newChunk;
 	}
 
-	protected void CheckTriangle()
+
+
+	public void DeleteTerrainCorner(TerrainChunkCorner corner)
+	{
+		ChunkCorners[ChunkCorners.IndexOf(corner)] = null;
+	}
+
+
+	/*protected void CheckTriangle()
 	{
 		
-	}
+	}*/
 
 	/// <summary>
 	/// Replaces a neighboring chunk with a new neighboring MapChunk, and replaces it's corrosponding neighbor with this MapChunk.

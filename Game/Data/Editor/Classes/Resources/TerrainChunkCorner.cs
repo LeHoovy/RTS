@@ -4,7 +4,7 @@ using System;
 /// <summary>
 /// Used to find terrain corners.
 /// </summary>
-public partial class ChunkCorner : Resource
+public partial class TerrainChunkCorner : Resource
 {
 	public enum ConnectionDir
 	{
@@ -24,7 +24,7 @@ public partial class ChunkCorner : Resource
 		Northwest,
 		Northeast
 	}
-	protected enum HelperType
+	public enum HelperType
 	{
 		Flat,
 		Corner,
@@ -33,20 +33,21 @@ public partial class ChunkCorner : Resource
 		Edgecorner // has one straight edge and a corner (three levels), might be redundant/just use corner
 	}
 
-	public ChunkMeshHelper[] Neighbors = new ChunkMeshHelper[8];
-	public ChunkMeshHelper[] Connections = new ChunkMeshHelper[8];
-	public byte[] TileHeights = new byte[4];
+	public TerrainChunkCorner[] Neighbors = new TerrainChunkCorner[8];
+	public TerrainChunkCorner[] Connections = new TerrainChunkCorner[8];
+	public byte?[] TileHeights = new byte?[4];
 	//public byte[] ExtendedHeightmap;
 	//public Vector2I Position;
 	public HelperType Type;
+	public MapChunk ParentChunk;
 
 	/// <summary>
 	/// Connects the target helper to this helper.
 	/// Connects this helper to the target helper as well.
 	/// </summary>
-	/// <param name="toConnect">The ChunkMeshHelper to connect to.</param>
+	/// <param name="toConnect">The TerrainChunkCorner to connect to.</param>
 	/// <param name="connectDir">The direction to connect in.</param>
-	public void ConnectHelper(ChunkMeshHelper toConnect, byte connectDir, bool setNeighbors = false)
+	public void ConnectHelper(TerrainChunkCorner toConnect, byte connectDir, bool setNeighbors = false)
 	{
 		Connections[connectDir] = toConnect;
 		if (toConnect != null)
@@ -62,6 +63,7 @@ public partial class ChunkCorner : Resource
 			{
 				toConnect.Connections[connectDir + 4 % 8] = this;
 			}
+			
 		}
 	}
 
@@ -72,7 +74,7 @@ public partial class ChunkCorner : Resource
 		{
 			// Get the connected node in each direction
 			// Then set what should be connected to this to what is connected to this in that same direction
-			ChunkMeshHelper connected = Connections[connection];
+			TerrainChunkCorner connected = Connections[connection];
 			connected.Connections[connection + 4 % 8] = Connections[connection + 4 % 8];
 
 			/* Technically safer but this shouldn't ever be needed, keeping for future reference:
@@ -93,11 +95,13 @@ public partial class ChunkCorner : Resource
 			{
 				// Get the connected node in each direction
 				// Then set what should be connected to this to what is connected to this in that same direction
-				ChunkMeshHelper connected = Neighbors[connection];
+				TerrainChunkCorner connected = Neighbors[connection];
 				connected.Neighbors[connection + 4 % 8] = null;
 			}
 
-			QueueFree();
+			// Should hopefully remove the only reference to this
+			// and when C# runs its garbage collection this resource should be deleted
+			ParentChunk.DeleteTerrainCorner(this);
 		}
 	}
 
