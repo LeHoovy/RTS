@@ -4,7 +4,7 @@ using System;
 /// <summary>
 /// Used to find terrain corners.
 /// </summary>
-public partial class TerrainChunkCorner : Resource
+public partial class TerrainChunkNode : Resource
 {
 	public enum ConnectionDir
 	{
@@ -33,8 +33,8 @@ public partial class TerrainChunkCorner : Resource
 		Edgecorner // has one straight edge and a corner (three levels), might be redundant/just use corner
 	}
 
-	public TerrainChunkCorner[] Neighbors = new TerrainChunkCorner[8];
-	public TerrainChunkCorner[] Connections = new TerrainChunkCorner[8];
+	public TerrainChunkNode[] Neighbors = new TerrainChunkNode[8];
+	public TerrainChunkNode[] Connections = new TerrainChunkNode[8];
 	public byte?[] TileHeights = new byte?[4];
 	//public byte[] ExtendedHeightmap;
 	//public Vector2I Position;
@@ -45,9 +45,9 @@ public partial class TerrainChunkCorner : Resource
 	/// Connects the target helper to this helper.
 	/// Connects this helper to the target helper as well.
 	/// </summary>
-	/// <param name="toConnect">The TerrainChunkCorner to connect to.</param>
+	/// <param name="toConnect">The TerrainChunkNode to connect to.</param>
 	/// <param name="connectDir">The direction to connect in.</param>
-	public void ConnectHelper(TerrainChunkCorner toConnect, byte connectDir, bool setNeighbors = false)
+	public void ConnectHelper(TerrainChunkNode toConnect, byte connectDir, bool setNeighbors = false)
 	{
 		Connections[connectDir] = toConnect;
 		if (toConnect != null)
@@ -74,7 +74,7 @@ public partial class TerrainChunkCorner : Resource
 		{
 			// Get the connected node in each direction
 			// Then set what should be connected to this to what is connected to this in that same direction
-			TerrainChunkCorner connected = Connections[connection];
+			TerrainChunkNode connected = Connections[connection];
 			connected.Connections[connection + 4 % 8] = Connections[connection + 4 % 8];
 
 			/* Technically safer but this shouldn't ever be needed, keeping for future reference:
@@ -95,7 +95,7 @@ public partial class TerrainChunkCorner : Resource
 			{
 				// Get the connected node in each direction
 				// Then set what should be connected to this to what is connected to this in that same direction
-				TerrainChunkCorner connected = Neighbors[connection];
+				TerrainChunkNode connected = Neighbors[connection];
 				connected.Neighbors[connection + 4 % 8] = null;
 			}
 
@@ -188,7 +188,7 @@ public partial class TerrainChunkCorner : Resource
 		TileHeights[2] == TileHeights[3] &&
 		TileHeights[3] == TileHeights[0])
 		{
-			return (int)HelperType.Flat;
+			return HelperType.Flat;
 		}
 
 		// First check if this contains any corners
@@ -201,28 +201,29 @@ public partial class TerrainChunkCorner : Resource
 			{
 				if (recursive)
 				{
-					for (int neighbor = 0; neighbor < 2; neighbor++)
+					// I don't remember what this was for exactly
+					//for (int neighbor = 0; neighbor < 2; neighbor++)
+					//{
+					//	
+					//}
+					
+					// if either connection is just null, keep as a corner
+					// if either of these result in an edge
+					// then keep this as a corner
+					if (Connections[(tile + 2 % 4) * 2].GetType() != HelperType.Corner ||
+					Connections[(tile + 3 % 4) * 2].GetType() != HelperType.Corner)
 					{
-						// if either connection is just null, keep as a corner
-						//Connections[(tile + 2) * 2].GetType(); // if either of these result in an edge
-						//Connections[(tile + 3) * 2].GetType(); // then keep this as a corner
-						if (Connections[(tile + 2) * 2].GetType() == HelperType.Edge ||
-						Connections[(tile + 3) * 2].GetType() == HelperType.Edge)
-						{
-							return HelperType.Corner;
-						}
+						return HelperType.Corner;
 					}
 				}
-				else
-				{
-					return HelperType.EdgeDiagonal;
-				}
+				// It isn't a corner in this case
+				return HelperType.Edge;
 			}
 		}
 
 		// Check if we are an edge or need to be changed into a corner
 
-		return (int)HelperType.Corner;
+		return HelperType.Corner;
 	}
 
 

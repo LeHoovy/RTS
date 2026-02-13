@@ -5,9 +5,12 @@
 [ext_resource type="Script" uid="uid://bivgddi4op53s" path="res://Game/Data/Editor/Classes_gdscript/map_gdscript.gd" id="4_kso8g"]
 [ext_resource type="Script" uid="uid://ct2m2htg8meom" path="res://Game/Data/Editor/Classes/MapEditor.cs" id="5_2pls3"]
 [ext_resource type="PackedScene" uid="uid://u4ut6lkirmov" path="res://Game/Data/Editor/UI/Scenes/editor_ui.tscn" id="6_tu6x0"]
+[ext_resource type="Material" uid="uid://bgd2s5biaripg" path="res://test.tres" id="7_hj1yq"]
 [ext_resource type="Script" uid="uid://b3vr402ygu4g6" path="res://Game/Data/Editor/Classes/Map.cs" id="7_vcjhx"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3ditt"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qamj0"]
 
 [node name="debug editor" type="Node3D" unique_id=286483857]
 
@@ -63,3 +66,9 @@ offset_bottom = 0.0
 unique_name_in_owner = true
 script = ExtResource("7_vcjhx")
 metadata/_custom_type_script = "uid://b3vr402ygu4g6"
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=1903643530]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, -34.97024, 11.225401, 0.6208477)
+mesh = SubResource("BoxMesh_qamj0")
+skeleton = NodePath("../MouseTracker/MeshInstance3D")
+surface_material_override/0 = ExtResource("7_hj1yq")

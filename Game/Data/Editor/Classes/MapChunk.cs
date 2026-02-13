@@ -18,7 +18,7 @@ public partial class MapChunk : Node
 	}
 
 	[Export]
-	public TerrainChunkCorner[] ChunkCorners = new TerrainChunkCorner[289];
+	public TerrainChunkNode[] ChunkNodes = new TerrainChunkNode[289];
 
 	public MapChunk[] NeighboringChunks = new MapChunk[8];
 	protected Vector2I Position = new Vector2I(-1, -1);
@@ -57,7 +57,7 @@ public partial class MapChunk : Node
 
 				// create chunk mesh helpers at this position
 				// connect to any previous ones within |x-x|=1 and |y-y|=1
-				TerrainChunkCorner newCorner = new TerrainChunkCorner();
+				TerrainChunkNode newCorner = new TerrainChunkNode();
 				//Vector2I newCornerPos = new Vector2I(x, y);
 				newCorner.Position = new Vector2I(x, y);
 
@@ -73,7 +73,7 @@ public partial class MapChunk : Node
 
 
 				// Connect the current corner to any already existing corners
-				foreach (TerrainChunkCorner corner in ChunkCorners)
+				foreach (TerrainChunkNode corner in ChunkNodes)
 				{
 					if (x - 1 <= corner.Position.X &&
 						x + 1 >= corner.Position.X &&
@@ -93,7 +93,7 @@ public partial class MapChunk : Node
 				}
 
 				//AddChild(newCorner);
-				ChunkCorners[x + (y * 17)] = newCorner;
+				ChunkNodes[x + (y * 17)] = newCorner;
 			}
 		}
 		Print();
@@ -155,16 +155,69 @@ public partial class MapChunk : Node
 
 
 
-	public void DeleteTerrainCorner(TerrainChunkCorner corner)
+	public void DeleteTerrainCorner(TerrainChunkNode corner)
 	{
-		ChunkCorners[ChunkCorners.IndexOf(corner)] = null;
+		ChunkNodes[ChunkNodes.IndexOf(corner)] = null;
 	}
 
 
-	/*protected void CheckTriangle()
+	public void GenerateMesh()
 	{
-		
-	}*/
+		// Prepare to generate the mesh
+		foreach (TerrainChunkNode node in ChunkNodes)
+		{
+			node.setup()
+		}
+
+		// Get what node we are starting with
+		TerrainChunkNode initialNode;
+		foreach (TerrainChunkNode node in ChunkNodes)
+		{
+			if (node.GetType(true) == TerrainChunkNode.HelperType.corner)
+			{
+				initialNode = node;
+				break;
+			}
+		}
+
+		// Draw a wireframe for debug purposes
+		// TODO: Change this later to be changed during runtime
+		// So that I can see the full mesh AND wireframe
+		Viewport currentViewport = GetViewport();
+		currentViewport.DebugDraw = Viewport.DebugDrawEnum.Wireframe;
+
+		TerrainChunkNode secondaryNode = null;
+		TerrainChunkNode tertiaryNode = null;
+		foreach (TerrainChunkNode secondaryConnection in initialNode.Connections)
+		{
+			foreach (TerrainChunkNode tertiaryConnection in secondaryConnection.Connections)
+			{
+				if (tertiaryConnection.Connections.Exists(initialNode))
+				{
+
+				}
+			}
+		}
+	}
+
+
+	// TODO: this function
+	// Returns an array containing arrays of regions
+	// Each region is closed and SHOULD NOT overlap
+	// Nodes can be shared between arrays
+	// But they should not connect to each other through other regions
+	// Additionally, avoid returning triangles.
+	// Return the full regions that need to be triangulated.
+	protected TerrainChunkNode[][] generateConstrainedEdges(TerrainChunkNode startingNode)
+	{
+		// used to get the direction in which we are travelling
+		// in which to find the next corner
+		// it is important to make sure that the height of every "flat" node inside is the same
+		// i.e every edge node's "inner" side (current dir + 2)
+		// is the same height
+		byte currentDir == 0; // 0-7 range
+	}
+
 
 	/// <summary>
 	/// Replaces a neighboring chunk with a new neighboring MapChunk, and replaces it's corrosponding neighbor with this MapChunk.
