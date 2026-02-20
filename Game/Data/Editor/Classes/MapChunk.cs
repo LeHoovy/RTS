@@ -62,13 +62,13 @@ public partial class MapChunk : Node
 				newCorner.Position = new Vector2I(x, y);
 
 				// Pass the heightmap to the corner
-				for (byte tile = 0; tile < newCorner.TileHeights.Length(); tile++)
+				for (byte tile = 0; tile < newCorner.TileHeights.Length; tile++)
 				{
 					// Check if it is on the edge of the chunk
-					Vector2 tileRelPos = new Vector2(x + (((tile % 2) - 0.5) * 2),
-						y + ((Math.Floor((double)tile / 2) - 0.5) * 2)
+					Vector2 tileRelPos = new Vector2(x + (((tile % 2) - 0.5f) * 2),
+						y + ((float)(Math.Floor(tile / 2f) - 0.5f) * 2)
 					);
-					newCorner.TileHeights[tile] = GetHeightAtPos(tileRelPos);
+					newCorner.TileHeights[tile] = GetHeightAtPos((Vector2I)tileRelPos);
 				}
 
 
@@ -103,16 +103,16 @@ public partial class MapChunk : Node
 	// Input a tile position, output the height that is at that position
 	public byte? GetHeightAtPos(Vector2I tilePos)
 	{
-		if (tilePos.X < 0 or tilePos.Y > 16)
+		if (tilePos.X < 0 || tilePos.Y > 16)
 		{
 			return null;
 		}
-		if (tilePos.Y < 0 or tilePos.Y > 16)
+		if (tilePos.Y < 0 || tilePos.Y > 16)
 		{
 			return null;
 		}
 
-		return (byte)(tilePos.X + (TilePos.Y * 16));
+		return (byte)(tilePos.X + (tilePos.Y * 16));
 	}
 
 
@@ -157,27 +157,33 @@ public partial class MapChunk : Node
 
 	public void DeleteTerrainCorner(TerrainChunkNode corner)
 	{
-		ChunkNodes[ChunkNodes.IndexOf(corner)] = null;
+		ChunkNodes[Array.IndexOf(ChunkNodes, corner)] = null;
 	}
 
 
 	public void GenerateMesh()
 	{
-		// Prepare to generate the mesh
+		/* // Prepare to generate the mesh
 		foreach (TerrainChunkNode node in ChunkNodes)
 		{
-			node.setup()
-		}
+			node.Setup();
+		} */
 
 		// Get what node we are starting with
-		TerrainChunkNode initialNode;
+		TerrainChunkNode initialNode = null;
 		foreach (TerrainChunkNode node in ChunkNodes)
 		{
-			if (node.GetType(true) == TerrainChunkNode.HelperType.corner)
+			if (node.GetType(true) == TerrainChunkNode.HelperType.Corner)
 			{
 				initialNode = node;
 				break;
 			}
+		}
+
+		if (initialNode == null)
+		{
+			GD.PushWarning("Could not find an initial node");
+			return;
 		}
 
 		// Draw a wireframe for debug purposes
@@ -186,18 +192,21 @@ public partial class MapChunk : Node
 		Viewport currentViewport = GetViewport();
 		currentViewport.DebugDraw = Viewport.DebugDrawEnum.Wireframe;
 
+		/*
 		TerrainChunkNode secondaryNode = null;
 		TerrainChunkNode tertiaryNode = null;
 		foreach (TerrainChunkNode secondaryConnection in initialNode.Connections)
 		{
 			foreach (TerrainChunkNode tertiaryConnection in secondaryConnection.Connections)
 			{
-				if (tertiaryConnection.Connections.Exists(initialNode))
+				if (Array.Exists(tertiaryConnection.Connections, element => element == initialNode))
 				{
-
+					// Triangle Found
+					// We need a region made of lines, not a triangle
 				}
 			}
 		}
+		*/
 	}
 
 
@@ -215,7 +224,10 @@ public partial class MapChunk : Node
 		// it is important to make sure that the height of every "flat" node inside is the same
 		// i.e every edge node's "inner" side (current dir + 2)
 		// is the same height
-		byte currentDir == 0; // 0-7 range
+		byte currentDir = 0; // 0-7 range, try 0-3 * 2 for now (val % 4 * 2 or val * 2 % 8)
+		byte insideDir = 0; // 0-3 range, used to check the "inner" shared tile
+
+		return [];
 	}
 
 

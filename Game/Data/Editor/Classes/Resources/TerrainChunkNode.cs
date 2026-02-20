@@ -37,7 +37,7 @@ public partial class TerrainChunkNode : Resource
 	public TerrainChunkNode[] Connections = new TerrainChunkNode[8];
 	public byte?[] TileHeights = new byte?[4];
 	//public byte[] ExtendedHeightmap;
-	//public Vector2I Position;
+	public Vector2I Position;
 	public HelperType Type;
 	public MapChunk ParentChunk;
 
@@ -70,7 +70,7 @@ public partial class TerrainChunkNode : Resource
 	// Disconnects this helper from its connections, and overwrites those connections with this neighbors previous connections
 	public void DisconnectHelper(bool fullDisconnect = false)
 	{
-		for (int connection = 0; connection < Connections.Length(); connection++)
+		for (int connection = 0; connection < Connections.Length; connection++)
 		{
 			// Get the connected node in each direction
 			// Then set what should be connected to this to what is connected to this in that same direction
@@ -91,7 +91,7 @@ public partial class TerrainChunkNode : Resource
 
 		if (fullDisconnect)
 		{
-			for (int connection = 0; connection < Connections.Length(); connection++)
+			for (int connection = 0; connection < Connections.Length; connection++)
 			{
 				// Get the connected node in each direction
 				// Then set what should be connected to this to what is connected to this in that same direction
@@ -105,6 +105,9 @@ public partial class TerrainChunkNode : Resource
 		}
 	}
 
+	/// <summary>
+	/// Disconnects this helper if it is not a corner.
+	/// </summary>
 	public void Setup()
 	{
 		Type = GetType(true);
@@ -176,6 +179,10 @@ public partial class TerrainChunkNode : Resource
 
 	/// <summary>
 	/// Check if this helper is an edge (not a corner) or if it is in a flat space and still does not need to be kept.
+	/// Returns flat if all tiles are equal height.
+	/// Returns corner if all tiles are different heights.
+	/// Returns edge depending on recursion.
+	/// If not recursive, 
 	/// </summary>
 	/// <param name="level">int level, (may not be used)</param>
 	/// <param name="recursive"></param>
@@ -201,17 +208,17 @@ public partial class TerrainChunkNode : Resource
 			{
 				if (recursive)
 				{
-					// I don't remember what this was for exactly
+					/* I don't remember what this was for exactly
 					//for (int neighbor = 0; neighbor < 2; neighbor++)
 					//{
 					//	
-					//}
+					//}*/
 					
 					// if either connection is just null, keep as a corner
 					// if either of these result in an edge
 					// then keep this as a corner
-					if (Connections[(tile + 2 % 4) * 2].GetType() != HelperType.Corner ||
-					Connections[(tile + 3 % 4) * 2].GetType() != HelperType.Corner)
+					if (Neighbors[(tile + 2 % 4) * 2].GetType() != HelperType.Corner ||
+					Neighbors[(tile + 3 % 4) * 2].GetType() != HelperType.Corner)
 					{
 						return HelperType.Corner;
 					}
