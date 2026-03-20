@@ -3,7 +3,7 @@ extends RefCounted
 
 
 var scene_root: Node
-var map: Map
+var map: MapGDScript
 var _chunk_size: int = 8 # Size of each chunk in tiles on one axis. Chunks are square.
 
 

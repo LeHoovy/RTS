@@ -19,6 +19,21 @@ config/tags=PackedStringArray("private", "prototype", "real_time_strategy")
 run/main_scene="uid://blif5g8ckxnwo"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 
+[audio]
+
+buses/default_bus_layout=""
+nexus_resonance/logger/categories_enabled={}
+nexus_resonance/logger/output_to_file=false
+nexus_resonance/logger/file_path="user://nexus_resonance_log.ndjson"
+nexus_resonance/logger/steam_audio_verbose=false
+nexus_resonance/bus="Master"
+nexus_resonance/reverb_bus_name="ResonanceReverb"
+nexus_resonance/bake/output_dir="res://audio_data/"
+
+[autoload]
+
+ResonanceLogger="*uid://bq7nrlog0001"
+
 [debug]
 
 gdscript/warnings/untyped_declaration=2
@@ -43,7 +58,7 @@ project/assembly_name="Realtime Strategy"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/nexus_resonance/plugin.cfg")
 
 [file_customization]
 
@@ -74,3 +89,7 @@ locale/translations_pot_files=PackedStringArray("res://test.dialogue")
 [physics]
 
 common/physics_ticks_per_second=48
+
+[steam]
+
+multiplayer_peer/max_channels=4

@@ -1,4 +1,4 @@
 {
-"godotTools.editorPath.godot4": "c:\\Users\\zrwhi\\Desktop\\Godot Engine Versions\\Godot V4.6 RC1 Mono\\Godot_v4.6-rc1_mono_win64_console.exe",
+"godotTools.editorPath.godot4": "/usr/bin/godot-mono",
 "editor.fontFamily": "Inter, Consolas, 'Courier New', monospace",
 }
