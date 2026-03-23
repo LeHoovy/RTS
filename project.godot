@@ -58,7 +58,7 @@ project/assembly_name="Realtime Strategy"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/nexus_resonance/plugin.cfg")
+enabled=PackedStringArray()
 
 [file_customization]
 

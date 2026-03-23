@@ -3,13 +3,13 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://isieqruwyst6"
-path="res://.godot/imported/TerrainUpdate.glb-4f6e50a12ee73dcc0cc82c4b041dae44.scn"
+uid="uid://b5g74q826u4k4"
+path="res://.godot/imported/TerrainUpdate2.glb-cc2ed0e15464f59b0756e125d7135279.scn"
 
 [deps]
 
-source_file="res://Game/Data/Testing/Assets/Prototype/Artificial/Models/TerrainUpdate.glb"
-dest_files=["res://.godot/imported/TerrainUpdate.glb-4f6e50a12ee73dcc0cc82c4b041dae44.scn"]
+source_file="res://old but useful stuff/Testing/Assets/Prototype/Artificial/Models/TerrainUpdate2.glb"
+dest_files=["res://.godot/imported/TerrainUpdate2.glb-cc2ed0e15464f59b0756e125d7135279.scn"]
 
 [params]
 

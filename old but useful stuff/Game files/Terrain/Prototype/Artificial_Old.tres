@@ -1,7 +1,7 @@
-[gd_resource type="MeshLibrary" load_steps=91 format=4 uid="uid://bwuu73snwn6fk"]
+[gd_resource type="MeshLibrary" format=4 uid="uid://bwuu73snwn6fk"]
 
-[ext_resource type="Texture2D" uid="uid://bxxqr4yfq0jm2" path="res://Game/Data/Testing/Assets/Prototype/Artificial/texture_09.png" id="1_6ohd1"]
-[ext_resource type="Material" uid="uid://b8s2x0rsmxcb1" path="res://Game/Data/Testing/Assets/Prototype/Artificial/Models/prototype_artificial_texture.tres" id="2_l4y0t"]
+[ext_resource type="Texture2D" uid="uid://bxxqr4yfq0jm2" path="res://old but useful stuff/Testing/Assets/Prototype/Artificial/texture_09.png" id="1_6ohd1"]
+[ext_resource type="Material" uid="uid://b8s2x0rsmxcb1" path="res://old but useful stuff/Testing/Assets/Prototype/Artificial/Models/prototype_artificial_texture.tres" id="2_l4y0t"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bxxt6"]
 albedo_texture = ExtResource("1_6ohd1")

@@ -75,7 +75,8 @@ public partial class MapChunk : Node
 				// Connect the current corner to any already existing corners
 				foreach (TerrainChunkNode corner in ChunkNodes)
 				{
-					if (x - 1 <= corner.Position.X &&
+					if (corner is TerrainChunkNode &&
+						x - 1 <= corner.Position.X &&
 						x + 1 >= corner.Position.X &&
 						y + 1 >= corner.Position.Y &&
 						y - 1 <= corner.Position.Y)

@@ -1,6 +1,6 @@
-[gd_resource type="MeshLibrary" load_steps=32 format=4 uid="uid://ceye13iqv5iih"]
+[gd_resource type="MeshLibrary" format=4 uid="uid://ceye13iqv5iih"]
 
-[ext_resource type="Material" uid="uid://b8s2x0rsmxcb1" path="res://Game/Data/Testing/Assets/Prototype/Artificial/Models/prototype_artificial_texture.tres" id="1_da7o5"]
+[ext_resource type="Material" uid="uid://b8s2x0rsmxcb1" path="res://old but useful stuff/Testing/Assets/Prototype/Artificial/Models/prototype_artificial_texture.tres" id="1_da7o5"]
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_s5apa"]
 _surfaces = [{
