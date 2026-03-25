@@ -1,7 +1,11 @@
 # RTS
+
+## TRA* Pathfinding
+The goal of this branch is to generate a navmesh on a 2d map and do TRA* from that, then potentially render in 3d unless I like it in 2d.
+
 Godot download link: https://godotengine.org/download/windows/
 
-Godot can also be found on steam, although I am using 4.5 and the most recent version is 4.5.1 so you'd have to switch in the betas tab
+Godot can also be found on steam, although I am using 4.6.1 mono, and mono cannot be found on steam
 
 Possible languages:
 Gdscript
@@ -13,16 +17,6 @@ You might have to download the github app so you can push the to the repository.
 
 [Discord server (Disabled)](discord.gg/egXPKJv2j)u
 
-Game:
-
-Right click: make a target location
-Space: spawn a unit at the mouse's position
-If a unit is spawned after creating a target, the unit will not move.
-
-
-
-Aight so I've decided flow field can work, but we gotta work on map creation so that we can implement any pathfinding
-Also Constrained Delaunay Triangulation may work for pathfinding instead of flowfield (just has to be baked when loading, I think its godot's default pathfinding system but idk)
 
 Useful links:
 
