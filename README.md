@@ -1,5 +1,6 @@
 # WILL NOT BE UPDATED ANYMORE
-Head to the `[TRA-Star](https://github.com/dot-Avi/RTS/tree/TRA-Star)` branch instead
+Head to the [`TRA-Star`](https://github.com/dot-Avi/RTS/tree/TRA-Star) branch instead
+This branch is being kept for archival purposes (as well as being able to quickly reference old files that are no longer in use)
 
 # RTS
 Godot download link: https://godotengine.org/download/windows/
