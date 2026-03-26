@@ -13,7 +13,7 @@ func _ready() -> void:
 	_camera = _viewport.get_camera_3d()
 
 
-func _process(delta: float) -> void:
+func _process(_delta: float) -> void:
 	var collision_pos: Vector3
 	var collided: bool = false
 	#if terrain_brush_active:

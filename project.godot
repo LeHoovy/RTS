@@ -30,10 +30,6 @@ nexus_resonance/bus="Master"
 nexus_resonance/reverb_bus_name="ResonanceReverb"
 nexus_resonance/bake/output_dir="res://audio_data/"
 
-[autoload]
-
-ResonanceLogger="*uid://bq7nrlog0001"
-
 [debug]
 
 gdscript/warnings/untyped_declaration=2
