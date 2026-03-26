@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="RTS"
 config/tags=PackedStringArray("private", "prototype", "real_time_strategy")
-run/main_scene="uid://blif5g8ckxnwo"
+run/main_scene="res://node_3d.tscn"
 config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 
 [audio]
@@ -30,12 +30,9 @@ nexus_resonance/bus="Master"
 nexus_resonance/reverb_bus_name="ResonanceReverb"
 nexus_resonance/bake/output_dir="res://audio_data/"
 
-[autoload]
-
-ResonanceLogger="*uid://bq7nrlog0001"
-
 [debug]
 
+file_logging/enable_file_logging=true
 gdscript/warnings/untyped_declaration=2
 gdscript/warnings/unsafe_property_access=2
 gdscript/warnings/unsafe_method_access=2
@@ -93,6 +90,3 @@ common/physics_ticks_per_second=48
 [steam]
 
 multiplayer_peer/max_channels=4
-initialization/app_id=0
-initialization/initialize_on_startup=false
-initialization/embed_callbacks=false

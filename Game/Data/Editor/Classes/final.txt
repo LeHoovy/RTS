@@ -1,1 +1,0 @@
-all scripts here should be the final used scripts without their script type as an extension to the name

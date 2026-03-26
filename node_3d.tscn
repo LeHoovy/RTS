@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://jw60hmtly018"]
+
+[ext_resource type="Script" uid="uid://byn8b1baqdlu6" path="res://Test.cs" id="1_a202f"]
+
+[node name="og test" type="Node3D" unique_id=1877186422]
+script = ExtResource("1_a202f")
+
+[node name="test" type="Node" parent="." unique_id=200136314]
+unique_name_in_owner = true
+
+[node name="test3d" type="Node3D" parent="test" unique_id=361667907]
+unique_name_in_owner = true
+
+[node name="test2d" type="Node2D" parent="." unique_id=210970002]
+unique_name_in_owner = true
