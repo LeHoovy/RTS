@@ -1,6 +1,7 @@
 [gd_scene format=3 uid="uid://c5x1acpxdhdq4"]
 
 [ext_resource type="Script" uid="uid://byn8b1baqdlu6" path="res://Test.cs" id="1_a202f"]
+[ext_resource type="Texture2D" uid="uid://c6o6omgxh44wy" path="res://test/map.png" id="2_noarx"]
 
 [node name="og test" type="Node3D" unique_id=1877186422]
 script = ExtResource("1_a202f")
@@ -13,3 +14,10 @@ unique_name_in_owner = true
 
 [node name="test2d" type="Node2D" parent="." unique_id=210970002]
 unique_name_in_owner = true
+
+[node name="map" type="Sprite2D" parent="test2d" unique_id=1825059738]
+unique_name_in_owner = true
+texture_filter = 1
+scale = Vector2(4, 4)
+texture = ExtResource("2_noarx")
+centered = false

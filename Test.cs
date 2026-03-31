@@ -8,15 +8,26 @@ using System.Text.RegularExpressions;
 public partial class Test : Node3D
 {
 	private Steam _instance;
+	private MapData testMapData;
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
-		Node testSpace = GetNode<Node3D>("%test3d");
-		GD.Print(testSpace.Name);
+		// Non-Steam stuff
+		ulong microStart = Time.GetTicksUsec();
+		testMapData = MapData.NewMap(new Vector2I(2, 16), 1);
+		ulong microEnd = Time.GetTicksUsec();
+		GD.Print($"Time elapsed:\n{microEnd-microStart} microseconds\n{Math.Round((microEnd-microStart) / 100.0) / 10} milliseconds");
+		GD.Print();
 
+		Image img = new Image();
+		img.SetData(32, 256, false, Image.Format.R8, testMapData.HeightMap);
+		img.SavePng("res://test/map.png");
+		Sprite2D newSprite = new Sprite2D();
+		GetNode<Sprite2D>("%map").Texture = ImageTexture.CreateFromImage(img);
+
+		// Steam Stuff
 		_instance = Steam.GetSingleton();
-
 		if (_instance == null)
 		{
 			GD.PrintErr("Steam is not running! Quitting!");
