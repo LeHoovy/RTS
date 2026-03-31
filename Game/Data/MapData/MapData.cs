@@ -18,6 +18,7 @@ public partial class MapData : Resource
 	/// <returns></returns>
 	public static MapData NewMap(Vector2I mapSize, byte initialDepth)
 	{
+		mapSize = mapSize.Clamp(0, 16); // Ensure the map isn't too large to store
 		MapData newMap = new MapData
 		{
 			MapSize = mapSize * 16,

@@ -42,14 +42,15 @@ public partial class Test : Node3D
 			GD.Print("Steam has correctly initialized.");
 		} else if ((int)initStatus["status"] == 2)
 		{
-			GD.PrintErr("Cannot connect to steam! Steam likely is not running.");
+			GD.PrintErr("Quitting: Cannot connect to steam! Steam likely is not running.");
+			//GetTree().Quit();
 			return;
 		} else if ((int)initStatus["status"] == 3)
 		{
 			GD.PrintErr("Steam client is out of date! Please update.");
 		} else if ((int)initStatus["status"] == 1)
 		{
-			//GD.PrintErr("Steam has failed to initialize! Quitting!");
+			//GD.PrintErr("Quitting: Steam has failed to initialize! Quitting!");
 			//GetTree().Quit();
 			return;
 		}
