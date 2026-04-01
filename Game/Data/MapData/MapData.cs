@@ -43,7 +43,7 @@ public partial class MapData : Resource
 				// Get chunk pos
 				Vector2I chunkPos = newMap.GetChunkAtPos(new Vector2I(x, y));
 				int newHeight = (int)(chunkPos.X * 2 + chunkPos.Y * 2);
-				if (x % 16 > y % 16)
+				if (x % 16 < y % 16)
 				{
 					newHeight = (byte)(newHeight + 1);
 				}

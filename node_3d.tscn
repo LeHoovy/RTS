@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" uid="uid://byn8b1baqdlu6" path="res://Test.cs" id="1_a202f"]
 [ext_resource type="Texture2D" uid="uid://c6o6omgxh44wy" path="res://test/map.png" id="2_noarx"]
+[ext_resource type="Script" uid="uid://dbvkko6hibda7" path="res://Game/Data/Map/MapHandler.cs" id="3_a0tk4"]
 
 [node name="og test" type="Node3D" unique_id=1877186422]
 script = ExtResource("1_a202f")
@@ -21,3 +22,7 @@ texture_filter = 1
 scale = Vector2(4, 4)
 texture = ExtResource("2_noarx")
 centered = false
+
+[node name="MapHandler" type="Node" parent="." unique_id=456877392]
+script = ExtResource("3_a0tk4")
+metadata/_custom_type_script = "uid://dbvkko6hibda7"
