@@ -18,7 +18,7 @@ public partial class MapData : Resource
 	/// <returns></returns>
 	public static MapData NewMap(Vector2I mapSize, byte initialDepth)
 	{
-		mapSize = mapSize.Clamp(0, 16); // Ensure the map isn't too large to store
+		mapSize = mapSize.Clamp(0, 65536); // Ensure the map isn't too large to store
 		MapData newMap = new MapData
 		{
 			MapSize = mapSize * 16,
@@ -27,43 +27,23 @@ public partial class MapData : Resource
 
 		//newMap.HeightMap = new byte[newMap.MapSize.X * newMap.MapSize.Y];
 		GD.Print(newMap.HeightMap.Length);
-		int iteration = 0;
-		for (byte y = 0; y < newMap.MapSize.Y; y++)
+		for (uint iteration = 0; iteration < newMap.HeightMap.Length; iteration++)
 		{
-			for (byte x = 0; x < newMap.MapSize.X; x++)
+			// just debug mapgen stuff, really
+			// so I don't need to create map modification stuff just yet
+			Vector2I tilePos = newMap.ConvertPos(iteration);
+			Vector2I chunkPos = newMap.GetChunkAtPos(iteration);
+			byte newHeight = (byte)(chunkPos.X + chunkPos.Y);
+
+			if (tilePos.X % 16 < tilePos.Y % 16)
 			{
-				if (iteration > newMap.MapSize.X * newMap.MapSize.Y)
-				{
-					GD.PrintErr($"Iteration ({iteration}) is too high!");
-					GD.PushError($"Iteration ({iteration}) is too high!");
-					return newMap;
-				}
-
-				// DEBUG MAP GEN
-				// Get chunk pos
-				Vector2I chunkPos = newMap.GetChunkAtPos(new Vector2I(x, y));
-				int newHeight = (int)(chunkPos.X * 2 + chunkPos.Y * 2);
-				if (x % 16 < y % 16)
-				{
-					newHeight = (byte)(newHeight + 1);
-				}
-
-				newMap.HeightMap[newMap.ConvertPos(new Vector2I(x, y))] = (byte)(newHeight * 16 % 255);
-				// Final. Use later and comment out/delete the previous code as it will be unneeded
-				//newMap.HeightMap[newMap.ConvertPos(new Vector2I(x, y))] = (byte)(initialDepth * 8);
-
-				iteration++;
-
-				if (x == 255)
-				{
-					break;
-				}
+				newHeight += 4;
 			}
-			if (y == 255)
-			{
-				break;
-			}
+
+			newMap.HeightMap[iteration] = (byte)(newHeight * 16);
+			//newMap.HeightMap[iteration] = (byte)(initialDepth * 8);
 		}
+
 
 		return newMap;
 	}
@@ -95,11 +75,12 @@ public partial class MapData : Resource
 
 	/// <summary>
 	/// Overload for GetChunkAtPos() that takes a heightmap position.<br/>
-	/// Finds a chunk at a given position.
+	/// Finds a chunk at a given position.<br/>
+	/// In theory should always return a real chunk as it converts through ConvertPos() first.
 	/// </summary>
 	/// <param name="pos">A position on the heightmap.</param>
 	/// <returns>Chunk position that contains the given position.</returns>
-	public Vector2I GetChunkAtPos(ushort pos)
+	public Vector2I GetChunkAtPos(uint pos)
 	{
 		return GetChunkAtPos(ConvertPos(pos));
 	}
@@ -112,7 +93,7 @@ public partial class MapData : Resource
 	/// <param name="pos">Tile position we want to find the heightmap position of.</param>
 	/// <returns>Heightmap position of the given tile.
 	/// If the tile is not on the map, returns 0.</returns>
-	private ushort ConvertPos(Vector2I pos)
+	private uint ConvertPos(Vector2I pos)
 	{
 		if (pos.X < 0 || pos.X >= MapSize.X)
 		{
@@ -127,7 +108,7 @@ public partial class MapData : Resource
 			return 0;
 		}
 
-		return (ushort)(pos.X + (pos.Y * MapSize.X));
+		return (uint)(pos.X + (pos.Y * MapSize.X));
 	}
 
 
@@ -138,7 +119,7 @@ public partial class MapData : Resource
 	/// <param name="pos">Position on the heightmap to convert to a map position.</param>
 	/// <returns>Returns the tile position of the given heightmap position.
 	/// Returns the (-1, -1) if the given position does not exist..</returns>
-	private Vector2I ConvertPos(ushort pos)
+	private Vector2I ConvertPos(uint pos)
 	{
 		if (pos > HeightMap.Length)
 		{
@@ -147,6 +128,6 @@ public partial class MapData : Resource
 			return new Vector2I(-1, -1);
 		}
 
-		return new Vector2I(pos % MapSize.X, (int)Math.Floor((double)pos / MapSize.X));
+		return new Vector2I((int)pos % MapSize.X, (int)Math.Floor((double)pos / MapSize.X));
 	}
 }

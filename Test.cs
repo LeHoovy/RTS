@@ -15,14 +15,14 @@ public partial class Test : Node3D
 	{
 		// Non-Steam stuff
 		ulong microStart = Time.GetTicksUsec();
-		testMapData = MapData.NewMap(new Vector2I(16, 16), 1);
+		testMapData = MapData.NewMap(new Vector2I(32, 32), 1);
 		ulong microEnd = Time.GetTicksUsec();
 		GD.Print($"Time elapsed:\n{microEnd-microStart} microseconds\n{Math.Round((microEnd-microStart) / 100.0) / 10} milliseconds");
 		GD.Print();
 
 		// debug heightmap creation
 		Image img = new Image();
-		img.SetData(256, 256, false, Image.Format.R8, testMapData.HeightMap);
+		img.SetData(testMapData.MapSize.X, testMapData.MapSize.Y, false, Image.Format.R8, testMapData.HeightMap);
 		img.SavePng("res://test/map.png");
 		Sprite2D newSprite = new Sprite2D();
 		GetNode<Sprite2D>("%map").Texture = ImageTexture.CreateFromImage(img);
