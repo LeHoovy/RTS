@@ -13,16 +13,16 @@ public partial class MapData : Resource
 	/// <summary>
 	/// Creates a new map.
 	/// </summary>
-	/// <param name="mapSize"></param>
+	/// <param name="mapSize">Size of the new map in chunks.</param>
 	/// <param name="initialDepth"></param>
 	/// <returns></returns>
-	public static MapData NewMap(Vector2I mapSize, byte initialDepth)
+	public static MapData NewMap(Vector2I mapSize, byte initialDepth, byte chunkSize = 16)
 	{
 		mapSize = mapSize.Clamp(0, 65536); // Ensure the map isn't too large to store
 		MapData newMap = new MapData
 		{
-			MapSize = mapSize * 16,
-			HeightMap = new byte[mapSize.X * 16 * mapSize.Y * 16]
+			MapSize = mapSize * chunkSize,
+			HeightMap = new byte[mapSize.X * chunkSize * mapSize.Y * chunkSize]
 		};
 
 		//newMap.HeightMap = new byte[newMap.MapSize.X * newMap.MapSize.Y];
@@ -35,12 +35,12 @@ public partial class MapData : Resource
 			Vector2I chunkPos = newMap.GetChunkAtPos(iteration);
 			byte newHeight = (byte)(chunkPos.X + chunkPos.Y);
 
-			if (tilePos.X % 16 < tilePos.Y % 16)
+			if (tilePos.X % chunkSize < tilePos.Y % chunkSize)
 			{
 				newHeight += 4;
 			}
 
-			newMap.HeightMap[iteration] = (byte)(newHeight * 16);
+			newMap.HeightMap[iteration] = (byte)(newHeight * chunkSize);
 			//newMap.HeightMap[iteration] = (byte)(initialDepth * 8);
 		}
 
