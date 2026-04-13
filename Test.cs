@@ -14,7 +14,7 @@ public partial class Test : Node3D
 	public override void _Ready()
 	{
 		// Non-Steam stuff
-		ulong microStart = Time.GetTicksUsec();
+		/*ulong microStart = Time.GetTicksUsec();
 		testMapData = MapData.NewMap(new Vector2I(32, 32), 1);
 		ulong microEnd = Time.GetTicksUsec();
 		GD.Print($"Time elapsed:\n{microEnd-microStart} microseconds\n{Math.Round((microEnd-microStart) / 100.0) / 10} milliseconds");
@@ -25,7 +25,7 @@ public partial class Test : Node3D
 		img.SetData(testMapData.MapSize.X, testMapData.MapSize.Y, false, Image.Format.R8, testMapData.HeightMap);
 		img.SavePng("res://test/map.png");
 		Sprite2D newSprite = new Sprite2D();
-		GetNode<Sprite2D>("%map").Texture = ImageTexture.CreateFromImage(img);
+		GetNode<Sprite2D>("%map").Texture = ImageTexture.CreateFromImage(img);*/
 
 		// Steam Stuff
 		instance = Steam.GetSingleton();

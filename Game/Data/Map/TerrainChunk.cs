@@ -1,17 +1,17 @@
 using Godot;
 using System;
 
-public partial class TerrainChunk : Node
+public partial class TerrainChunk : Resource
 {
 	public Vector2I Position; // Position relative to other chunks/to the map.
 	public byte[] LocalHeightMap; // The heightmap that is contained on the chunk.
 
-	// Called when the node enters the scene tree for the first time.
+	/* Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
 		GD.Print(Position);
 		Name = $"Chunk{Position.X},{Position.Y}";
-	}
+	}*/
 
 
 	/// <summary>
@@ -57,5 +57,13 @@ public partial class TerrainChunk : Node
 		}
 
 		return new Vector2I((int)pos % 16, (int)Math.Floor((double)pos / 16));
+	}
+
+
+	public static TerrainChunk NewChunk(Vector2I position, byte[] heightmap)
+	{
+		TerrainChunk newChunk = new TerrainChunk();
+
+		return newChunk;
 	}
 }
