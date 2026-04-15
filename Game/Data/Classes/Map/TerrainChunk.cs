@@ -4,7 +4,7 @@ using System;
 public partial class TerrainChunk : Resource
 {
 	public Vector2I Position; // Position relative to other chunks/to the map.
-	public byte[] LocalHeightMap; // The heightmap that is contained on the chunk.
+	public byte[,] LocalHeightMap; // The heightmap that is contained on the chunk.
 
 	/* Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -60,10 +60,17 @@ public partial class TerrainChunk : Resource
 	}
 
 
-	public static TerrainChunk NewChunk(Vector2I position, byte[] heightmap)
+	/// <summary>
+	/// Creates a new chunk from a position and the local heightmap.
+	/// </summary>
+	/// <param name="position">The chunk's position on the map</param>
+	/// <param name="heightmap">The chunk's local heightmap</param>
+	/// <returns>The new chunk</returns>
+	public static TerrainChunk NewChunk(Vector2I position, byte[,] heightmap)
 	{
 		TerrainChunk newChunk = new TerrainChunk();
-
+		newChunk.Position = position;
+		newChunk.LocalHeightMap = heightmap;
 		return newChunk;
 	}
 }
