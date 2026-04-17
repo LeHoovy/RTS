@@ -24,7 +24,7 @@ public partial class MapHandler : Node
 	{
 		if (Data is null) // If there is no map data, generate a new one.
 		{
-			Data = MapData.NewMap(new Vector2I(16, 16), 4, ChunkSize);
+			Data = MapData.NewMap(new Vector2I(30, 17), 4, ChunkSize);
 		}
 		
 		Vector2I size = Data.MapSize;
