@@ -35,7 +35,7 @@ public partial class MapData : Resource
 				// just debug mapgen stuff, really
 				// so I don't need to create map modification stuff just yet
 				Vector2I tilePos = new Vector2I((int)XPos, (int)YPos);
-				Vector2I chunkPos = newMap.GetChunkAtPos(XPos);
+				Vector2I chunkPos = newMap.GetChunkAtPos(tilePos);
 				byte newHeight = (byte)(chunkPos.X + chunkPos.Y);
 
 				if (tilePos.X % chunkSize < tilePos.Y % chunkSize)

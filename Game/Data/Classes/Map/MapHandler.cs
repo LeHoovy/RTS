@@ -41,8 +41,11 @@ public partial class MapHandler : Node
 				);
 				//newChunk.Position = new Vector2I((int)chunkX, (int)chunkY);
 				chunks[chunkX, chunkY] = newChunk; // Store the new chunk in the Chunk Array
+
+				newChunk.quickie();
 			}
 		}
+		//ArrayHelper.Print2DArray(Data.HeightMap);
 
 		// just generates the texture the sprite2d uses
 		if (Debug)
@@ -50,8 +53,15 @@ public partial class MapHandler : Node
 			Image img = new Image();
 			byte[] imgData = new byte[Data.HeightMap.Length];
 			Buffer.BlockCopy(Data.HeightMap, 0, imgData, 0, Data.HeightMap.Length); // Flattens the heightmap
-			//GD.Print(Data.HeightMap.Length);
 			img.SetData(Data.MapSize.X, Data.MapSize.Y, false, Image.Format.R8, imgData);
+			// prints the whole heightmap
+			
+			/*byte[] imgData = new byte[chunks[0, 0].LocalHeightMap.Length];
+			Buffer.BlockCopy(chunks[0, 0].LocalHeightMap, 0, imgData, 0, chunks[0, 0].LocalHeightMap.Length); // Flattens the heightmap
+			img.SetData(16, 16, false, Image.Format.R8, imgData);
+			// prints the chunk at (0, 0)*/
+
+			//GD.Print(Data.HeightMap.Length);
 			img.SavePng("res://test/map.png");
 			DebugParent.GetNode<Sprite2D>("map").Texture = ImageTexture.CreateFromImage(img);
 			//GetNode<Sprite2D>("%map").Texture = ImageTexture.CreateFromImage(img);

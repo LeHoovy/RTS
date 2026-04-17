@@ -6,12 +6,12 @@ public partial class TerrainChunk : Resource
 	public Vector2I Position; // Position relative to other chunks/to the map.
 	public byte[,] LocalHeightMap; // The heightmap that is contained on the chunk.
 
-	/* Called when the node enters the scene tree for the first time.
-	public override void _Ready()
+	//Called when the node enters the scene tree for the first time.
+	public void quickie()
 	{
 		GD.Print(Position);
-		Name = $"Chunk{Position.X},{Position.Y}";
-	}*/
+		ArrayHelper.Print2DArray(LocalHeightMap);
+	}
 
 
 	/// <summary>

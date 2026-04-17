@@ -25,4 +25,48 @@ public static class ArrayHelper
 		}
 		return result;
 	}
+
+
+	/// <summary>
+	/// Prints a 2-dimensional arary to the godot console.
+	/// </summary>
+	/// <typeparam name="T">What type of array is being printed</typeparam>
+	/// <param name="arr">The 2-dimensional array</param>
+	public static void Print2DArray<T>(T[,] arr)
+	{
+		int len = 0;
+		foreach (T item in arr)
+		{
+			var itemLen = item.ToString().Length;
+			if (itemLen > len)
+			{
+				len = itemLen;
+			}
+		}
+
+		GD.Print('[');
+		for (int x = 0; x < arr.GetLength(0); x++)
+		{
+			string row = "";
+			for (int y = 0; y < arr.GetLength(1); y++)
+			{
+				string newItem = arr[x, y].ToString();
+				string end = "";
+				if (y != arr.GetLength(1) - 1)// || y != arr.GetLength(1) - 1)
+				{
+					end = ", ";
+				}
+				string exSpaces = ""; // extra spaces to make sure each item is the same size
+				for (int space = 0; space < len - newItem.Length; space++)
+				{
+					exSpaces += " ";
+				}
+
+				row += exSpaces + newItem + end; // exSpaces on the left to be right-aligned
+				//row += newItem + end + exSpaces; // exSpaces on the right to be left-aligned
+			}
+			GD.Print(row);
+		}
+		GD.Print(']');
+	}
 }
