@@ -24,7 +24,7 @@ public partial class MapHandler : Node
 	{
 		if (Data is null) // If there is no map data, generate a new one.
 		{
-			Data = MapData.NewMap(new Vector2I(30, 17), 4, ChunkSize);
+			Data = MapData.NewMap(new Vector2I(16, 16), 4, ChunkSize);
 		}
 		
 		Vector2I size = Data.MapSize;
@@ -37,27 +37,27 @@ public partial class MapHandler : Node
 			{
 				TerrainChunk newChunk = TerrainChunk.NewChunk(
 					new Vector2I((int)chunkX, (int)chunkY),
-					ArrayHelper.Slice2DArray<byte>(Data.HeightMap, (int)chunkX * ChunkSize, ChunkSize, (int)chunkY * ChunkSize, ChunkSize)
+					Data.HeightMap,
+					ChunkSize
 				);
 				//newChunk.Position = new Vector2I((int)chunkX, (int)chunkY);
 				chunks[chunkX, chunkY] = newChunk; // Store the new chunk in the Chunk Array
-
-				newChunk.quickie();
 			}
 		}
+		//ArrayHelper.Print2DArray(ArrayHelper.Slice2DArray(Data.HeightMap, 0, 15, 0, 15));
 		//ArrayHelper.Print2DArray(Data.HeightMap);
 
 		// just generates the texture the sprite2d uses
 		if (Debug)
 		{
 			Image img = new Image();
-			byte[] imgData = new byte[Data.HeightMap.Length];
-			Buffer.BlockCopy(Data.HeightMap, 0, imgData, 0, Data.HeightMap.Length); // Flattens the heightmap
+			byte[] imgData = ArrayHelper.Flatten2DArray(Data.HeightMap); // Flattens the heightmap
 			img.SetData(Data.MapSize.X, Data.MapSize.Y, false, Image.Format.R8, imgData);
 			// prints the whole heightmap
 			
 			/*byte[] imgData = new byte[chunks[0, 0].LocalHeightMap.Length];
-			Buffer.BlockCopy(chunks[0, 0].LocalHeightMap, 0, imgData, 0, chunks[0, 0].LocalHeightMap.Length); // Flattens the heightmap
+			// Flattens the heightmap
+			Buffer.BlockCopy(chunks[0, 0].LocalHeightMap, 0, imgData, 0, chunks[0, 0].LocalHeightMap.Length);
 			img.SetData(16, 16, false, Image.Format.R8, imgData);
 			// prints the chunk at (0, 0)*/
 

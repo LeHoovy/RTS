@@ -45,14 +45,14 @@ public static class ArrayHelper
 		}
 
 		GD.Print('[');
-		for (int x = 0; x < arr.GetLength(0); x++)
+		for (int y = 0; y < arr.GetLength(1); y++)
 		{
 			string row = "";
-			for (int y = 0; y < arr.GetLength(1); y++)
+			for (int x = 0; x < arr.GetLength(0); x++) // in y, x order to get rows instead of columns
 			{
 				string newItem = arr[x, y].ToString();
 				string end = "";
-				if (y != arr.GetLength(1) - 1)// || y != arr.GetLength(1) - 1)
+				if (x != arr.GetLength(1) - 1)// || y != arr.GetLength(1) - 1)
 				{
 					end = ", ";
 				}
@@ -68,5 +68,27 @@ public static class ArrayHelper
 			GD.Print(row);
 		}
 		GD.Print(']');
+	}
+
+
+	/// <summary>
+	/// Flattens a 2D array by creating a new array and each row to the end of the previous row.
+	/// </summary>
+	/// <typeparam name="T">The type of array that is being flattened.</typeparam>
+	/// <param name="arr">The array being flattened. Must be 2D.</param>
+	/// <returns>The flattened array.</returns>
+	public static T[] Flatten2DArray<T>(T[,] arr)
+	{
+		Vector2I size = new Vector2I(arr.GetLength(0), arr.GetLength(1));
+		T[] output = new T[size.X * size.Y];
+		for (int j = 0; j < size.Y; j++) // Goes column by column
+		{
+			for (int i = 0; i < size.X; i++) // Adds each row to the end of the last
+			{
+				int curPos = i + (j * size.X);
+				output[curPos] = arr[i, j];
+			}
+		}
+		return output;
 	}
 }

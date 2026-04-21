@@ -5,13 +5,7 @@ public partial class TerrainChunk : Resource
 {
 	public Vector2I Position; // Position relative to other chunks/to the map.
 	public byte[,] LocalHeightMap; // The heightmap that is contained on the chunk.
-
-	//Called when the node enters the scene tree for the first time.
-	public void quickie()
-	{
-		GD.Print(Position);
-		ArrayHelper.Print2DArray(LocalHeightMap);
-	}
+	private TerrainProbe[,] terrainProbes;
 
 
 	/// <summary>
@@ -66,11 +60,24 @@ public partial class TerrainChunk : Resource
 	/// <param name="position">The chunk's position on the map</param>
 	/// <param name="heightmap">The chunk's local heightmap</param>
 	/// <returns>The new chunk</returns>
-	public static TerrainChunk NewChunk(Vector2I position, byte[,] heightmap)
+	public static TerrainChunk NewChunk(Vector2I position, byte[,] heightmap, byte size)
 	{
 		TerrainChunk newChunk = new TerrainChunk();
 		newChunk.Position = position;
-		newChunk.LocalHeightMap = heightmap;
+		newChunk.LocalHeightMap = ArrayHelper.Slice2DArray(heightmap, position.X, size, position.Y, size);
+
+		newChunk.terrainProbes = new TerrainProbe[
+			heightmap.GetLength(0) + 1,
+			heightmap.GetLength(1) + 1
+		];
+		for (int y = 0; y < heightmap.GetLength(1) + 1; y++)
+		{
+			for (int x = 0; x < heightmap.GetLength(0) + 1; x++)
+			{
+				newChunk.terrainProbes[x, y] = TerrainProbe.NewProbe(new Vector2I(x, y), heightmap);
+			}
+		}
+
 		return newChunk;
 	}
 }
