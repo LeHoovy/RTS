@@ -22,9 +22,10 @@ public partial class MapHandler : Node
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
 	{
+		ulong startTime = Time.GetTicksUsec();
 		if (Data is null) // If there is no map data, generate a new one.
 		{
-			Data = MapData.NewMap(new Vector2I(16, 16), 4, ChunkSize);
+			Data = MapData.NewMap(new Vector2I(14, 14), 4, ChunkSize);
 		}
 		
 		Vector2I size = Data.MapSize;
@@ -44,6 +45,14 @@ public partial class MapHandler : Node
 				chunks[chunkX, chunkY] = newChunk; // Store the new chunk in the Chunk Array
 			}
 		}
+		GD.Print($"Total Terrain Probes: {TerrainProbe.Probes}");
+
+		// Print how long the process took
+		ulong endTime = Time.GetTicksUsec();
+		GD.Print($"Time elapsed:\n{endTime-startTime} microseconds");
+		GD.Print($"{Math.Round((endTime-startTime) / 100.0) / 10} milliseconds");
+		GD.Print($"{Math.Round(Math.Round((endTime-startTime) / 1000.0) / 100) / 10} seconds");
+		GD.Print();
 		//ArrayHelper.Print2DArray(ArrayHelper.Slice2DArray(Data.HeightMap, 0, 15, 0, 15));
 		//ArrayHelper.Print2DArray(Data.HeightMap);
 

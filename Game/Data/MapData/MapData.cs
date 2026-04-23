@@ -18,7 +18,7 @@ public partial class MapData : Resource
 	/// <returns></returns>
 	public static MapData NewMap(Vector2I mapSize, byte initialDepth, byte chunkSize = 16)
 	{
-		ulong startTime = Time.GetTicksUsec();
+		//ulong startTime = Time.GetTicksUsec();
 		mapSize = mapSize.Clamp(0, 65536); // Ensure the map isn't too large to store
 		MapData newMap = new MapData
 		{
@@ -49,9 +49,9 @@ public partial class MapData : Resource
 		}
 
 		// Print out how long it took to generate the new map
-		ulong endTime = Time.GetTicksUsec();
+		/*ulong endTime = Time.GetTicksUsec();
 		GD.Print($"Time elapsed:\n{endTime-startTime} microseconds\n{Math.Round((endTime-startTime) / 100.0) / 10} milliseconds");
-		GD.Print();
+		GD.Print();*/
 
 		return newMap;
 	}

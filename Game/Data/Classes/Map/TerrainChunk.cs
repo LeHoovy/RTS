@@ -1,6 +1,7 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class TerrainChunk : Resource
 {
 	public Vector2I Position; // Position relative to other chunks/to the map.
@@ -70,9 +71,9 @@ public partial class TerrainChunk : Resource
 			heightmap.GetLength(0) + 1,
 			heightmap.GetLength(1) + 1
 		];
-		for (int y = 0; y < heightmap.GetLength(1) + 1; y++)
+		for (int y = 0; y < newChunk.LocalHeightMap.GetLength(1) + 1; y++)
 		{
-			for (int x = 0; x < heightmap.GetLength(0) + 1; x++)
+			for (int x = 0; x < newChunk.LocalHeightMap.GetLength(0) + 1; x++)
 			{
 				newChunk.terrainProbes[x, y] = TerrainProbe.NewProbe(new Vector2I(x, y), heightmap);
 			}

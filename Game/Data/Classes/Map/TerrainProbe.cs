@@ -1,10 +1,53 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class TerrainProbe : Resource
 {
+	// Constant variables
+	enum Type // What type is the probe
+	{
+		Flat,    //0: Flat tile.
+		Edge,    //1: Contains an edge, but otherwise the same as a flat tile.
+		Corner,  //2: Contains a corner. Used to generate polygons.
+		Junction //3: Contains a corner and an edge. Used to generate polygons.
+	}
+
+	// Standard variables
 	public Vector2I Position; // Position relative to the owner chunk.
+	private bool isCorner; // If the probe is a corner, use for quick checks
 	private byte?[,] localHeightmap; // Local heightmap. Should be a 4x4 grid.
+
+	// Static variables
+#pragma warning disable CA2211 // Non-constant fields should not be visible
+	public static ulong Probes; // Debug value for counting how many terrain probes are created.
+#pragma warning restore CA2211 // Non-constant fields should not be visible
+
+
+	/// <summary>
+	/// Returns the type of the probe and sets if it is a corner or not.
+	/// </summary>
+	/// <param name="pos">What position (0,0) - (2,2) to check on the local heightmap</param>
+	/// <returns></returns>
+	private Type CheckType(Vector2I pos, bool updateCorner = false)
+	{
+		// The main 4 tiles the probe covers
+		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, pos.X, 1, pos.Y, 1);
+
+		if (primaryTiles[0, 0] == primaryTiles[0, 1] &&
+		    primaryTiles[0, 1] == primaryTiles[1, 1] &&
+		    primaryTiles[1, 1] == primaryTiles[1, 0])
+		{
+			return Type.Flat;
+		}
+
+		for (byte i = 0; i < 4; i++)
+		{
+			Vector2I curPos = ArrayHelper.ConvertPos(i, 2);
+		}
+
+		return Type.Flat;
+	}
 
 
 	/// <summary>
@@ -13,12 +56,14 @@ public partial class TerrainProbe : Resource
 	/// <param name="position">The chunk's position on the map</param>
 	/// <param name="heightmap">The chunk's local heightmap</param>
 	/// <returns>A terrain probe.</returns>
-	public static TerrainProbe NewProbe(Vector2I pos, byte[,] heightmap)
+	public static TerrainProbe NewProbe(Vector2I pos, byte[,] heightmap, bool doPreCheck = false)
 	{
+		Probes += 1;
+
 		TerrainProbe probe = new TerrainProbe();
 		probe.Position = pos;
 		probe.localHeightmap = new byte?[4, 4];
-		GD.Print(pos);
+		//GD.Print(pos);
 		for (int x = -2; x < 2; x++)
 		{
 			for (int y = -2; y < 2; y++)

@@ -91,4 +91,14 @@ public static class ArrayHelper
 		}
 		return output;
 	}
+
+
+	/// <summary>
+	/// Converts an integer position into a vector position usable in an array.
+	/// </summary>
+	/// <returns></returns>
+	public static Vector2I ConvertPos(int pos, int arrWidth)
+	{
+		return new Vector2I(pos % arrWidth, pos / arrWidth);
+	}
 }
