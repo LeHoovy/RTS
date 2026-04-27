@@ -47,6 +47,26 @@ public partial class MapHandler : Node
 		}
 		GD.Print($"Total Terrain Probes: {TerrainProbe.Probes}");
 
+		PackedScene marker = GD.Load<PackedScene>("res://test/marker.tscn");
+		foreach (TerrainChunk chunk in chunks)
+		{
+			Node2D newMarker = marker.Instantiate<Node2D>();
+			newMarker.Position = chunk.Position * 64;
+			AddChild(newMarker);
+			ArrayHelper.Print2DArray(chunk.probes);
+			/*foreach (TerrainProbe probe in chunk.probes)
+			{
+				if (probe.CheckType() == TerrainProbe.ProbeType.Corner)
+				{
+					Vector2I probePos = chunk.Position * 64 + probe.Position * 4;
+					Node2D newMarker = marker.Instantiate<Node2D>();
+					newMarker.Position = probePos;
+					AddChild(newMarker);
+
+				}
+			}*/
+		}
+
 		// Print how long the process took
 		ulong endTime = Time.GetTicksUsec();
 		GD.Print($"Time elapsed:\n{endTime-startTime} microseconds");

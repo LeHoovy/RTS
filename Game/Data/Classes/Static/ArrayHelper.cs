@@ -35,12 +35,19 @@ public static class ArrayHelper
 	public static void Print2DArray<T>(T[,] arr)
 	{
 		int len = 0;
-		foreach (T item in arr)
+		for (int x = 0; x < arr.GetLength(0); x++)
 		{
-			var itemLen = item.ToString().Length;
-			if (itemLen > len)
+			for (int y = 0; y < arr.GetLength(1); y++)
 			{
-				len = itemLen;
+				if (arr[x, y] == null)
+				{
+					continue;
+				}
+				var itemLen = arr[x, y].ToString().Length;
+				if (itemLen > len)
+				{
+					len = itemLen;
+				}
 			}
 		}
 

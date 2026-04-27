@@ -6,7 +6,7 @@ public partial class TerrainChunk : Resource
 {
 	public Vector2I Position; // Position relative to other chunks/to the map.
 	public byte[,] LocalHeightMap; // The heightmap that is contained on the chunk.
-	private TerrainProbe[,] terrainProbes;
+	public TerrainProbe[,] probes;
 
 
 	/// <summary>
@@ -67,18 +67,18 @@ public partial class TerrainChunk : Resource
 		newChunk.Position = position;
 		newChunk.LocalHeightMap = ArrayHelper.Slice2DArray(heightmap, position.X, size, position.Y, size);
 
-		newChunk.terrainProbes = new TerrainProbe[
-			heightmap.GetLength(0) + 1,
-			heightmap.GetLength(1) + 1
+		newChunk.probes = new TerrainProbe[
+			newChunk.LocalHeightMap.GetLength(0) + 1,
+			newChunk.LocalHeightMap.GetLength(1) + 1
 		];
-		for (int y = 0; y < newChunk.LocalHeightMap.GetLength(1) + 1; y++)
+		for (int x = 0; x < newChunk.LocalHeightMap.GetLength(0) + 1; x++)
 		{
-			for (int x = 0; x < newChunk.LocalHeightMap.GetLength(0) + 1; x++)
+			for (int y = 0; y < newChunk.LocalHeightMap.GetLength(1) + 1; y++)
 			{
-				newChunk.terrainProbes[x, y] = TerrainProbe.NewProbe(new Vector2I(x, y), heightmap);
+				newChunk.probes[x, y] = TerrainProbe.NewProbe(new Vector2I(x, y), position, heightmap);
 			}
 		}
-
+		GD.Print("Probes Created!");
 		return newChunk;
 	}
 }
