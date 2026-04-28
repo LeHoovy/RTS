@@ -38,7 +38,7 @@ public partial class MapData : Resource
 				Vector2I chunkPos = newMap.GetChunkAtPos(tilePos);
 				byte newHeight = (byte)(chunkPos.X + chunkPos.Y);
 
-				if (tilePos.X % chunkSize < tilePos.Y % chunkSize)
+				if ((tilePos.X % chunkSize) + 1 < (tilePos.Y % chunkSize))
 				{
 					newHeight += 4;
 				}

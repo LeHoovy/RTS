@@ -5,7 +5,7 @@ using System;
 public partial class TerrainProbe : Resource
 {
 	// Constant variables
-	enum Type // What type is the probe
+	public enum ProbeType // What type is the probe
 	{
 		Flat,    //0: Flat tile.
 		Edge,    //1: Contains an edge, but otherwise the same as a flat tile.
@@ -15,6 +15,7 @@ public partial class TerrainProbe : Resource
 
 	// Standard variables
 	public Vector2I Position; // Position relative to the owner chunk.
+	public Vector2I InChunk; // What chunk the probe is in.
 	private bool isCorner; // If the probe is a corner, use for quick checks
 	private byte?[,] localHeightmap; // Local heightmap. Should be a 4x4 grid.
 
@@ -26,27 +27,42 @@ public partial class TerrainProbe : Resource
 
 	/// <summary>
 	/// Returns the type of the probe and sets if it is a corner or not.
+	/// Might need to be public but was private before
 	/// </summary>
 	/// <param name="pos">What position (0,0) - (2,2) to check on the local heightmap</param>
 	/// <returns></returns>
-	private Type CheckType(Vector2I pos, bool updateCorner = false)
+	public ProbeType CheckType(bool updateCorner = false)
 	{
 		// The main 4 tiles the probe covers
-		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, pos.X, 1, pos.Y, 1);
+		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, 1, 2, 1, 2);
 
-		if (primaryTiles[0, 0] == primaryTiles[0, 1] &&
-		    primaryTiles[0, 1] == primaryTiles[1, 1] &&
-		    primaryTiles[1, 1] == primaryTiles[1, 0])
+		ArrayHelper.Print2DArray(localHeightmap);
+		ArrayHelper.Print2DArray(primaryTiles);
+		// If each position is the same height, it is flat
+		if (primaryTiles[0, 0] == primaryTiles[0, 1]
+			&& primaryTiles[0, 1] == primaryTiles[1, 1]
+		   && primaryTiles[1, 1] == primaryTiles[1, 0])
 		{
-			return Type.Flat;
+			return ProbeType.Flat;
 		}
 
-		for (byte i = 0; i < 4; i++)
+		// If two positions equal each other and another two positions equal each other
+		// it is an edge
+		if ((primaryTiles[0, 0] == primaryTiles[1, 0]
+			&& primaryTiles[0, 1] == primaryTiles[1, 1]
+			&& primaryTiles[0, 0] != primaryTiles[0, 1]
+			) || (
+			primaryTiles[0, 0] == primaryTiles[0, 1]
+			&& primaryTiles[1, 0] == primaryTiles[1, 1]
+			&& primaryTiles[0, 0] != primaryTiles[1, 0])
+			)
 		{
-			Vector2I curPos = ArrayHelper.ConvertPos(i, 2);
+			return ProbeType.Edge;
 		}
 
-		return Type.Flat;
+		// Now to figure out if it's a corner or diagonal edge
+
+		return ProbeType.Corner;
 	}
 
 
@@ -56,7 +72,7 @@ public partial class TerrainProbe : Resource
 	/// <param name="position">The chunk's position on the map</param>
 	/// <param name="heightmap">The chunk's local heightmap</param>
 	/// <returns>A terrain probe.</returns>
-	public static TerrainProbe NewProbe(Vector2I pos, byte[,] heightmap, bool doPreCheck = false)
+	public static TerrainProbe NewProbe(Vector2I pos, Vector2I chunkPos, byte[,] heightmap, bool doPreCheck = false)
 	{
 		Probes += 1;
 
@@ -69,22 +85,21 @@ public partial class TerrainProbe : Resource
 			for (int y = -2; y < 2; y++)
 			{
 				// Ensures the position actually exists.
-				if (y + pos.Y < 0 || y + pos.Y >= heightmap.GetLength(1))
+				if (chunkPos.Y + y + pos.Y < 0 || chunkPos.Y + y + pos.Y >= heightmap.GetLength(1))
 				{
 					probe.localHeightmap[x + 2, y + 2] = null;
 					continue;
 				}
-				if (x + pos.X < 0 || x + pos.X >= heightmap.GetLength(0))
+				if (chunkPos.X + x + pos.X < 0 || chunkPos.X + x + pos.X >= heightmap.GetLength(0))
 				{
 					probe.localHeightmap[x + 2, y + 2] = null;
 					continue;
 				}
 
-				probe.localHeightmap[x + 2, y + 2] = heightmap[x + pos.X, y + pos.Y];
+				probe.localHeightmap[x + 2, y + 2] = heightmap[chunkPos.X + x + pos.X, chunkPos.Y + y + pos.Y];
 			}
 		}
 		//ArrayHelper.Print2DArray(probe.localHeightmap);
-
 		return probe;
 	}
 }
