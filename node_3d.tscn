@@ -13,23 +13,22 @@ unique_name_in_owner = true
 [node name="test3d" type="Node3D" parent="test" unique_id=361667907]
 unique_name_in_owner = true
 
-[node name="test2d" type="Node2D" parent="." unique_id=210970002]
+[node name="Node2D" type="Node2D" parent="." unique_id=1205658513]
+
+[node name="test2d" type="Node2D" parent="Node2D" unique_id=210970002]
 unique_name_in_owner = true
 
-[node name="map" type="Sprite2D" parent="test2d" unique_id=1825059738]
+[node name="map" type="Sprite2D" parent="Node2D/test2d" unique_id=1825059738]
 unique_name_in_owner = true
 texture_filter = 1
 scale = Vector2(4, 4)
 texture = ExtResource("2_noarx")
 centered = false
 
-[node name="Polygon2D" type="Polygon2D" parent="test2d" unique_id=1741406573]
+[node name="Polygon2D" type="Polygon2D" parent="Node2D/test2d" unique_id=1741406573]
 visible = false
 color = Color(0.30549997, 0.39, 0, 0.5137255)
 polygon = PackedVector2Array(0, 0, 128, 0, 128, 64, 126, 64, 68, 6, 64, 6, 64, 128, 0, 64)
 
-[node name="MapHandler" type="Node" parent="." unique_id=456877392 node_paths=PackedStringArray("DebugParent")]
+[node name="MapHandler" type="Node2D" parent="Node2D" unique_id=1628411832]
 script = ExtResource("3_a0tk4")
-Debug = true
-DebugParent = NodePath("../test2d")
-metadata/_custom_type_script = "uid://dbvkko6hibda7"

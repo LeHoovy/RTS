@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 
 [GlobalClass]
-public partial class MapHandler : Node
+public partial class MapHandler : Node2D
 {
 	// General Variables
 	public MapData Data;
@@ -31,6 +31,7 @@ public partial class MapHandler : Node
 		Vector2I size = Data.MapSize;
 		Vector2I chunkMapSize = size / ChunkSize;
 		chunks = new TerrainChunk[chunkMapSize.X, chunkMapSize.Y];
+		GD.Print(chunkMapSize);
 		// Create chunks
 		for (uint chunkX = 0; chunkX < chunks.GetLength(0); chunkX++)
 		{
@@ -50,21 +51,21 @@ public partial class MapHandler : Node
 		PackedScene marker = GD.Load<PackedScene>("res://test/marker.tscn");
 		foreach (TerrainChunk chunk in chunks)
 		{
-			Node2D newMarker = marker.Instantiate<Node2D>();
+			/*Node2D newMarker = marker.Instantiate<Node2D>();
 			newMarker.Position = chunk.Position * 64;
 			AddChild(newMarker);
-			ArrayHelper.Print2DArray(chunk.probes);
-			/*foreach (TerrainProbe probe in chunk.probes)
+			ArrayHelper.Print2DArray(chunk.probes);*/
+			foreach (TerrainProbe probe in chunk.probes)
 			{
 				if (probe.CheckType() == TerrainProbe.ProbeType.Corner)
 				{
-					Vector2I probePos = chunk.Position * 64 + probe.Position * 4;
+					Vector2I probePos = chunk.Position * 16 + probe.Position;
 					Node2D newMarker = marker.Instantiate<Node2D>();
-					newMarker.Position = probePos;
+					newMarker.Position = probePos * 4;
+					newMarker.Name = probePos.ToString();
 					AddChild(newMarker);
-
 				}
-			}*/
+			}
 		}
 
 		// Print how long the process took

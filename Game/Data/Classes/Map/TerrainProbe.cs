@@ -36,8 +36,11 @@ public partial class TerrainProbe : Resource
 		// The main 4 tiles the probe covers
 		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, 1, 2, 1, 2);
 
-		ArrayHelper.Print2DArray(localHeightmap);
-		ArrayHelper.Print2DArray(primaryTiles);
+		// debug print stuff
+		//GD.Print(Position);
+		//ArrayHelper.Print2DArray(localHeightmap);
+		//ArrayHelper.Print2DArray(primaryTiles);
+
 		// If each position is the same height, it is flat
 		if (primaryTiles[0, 0] == primaryTiles[0, 1]
 			&& primaryTiles[0, 1] == primaryTiles[1, 1]
@@ -60,9 +63,40 @@ public partial class TerrainProbe : Resource
 			return ProbeType.Edge;
 		}
 
-		// Now to figure out if it's a corner or diagonal edge
+		//GD.Print(Position);
+		// Now to figure out if it's a corner or diagonal
+		Func<int, int> xPos = n => Math.Clamp(n % 3, 0, 1);
+		Func<int, int> yPos = n => n / 2;
+		for (byte i = 0; i < 4; i++)
+		{
+			var posOne = primaryTiles[xPos(i), yPos(i)];
+			var posTwo = primaryTiles[xPos(i + 1 % 4), yPos(i + 1 % 4)];
+			var posThree = primaryTiles[xPos(i + 2 % 4), yPos(i + 2 % 4)];
+			var posFour = primaryTiles[xPos(i + 3 % 4), yPos(i + 3 % 4)]; // out of bounds error
 
-		return ProbeType.Corner;
+			if (posOne is null
+			|| posTwo is null
+			|| posThree is null
+			|| posFour is null)
+			{
+				return ProbeType.Corner;
+			}
+
+			if ((posOne != posTwo // Vertical check
+			&& posTwo != posThree
+			&& posThree != posOne
+			&& posTwo == posFour)
+			|| (posOne == posTwo // Horizontal/Diagonal check
+			&& posTwo != posThree
+			&& posThree != posFour
+			&& posFour != posOne))
+			{
+				return ProbeType.Corner;
+			}
+			//GD.Print(xPos(
+		}
+
+		return ProbeType.Flat;
 	}
 
 
