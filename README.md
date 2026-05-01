@@ -7,7 +7,14 @@ Download and install [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/
 <br>Ensure you download the SDK. You can also download .NET 9.0, but I used 8.0.
 
 Download and extract this project wherever you want.
-<br>From here either run the editor executable, scan for the project's folder, and open it, then hit run, OR drag the executable to the project folder and run the executable.
+<br>From here you can either:
+1. Run the engine executable
+2. Scan for the project's folder
+3. Open the project
+4. Hit run
+OR
+1. Drag the engine executable to the project folder
+2. Run the executable
 ## TRA* Pathfinding
 The goal of this branch is to generate a navmesh on a 2d map and do TRA* from that, then potentially render in 3d unless I like it in 2d.
 
