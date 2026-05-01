@@ -1,5 +1,5 @@
 # RTS
-## Instructions
+### Instructions
 Download the [Godot Engine](https://godotengine.org/download/archive/4.6.1-stable/).
 <br>You can also download 4.6.2, but I'm using 4.6.1. Make sure you get the mono (.NET) version.
 
