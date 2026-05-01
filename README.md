@@ -12,7 +12,8 @@ Download and extract this project wherever you want.
 2. Scan for the project's folder
 3. Open the project
 4. Hit run
-OR
+
+Alternatively you can:
 1. Drag the engine executable to the project folder
 2. Run the executable
 ## TRA* Pathfinding
