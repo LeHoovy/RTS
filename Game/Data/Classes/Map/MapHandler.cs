@@ -18,6 +18,8 @@ public partial class MapHandler : Node2D
 	public bool Debug;
 	[Export]
 	public Node DebugParent;
+	[Export]
+	public Vector2I MapSize = new Vector2I(16, 16);
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -25,7 +27,7 @@ public partial class MapHandler : Node2D
 		ulong startTime = Time.GetTicksUsec();
 		if (Data is null) // If there is no map data, generate a new one.
 		{
-			Data = MapData.NewMap(new Vector2I(14, 14), 4, ChunkSize);
+			Data = MapData.NewMap(MapSize, 4, ChunkSize);
 		}
 		
 		Vector2I size = Data.MapSize;

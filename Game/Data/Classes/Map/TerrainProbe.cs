@@ -70,9 +70,9 @@ public partial class TerrainProbe : Resource
 		for (byte i = 0; i < 4; i++)
 		{
 			var posOne = primaryTiles[xPos(i), yPos(i)];
-			var posTwo = primaryTiles[xPos(i + 1 % 4), yPos(i + 1 % 4)];
-			var posThree = primaryTiles[xPos(i + 2 % 4), yPos(i + 2 % 4)];
-			var posFour = primaryTiles[xPos(i + 3 % 4), yPos(i + 3 % 4)]; // out of bounds error
+			var posTwo = primaryTiles[xPos((i + 1) % 4), yPos((i + 1) % 4)];
+			var posThree = primaryTiles[xPos((i + 2) % 4), yPos((i + 2) % 4)];
+			var posFour = primaryTiles[xPos((i + 3) % 4), yPos((i + 3) % 4)]; //ERROR: out of bounds
 
 			if (posOne is null
 			|| posTwo is null
@@ -82,12 +82,24 @@ public partial class TerrainProbe : Resource
 				return ProbeType.Corner;
 			}
 
+			// Not a single tile is the same height
+			if (posOne != posTwo
+			&& posTwo != posThree
+			&& posThree != posFour
+			&& posThree != posOne
+			&& posFour != posOne
+			&& posFour != posTwo)
+			{
+				return ProbeType.Corner;
+			}
+
+			// Three-way junction
 			if ((posOne != posTwo // Vertical check
 			&& posTwo != posThree
 			&& posThree != posOne
 			&& posTwo == posFour)
 			|| (posOne == posTwo // Horizontal/Diagonal check
-			&& posTwo != posThree
+			&& posTwo != posThree // Technically diagonal would be a four-way junction
 			&& posThree != posFour
 			&& posFour != posOne))
 			{

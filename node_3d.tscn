@@ -1,11 +1,9 @@
 [gd_scene format=3 uid="uid://c5x1acpxdhdq4"]
 
-[ext_resource type="Script" uid="uid://byn8b1baqdlu6" path="res://Test.cs" id="1_a202f"]
 [ext_resource type="Texture2D" uid="uid://c6o6omgxh44wy" path="res://test/map.png" id="2_noarx"]
 [ext_resource type="Script" uid="uid://dbvkko6hibda7" path="res://Game/Data/Classes/Map/MapHandler.cs" id="3_a0tk4"]
 
 [node name="og test" type="Node3D" unique_id=1877186422]
-script = ExtResource("1_a202f")
 
 [node name="test" type="Node" parent="." unique_id=200136314]
 unique_name_in_owner = true
@@ -30,5 +28,8 @@ visible = false
 color = Color(0.30549997, 0.39, 0, 0.5137255)
 polygon = PackedVector2Array(0, 0, 128, 0, 128, 64, 126, 64, 68, 6, 64, 6, 64, 128, 0, 64)
 
-[node name="MapHandler" type="Node2D" parent="Node2D" unique_id=1628411832]
+[node name="MapHandler" type="Node2D" parent="Node2D" unique_id=1628411832 node_paths=PackedStringArray("DebugParent")]
 script = ExtResource("3_a0tk4")
+Debug = true
+DebugParent = NodePath("../test2d")
+MapSize = Vector2i(30, 17)
