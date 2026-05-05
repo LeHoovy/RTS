@@ -42,23 +42,16 @@ public partial class TerrainProbe : Resource
 		//ArrayHelper.Print2DArray(primaryTiles);
 
 		// If each position is the same height, it is flat
-		if (primaryTiles[0, 0] == primaryTiles[0, 1]
-			&& primaryTiles[0, 1] == primaryTiles[1, 1]
-		   && primaryTiles[1, 1] == primaryTiles[1, 0])
+		if (CheckisFlat(new Vector2I(1, 1)))
 		{
 			return ProbeType.Flat;
 		}
 
+		// TODO: ensure probes on the edge of the chunk remain
+
 		// If two positions equal each other and another two positions equal each other
 		// it is an edge
-		if ((primaryTiles[0, 0] == primaryTiles[1, 0]
-			&& primaryTiles[0, 1] == primaryTiles[1, 1]
-			&& primaryTiles[0, 0] != primaryTiles[0, 1]
-			) || (
-			primaryTiles[0, 0] == primaryTiles[0, 1]
-			&& primaryTiles[1, 0] == primaryTiles[1, 1]
-			&& primaryTiles[0, 0] != primaryTiles[1, 0])
-			)
+		if (CheckIsEdge(new Vector2I(1, 1)))
 		{
 			return ProbeType.Edge;
 		}
@@ -105,10 +98,70 @@ public partial class TerrainProbe : Resource
 			{
 				return ProbeType.Corner;
 			}
-			//GD.Print(xPos(
+			
+			// three are equal and one isn't
+			if (posOne != posTwo
+			&& posFour == posTwo
+			&& posThree == posFour)
+			{
+				byte flatCount = 0;
+				for (byte j = 0; j < 4; j++)
+				{
+					double dir = i * (Math.PI/2);
+					Vector2I normalizedDir = (Vector2I)Vector2.FromAngle((float)dir);
+
+					// Early return as if there's a single edge, it should be a corner
+					if (CheckIsEdge(new Vector2I(1, 1) + normalizedDir))
+					{
+						return ProbeType.Corner;
+					}
+					if (CheckisFlat(new Vector2I(1, 1) + normalizedDir))
+					{
+						flatCount++;
+					}
+				}
+				// A diagonal edge has two flat neighbors and two other "corner" neighbors
+				if (flatCount > 2)
+				{
+					return ProbeType.Corner;
+				}
+			}
 		}
 
 		return ProbeType.Flat;
+	}
+
+
+	private bool CheckisFlat(Vector2I pos)
+	{
+		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, pos.X, 2, pos.Y, 2);
+
+		if (primaryTiles[0, 0] == primaryTiles [0, 1]
+		&& primaryTiles[0, 1] == primaryTiles[1, 1]
+		&& primaryTiles[1, 1] == primaryTiles[1, 0])
+		{
+			return true;
+		}
+		return false;
+	}
+
+
+	private bool CheckIsEdge(Vector2I pos)
+	{
+		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, pos.X, 2, pos.Y, 2);
+
+		if ((primaryTiles[0, 0] == primaryTiles[1, 0]
+			&& primaryTiles[0, 1] == primaryTiles[1, 1]
+			&& primaryTiles[0, 0] != primaryTiles[0, 1]
+			) || (
+			primaryTiles[0, 0] == primaryTiles[0, 1]
+			&& primaryTiles[1, 0] == primaryTiles[1, 1]
+			&& primaryTiles[0, 0] != primaryTiles[1, 0])
+			)
+		{
+			return true;
+		}
+		return false;
 	}
 
 
