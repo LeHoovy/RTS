@@ -31,7 +31,7 @@ public partial class TerrainProbe : Resource
 	/// </summary>
 	/// <param name="pos">What position (0,0) - (2,2) to check on the local heightmap</param>
 	/// <returns></returns>
-	public ProbeType CheckType(bool updateCorner = false)
+	public ProbeType CheckType(bool recursion = false, bool updateCorner = false)
 	{
 		// The main 4 tiles the probe covers
 		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, 1, 2, 1, 2);
@@ -40,14 +40,19 @@ public partial class TerrainProbe : Resource
 		//GD.Print(Position);
 		//ArrayHelper.Print2DArray(localHeightmap);
 		//ArrayHelper.Print2DArray(primaryTiles);
+		
+		// Ensures the probe remains as a corner if it is on the edge of a chunk
+		if (Position.X == 0 || Position.X == 16
+		  ||Position.Y == 0 || Position.Y == 16)
+		{
+			return ProbeType.Corner;
+		}
 
 		// If each position is the same height, it is flat
 		if (CheckisFlat(new Vector2I(1, 1)))
 		{
 			return ProbeType.Flat;
 		}
-
-		// TODO: ensure probes on the edge of the chunk remain
 
 		// If two positions equal each other and another two positions equal each other
 		// it is an edge
@@ -107,11 +112,15 @@ public partial class TerrainProbe : Resource
 				byte flatCount = 0;
 				for (byte j = 0; j < 4; j++)
 				{
-					double dir = i * (Math.PI/2);
-					Vector2I normalizedDir = (Vector2I)Vector2.FromAngle((float)dir);
+					float dir = j * ((float)Math.PI/2);
+					Vector2I normalizedDir = (Vector2I)Vector2.FromAngle(dir).Round();
+					/*if (Position == new Vector2I(0, 0))
+					{
+						GD.Print($"{j}: Vec2{Vector2.FromAngle((float)dir)}, Vec2I{normalizedDir}");// + new Vector2I(1, 1));
+					}*/// Wasn't working at first
 
 					// Early return as if there's a single edge, it should be a corner
-					if (CheckIsEdge(new Vector2I(1, 1) + normalizedDir))
+					if (CheckIsEdge(new Vector2I(1, 1) + normalizedDir, Math.Abs(normalizedDir.Y)))
 					{
 						return ProbeType.Corner;
 					}
@@ -146,21 +155,47 @@ public partial class TerrainProbe : Resource
 	}
 
 
-	private bool CheckIsEdge(Vector2I pos)
+	private bool CheckIsEdge(Vector2I pos, int? dir = null)
 	{
 		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, pos.X, 2, pos.Y, 2);
-
-		if ((primaryTiles[0, 0] == primaryTiles[1, 0]
-			&& primaryTiles[0, 1] == primaryTiles[1, 1]
-			&& primaryTiles[0, 0] != primaryTiles[0, 1]
-			) || (
-			primaryTiles[0, 0] == primaryTiles[0, 1]
-			&& primaryTiles[1, 0] == primaryTiles[1, 1]
-			&& primaryTiles[0, 0] != primaryTiles[1, 0])
-			)
+		if (dir == null) // Direction doesn't matter, check both
 		{
-			return true;
+			if ((primaryTiles[0, 0] == primaryTiles[1, 0]
+				&& primaryTiles[0, 1] == primaryTiles[1, 1]
+				&& primaryTiles[0, 0] != primaryTiles[0, 1]
+				) || (
+				primaryTiles[0, 0] == primaryTiles[0, 1]
+				&& primaryTiles[1, 0] == primaryTiles[1, 1]
+				&& primaryTiles[0, 0] != primaryTiles[1, 0])
+			)
+			{
+				return true;
+			}
+		} else // Only runs if there is a direction to check
+		{
+			if (dir == 0) // Check the horizontal
+			{
+				if (primaryTiles[0, 0] == primaryTiles[1, 0]
+					&& primaryTiles[0, 1] == primaryTiles[1, 1]
+					&& primaryTiles[0, 0] != primaryTiles[0, 1]
+				)
+				{
+					return true;
+				}
+			}
+			if (dir == 1)
+			{ // Check the vertical
+				if (primaryTiles[0, 0] == primaryTiles[0, 1]
+					&& primaryTiles[1, 0] == primaryTiles[1, 1]
+					&& primaryTiles[0, 0] != primaryTiles[1, 0]
+				)
+				{
+					return true;
+				}
+			}
 		}
+		
+		// Not an edge
 		return false;
 	}
 
@@ -171,7 +206,8 @@ public partial class TerrainProbe : Resource
 	/// <param name="position">The chunk's position on the map</param>
 	/// <param name="heightmap">The chunk's local heightmap</param>
 	/// <returns>A terrain probe.</returns>
-	public static TerrainProbe NewProbe(Vector2I pos, Vector2I chunkPos, byte[,] heightmap, bool doPreCheck = false)
+	public static TerrainProbe NewProbe(Vector2I pos, Vector2I chunkPos, byte[,] heightmap)
+	//, bool doPreCheck = false)
 	{
 		Probes += 1;
 
@@ -179,23 +215,25 @@ public partial class TerrainProbe : Resource
 		probe.Position = pos;
 		probe.localHeightmap = new byte?[4, 4];
 		//GD.Print(pos);
+
+		// Something might be wrong here as the heightmap seems off by one, relative to the chunk's position
 		for (int x = -2; x < 2; x++)
 		{
 			for (int y = -2; y < 2; y++)
 			{
 				// Ensures the position actually exists.
-				if (chunkPos.Y + y + pos.Y < 0 || chunkPos.Y + y + pos.Y >= heightmap.GetLength(1))
-				{
+				if ((chunkPos.Y * 2) + y + pos.Y < 0 || (chunkPos.Y * 2) + y + pos.Y >= heightmap.GetLength(1))
+				{ // Switched from just (chunkPos.V) to (chunkPos.V * 2), seems more broken
 					probe.localHeightmap[x + 2, y + 2] = null;
 					continue;
 				}
-				if (chunkPos.X + x + pos.X < 0 || chunkPos.X + x + pos.X >= heightmap.GetLength(0))
+				if ((chunkPos.X * 2) + x + pos.X < 0 || (chunkPos.X * 2) + x + pos.X >= heightmap.GetLength(0))
 				{
 					probe.localHeightmap[x + 2, y + 2] = null;
 					continue;
 				}
 
-				probe.localHeightmap[x + 2, y + 2] = heightmap[chunkPos.X + x + pos.X, chunkPos.Y + y + pos.Y];
+				probe.localHeightmap[x + 2, y + 2] = heightmap[(chunkPos.Y * 2) + x + pos.X, (chunkPos.X * 2) + y + pos.Y];
 			}
 		}
 		//ArrayHelper.Print2DArray(probe.localHeightmap);
