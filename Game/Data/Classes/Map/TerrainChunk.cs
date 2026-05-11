@@ -73,10 +73,6 @@ public partial class TerrainChunk : Resource
 			newChunk.LocalHeightMap.GetLength(0) + 1,
 			newChunk.LocalHeightMap.GetLength(1) + 1
 		];
-
-		// Iterate over every position in the probe array to generate a probe
-		// Something seems wrong here, like the probes heightmap is off by the chunks position
-		// Maybe in the probe's script?
 		for (int x = 0; x < newChunk.LocalHeightMap.GetLength(0) + 1; x++)
 		{
 			for (int y = 0; y < newChunk.LocalHeightMap.GetLength(1) + 1; y++)
