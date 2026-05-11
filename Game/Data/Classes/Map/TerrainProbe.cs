@@ -15,9 +15,12 @@ public partial class TerrainProbe : Resource
 
 	// Standard variables
 	public Vector2I Position; // Position relative to the owner chunk.
-	public Vector2I InChunk; // What chunk the probe is in.
-	private bool isCorner; // If the probe is a corner, use for quick checks
+	public bool isRamp; // unneeded for now, will be used later
 	private byte?[,] localHeightmap; // Local heightmap. Should be a 4x4 grid.
+
+	// Might not be needed after all
+	//public Vector2I InChunk; // What chunk the probe is in.
+	//private bool isCorner; // If the probe is a corner, use for quick checks
 
 	// Static variables
 #pragma warning disable CA2211 // Non-constant fields should not be visible
@@ -42,8 +45,8 @@ public partial class TerrainProbe : Resource
 		//ArrayHelper.Print2DArray(primaryTiles);
 		
 		// Ensures the probe remains as a corner if it is on the edge of a chunk
-		if (Position.X == 0 || Position.X == 16
-		  ||Position.Y == 0 || Position.Y == 16)
+		if ((Position.X == 0 || Position.X == 16)
+		  &&(Position.Y == 0 || Position.Y == 16))
 		{
 			return ProbeType.Corner;
 		}
@@ -222,18 +225,18 @@ public partial class TerrainProbe : Resource
 			for (int y = -2; y < 2; y++)
 			{
 				// Ensures the position actually exists.
-				if ((chunkPos.Y * 2) + y + pos.Y < 0 || (chunkPos.Y * 2) + y + pos.Y >= heightmap.GetLength(1))
+				if (chunkPos.Y + y + pos.Y < 0 || chunkPos.Y + y + pos.Y >= heightmap.GetLength(1))
 				{ // Switched from just (chunkPos.V) to (chunkPos.V * 2), seems more broken
 					probe.localHeightmap[x + 2, y + 2] = null;
 					continue;
 				}
-				if ((chunkPos.X * 2) + x + pos.X < 0 || (chunkPos.X * 2) + x + pos.X >= heightmap.GetLength(0))
+				if (chunkPos.X + x + pos.X < 0 || chunkPos.X + x + pos.X >= heightmap.GetLength(0))
 				{
 					probe.localHeightmap[x + 2, y + 2] = null;
 					continue;
 				}
 
-				probe.localHeightmap[x + 2, y + 2] = heightmap[(chunkPos.Y * 2) + x + pos.X, (chunkPos.X * 2) + y + pos.Y];
+				probe.localHeightmap[x + 2, y + 2] = heightmap[chunkPos.X + x + pos.X, chunkPos.Y + y + pos.Y];
 			}
 		}
 		//ArrayHelper.Print2DArray(probe.localHeightmap);

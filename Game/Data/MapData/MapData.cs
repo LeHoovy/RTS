@@ -8,6 +8,10 @@ public partial class MapData : Resource
 {
 	public byte[,] HeightMap;
 	public Vector2I MapSize;
+	// Dictionary for ramps
+	// Contains starting and ending positions
+	// Maybe width/radius, though corner ramps will be annoying with that
+	// Maybe just each bend/corner on the ramp
 
 
 	/// <summary>
