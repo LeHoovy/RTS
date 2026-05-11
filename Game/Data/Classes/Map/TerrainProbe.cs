@@ -222,18 +222,18 @@ public partial class TerrainProbe : Resource
 			for (int y = -2; y < 2; y++)
 			{
 				// Ensures the position actually exists.
-				if (chunkPos.Y + y + pos.Y < 0 || chunkPos.Y + y + pos.Y >= heightmap.GetLength(1))
+				if ((chunkPos.Y * 2) + y + pos.Y < 0 || (chunkPos.Y * 2) + y + pos.Y >= heightmap.GetLength(1))
 				{ // Switched from just (chunkPos.V) to (chunkPos.V * 2), seems more broken
 					probe.localHeightmap[x + 2, y + 2] = null;
 					continue;
 				}
-				if (chunkPos.X + x + pos.X < 0 || chunkPos.X + x + pos.X >= heightmap.GetLength(0))
+				if ((chunkPos.X * 2) + x + pos.X < 0 || (chunkPos.X * 2) + x + pos.X >= heightmap.GetLength(0))
 				{
 					probe.localHeightmap[x + 2, y + 2] = null;
 					continue;
 				}
 
-				probe.localHeightmap[x + 2, y + 2] = heightmap[chunkPos.X + x + pos.X, chunkPos.Y + y + pos.Y];
+				probe.localHeightmap[x + 2, y + 2] = heightmap[(chunkPos.Y * 2) + x + pos.X, (chunkPos.X * 2) + y + pos.Y];
 			}
 		}
 		//ArrayHelper.Print2DArray(probe.localHeightmap);
