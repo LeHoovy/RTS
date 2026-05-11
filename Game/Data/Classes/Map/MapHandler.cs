@@ -57,22 +57,18 @@ public partial class MapHandler : Node2D
 			newMarker.Position = chunk.Position * 64;
 			AddChild(newMarker);
 			ArrayHelper.Print2DArray(chunk.probes);*/
-			if (chunk.Position == new Vector2I(0, 1))
+			foreach (TerrainProbe probe in chunk.probes)
 			{
-				foreach (TerrainProbe probe in chunk.probes)
+				if (probe.CheckType() == TerrainProbe.ProbeType.Corner)
 				{
-					//if (probe.CheckType() == TerrainProbe.ProbeType.Corner)
-					//{
 					Vector2I probePos = chunk.Position * 16 + probe.Position;
 					Node2D newMarker = marker.Instantiate<Node2D>();
 					newMarker.Position = probePos * 4;
 					newMarker.Name = probePos.ToString();
-					GD.Print($"probe {newMarker.Name} of type {probe.CheckType()} at {probe.Position} in chunk {chunk.Position}");
+					//GD.Print($"probe {newMarker.Name} of type {probe.CheckType()} at {probe.Position} in chunk {chunk.Position}");
 					AddChild(newMarker);
-					//}
 				}
 			}
-			
 		}
 
 		// Print how long the process took

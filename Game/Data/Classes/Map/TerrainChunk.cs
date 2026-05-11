@@ -81,7 +81,7 @@ public partial class TerrainChunk : Resource
 		{
 			for (int y = 0; y < newChunk.LocalHeightMap.GetLength(1) + 1; y++)
 			{
-				newChunk.probes[x, y] = TerrainProbe.NewProbe(new Vector2I(x, y), position, heightmap);
+				newChunk.probes[x, y] = TerrainProbe.NewProbe(new Vector2I(x, y), position * 16, heightmap);
 				Vector2I probeWorldPos = newChunk.probes[x, y].Position + newChunk.Position * 16;
 				if (probeWorldPos == new Vector2I(16, 3))
 				{
