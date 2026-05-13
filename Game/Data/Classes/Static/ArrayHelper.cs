@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public static class ArrayHelper
 {
@@ -107,5 +108,19 @@ public static class ArrayHelper
 	public static Vector2I ConvertPos(int pos, int arrWidth)
 	{
 		return new Vector2I(pos % arrWidth, pos / arrWidth);
+	}
+
+
+	/// <summary>
+	/// Counts how many unique values are in an array.
+	/// </summary>
+	/// <typeparam name="T">The type of the array</typeparam>
+	/// <param name="arr">The array to count the unique values in.</param>
+	/// <returns>How many unique values are stored in the array.</returns>
+	public static int GetUniqueValues<T>(T[] arr)
+	{
+		HashSet<T> hash = new HashSet<T>(arr);
+		
+		return hash.Count;
 	}
 }

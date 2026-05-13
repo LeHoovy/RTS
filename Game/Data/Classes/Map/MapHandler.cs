@@ -59,7 +59,7 @@ public partial class MapHandler : Node2D
 			ArrayHelper.Print2DArray(chunk.probes);*/
 			foreach (TerrainProbe probe in chunk.Probes)
 			{
-				if (probe.CheckType() == TerrainProbe.ProbeType.Corner)
+				if (probe.GetProbeType<int>() >= 3)
 				{
 					Vector2I probePos = chunk.Position * 16 + probe.Position;
 					Node2D newMarker = marker.Instantiate<Node2D>();

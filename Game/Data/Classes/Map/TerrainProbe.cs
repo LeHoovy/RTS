@@ -5,18 +5,23 @@ using System;
 public partial class TerrainProbe : Resource
 {
 	// Constant variables
+	/// <summary>
+	/// Probe types. An int of value <b>2</b> or more is considered a corner.
+	/// </summary>
 	public enum ProbeType // What type is the probe
 	{
 		Flat,    //0: Flat tile.
 		Edge,    //1: Contains an edge, but otherwise the same as a flat tile.
 		Corner,  //2: Contains a corner. Used to generate polygons.
-		Junction //3: Contains a corner and an edge. Used to generate polygons.
+		Junction, //3: Contains a corner and an edge. Used to generate polygons.
+		FourWay //4: No two points make flat space.. Used to generate polygons.
 	}
 
 	// Standard variables
 	public Vector2I Position; // Position relative to the owner chunk.
 	public bool isRamp; // unneeded for now, will be used later
 	private byte?[,] localHeightmap; // Local heightmap. Should be a 4x4 grid.
+	private ProbeType probeType;
 
 	// Might not be needed after all
 	//public Vector2I InChunk; // What chunk the probe is in.
@@ -29,12 +34,44 @@ public partial class TerrainProbe : Resource
 
 
 	/// <summary>
+	/// Returns the type of the probe. Also updates the type of the probe.
+	/// </summary>
+	/// <typeparam name="T">Must be either ProbeType or int.</typeparam>
+	/// <returns>What type the probe is. Either an enum or int.</returns>
+	/// <exception cref="InvalidOperationException">Type must be int or enum.</exception>
+	public T GetProbeType<T>()
+	{
+		probeType = CheckType();
+		if (typeof(T) == typeof(int))
+		{
+			return (T)(object)(int)probeType; // Returns as an int
+		}
+		else if (typeof(T) == typeof(ProbeType) || typeof(T) == null)
+		{
+			return (T)(object)probeType; // Returns as an enum
+		}
+		throw new InvalidOperationException("Unsupported type: must be a 'ProbeType' or 'Int");
+	}
+
+
+	/// <summary>
+	/// Overload for GetType that takes no type enforcer.
+	/// </summary>
+	/// <returns>The type of the probe as an enum.</returns>
+	public ProbeType GetProbeType()
+	{
+		probeType = CheckType();
+		return probeType;
+	}
+
+
+	/// <summary>
 	/// Returns the type of the probe and sets if it is a corner or not.
 	/// Might need to be public but was private before
 	/// </summary>
 	/// <param name="pos">What position (0,0) - (2,2) to check on the local heightmap</param>
 	/// <returns></returns>
-	public ProbeType CheckType(bool recursion = false, bool updateCorner = false)
+	public ProbeType CheckType()
 	{
 		// The main 4 tiles the probe covers
 		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, 1, 2, 1, 2);
@@ -73,7 +110,7 @@ public partial class TerrainProbe : Resource
 			var posOne = primaryTiles[xPos(i), yPos(i)];
 			var posTwo = primaryTiles[xPos((i + 1) % 4), yPos((i + 1) % 4)];
 			var posThree = primaryTiles[xPos((i + 2) % 4), yPos((i + 2) % 4)];
-			var posFour = primaryTiles[xPos((i + 3) % 4), yPos((i + 3) % 4)]; //ERROR: out of bounds
+			var posFour = primaryTiles[xPos((i + 3) % 4), yPos((i + 3) % 4)]; 
 
 			if (posOne is null
 			|| posTwo is null
@@ -83,15 +120,13 @@ public partial class TerrainProbe : Resource
 				return ProbeType.Corner;
 			}
 
-			// Not a single tile is the same height
+			// Not a single tile forms an edge
 			if (posOne != posTwo
-			&& posTwo != posThree
-			&& posThree != posFour
-			&& posThree != posOne
-			&& posFour != posOne
-			&& posFour != posTwo)
+			&& posTwo != posFour
+			&& posFour != posThree
+			&& posThree != posOne)
 			{
-				return ProbeType.Corner;
+				return ProbeType.FourWay;
 			}
 
 			// Three-way junction
@@ -104,7 +139,7 @@ public partial class TerrainProbe : Resource
 			&& posThree != posFour
 			&& posFour != posOne))
 			{
-				return ProbeType.Corner;
+				return ProbeType.Junction;
 			}
 			
 			// three are equal and one isn't
