@@ -6,7 +6,8 @@ public partial class TerrainChunk : Resource
 {
 	public Vector2I Position; // Position relative to other chunks/to the map.
 	public byte[,] LocalHeightMap; // The heightmap that is contained on the chunk.
-	public TerrainProbe[,] probes;
+	public TerrainProbe[,] Probes;
+	private TerrainProbe[,] terrainCorners;
 
 
 	/// <summary>
@@ -63,22 +64,33 @@ public partial class TerrainChunk : Resource
 	/// <returns>The new chunk</returns>
 	public static TerrainChunk NewChunk(Vector2I position, byte[,] heightmap, byte size)
 	{
+		// Prepares the new chunk and sets its stored variables
 		TerrainChunk newChunk = new TerrainChunk();
 		newChunk.Position = position;
 		newChunk.LocalHeightMap = ArrayHelper.Slice2DArray(heightmap, position.X, size, position.Y, size);
 
-		newChunk.probes = new TerrainProbe[
+		// Initializes the new chunk's probe array
+		newChunk.Probes = new TerrainProbe[
 			newChunk.LocalHeightMap.GetLength(0) + 1,
 			newChunk.LocalHeightMap.GetLength(1) + 1
 		];
+
+		// Iterate over every position in the probe array to generate a probe
+		// Something seems wrong here, like the Probes heightmap is off by the chunks position
+		// Maybe in the probe's script?
 		for (int x = 0; x < newChunk.LocalHeightMap.GetLength(0) + 1; x++)
 		{
 			for (int y = 0; y < newChunk.LocalHeightMap.GetLength(1) + 1; y++)
 			{
-				newChunk.probes[x, y] = TerrainProbe.NewProbe(new Vector2I(x, y), position, heightmap);
+				newChunk.Probes[x, y] = TerrainProbe.NewProbe(new Vector2I(x, y), position * 16, heightmap);
+				Vector2I probeWorldPos = newChunk.Probes[x, y].Position + newChunk.Position * 16;
+				if (probeWorldPos == new Vector2I(16, 3))
+				{
+					GD.Print($"chunk {newChunk.Position}: {probeWorldPos}");
+				}
 			}
 		}
-		GD.Print("Probes Created!");
+		//GD.Print("Probes Created!");
 		return newChunk;
 	}
 }

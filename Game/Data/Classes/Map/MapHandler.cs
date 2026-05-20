@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 
 [GlobalClass]
-public partial class MapHandler : Node
+public partial class MapHandler : Node2D
 {
 	// General Variables
 	public MapData Data;
@@ -18,6 +18,8 @@ public partial class MapHandler : Node
 	public bool Debug;
 	[Export]
 	public Node DebugParent;
+	[Export]
+	public Vector2I MapSize = new Vector2I(16, 16);
 
 	// Called when the node enters the scene tree for the first time.
 	public override void _Ready()
@@ -25,12 +27,13 @@ public partial class MapHandler : Node
 		ulong startTime = Time.GetTicksUsec();
 		if (Data is null) // If there is no map data, generate a new one.
 		{
-			Data = MapData.NewMap(new Vector2I(14, 14), 4, ChunkSize);
+			Data = MapData.NewMap(MapSize, 4, ChunkSize);
 		}
 		
 		Vector2I size = Data.MapSize;
 		Vector2I chunkMapSize = size / ChunkSize;
 		chunks = new TerrainChunk[chunkMapSize.X, chunkMapSize.Y];
+		GD.Print(chunkMapSize);
 		// Create chunks
 		for (uint chunkX = 0; chunkX < chunks.GetLength(0); chunkX++)
 		{
@@ -50,21 +53,22 @@ public partial class MapHandler : Node
 		PackedScene marker = GD.Load<PackedScene>("res://test/marker.tscn");
 		foreach (TerrainChunk chunk in chunks)
 		{
-			Node2D newMarker = marker.Instantiate<Node2D>();
+			/*Node2D newMarker = marker.Instantiate<Node2D>();
 			newMarker.Position = chunk.Position * 64;
 			AddChild(newMarker);
-			ArrayHelper.Print2DArray(chunk.probes);
-			/*foreach (TerrainProbe probe in chunk.probes)
+			ArrayHelper.Print2DArray(chunk.probes);*/
+			foreach (TerrainProbe probe in chunk.Probes)
 			{
-				if (probe.CheckType() == TerrainProbe.ProbeType.Corner)
+				if (probe.GetProbeType<int>() >= 3)
 				{
-					Vector2I probePos = chunk.Position * 64 + probe.Position * 4;
+					Vector2I probePos = chunk.Position * 16 + probe.Position;
 					Node2D newMarker = marker.Instantiate<Node2D>();
-					newMarker.Position = probePos;
+					newMarker.Position = probePos * 4;
+					newMarker.Name = probePos.ToString();
+					//GD.Print($"probe {newMarker.Name} of type {probe.CheckType()} at {probe.Position} in chunk {chunk.Position}");
 					AddChild(newMarker);
-
 				}
-			}*/
+			}
 		}
 
 		// Print how long the process took

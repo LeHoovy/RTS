@@ -8,6 +8,10 @@ public partial class MapData : Resource
 {
 	public byte[,] HeightMap;
 	public Vector2I MapSize;
+	// Dictionary for ramps
+	// Contains starting and ending positions
+	// Maybe width/radius, though corner ramps will be annoying with that
+	// Maybe just each bend/corner on the ramp
 
 
 	/// <summary>
@@ -36,7 +40,7 @@ public partial class MapData : Resource
 				// so I don't need to create map modification stuff just yet
 				Vector2I tilePos = new Vector2I((int)XPos, (int)YPos);
 				Vector2I chunkPos = newMap.GetChunkAtPos(tilePos);
-				byte newHeight = (byte)(chunkPos.X + chunkPos.Y);
+				byte newHeight = 6;//(byte)(chunkPos.X + chunkPos.Y);
 
 				if ((tilePos.X % chunkSize) + 1 < (tilePos.Y % chunkSize))
 				{

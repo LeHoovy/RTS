@@ -1,5 +1,21 @@
 # RTS
+### Instructions
+Download the [Godot Engine](https://godotengine.org/download/archive/4.6.1-stable/).
+<br>You can also download 4.6.2, but I'm using 4.6.1. Make sure you get the mono (.NET) version.
 
+Download and install [.NET 8.0 SDK](https://dotnet.microsoft.com/en-us/download/dotnet/8.0)
+<br>Ensure you download the SDK. You can also download .NET 9.0, but I used 8.0.
+
+Download and extract this project wherever you want.
+<br>From here you can either:
+1. Run the engine executable
+2. Scan for the project's folder
+3. Open the project
+4. Hit run
+
+Alternatively you can:
+1. Drag the engine executable to the project folder
+2. Run the executable
 ## TRA* Pathfinding
 The goal of this branch is to generate a navmesh on a 2d map and do TRA* from that, then potentially render in 3d unless I like it in 2d.
 
