@@ -48,7 +48,7 @@ public partial class MapHandler : Node2D
 				chunks[chunkX, chunkY] = newChunk; // Store the new chunk in the Chunk Array
 			}
 		}
-		GD.Print($"Total Terrain Probes: {TerrainProbe.Probes}");
+		GD.Print($"Total Terrain Probes: {HeightMapProbe.Probes}");
 
 		PackedScene marker = GD.Load<PackedScene>("res://test/marker.tscn");
 		foreach (TerrainChunk chunk in chunks)
@@ -57,9 +57,9 @@ public partial class MapHandler : Node2D
 			newMarker.Position = chunk.Position * 64;
 			AddChild(newMarker);
 			ArrayHelper.Print2DArray(chunk.probes);*/
-			foreach (TerrainProbe probe in chunk.Probes)
+			foreach (HeightMapProbe probe in chunk.Probes)
 			{
-				if (probe.GetProbeType<int>() >= 3)
+				if (probe.GetProbeType<int>() >= 2)
 				{
 					Vector2I probePos = chunk.Position * 16 + probe.Position;
 					Node2D newMarker = marker.Instantiate<Node2D>();

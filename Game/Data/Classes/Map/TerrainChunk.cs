@@ -4,10 +4,14 @@ using System;
 [GlobalClass]
 public partial class TerrainChunk : Resource
 {
+	// TODO:
+	// Create terrain from the heightmap probes
+	// Create a navmesh from the terrain
+
 	public Vector2I Position; // Position relative to other chunks/to the map.
 	public byte[,] LocalHeightMap; // The heightmap that is contained on the chunk.
-	public TerrainProbe[,] Probes;
-	private TerrainProbe[,] terrainCorners;
+	public HeightMapProbe[,] Probes;
+	private HeightMapProbe[,] terrainCorners;
 
 
 	/// <summary>
@@ -70,7 +74,7 @@ public partial class TerrainChunk : Resource
 		newChunk.LocalHeightMap = ArrayHelper.Slice2DArray(heightmap, position.X, size, position.Y, size);
 
 		// Initializes the new chunk's probe array
-		newChunk.Probes = new TerrainProbe[
+		newChunk.Probes = new HeightMapProbe[
 			newChunk.LocalHeightMap.GetLength(0) + 1,
 			newChunk.LocalHeightMap.GetLength(1) + 1
 		];
@@ -82,7 +86,7 @@ public partial class TerrainChunk : Resource
 		{
 			for (int y = 0; y < newChunk.LocalHeightMap.GetLength(1) + 1; y++)
 			{
-				newChunk.Probes[x, y] = TerrainProbe.NewProbe(new Vector2I(x, y), position * 16, heightmap);
+				newChunk.Probes[x, y] = HeightMapProbe.NewProbe(new Vector2I(x, y), position * 16, heightmap);
 				Vector2I probeWorldPos = newChunk.Probes[x, y].Position + newChunk.Position * 16;
 				if (probeWorldPos == new Vector2I(16, 3))
 				{
@@ -92,5 +96,14 @@ public partial class TerrainChunk : Resource
 		}
 		//GD.Print("Probes Created!");
 		return newChunk;
+	}
+
+
+	/// <summary>
+	/// Regenerates the entirety of the chunk's 3D terrain.
+	/// </summary>
+	public void GenerateTerrain()
+	{
+		
 	}
 }
