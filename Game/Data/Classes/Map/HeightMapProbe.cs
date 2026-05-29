@@ -2,7 +2,7 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class HeightMapProbe : Resource
+public partial class HeightMapProbe : RefCounted
 {
 	// Constant variables
 	/// <summary>
