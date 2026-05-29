@@ -2,11 +2,42 @@ using Godot;
 using System;
 
 [GlobalClass]
-public partial class TerrainChunk : Resource
+public partial class TerrainChunk : RefCounted
 {
-	// TODO:
-	// Create terrain from the heightmap probes
-	// Create a navmesh from the terrain
+#region TODO list
+	// TERRAIN
+	// TODO TERRAIN Generate the terrain
+	// [ ] TERRAIN Generate regions
+	// [ ] TERRAIN Generate floors
+	// [ ] TERRAIN Generate ramps
+	// [ ] TERRAIN Generate walls
+	// [ ] TERRAIN (?)Optimization by adjusting existing meshes rather than regenerating new ones
+
+	// NAVMESH
+	// TODO NAVMESH Generate the navmesh
+	// [ ] NAVMESH Take the points and convert them into regions
+	// [ ] NAVMESH (?)Adjust the regions to account for cliffs
+	// [ ] NAVMESH Add tags to the regions
+	// [ ] NAVMESH Triangulate the regions
+	// [ ] NAVMESH Perform a Constrained Delaunay Triangulation
+	// XXX NAVMESH The rest should be done in other things
+	// TODO NAVMESH I think the Navmesh needs to be its own thing and not based on chunks
+	// only updating from changes on the map with a main layer based on chunks
+	// INFO NAVMESH Tags will be given to triangles within regions.
+	// These tags will determine where units can pathfind (flying, cliff, ground, etc)
+	// INFO NAVMESH Triangles should contain how long the shared edge between it and a neighboring triangle is.
+	// INFO NAVMESH Triangles can connect to any other triangle.
+	// If a triangle is connected to one that its edges do not border, the length of the shared edge is the radius from the center needed to teleport.
+	// Alternatively, something could be set up so that once an agent enters the triangle (as in the center crosses the border into the triangle)
+	// the agent gets teleported to the edge of the next triangle.
+	// In this case, the distance between the two triangles should be "0" as they technically overlap.
+	// Additionally, the triangles may need to be 1:1 scale, or teleport the agent to a point as close as possible on the exit triangle
+	// to the point they entered on the first triangle.
+	// INFO NAVMESH Each edge within a triangle should contain the data on the length of the shared edge.
+	// So I guess that means the second case in the previous info is the only possible case.
+	// INFO NAVMESH The navmesh may need to be contained in another object.
+	// Only update from each chunk for optimization. I dunno honestly, something like this.
+#endregion
 
 	public Vector2I Position; // Position relative to other chunks/to the map.
 	public byte[,] LocalHeightMap; // The heightmap that is contained on the chunk.
@@ -101,9 +132,11 @@ public partial class TerrainChunk : Resource
 
 	/// <summary>
 	/// Regenerates the entirety of the chunk's 3D terrain.
+	/// May be laggy as it regenerates the entire chunk rather than updating terrain.
+	/// I'll probably try to optimize that later, especially if it ends up being too slow.
 	/// </summary>
 	public void GenerateTerrain()
 	{
-		
+		HeightMapProbe origin = Probes[0, 0];
 	}
 }

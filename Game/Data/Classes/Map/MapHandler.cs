@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 
 [GlobalClass]
-public partial class MapHandler : Node2D
+public partial class MapHandler : Node
 {
 	// General Variables
 	public MapData Data;
