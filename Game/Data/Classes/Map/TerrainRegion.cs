@@ -9,8 +9,6 @@ public partial class TerrainRegion : RefCounted
 	// I.E it will only go from (0, 0) to (15, 15)
 
 
-	public Vector3I[] Corners; // The third position is used for height.
-	// INFO:
-	// When creating 3D terrain, switch Y and Z.
-	// Otherwise it will not be correct
+	public Vector2I[] Corners; // Where the corners corners of the region are
+	public byte[] CornerHeights; // Mainly used for ramps
 }

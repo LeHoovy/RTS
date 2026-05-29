@@ -57,6 +57,7 @@ public partial class MapHandler : Node
 			newMarker.Position = chunk.Position * 64;
 			AddChild(newMarker);
 			ArrayHelper.Print2DArray(chunk.probes);*/
+			chunk.GenerateTerrain();
 			foreach (HeightMapProbe probe in chunk.Probes)
 			{
 				if (probe.GetProbeType<int>() >= 2)

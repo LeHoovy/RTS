@@ -130,6 +130,11 @@ public partial class TerrainChunk : RefCounted
 	}
 
 
+	/// TODO: GenTerrain Generate the terrain
+	/// [ ] GenTerrain make this method work
+	/// [ ] GenTerrain finish it so it generates everything, not just the first region
+	/// [ ] GenTerrain make it generate ramps
+	/// [ ] GenTerrain make it generate walls
 	/// <summary>
 	/// Regenerates the entirety of the chunk's 3D terrain.
 	/// May be laggy as it regenerates the entire chunk rather than updating terrain.
@@ -137,6 +142,16 @@ public partial class TerrainChunk : RefCounted
 	/// </summary>
 	public void GenerateTerrain()
 	{
+		// Move this outside of the containing method if it ever comes up outside of this
+		void generateRegion(Vector2I curProbe, byte dir)
+		{
+			var angle = dir % 8 * Math.PI / 4;
+			var nextProbeRel = Vector2.Right.Rotated((float)angle).Normalized();
+			var relPos = new Vector2I((int)Math.Ceiling(nextProbeRel.X), (int)Math.Ceiling(nextProbeRel.Y));
+			GD.Print(curProbe + relPos);
+		}
+
+		generateRegion(new Vector2I(0, 0), 2);
 		HeightMapProbe origin = Probes[0, 0];
 	}
 }
