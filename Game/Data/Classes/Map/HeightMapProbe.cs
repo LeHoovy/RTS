@@ -19,9 +19,10 @@ public partial class HeightMapProbe : RefCounted
 
 	// Standard variables
 	public Vector2I Position; // Position relative to the owner chunk.
-	public bool isRamp; // unneeded for now, will be used later
+	public bool IsRamp; // unneeded for now, might be used later
+	public bool IsCorner;
 	private byte?[,] localHeightmap; // Local heightmap. Should be a 4x4 grid.
-	private ProbeType probeType;
+	//private ProbeType probeType; // Likely unneeded
 
 	// Might not be needed after all
 	//public Vector2I InChunk; // What chunk the probe is in.
@@ -42,14 +43,14 @@ public partial class HeightMapProbe : RefCounted
 	public T GetProbeType<T>()
 	{
 		var pType = CheckType();
-		probeType = pType;
+		//probeType = pType; // Previously used as return, likely unneeded now
 		if (typeof(T) == typeof(int))
 		{
-			return (T)(object)(int)probeType; // Returns as an int
+			return (T)(object)(int)pType; // Returns as an int
 		}
 		else if (typeof(T) == typeof(ProbeType) || typeof(T) == null)
 		{
-			return (T)(object)probeType; // Returns as an enum
+			return (T)(object)pType; // Returns as an enum
 		}
 		throw new InvalidOperationException("Unsupported type: must be a 'ProbeType' or 'Int");
 	}
@@ -61,8 +62,9 @@ public partial class HeightMapProbe : RefCounted
 	/// <returns>The type of the probe as an enum.</returns>
 	public ProbeType GetProbeType()
 	{
-		probeType = CheckType();
-		return probeType;
+		//probeType = CheckType(); // Previously used as return, likely unneeded now
+		var type = CheckType();
+		return type;
 	}
 
 
@@ -177,65 +179,86 @@ public partial class HeightMapProbe : RefCounted
 		}
 
 		return ProbeType.Flat;
-	}
+	//}
 
 
-	private bool CheckisFlat(Vector2I pos)
-	{
-		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, pos.X, 2, pos.Y, 2);
-
-		if (primaryTiles[0, 0] == primaryTiles [0, 1]
-		&& primaryTiles[0, 1] == primaryTiles[1, 1]
-		&& primaryTiles[1, 1] == primaryTiles[1, 0])
+		bool CheckisFlat(Vector2I pos)
 		{
-			return true;
-		}
-		return false;
-	}
+			byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, pos.X, 2, pos.Y, 2);
 
-
-	private bool CheckIsEdge(Vector2I pos, int? dir = null)
-	{
-		byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, pos.X, 2, pos.Y, 2);
-		if (dir == null) // Direction doesn't matter, check both
-		{
-			if ((primaryTiles[0, 0] == primaryTiles[1, 0]
-				&& primaryTiles[0, 1] == primaryTiles[1, 1]
-				&& primaryTiles[0, 0] != primaryTiles[0, 1]
-				) || (
-				primaryTiles[0, 0] == primaryTiles[0, 1]
-				&& primaryTiles[1, 0] == primaryTiles[1, 1]
-				&& primaryTiles[0, 0] != primaryTiles[1, 0])
-			)
+			if (primaryTiles[0, 0] == primaryTiles [0, 1]
+			&& primaryTiles[0, 1] == primaryTiles[1, 1]
+			&& primaryTiles[1, 1] == primaryTiles[1, 0])
 			{
 				return true;
 			}
-		} else // Only runs if there is a direction to check
+			return false;
+		}
+
+
+		bool CheckIsEdge(Vector2I pos, int? dir = null)
 		{
-			if (dir == 0) // Check the horizontal
+			byte?[,] primaryTiles = ArrayHelper.Slice2DArray(localHeightmap, pos.X, 2, pos.Y, 2);
+			if (dir == null) // Direction doesn't matter, check both
 			{
-				if (primaryTiles[0, 0] == primaryTiles[1, 0]
+				if ((primaryTiles[0, 0] == primaryTiles[1, 0]
 					&& primaryTiles[0, 1] == primaryTiles[1, 1]
 					&& primaryTiles[0, 0] != primaryTiles[0, 1]
-				)
-				{
-					return true;
-				}
-			}
-			if (dir == 1)
-			{ // Check the vertical
-				if (primaryTiles[0, 0] == primaryTiles[0, 1]
+					) || (
+					primaryTiles[0, 0] == primaryTiles[0, 1]
 					&& primaryTiles[1, 0] == primaryTiles[1, 1]
-					&& primaryTiles[0, 0] != primaryTiles[1, 0]
+					&& primaryTiles[0, 0] != primaryTiles[1, 0])
 				)
 				{
 					return true;
 				}
+			} else // Only runs if there is a direction to check
+			{
+				if (dir == 0) // Check the horizontal
+				{
+					if (primaryTiles[0, 0] == primaryTiles[1, 0]
+						&& primaryTiles[0, 1] == primaryTiles[1, 1]
+						&& primaryTiles[0, 0] != primaryTiles[0, 1]
+					)
+					{
+						return true;
+					}
+				}
+				if (dir == 1)
+				{ // Check the vertical
+					if (primaryTiles[0, 0] == primaryTiles[0, 1]
+						&& primaryTiles[1, 0] == primaryTiles[1, 1]
+						&& primaryTiles[0, 0] != primaryTiles[1, 0]
+					)
+					{
+						return true;
+					}
+				}
 			}
+			
+			// Not an edge
+			return false;
 		}
-		
-		// Not an edge
-		return false;
+	}
+
+
+	/// <summary>
+	/// Checks if the probe is a corner or not.
+	/// If it is, mark it as one.
+	/// If not, mark that it isn't.
+	/// </summary>
+	/// <returns>The new corner status of the probe.</returns>
+	public bool UpdateProbeCornerStatus()
+	{
+		if (GetProbeType<int>() >= 2)
+		{
+			IsCorner = true;
+		}
+		else
+		{
+			IsCorner = false;
+		}
+		return IsCorner;
 	}
 
 

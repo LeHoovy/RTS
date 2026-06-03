@@ -60,7 +60,7 @@ public partial class MapHandler : Node
 			chunk.GenerateTerrain();
 			foreach (HeightMapProbe probe in chunk.Probes)
 			{
-				if (probe.GetProbeType<int>() >= 2)
+				if (probe.IsCorner)
 				{
 					Vector2I probePos = chunk.Position * 16 + probe.Position;
 					Node2D newMarker = marker.Instantiate<Node2D>();

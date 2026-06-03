@@ -125,6 +125,15 @@ public partial class TerrainChunk : RefCounted
 				}
 			}
 		}
+
+		// Prepare the probes
+		for (int x = 0; x < newChunk.Probes.GetLength(0); x++)
+		{
+			for (int y = 0; y < newChunk.Probes.GetLength(1); y++)
+			{
+				newChunk.Probes[x, y].UpdateProbeCornerStatus();
+			}
+		}
 		//GD.Print("Probes Created!");
 		return newChunk;
 	}
@@ -142,16 +151,6 @@ public partial class TerrainChunk : RefCounted
 	/// </summary>
 	public void GenerateTerrain()
 	{
-		// Move this outside of the containing method if it ever comes up outside of this
-		void generateRegion(Vector2I curProbe, byte dir)
-		{
-			var angle = dir % 8 * Math.PI / 4;
-			var nextProbeRel = Vector2.Right.Rotated((float)angle).Normalized();
-			var relPos = new Vector2I((int)Math.Ceiling(nextProbeRel.X), (int)Math.Ceiling(nextProbeRel.Y));
-			GD.Print(curProbe + relPos);
-		}
-
-		generateRegion(new Vector2I(0, 0), 2);
-		HeightMapProbe origin = Probes[0, 0];
+		
 	}
 }
