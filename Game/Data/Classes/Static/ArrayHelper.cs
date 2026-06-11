@@ -120,7 +120,31 @@ public static class ArrayHelper
 	public static int GetUniqueValues<T>(T[] arr)
 	{
 		HashSet<T> hash = new HashSet<T>(arr);
-		
+		// A HashSet is basically an Array or List but can only contain one copy of each item
 		return hash.Count;
+	}
+
+
+	// TODO BitFlag
+	// Maybe try a bitwise operation to check each bit
+	// i.e 10011000 = [8, 16, 128] = 152
+	// (128 + 0 + 0 + 16 + 8 + 0 + 0 + 0) = 152
+	/// <summary>
+	/// 
+	/// </summary>
+	/// <param name="enumValue"></param>
+	/// <returns></returns>
+	public static int[] SplitBitFlagEnum(int enumValue)
+	{
+		if (enumValue == 0)
+		{
+			return [];
+		}
+
+		int i = 1;
+		while (i < enumValue)
+		{
+			i *= 2;
+		}
 	}
 }

@@ -5,37 +5,37 @@ using System;
 public partial class TerrainChunk : RefCounted
 {
 #region TODO list
-	// TERRAIN
-	// TODO TERRAIN Generate the terrain
-	// [ ] TERRAIN Generate regions
-	// [ ] TERRAIN Generate floors
-	// [ ] TERRAIN Generate ramps
-	// [ ] TERRAIN Generate walls
-	// [ ] TERRAIN (?)Optimization by adjusting existing meshes rather than regenerating new ones
+	// Terrain
+	// TODO Terrain Generate the terrain
+	// [ ] Terrain Generate regions
+	// [ ] Terrain Generate floors
+	// [ ] Terrain Generate ramps
+	// [ ] Terrain Generate walls
+	// [ ] Terrain (?)Optimization by adjusting existing meshes rather than regenerating new ones
 
-	// NAVMESH
-	// TODO NAVMESH Generate the navmesh
-	// [ ] NAVMESH Take the points and convert them into regions
-	// [ ] NAVMESH (?)Adjust the regions to account for cliffs
-	// [ ] NAVMESH Add tags to the regions
-	// [ ] NAVMESH Triangulate the regions
-	// [ ] NAVMESH Perform a Constrained Delaunay Triangulation
-	// XXX NAVMESH The rest should be done in other things
-	// TODO NAVMESH I think the Navmesh needs to be its own thing and not based on chunks
+	// NavMesh
+	// TODO NavMesh Generate the navmesh
+	// [ ] NavMesh Take the points and convert them into regions
+	// [ ] NavMesh (?)Adjust the regions to account for cliffs
+	// [ ] NavMesh Add tags to the regions
+	// [ ] NavMesh Triangulate the regions
+	// [ ] NavMesh Perform a Constrained Delaunay Triangulation
+	// XXX NavMesh The rest should be done in other things
+	// TODO NavMesh I think the Navmesh needs to be its own thing and not based on chunks
 	// only updating from changes on the map with a main layer based on chunks
-	// INFO NAVMESH Tags will be given to triangles within regions.
+	// INFO NavMesh Tags will be given to triangles within regions.
 	// These tags will determine where units can pathfind (flying, cliff, ground, etc)
-	// INFO NAVMESH Triangles should contain how long the shared edge between it and a neighboring triangle is.
-	// INFO NAVMESH Triangles can connect to any other triangle.
+	// INFO NavMesh Triangles should contain how long the shared edge between it and a neighboring triangle is.
+	// INFO NavMesh Triangles can connect to any other triangle.
 	// If a triangle is connected to one that its edges do not border, the length of the shared edge is the radius from the center needed to teleport.
 	// Alternatively, something could be set up so that once an agent enters the triangle (as in the center crosses the border into the triangle)
 	// the agent gets teleported to the edge of the next triangle.
 	// In this case, the distance between the two triangles should be "0" as they technically overlap.
 	// Additionally, the triangles may need to be 1:1 scale, or teleport the agent to a point as close as possible on the exit triangle
 	// to the point they entered on the first triangle.
-	// INFO NAVMESH Each edge within a triangle should contain the data on the length of the shared edge.
+	// INFO NavMesh Each edge within a triangle should contain the data on the length of the shared edge.
 	// So I guess that means the second case in the previous info is the only possible case.
-	// INFO NAVMESH The navmesh may need to be contained in another object.
+	// INFO NavMesh The navmesh may need to be contained in another object.
 	// Only update from each chunk for optimization. I dunno honestly, something like this.
 #endregion
 
@@ -139,6 +139,7 @@ public partial class TerrainChunk : RefCounted
 	}
 
 
+	// XXX IMPORTANT Generate the terrain
 	/// TODO: GenTerrain Generate the terrain
 	/// [ ] GenTerrain make this method work
 	/// [ ] GenTerrain finish it so it generates everything, not just the first region
@@ -151,6 +152,9 @@ public partial class TerrainChunk : RefCounted
 	/// </summary>
 	public void GenerateTerrain()
 	{
-		
+		// Generate each edge, find each connected edge, keep going until returning to root corner
+		// Re-check each corner that has multiple junctions until fully checked
+		// Maybe try re-using edges that are shared between two regions?
+		// I have no idea what I'm doing :(
 	}
 }

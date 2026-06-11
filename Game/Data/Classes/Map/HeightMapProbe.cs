@@ -15,7 +15,22 @@ public partial class HeightMapProbe : RefCounted
 		Corner,  //2: Contains a corner. Used to generate polygons.
 		Junction, //3: Contains a corner and an edge. Used to generate polygons.
 		FourWay //4: No two points make flat space.. Used to generate polygons.
-	}
+	};
+
+	[Flags]
+	public enum EdgeDir // Helps me to understand, plus I think C# has built-in bitflag-byte conversion
+	{
+		None = 0,
+		East = 1,
+		SouthEast = 2,
+		South = 4,
+		SouthWest = 8,
+		West = 16,
+		NorthWest = 32,
+		North = 64,
+		NorthEast = 128
+	};
+	public byte Edges;
 
 	// Standard variables
 	public Vector2I Position; // Position relative to the owner chunk.
