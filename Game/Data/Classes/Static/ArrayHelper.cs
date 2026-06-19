@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 
 public static class ArrayHelper
@@ -141,10 +142,20 @@ public static class ArrayHelper
 			return [];
 		}
 
-		int i = 1;
-		while (i < enumValue)
+		GD.Print(enumValue);
+		BitArray bits = new BitArray(new int[] {enumValue});
+		int val = 0;
+		int iteration = 1;
+		for (int pos = 0; pos < bits.Length; pos++)
 		{
-			i *= 2;
+			GD.Print($"bit at pos {pos}: {bits[pos]}");
+			if (bits[pos])
+			{
+				val += iteration;
+			}
+			iteration *= 2;
 		}
+		GD.Print($"{enumValue} == {val}: {enumValue == val}");
+		return []; // TEMP
 	}
 }

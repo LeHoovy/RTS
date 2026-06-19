@@ -1,5 +1,7 @@
 using Godot;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 
 [GlobalClass]
 public partial class HeightMapProbe : RefCounted
@@ -30,12 +32,15 @@ public partial class HeightMapProbe : RefCounted
 		North = 64,
 		NorthEast = 128
 	};
-	public byte Edges;
+	public BitArray Edges;
+	public byte EdgeCount;
 
 	// Standard variables
 	public Vector2I Position; // Position relative to the owner chunk.
 	public bool IsRamp; // unneeded for now, might be used later
+	public bool IsStraightEdge; // Probably will work better on its own than the next two would have
 	public bool IsCorner;
+	//public bool IsFlat;
 	private byte?[,] localHeightmap; // Local heightmap. Should be a 4x4 grid.
 	//private ProbeType probeType; // Likely unneeded
 
@@ -68,6 +73,154 @@ public partial class HeightMapProbe : RefCounted
 			return (T)(object)pType; // Returns as an enum
 		}
 		throw new InvalidOperationException("Unsupported type: must be a 'ProbeType' or 'Int");
+	}
+
+
+	// TODO UNFINISHED Update Probe method
+	/// <summary>
+	/// Updates the probe's edges.
+	/// </summary>
+	// INFO OPTIMIZATION Potential Optimization Here
+	public void UpdateProbe()
+	{
+		CheckEdges();
+		IsStraightEdge = CheckIfStraightEdge();
+		if (IsStraightEdge)
+		{
+			GD.Print("Probe is edge");
+		}
+		//else if (EdgeCount != 2)
+		//{
+		//	GD.Print($"Probe {Position} not edge: {EdgeCount}");
+		//}
+		if (EdgeCount >= 2 && !IsStraightEdge)
+		{
+			IsCorner = true;
+		}
+	}
+
+
+	/// <summary>
+	/// Checks to make sure if the point the probe is on makes a straight edge.
+	/// </summary>
+	/// <returns>Returns "true" if it is a straight edge, otherwise returns false.</returns>
+	private bool CheckIfStraightEdge()
+	{
+		if (EdgeCount != 2) // It is only
+		{
+			return false;
+		}
+		for (byte edge = 0; edge < 4; edge++)
+		{
+			// This loop and if statement ensures it is not a corner/junction with only two edges
+			if (Edges[edge] && Edges[edge + 4])
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
+
+	private void CheckEdges()
+	{
+		// Checks if there is a horizontal edge on the tile
+		// rootPos is the top left corner of the tile
+		bool checkHorizontal(Vector2I rootPos)
+		{
+			if (localHeightmap[rootPos.X, rootPos.Y] == localHeightmap[rootPos.X + 1, rootPos.Y]
+			&& localHeightmap[rootPos.X, rootPos.Y + 1] == localHeightmap[rootPos.X + 1, rootPos.Y + 1]
+			&& localHeightmap[rootPos.X, rootPos.Y] != localHeightmap[rootPos.X, rootPos.Y + 1])
+			{
+				return true;
+			}
+			return false;
+		}
+
+		// Checks if there is a vertical edge on the checked tile
+		// rootPos is the top left corner of the tile
+		bool checkVertical(Vector2I rootPos)
+		{
+			if (localHeightmap[rootPos.X, rootPos.Y] == localHeightmap[rootPos.X, rootPos.Y + 1]
+			&& localHeightmap[rootPos.X + 1, rootPos.Y] == localHeightmap[rootPos.X + 1, rootPos.Y + 1]
+			&& localHeightmap[rootPos.X, rootPos.Y] != localHeightmap[rootPos.X, rootPos.Y + 1])
+			{
+				return true;
+			}
+			return false;
+		}
+
+		// TODO UNFINISHED Diagonal Forward Slash Edge Check
+		// Checks if there is a diagonal edge going from the bottom left to the top right, forward slash (/) pattern
+		// rootPos is the top left corner of the tile
+		bool checkDiagonalInequalCoordinates(Vector2I rootPos)
+		{
+			var posOne = localHeightmap[rootPos.X, rootPos.Y];
+			var posTwo = localHeightmap[rootPos.X + 1, rootPos.Y];
+			var posThree = localHeightmap[rootPos.X, rootPos.Y + 1];
+			var posFour = localHeightmap[rootPos.X + 1, rootPos.Y + 1];
+
+			if (posTwo == posThree
+			&& (posTwo == posOne || posTwo == posFour)
+			&& posOne != posFour)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		// TODO UNFINISHED Diagonal Backwards Slash Edge Check
+		// Checks if there is a diagonal edge going from the top left to the bottom right, backwards slash (\) pattern
+		// rootPos is the top left corner of the tile
+		bool checkDiagonalEqualCoordinates(Vector2I rootPos)
+		{
+			var posOne = localHeightmap[rootPos.X, rootPos.Y];
+			var posTwo = localHeightmap[rootPos.X + 1, rootPos.Y];
+			var posThree = localHeightmap[rootPos.X, rootPos.Y + 1];
+			var posFour = localHeightmap[rootPos.X + 1, rootPos.Y + 1];
+
+			if (posOne == posFour
+			&& (posOne == posTwo || posOne == posThree)
+			&& posTwo != posFour)
+			{
+				return true;
+			}
+			return false;
+		}
+
+		Vector2I center = new Vector2I(1, 1);
+		for (byte i = 0; i < 8; i++)
+		{
+			Vector2I tile = GridHelper.DirNeighborTiles[i];
+			if (tile.X % 2 == tile.Y % 2)
+			{ 
+				// Corner (\ Diagonal /)
+				if (tile.X == tile.Y) // \ UpLeft \ DownRight \
+				{
+					Edges[i] = checkDiagonalEqualCoordinates(tile + center);
+					EdgeCount++;
+				}
+				else //(tile.X != tile.Y) / UpRight / DownLeft /
+				{
+					Edges[i] = checkDiagonalInequalCoordinates(tile + center);
+					EdgeCount++;
+				}
+				continue;
+			} 
+			
+			// else Abs(tile.X % 2) != Abs(tile.y % 2)
+			// Linear (+ Cardinal +)
+			if (tile.X % 2 == 0) // | Vertical | Up | Down
+			{
+				Edges[i] = checkVertical(tile + center);
+				EdgeCount++;
+			}
+			else //(tile.Y == 0) - Horizontal - Left - Right
+			{
+				Edges[i] = checkHorizontal(tile + center);
+				EdgeCount++;
+			}
+		}
 	}
 
 
@@ -263,7 +416,7 @@ public partial class HeightMapProbe : RefCounted
 	/// If not, mark that it isn't.
 	/// </summary>
 	/// <returns>The new corner status of the probe.</returns>
-	public bool UpdateProbeCornerStatus()
+	/*public bool UpdateProbeCornerStatus()
 	{
 		if (GetProbeType<int>() >= 2)
 		{
@@ -274,7 +427,7 @@ public partial class HeightMapProbe : RefCounted
 			IsCorner = false;
 		}
 		return IsCorner;
-	}
+	}*/
 
 
 	/// <summary>
@@ -291,6 +444,10 @@ public partial class HeightMapProbe : RefCounted
 		HeightMapProbe probe = new HeightMapProbe();
 		probe.Position = pos;
 		probe.localHeightmap = new byte?[4, 4];
+		probe.Edges = new BitArray(8);
+		probe.IsStraightEdge = false;
+		probe.IsCorner = false;
+		//probe.IsFlat = true;
 		//GD.Print(pos);
 
 		// Something might be wrong here as the heightmap seems off by one, relative to the chunk's position

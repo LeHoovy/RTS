@@ -118,22 +118,24 @@ public partial class TerrainChunk : RefCounted
 			for (int y = 0; y < newChunk.LocalHeightMap.GetLength(1) + 1; y++)
 			{
 				newChunk.Probes[x, y] = HeightMapProbe.NewProbe(new Vector2I(x, y), position * 16, heightmap);
-				Vector2I probeWorldPos = newChunk.Probes[x, y].Position + newChunk.Position * 16;
+				newChunk.Probes[x, y].UpdateProbe();
+
+				/*Vector2I probeWorldPos = newChunk.Probes[x, y].Position + newChunk.Position * 16;
 				if (probeWorldPos == new Vector2I(16, 3))
 				{
 					GD.Print($"chunk {newChunk.Position}: {probeWorldPos}");
-				}
+				}*/
 			}
 		}
 
 		// Prepare the probes
-		for (int x = 0; x < newChunk.Probes.GetLength(0); x++)
-		{
-			for (int y = 0; y < newChunk.Probes.GetLength(1); y++)
-			{
-				newChunk.Probes[x, y].UpdateProbeCornerStatus();
-			}
-		}
+		//for (int x = 0; x < newChunk.Probes.GetLength(0); x++)
+		//{
+		//	for (int y = 0; y < newChunk.Probes.GetLength(1); y++)
+		//	{
+		//		newChunk.Probes[x, y].UpdateProbe();
+		//	}
+		//}
 		//GD.Print("Probes Created!");
 		return newChunk;
 	}

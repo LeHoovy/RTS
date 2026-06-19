@@ -25,6 +25,7 @@ public partial class MapHandler : Node
 	public override void _Ready()
 	{
 		ulong startTime = Time.GetTicksUsec();
+		Console.WriteLine("Console.WriteLine test");
 		if (Data is null) // If there is no map data, generate a new one.
 		{
 			Data = MapData.NewMap(MapSize, 4, ChunkSize);
@@ -50,6 +51,7 @@ public partial class MapHandler : Node
 		}
 		GD.Print($"Total Terrain Probes: {HeightMapProbe.Probes}");
 
+
 		PackedScene marker = GD.Load<PackedScene>("res://test/marker.tscn");
 		foreach (TerrainChunk chunk in chunks)
 		{
@@ -60,7 +62,7 @@ public partial class MapHandler : Node
 			chunk.GenerateTerrain();
 			foreach (HeightMapProbe probe in chunk.Probes)
 			{
-				if (probe.IsCorner)
+				if (probe.EdgeCount > 2)//GetProbeType<int>() > 1)
 				{
 					Vector2I probePos = chunk.Position * 16 + probe.Position;
 					Node2D newMarker = marker.Instantiate<Node2D>();
