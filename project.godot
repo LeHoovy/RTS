@@ -45,6 +45,7 @@ gdscript/warnings/unsafe_void_return=2
 window/size/viewport_width=1920
 window/size/viewport_height=1080
 window/per_pixel_transparency/allowed=true
+window/vsync/vsync_mode=0
 
 [dotnet]
 

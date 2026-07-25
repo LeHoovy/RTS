@@ -18,10 +18,11 @@ public partial class CameraDebug : Camera2D
 	{
 		if (isDragging)
 		{
-			Position -= GetLocalMousePosition() - mousePrevPos;;
-			mousePrevPos = GetLocalMousePosition();
+			Vector2 mouseCurPos = GetLocalMousePosition();
+			Vector2 movement = mouseCurPos - mousePrevPos;
+			Position -= movement;
+			mousePrevPos = mouseCurPos;
 		}
-		//mousePrevPos = GetLocalMousePosition();
 	}
 
 	public override void _Input(InputEvent @event)
@@ -42,27 +43,12 @@ public partial class CameraDebug : Camera2D
 				case MouseButton.WheelUp:
 					Vector2 zoomIn = new Vector2(Zoom.X * (float)1.2, Zoom.Y * (float)1.2);
 					Zoom = zoomIn;
-					//Position -= GetLocalMousePosition() - mousePrevPos;
-					//mousePrevPos = GetLocalMousePosition();
 					break;
 				case MouseButton.WheelDown:
 					Vector2 zoomOut = new Vector2(Zoom.X / (float)1.2, Zoom.Y / (float)1.2);
 					Zoom = zoomOut;
-					//Position -= GetLocalMousePosition() - mousePrevPos;
-					//mousePrevPos = GetLocalMousePosition();
 					break;
 			}
-		}
-		if (@event is InputEventMouseMotion motion && isDragging)
-		{
-			GD.Print("~~~~~~~~~~~~~~~~");
-			GD.PrintRich($"velocity (\"scaled\"): {motion.Velocity}\nscreen velocity (unscaled): {motion.ScreenVelocity}");
-			GD.Print();
-			Vector2 relScale = GetGlobalTransform().Scale;
-			GD.PrintRich($"relscale: {relScale}\nvelocity (manual scaling attempt): {motion.Velocity / relScale / Zoom}");
-			//Position -= GetLocalMousePosition() - mousePrevPos;
-			GD.Print($"change in position: {GetLocalMousePosition() - mousePrevPos}");
-			//mousePrevPos = GetLocalMousePosition();
 		}
 	}
 }
