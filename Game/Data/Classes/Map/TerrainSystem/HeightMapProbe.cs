@@ -234,10 +234,10 @@ public partial class HeightMapProbe : RefCounted
 		for (byte i = 0; i < 8; i++)
 		{
 			Vector2I tile = GridHelper.DirNeighborTiles[i];
-			if (Position == new Vector2I(13, 15))
+			/*if (Position == new Vector2I(13, 15))
 			{
 				GD.Print($"{tile}: \\: {tile.X == tile.Y}. Corner/Diagonal {tile.Abs()}: {Math.Abs(tile.X) == Math.Abs(tile.Y)}");
-			}
+			}*/
 
 			if (Math.Abs(tile.X) == Math.Abs(tile.Y % 2))
 			{

@@ -19,7 +19,7 @@ texture = ExtResource("2_kijd4")
 centered = false
 
 [node name="Camera2D" type="Camera2D" parent="RootDebug" unique_id=463151321]
-position = Vector2(240, 135)
+position = Vector2(144, 81)
 script = ExtResource("3_6qu3g")
 
 [node name="RootGame" type="Node3D" parent="." unique_id=702738705]
