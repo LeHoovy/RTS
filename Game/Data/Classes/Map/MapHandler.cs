@@ -51,29 +51,6 @@ public partial class MapHandler : Node
 		}
 		GD.Print($"Total Terrain Probes: {HeightMapProbe.Probes}");
 
-
-		PackedScene marker = GD.Load<PackedScene>("res://test/marker.tscn");
-		foreach (TerrainChunk chunk in chunks)
-		{
-			/*Node2D newMarker = marker.Instantiate<Node2D>();
-			newMarker.Position = chunk.Position * 64;
-			AddChild(newMarker);
-			ArrayHelper.Print2DArray(chunk.probes);*/
-			chunk.GenerateTerrain();
-			foreach (HeightMapProbe probe in chunk.Probes)
-			{
-				if (probe.EdgeCount > 2)//GetProbeType<int>() > 1)
-				{
-					Vector2I probePos = chunk.Position * 16 + probe.Position;
-					Node2D newMarker = marker.Instantiate<Node2D>();
-					newMarker.Position = probePos * 4;
-					newMarker.Name = probePos.ToString();
-					//GD.Print($"probe {newMarker.Name} of type {probe.CheckType()} at {probe.Position} in chunk {chunk.Position}");
-					AddChild(newMarker);
-				}
-			}
-		}
-
 		// Print how long the process took
 		ulong endTime = Time.GetTicksUsec();
 		GD.Print($"Time elapsed:\n{endTime-startTime} microseconds");
@@ -99,8 +76,44 @@ public partial class MapHandler : Node
 
 			//GD.Print(Data.HeightMap.Length);
 			img.SavePng("res://test/map.png");
-			DebugParent.GetNode<Sprite2D>("map").Texture = ImageTexture.CreateFromImage(img);
+			GetNode<Sprite2D>("%HeightMap").Texture = ImageTexture.CreateFromImage(img);
 			//GetNode<Sprite2D>("%map").Texture = ImageTexture.CreateFromImage(img);
+
+			PackedScene marker = GD.Load<PackedScene>("uid://dlw113xqvyiof");
+			Node2D debugRoot = GetNode<Node2D>("%RootDebug");
+			foreach (TerrainChunk chunk in chunks)
+			{
+				/*Node2D newMarker = marker.Instantiate<Node2D>();
+				newMarker.Position = chunk.Position * 64;
+				AddChild(newMarker);
+				ArrayHelper.Print2DArray(chunk.probes);*/
+				chunk.GenerateTerrain();
+				foreach (HeightMapProbe probe in chunk.Probes)
+				{
+					if (probe.IsCorner)//GetProbeType<int>() > 1)
+					{
+						if (chunk.Position == Vector2I.Zero && probe.Position == new Vector2I(13, 15))
+						{
+							GD.Print($"Probe is corner somehow:");
+							for (byte edge = 0; edge < 8; edge++)
+							{
+								GD.Print($"Dir {edge} is edge: {probe.Edges[edge]}");
+							}
+						}
+						Vector2I probePos = chunk.Position * 16 + probe.Position;
+						Node2D newMarker = marker.Instantiate<Node2D>();
+						newMarker.Position = probePos;
+						newMarker.Name = probePos.ToString();
+						//GD.Print($"probe {newMarker.Name} of type {probe.CheckType()} at {probe.Position} in chunk {chunk.Position}");
+						debugRoot.AddChild(newMarker);
+					}
+				}
+			}
 		}
+	}
+
+	public void LoadMap(MapData data)
+	{
+		
 	}
 }

@@ -16,8 +16,8 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="RTS"
 config/tags=PackedStringArray("private", "prototype", "real_time_strategy")
-run/main_scene="res://node_3d.tscn"
-config/features=PackedStringArray("4.6", "C#", "Forward Plus")
+run/main_scene="uid://cqr1ai0jdnm2o"
+config/features=PackedStringArray("4.7", "C#", "Forward Plus")
 
 [audio]
 
@@ -42,8 +42,8 @@ gdscript/warnings/unsafe_void_return=2
 
 [display]
 
-window/size/viewport_width=750
-window/size/viewport_height=750
+window/size/viewport_width=1920
+window/size/viewport_height=1080
 window/per_pixel_transparency/allowed=true
 
 [dotnet]
@@ -63,16 +63,19 @@ folder_colors={
 
 [input]
 
-moveCamera={
-"deadzone": 0.5,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":4,"position":Vector2(494, 4),"global_position":Vector2(503, 50),"factor":1.0,"button_index":3,"canceled":false,"pressed":true,"double_click":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":256,"position":Vector2(168, 8),"global_position":Vector2(177, 56),"factor":1.0,"button_index":9,"canceled":false,"pressed":true,"double_click":false,"script":null)
-, Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":true,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(401, 13),"global_position":Vector2(410, 61),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
+CameraDrag={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":0,"position":Vector2(661, 20),"global_position":Vector2(670, 68),"factor":1.0,"button_index":9,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
-rotateCamera={
+ZoomIn={
 "deadzone": 0.2,
-"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":2,"position":Vector2(291, 15),"global_position":Vector2(300, 63),"factor":1.0,"button_index":2,"canceled":false,"pressed":true,"double_click":false,"script":null)
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":8,"position":Vector2(281, 18),"global_position":Vector2(290, 66),"factor":1.0,"button_index":4,"canceled":false,"pressed":true,"double_click":false,"script":null)
+]
+}
+ZoomOut={
+"deadzone": 0.2,
+"events": [Object(InputEventMouseButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"window_id":0,"alt_pressed":false,"shift_pressed":false,"ctrl_pressed":false,"meta_pressed":false,"button_mask":16,"position":Vector2(292, 12),"global_position":Vector2(301, 60),"factor":1.0,"button_index":5,"canceled":false,"pressed":true,"double_click":false,"script":null)
 ]
 }
 

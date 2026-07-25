@@ -1,0 +1,35 @@
+[gd_scene format=3 uid="uid://cqr1ai0jdnm2o"]
+
+[ext_resource type="Script" uid="uid://dbvkko6hibda7" path="res://Game/Data/Classes/Map/MapHandler.cs" id="1_l87od"]
+[ext_resource type="Texture2D" uid="uid://c6o6omgxh44wy" path="res://test/map.png" id="2_kijd4"]
+[ext_resource type="Script" uid="uid://b0spnoytpn3pv" path="res://Game/Data/Classes/Debug/CameraDebug.cs" id="3_6qu3g"]
+
+[node name="Map" type="Node" unique_id=376599922]
+script = ExtResource("1_l87od")
+Debug = true
+
+[node name="RootDebug" type="Node2D" parent="." unique_id=673345472]
+unique_name_in_owner = true
+scale = Vector2(4, 4)
+
+[node name="HeightMap" type="Sprite2D" parent="RootDebug" unique_id=1910479236]
+unique_name_in_owner = true
+texture_filter = 1
+texture = ExtResource("2_kijd4")
+centered = false
+
+[node name="Camera2D" type="Camera2D" parent="RootDebug" unique_id=463151321]
+position = Vector2(240, 135)
+script = ExtResource("3_6qu3g")
+
+[node name="RootGame" type="Node3D" parent="." unique_id=702738705]
+
+[node name="(example structure)" type="Node" parent="RootGame" unique_id=2082378375]
+
+[node name="chunk1,1" type="Node3D" parent="RootGame/(example structure)" unique_id=1751886573]
+
+[node name="terrain" type="MeshInstance3D" parent="RootGame/(example structure)/chunk1,1" unique_id=1654852546]
+
+[node name="non-dynamic entities (doodads)" type="Node3D" parent="RootGame/(example structure)/chunk1,1" unique_id=79575394]
+
+[node name="dynamic entities (units, structures, map entities_destructibles_camps_objectives_whatever)" type="Node3D" parent="RootGame/(example structure)" unique_id=1106178800]

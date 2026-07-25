@@ -76,24 +76,16 @@ public partial class HeightMapProbe : RefCounted
 	}
 
 
-	// TODO UNFINISHED Update Probe method
+	// TODO Unfinished Update Probe method
 	/// <summary>
 	/// Updates the probe's edges.
 	/// </summary>
-	// INFO OPTIMIZATION Potential Optimization Here
+	// INFO Optimization Potential Optimization Here
 	public void UpdateProbe()
 	{
 		CheckEdges();
-		IsStraightEdge = CheckIfStraightEdge();
-		if (IsStraightEdge)
-		{
-			GD.Print("Probe is edge");
-		}
-		//else if (EdgeCount != 2)
-		//{
-		//	GD.Print($"Probe {Position} not edge: {EdgeCount}");
-		//}
-		if (EdgeCount >= 2 && !IsStraightEdge)
+		//IsStraightEdge = CheckIfPerfectEdge();
+		if (EdgeCount > 2 || (EdgeCount == 2 && !CheckIfPerfectEdge()))
 		{
 			IsCorner = true;
 		}
@@ -101,12 +93,12 @@ public partial class HeightMapProbe : RefCounted
 
 
 	/// <summary>
-	/// Checks to make sure if the point the probe is on makes a straight edge.
+	/// Checks to make sure if the point the probe is on makes a perfectly straight edge.
 	/// </summary>
 	/// <returns>Returns "true" if it is a straight edge, otherwise returns false.</returns>
-	private bool CheckIfStraightEdge()
+	private bool CheckIfPerfectEdge()
 	{
-		if (EdgeCount != 2) // It is only
+		if (EdgeCount != 2) // It can only be a perfectly straight edge 
 		{
 			return false;
 		}
@@ -122,15 +114,37 @@ public partial class HeightMapProbe : RefCounted
 	}
 
 
+	/// <summary>
+	/// Checks if the point forms an edge in a certain direction.
+	/// </summary>
+	/// <param name="source"></param>
+	/// <returns></returns>
+	public bool CheckIfEdgeInDir(byte source)
+	{
+		if (Edges[source] && Edges[(source + 4) % 8]
+		&& !(Edges[(source + 1) % 8] || Edges[(source + 2) % 8] || Edges[(source + 3) % 8]))
+		{
+			return true;
+		}
+
+		return false;
+	}
+
+
 	private void CheckEdges()
 	{
 		// Checks if there is a horizontal edge on the tile
 		// rootPos is the top left corner of the tile
 		bool checkHorizontal(Vector2I rootPos)
 		{
-			if (localHeightmap[rootPos.X, rootPos.Y] == localHeightmap[rootPos.X + 1, rootPos.Y]
-			&& localHeightmap[rootPos.X, rootPos.Y + 1] == localHeightmap[rootPos.X + 1, rootPos.Y + 1]
-			&& localHeightmap[rootPos.X, rootPos.Y] != localHeightmap[rootPos.X, rootPos.Y + 1])
+			var posOne = localHeightmap[rootPos.X, rootPos.Y];
+			var posTwo = localHeightmap[rootPos.X + 1, rootPos.Y];
+			var posThree = localHeightmap[rootPos.X, rootPos.Y + 1];
+			var posFour = localHeightmap[rootPos.X + 1, rootPos.Y + 1];
+
+			if (posOne == posTwo
+			&& posThree == posFour
+			&& posOne != posThree)
 			{
 				return true;
 			}
@@ -141,16 +155,20 @@ public partial class HeightMapProbe : RefCounted
 		// rootPos is the top left corner of the tile
 		bool checkVertical(Vector2I rootPos)
 		{
-			if (localHeightmap[rootPos.X, rootPos.Y] == localHeightmap[rootPos.X, rootPos.Y + 1]
-			&& localHeightmap[rootPos.X + 1, rootPos.Y] == localHeightmap[rootPos.X + 1, rootPos.Y + 1]
-			&& localHeightmap[rootPos.X, rootPos.Y] != localHeightmap[rootPos.X, rootPos.Y + 1])
+			var posOne = localHeightmap[rootPos.X, rootPos.Y];
+			var posTwo = localHeightmap[rootPos.X + 1, rootPos.Y];
+			var posThree = localHeightmap[rootPos.X, rootPos.Y + 1];
+			var posFour = localHeightmap[rootPos.X + 1, rootPos.Y + 1];
+
+			if (posOne == posThree
+			&& posTwo == posFour
+			&& posOne != posTwo)
 			{
 				return true;
 			}
 			return false;
 		}
 
-		// TODO UNFINISHED Diagonal Forward Slash Edge Check
 		// Checks if there is a diagonal edge going from the bottom left to the top right, forward slash (/) pattern
 		// rootPos is the top left corner of the tile
 		bool checkDiagonalInequalCoordinates(Vector2I rootPos)
@@ -169,7 +187,6 @@ public partial class HeightMapProbe : RefCounted
 			return false;
 		}
 
-		// TODO UNFINISHED Diagonal Backwards Slash Edge Check
 		// Checks if there is a diagonal edge going from the top left to the bottom right, backwards slash (\) pattern
 		// rootPos is the top left corner of the tile
 		bool checkDiagonalEqualCoordinates(Vector2I rootPos)
@@ -188,21 +205,59 @@ public partial class HeightMapProbe : RefCounted
 			return false;
 		}
 
-		Vector2I center = new Vector2I(1, 1);
+		// Checks if the tile is flat
+		// rootPos is the top left corner of the tile
+		bool checkIfFlat(Vector2I rootPos)
+		{
+			var posOne = localHeightmap[rootPos.X, rootPos.Y];
+			var posTwo = localHeightmap[rootPos.X + 1, rootPos.Y];
+			var posThree = localHeightmap[rootPos.X, rootPos.Y + 1];
+			var posFour = localHeightmap[rootPos.X + 1, rootPos.Y + 1];
+
+			if (posOne == posTwo && posTwo == posThree && posThree == posFour)
+			{
+				return true; // All four tiles are equal, therefore this is flat
+			}
+			return false;
+		}
+
+		Vector2I center = new Vector2I(1, 1); // Used for both of the next code blocks
+		EdgeCount = 0; // Reset for the next blocks
+
+		// The central tiles must have inequal heights for this probe to connect to other probes
+		if (checkIfFlat(center))
+		{
+			Edges.SetAll(false);
+			return; // No edges to count
+		}
+
 		for (byte i = 0; i < 8; i++)
 		{
 			Vector2I tile = GridHelper.DirNeighborTiles[i];
-			if (tile.X % 2 == tile.Y % 2)
-			{ 
+			if (Position == new Vector2I(13, 15))
+			{
+				GD.Print($"{tile}: \\: {tile.X == tile.Y}. Corner/Diagonal {tile.Abs()}: {Math.Abs(tile.X) == Math.Abs(tile.Y)}");
+			}
+
+			if (Math.Abs(tile.X) == Math.Abs(tile.Y % 2))
+			{
+				// ~BUG~ EdgeDection DownRight seems to be doing the wrong check (the other diagonal check) or something
+				// It's returning true when it shouldn't
+				// I think I fixed it by moving the check inside the if code block rather than in the if () statement
+
 				// Corner (\ Diagonal /)
-				if (tile.X == tile.Y) // \ UpLeft \ DownRight \
+				if (tile.X == tile.Y)// && checkDiagonalEqualCoordinates(tile + center)) // \ UpLeft \ DownRight \
 				{
-					Edges[i] = checkDiagonalEqualCoordinates(tile + center);
-					EdgeCount++;
+					if (checkDiagonalEqualCoordinates(tile + center))
+					{
+						// Only ran if previous is true. Inside previous as to not cause the next part to run if this block is false.
+						Edges[i] = true;//checkDiagonalEqualCoordinates(tile + center);
+						EdgeCount++;
+					}
 				}
-				else //(tile.X != tile.Y) / UpRight / DownLeft /
+				else if (checkDiagonalInequalCoordinates(tile + center)) // && (tile.X != tile.Y) / UpRight / DownLeft /
 				{
-					Edges[i] = checkDiagonalInequalCoordinates(tile + center);
+					Edges[i] = true;//checkDiagonalInequalCoordinates(tile + center);
 					EdgeCount++;
 				}
 				continue;
@@ -210,14 +265,18 @@ public partial class HeightMapProbe : RefCounted
 			
 			// else Abs(tile.X % 2) != Abs(tile.y % 2)
 			// Linear (+ Cardinal +)
-			if (tile.X % 2 == 0) // | Vertical | Up | Down
+			if (tile.X % 2 == 0)// && checkVertical(tile + center)) // | Vertical | Up | Down
 			{
-				Edges[i] = checkVertical(tile + center);
-				EdgeCount++;
+				if (checkVertical(tile + center))
+				{
+					// Only ran if previous is true. Inside previous as to not cause the next part to run if this block is false.
+					Edges[i] = true;//checkVertical(tile + center);
+					EdgeCount++;
+				}
 			}
-			else //(tile.Y == 0) - Horizontal - Left - Right
+			else if (checkHorizontal(tile + center)) // && (tile.Y == 0) - Horizontal - Left - Right
 			{
-				Edges[i] = checkHorizontal(tile + center);
+				Edges[i] = true;//checkHorizontal(tile + center);
 				EdgeCount++;
 			}
 		}
